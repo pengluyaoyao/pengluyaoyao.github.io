@@ -7,8 +7,8 @@
     <lastmod>2018-08-12T20:52:14+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="/fr/"
+                hreflang="es"
+                href="/es/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -27,11 +27,25 @@
   </url>
   
   <url>
-    <loc>/design/mmem/</loc>
+    <loc>/post/mmem/</loc>
   </url>
   
   <url>
-    <loc>/design/cs224n_studynotes/</loc>
+    <loc>/post/cs224n_studynotes/</loc>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/about/"
+                />
   </url>
   
   <url>
@@ -39,8 +53,8 @@
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="/fr/categories/"
+                hreflang="es"
+                href="/es/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -50,14 +64,13 @@
   </url>
   
   <url>
-    <loc>/design/</loc>
+    <loc>/tags/plot/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/plot/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-    <priority>0</priority>
+    <loc>/portfolio/</loc>
   </url>
   
   <url>
@@ -90,8 +103,8 @@
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
-                hreflang="fr"
-                href="/fr/tags/"
+                hreflang="es"
+                href="/es/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -101,7 +114,7 @@
   </url>
   
   <url>
-    <loc>/design/cs224n_assignment2/</loc>
+    <loc>/post/cs224n_assignment2/</loc>
   </url>
   
 </urlset>

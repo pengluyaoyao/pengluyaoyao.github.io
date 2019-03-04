@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Aquarium on 学习随笔_</title>
+    <title>Aquarium on Your Awesome Website</title>
     <link>/</link>
-    <description>Recent content in Aquarium on 学习随笔_</description>
+    <description>Recent content in Aquarium on Your Awesome Website</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>en-us</language>
     <lastBuildDate>Sun, 12 Aug 2018 20:52:14 +0200</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
@@ -33,30 +33,38 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     
     <item>
       <title></title>
-      <link>/design/mmem/</link>
+      <link>/post/mmem/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/design/mmem/</guid>
+      <guid>/post/mmem/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>/design/cs224n_studynotes/</link>
+      <link>/post/cs224n_studynotes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/design/cs224n_studynotes/</guid>
+      <guid>/post/cs224n_studynotes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Untitled</title>
-      <link>/design/cs224n_assignment2/</link>
+      <title>About</title>
+      <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/design/cs224n_assignment2/</guid>
-      <description>Assignment#2 Q2: Dependency Parsing This is a detailed notes on the python code for assignment Q2
- Setting up configuration import time import os import logging from collections import Counter import numpy as np # setting up configurations P_PREFIX = &#39;&amp;lt;p&amp;gt;:&#39; L_PREFIX = &#39;&amp;lt;l&amp;gt;:&#39; UNK = &#39;&amp;lt;UNK&amp;gt;&#39; NULL = &#39;&amp;lt;NULL&amp;gt;&#39; ROOT = &#39;&amp;lt;ROOT&amp;gt;&#39; class Config(object): language = &#39;english&#39; with_punct = True unlabeled = True lowercase = True use_pos = True #use position of s as features use_dep = True # use_dep = use_dep and (not unlabeled) data_path = &#39;.</description>
+      <guid>/about/</guid>
+      <description>This is the Roboto theme for Hugo.</description>
+    </item>
+    
+    <item>
+      <title>Untitled</title>
+      <link>/post/cs224n_assignment2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/cs224n_assignment2/</guid>
+      <description>Assignment#2 Q2: Dependency Parsing Setting up configuration import time import os import logging from collections import Counter import numpy as np # setting up configurations P_PREFIX = &#39;&amp;lt;p&amp;gt;:&#39; L_PREFIX = &#39;&amp;lt;l&amp;gt;:&#39; UNK = &#39;&amp;lt;UNK&amp;gt;&#39; NULL = &#39;&amp;lt;NULL&amp;gt;&#39; ROOT = &#39;&amp;lt;ROOT&amp;gt;&#39; class Config(object): language = &#39;english&#39; with_punct = True unlabeled = True lowercase = True use_pos = True #use position of s as features use_dep = True # use_dep = use_dep and (not unlabeled) data_path = &#39;.</description>
     </item>
     
   </channel>
