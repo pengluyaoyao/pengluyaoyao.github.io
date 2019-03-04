@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1551556418191.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BB6A7B3B",
+    "lastKnownWriteTime" : 1551684749,
+    "last_content_update" : 1551684749,
+    "path" : "~/Documents/Website/Website/adam_eve/config.toml",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "6,5",
+        "scrollLine" : "1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "toml"
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.54.0" />
+  <title>Hello R Markdown &middot; About aquarium</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.32613fbd6084d9525871ed8efdd0dea5c3435c551e1c988bd625afe492da3f60.css" integrity="sha256-MmE/vWCE2VJYce2O/dDepcNDXFUeHJiL1iWv5JLaP2A=" media="screen" title="default">
+
+</head>
+
+<body>
+  
+    <nav>
+  
+  
+  <a class="nav-item" href="/categories/"><span class='Categories'>⌂</span> Categories</a>
+  
+  <a class="nav-item" href="/"><span class='homepage'>⌂</span> Homepage</a>
+  
+  <hr />
+</nav>
+
+  
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#r-markdown">R Markdown</a></li>
+<li><a href="#including-plots">Including Plots</a></li>
+</ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  
+
+<h1 id="r-markdown">R Markdown</h1>
+
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com">http://rmarkdown.rstudio.com</a>.</p>
+
+<p>You can embed an R code chunk like this:</p>
+
+<pre><code class="language-r">summary(cars)
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+fit &lt;- lm(dist ~ speed, data = cars)
+fit
+## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Coefficients:
+## (Intercept)        speed  
+##     -17.579        3.932
+</code></pre>
+
+<h1 id="including-plots">Including Plots</h1>
+
+<p>You can also embed plots. See Figure \@ref(fig:pie) for example:</p>
+
+<pre><code class="language-r">par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c('Sky', 'Sunny side of pyramid', 'Shady side of pyramid'),
+  col = c('#0292D8', '#F7EA39', '#C4B632'),
+  init.angle = -50, border = NA
+)
+</code></pre>
+
+<div class="figure">
+<img src="2015-07-23-r-rmarkdown_files/figure-html/pie-1.png" alt="A fancy pie chart." width="672" />
+<p class="caption">A fancy pie chart.</p>
+</div>
+
+  </main>
+  <footer>
+    <hr />
+    <p>Last modification: 2015-07-23 at 21:13</p>
+
+  </footer>
+</body>
+</html>

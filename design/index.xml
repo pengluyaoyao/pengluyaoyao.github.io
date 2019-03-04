@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Designs on About aquarium</title>
+    <title>Designs on 学习随笔</title>
     <link>/design/</link>
-    <description>Recent content in Designs on About aquarium</description>
+    <description>Recent content in Designs on 学习随笔</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 13 Aug 2018 19:32:57 +0200</lastBuildDate>
     
 	<atom:link href="/design/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Styles</title>
-      <link>/design/styles/</link>
-      <pubDate>Mon, 13 Aug 2018 19:32:57 +0200</pubDate>
+      <title></title>
+      <link>/design/mmem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/design/styles/</guid>
-      <description>Styles Objects used for aquariums include: coffee tables, sinks, gumball machines and even toilets. Another such example is the MacQuarium, an aquarium made from the shell of an Apple Macintosh computer. In recent years, elaborate custom-designed home aquariums costing hundreds of thousands of dollars have become status symbols—according to The New York Times, &amp;ldquo;among people of means, a dazzling aquarium is one of the last surefire ways to impress their peers.</description>
+      <guid>/design/mmem/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Materials</title>
-      <link>/design/materials/</link>
-      <pubDate>Mon, 13 Aug 2018 19:22:34 +0200</pubDate>
+      <title></title>
+      <link>/design/cs224n_studynotes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/design/materials/</guid>
-      <description>Materials Most aquaria consist of glass panes bonded together by 100% silicone sealant, with plastic frames attached to the upper and lower edges for decoration. The glass aquarium is standard for sizes up to about 1,000 litres (260 US gal; 220 imp gal). However, glass as a material is brittle and has very little give before fracturing, though generally the sealant fails first. Aquaria are made in a variety of shapes, such as cuboid, hexagonal, angled to fit in a corner (L-shaped), and bow-front (the front side curves outwards).</description>
+      <guid>/design/cs224n_studynotes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Untitled</title>
+      <link>/design/cs224n_assignment2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/design/cs224n_assignment2/</guid>
+      <description>Assignment#2 Q2: Dependency Parsing This is a detailed notes on the python code for assignment Q2
+ Setting up configuration import time import os import logging from collections import Counter import numpy as np # setting up configurations P_PREFIX = &#39;&amp;lt;p&amp;gt;:&#39; L_PREFIX = &#39;&amp;lt;l&amp;gt;:&#39; UNK = &#39;&amp;lt;UNK&amp;gt;&#39; NULL = &#39;&amp;lt;NULL&amp;gt;&#39; ROOT = &#39;&amp;lt;ROOT&amp;gt;&#39; class Config(object): language = &#39;english&#39; with_punct = True unlabeled = True lowercase = True use_pos = True #use position of s as features use_dep = True # use_dep = use_dep and (not unlabeled) data_path = &#39;.</description>
     </item>
     
   </channel>

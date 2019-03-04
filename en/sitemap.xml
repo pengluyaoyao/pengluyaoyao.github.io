@@ -3,16 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/design/styles/</loc>
-    <lastmod>2018-08-13T19:32:57+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/design/materials/</loc>
-    <lastmod>2018-08-13T19:22:34+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/</loc>
     <lastmod>2018-08-12T20:52:14+02:00</lastmod>
     <xhtml:link
@@ -33,6 +23,14 @@
   </url>
   
   <url>
+    <loc>/design/mmem/</loc>
+  </url>
+  
+  <url>
+    <loc>/design/cs224n_studynotes/</loc>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
     <priority>0</priority>
     <xhtml:link
@@ -49,7 +47,6 @@
   
   <url>
     <loc>/design/</loc>
-    <lastmod>2018-08-13T19:32:57+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -97,6 +94,10 @@
                 hreflang="en"
                 href="/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>/design/cs224n_assignment2/</loc>
   </url>
   
 </urlset>
