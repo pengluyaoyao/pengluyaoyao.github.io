@@ -1,0 +1,12 @@
+---
+title: Assignment2
+author: ''
+date: '2019-03-04'
+slug: assignment2
+categories:
+  - NLP
+  - Python
+tags:
+  - NLP
+---
+
