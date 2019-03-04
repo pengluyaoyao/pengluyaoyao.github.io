@@ -221,10 +221,10 @@ code {
   </xsl:stylesheet>
   <channel>
     <title>Categories on Luyao&#39;s Blog</title>
-    <link>http://example.org/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Luyao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://example.org/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
