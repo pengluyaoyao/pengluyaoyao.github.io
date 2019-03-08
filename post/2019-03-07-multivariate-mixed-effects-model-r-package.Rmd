@@ -1,0 +1,62 @@
+---
+title: MMeM (Multivariate Mixed Effects Model) ---- My first R Package
+author: Luyao Peng
+date: '2019-03-07'
+slug: multivariate-mixed-effects-model-r-package
+categories:
+  - My Projects
+tags:
+  - R 
+  - Multivariate Mixed-effects Model
+header-includes: \usepackage{amsmath} \usepackage{bm} 
+---
+
+This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) <doi:10.2307/2530651> and Wesolowska Janczarek (1984) <doi:10.1002/bimj.4710260613>.
+
+It is available on CRAN and my github page:
+
+[Link to the MMeM github](https://github.com/pengluyaoyao/MMeM)
+
+[Link to the MMeM CRAN](https://cran.r-project.org/web/packages/MMeM/index.html)
+
+The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:
+
+
+$\mathbf{y} = (\mathbf{I} \otimes \mathbf{X})\mathbf{b} + (\mathbf{I} \otimes \mathbf{Z} )\mathbf{u} + \mathbf{e}$
+
+with
+
+$\mathbf{y} = \left\{\mathbf{y}_i\right\}_c, \mathbf{b} = \left\{\mathbf{b}_i\right\}_c, \mathbf{u} = \left\{\mathbf{u}_i\right\}_c, \mathbf{e} = \left\{\mathbf{e}_i\right\}_c, i =1, \dots, q$
+
+where $\mathbf{y}$ is n*q by 1 response vector;
+$\mathbf{X}$ is n by p design matrix for the fixed effects;
+$\mathbf{b}$ is p*q by 1 coefficients vector for the fixed effects;
+$\mathbf{Z}$ is n by s design matrix for the random effects;
+$\mathbf{u}$ is s*q by 1 vector of the random effects;
+$\mathbf{e}$ is n*q by 1 vector of random errors.
+
+It is assumed that 
+
+$cov(\mathbf{u}_i, \mathbf{u}_j') = \mathbf{G}_{ij}, cov(\mathbf{e}_i, \mathbf{e}_j') = \mathbf{R}_{ij}, cov(\mathbf{u}_i, \mathbf{e}_j') = \mathbf{0}$ 
+
+or
+
+$var(\mathbf{u}) = \mathbf{G} = \mathbf{T}\otimes \mathbf{I}_s, var(\mathbf{e}) = \mathbf{R} = \mathbf{E} \otimes \mathbf{I}_n, var(\mathbf{y}) = \mathbf{V} = \mathbf{T}\otimes \mathbf{ZZ}' + \mathbf{E} \otimes \mathbf{I}_n$. 
+
+The goal is to estimate the variance-covariance matrix of random effects $\mathbf{u}$ and $\mathbf{e}$ on $q$ response variates, i.e. $\mathbf{T}$ and $\mathbf{E}$.
+
+The model also supports the variance component estimations using univariate mixed-effects model regression, which is equivalent to R package lme4:
+
+$\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}$
+
+where 
+$\mathbf{y}$ is n by 1 response vector;
+$\mathbf{X}$ and $\mathbf{Z}$ are n by p and n by s known design matrix;
+$\mathbf{b}$ is p by 1 coefficients vector for the fixed effects;
+$\mathbf{u}$ is s by 1 matrix for the random effects,
+$\mathbf{e}$ is n by 1 vector of random errors.
+}
+
+The goal is to estimate $\sigma_u^2$ and $\sigma_e^2$ for $\mathbf{u} \sim N(\mathbf{0}, \sigma_u^2\mathbf{I}), \mathbf{e} \sim N(\mathbf{0}, \sigma_e^2\mathbf{I})$.
+
+Currently this package supports multivariate mixed effects model with two response variables, one fixed effects and one random effects, the package only estimates the variance covariance components under multivariate mixed effects model, it doesn't provide the estimation and hypothesis testing for the fixed effects parameters, which will be incorporated in the future. Users can compute the estimated fixed effects parameters by using the generalized least square formula for the fixed effect parameters after estimating the variance covariance components using this package.

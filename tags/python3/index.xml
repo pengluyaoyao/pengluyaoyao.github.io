@@ -10,7 +10,7 @@
       <html lang="en-us">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Categories RSS | Luyao&#39;s Blog</title>
+          <title>Python3 RSS | Luyao&#39;s Blog</title>
           <style>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -195,7 +195,7 @@ code {
               <div class="u-padding">
                 <h2 class="Heading-title">
                   
-                  <a class="Heading-link u-clickable" href="/categories/index.xml" rel="bookmark">Categories RSS</a>
+                  <a class="Heading-link u-clickable" href="/tags/python3/index.xml" rel="bookmark">Python3 RSS</a>
                   
                 </h2>
                 
@@ -221,11 +221,27 @@ code {
     </xsl:template>
   </xsl:stylesheet>
   <channel>
-    <title>Categories on Luyao&#39;s Blog</title>
-    <link>/categories/</link>
-    <description>Recent content in Categories on Luyao&#39;s Blog</description>
+    <title>Python3 on Luyao&#39;s Blog</title>
+    <link>/tags/python3/</link>
+    <description>Recent content in Python3 on Luyao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/python3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>KPCA for one-class classification in automated essay scoring and erasure analysis</title>
+      <link>/post/kpca-for-one-class-classification/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/kpca-for-one-class-classification/</guid>
+      <description>
+
+
+&lt;p&gt;One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.&lt;/p&gt;
+&lt;p&gt;The challenge of one-class classification problem is that people only have the data for normal class to train and to decide whether a new observation is alike or not. In this project, we used Kernel Principal Component Analysis (KPCA) and Support Vector Machine (SVM) to detect cheating behavior in automated essay scoring and forensic analysis.&lt;/p&gt;
+&lt;p&gt;In automated essay scoring, an abnormal essay can be gibberish, copying, writing in foreign language etc. We train the KPCA and SVM models using normal essay data for argumentative essays to identify whether a new essay is similar to normal essay or not, if a new essay is not similar to the normal essay in terms of KPCA score, we consider it as an abnormal essay.&lt;/p&gt;
+&lt;p&gt;Similarly, in erasure analysis, we extraced the features of the pattern of pencil bubbles for each student, which are the training data of normal bubbles, then we randomly sample the pencil bubbles from another student as the new observations and compare the features of the new pencil bubbles with that of the normal bubbles to see how many new pencil bubbles can be classified as abnormal bubbles using KPCA and SVM models.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca1.jpg&#34; /&gt; &lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca2.jpg&#34; /&gt; &lt;a href=&#34;https://kpca-outlier-detection.shinyapps.io/Shiny/&#34;&gt;Link to the KPCA app&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
   </channel>
 </rss>

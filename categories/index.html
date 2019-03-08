@@ -211,19 +211,48 @@ code {
 <link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
 
 <ul class="Tags">
   
+  <li class="Tags-item u-background">
+      <a class="Tags-link u-clickable" href="/categories/my-projects/">My Projects</a>
+    </li>
+    
   <li class="Tags-item u-background">
       <a class="Tags-link u-clickable" href="/categories/nlp/">Nlp</a>
     </li>
     
   <li class="Tags-item u-background">
       <a class="Tags-link u-clickable" href="/categories/python/">Python</a>
-    </li>
-    
-  <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/categories/r/">R</a>
     </li>
     
 </ul>
@@ -236,10 +265,11 @@ code {
 <footer class="Footer">
   <div class="u-wrapper">
     <div class="u-padding">
-      Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license"> Creative Commons Attribution 4.0 International License</a>.
+      © 2019 Luyao Peng
     </div>
   </div>
 </footer>
+
 
   
 </body>

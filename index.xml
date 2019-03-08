@@ -210,10 +210,11 @@ code {
 <footer class="Footer">
   <div class="u-wrapper">
     <div class="u-padding">
-      Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license"> Creative Commons Attribution 4.0 International License</a>.
+      © 2019 Luyao Peng
     </div>
   </div>
 </footer>
+
 
         </body>
       </html>
@@ -225,27 +226,62 @@ code {
     <description>Recent content on Luyao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Assignment2</title>
+      <title>KPCA for one-class classification in automated essay scoring and erasure analysis</title>
+      <link>/post/kpca-for-one-class-classification/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/kpca-for-one-class-classification/</guid>
+      <description>
+
+
+&lt;p&gt;One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.&lt;/p&gt;
+&lt;p&gt;The challenge of one-class classification problem is that people only have the data for normal class to train and to decide whether a new observation is alike or not. In this project, we used Kernel Principal Component Analysis (KPCA) and Support Vector Machine (SVM) to detect cheating behavior in automated essay scoring and forensic analysis.&lt;/p&gt;
+&lt;p&gt;In automated essay scoring, an abnormal essay can be gibberish, copying, writing in foreign language etc. We train the KPCA and SVM models using normal essay data for argumentative essays to identify whether a new essay is similar to normal essay or not, if a new essay is not similar to the normal essay in terms of KPCA score, we consider it as an abnormal essay.&lt;/p&gt;
+&lt;p&gt;Similarly, in erasure analysis, we extraced the features of the pattern of pencil bubbles for each student, which are the training data of normal bubbles, then we randomly sample the pencil bubbles from another student as the new observations and compare the features of the new pencil bubbles with that of the normal bubbles to see how many new pencil bubbles can be classified as abnormal bubbles using KPCA and SVM models.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca1.jpg&#34; /&gt; &lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca2.jpg&#34; /&gt; &lt;a href=&#34;https://kpca-outlier-detection.shinyapps.io/Shiny/&#34;&gt;Link to the KPCA app&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>MMeM (Multivariate Mixed Effects Model) ---- My first R Package</title>
+      <link>/post/multivariate-mixed-effects-model-r-package/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
+      <description>
+
+
+&lt;p&gt;This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) &lt;a href=&#34;doi:10.2307/2530651&#34; class=&#34;uri&#34;&gt;doi:10.2307/2530651&lt;/a&gt; and Wesolowska Janczarek (1984) &lt;a href=&#34;doi:10.1002/bimj.4710260613&#34; class=&#34;uri&#34;&gt;doi:10.1002/bimj.4710260613&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It is available on CRAN and my github page:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/pengluyaoyao/MMeM&#34;&gt;Link to the MMeM github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/MMeM/index.html&#34;&gt;Link to the MMeM CRAN&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = (\mathbf{I} \otimes \mathbf{X})\mathbf{b} + (\mathbf{I} \otimes \mathbf{Z} )\mathbf{u} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;with&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \left\{\mathbf{y}_i\right\}_c, \mathbf{b} = \left\{\mathbf{b}_i\right\}_c, \mathbf{u} = \left\{\mathbf{u}_i\right\}_c, \mathbf{e} = \left\{\mathbf{e}_i\right\}_c, i =1, \dots, q\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n&lt;em&gt;q by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; is n by p design matrix for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p&lt;/em&gt;q by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; is n by s design matrix for the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s&lt;em&gt;q by 1 vector of the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n&lt;/em&gt;q by 1 vector of random errors.&lt;/p&gt;
+&lt;p&gt;It is assumed that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(cov(\mathbf{u}_i, \mathbf{u}_j&amp;#39;) = \mathbf{G}_{ij}, cov(\mathbf{e}_i, \mathbf{e}_j&amp;#39;) = \mathbf{R}_{ij}, cov(\mathbf{u}_i, \mathbf{e}_j&amp;#39;) = \mathbf{0}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(var(\mathbf{u}) = \mathbf{G} = \mathbf{T}\otimes \mathbf{I}_s, var(\mathbf{e}) = \mathbf{R} = \mathbf{E} \otimes \mathbf{I}_n, var(\mathbf{y}) = \mathbf{V} = \mathbf{T}\otimes \mathbf{ZZ}&amp;#39; + \mathbf{E} \otimes \mathbf{I}_n\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The goal is to estimate the variance-covariance matrix of random effects &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt; response variates, i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{E}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The model also supports the variance component estimations using univariate mixed-effects model regression, which is equivalent to R package lme4:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; are n by p and n by s known design matrix; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s by 1 matrix for the random effects, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n by 1 vector of random errors. }&lt;/p&gt;
+&lt;p&gt;The goal is to estimate &lt;span class=&#34;math inline&#34;&gt;\(\sigma_u^2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\sigma_e^2\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u} \sim N(\mathbf{0}, \sigma_u^2\mathbf{I}), \mathbf{e} \sim N(\mathbf{0}, \sigma_e^2\mathbf{I})\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Currently this package supports multivariate mixed effects model with two response variables, one fixed effects and one random effects, the package only estimates the variance covariance components under multivariate mixed effects model, it doesn’t provide the estimation and hypothesis testing for the fixed effects parameters, which will be incorporated in the future. Users can compute the estimated fixed effects parameters by using the generalized least square formula for the fixed effect parameters after estimating the variance covariance components using this package.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Assignment2 Q2</title>
       <link>/post/assignment2/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/assignment2/</guid>
       <description>
 
 
-
-</description>
-    </item>
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>
-
-
+&lt;p&gt;This blog is a detailed annotation of the python code for cs224n Assignment#2 Q2. The goal of this assignment is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code is for Python2, I revised some of them so that it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, each sentence has ‘word’, ‘POS’, ‘head’ and ‘label’, where the ‘head’ is the correct dependency relation. Some code still puzzles me, so I left question mark as comment and will remove them if I understand them later.&lt;/p&gt;
+&lt;p&gt;First, import necessary modules and set up the configurations for the parser:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;import time
 import os
 import logging
@@ -261,24 +297,505 @@ ROOT = &amp;#39;&amp;lt;ROOT&amp;gt;&amp;#39;
 class Config(object): 
     language = &amp;#39;english&amp;#39;
     with_punct = True
-    unlabeled = True
+    unlabeled = True 
     lowercase = True
-    use_pos = True
-    use_dep = True
+    use_pos = True # use part of speech as input features
+    use_dep = True #?
     use_dep = use_dep and (not unlabeled)
     data_path = &amp;#39;./data&amp;#39;
     train_file = &amp;#39;train.conll&amp;#39;
     dev_file = &amp;#39;dev.conll&amp;#39;
     test_file = &amp;#39;test.conll&amp;#39;
     embedding_file = &amp;#39;./data/en-cw.txt&amp;#39;   
-    n_features = 36
-    n_classes = 3
+    n_features = 36 #?
+    n_classes = 3 # want to predict shift, left-arc or right-arc
     dropout = 0.5
     embed_size = 50
     hidden_size = 200
     batch_size = 2048
     n_epochs = 10
     lr = 0.001&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Define some utility functions:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# read the training data in:
+# The first 5 rows in the training data:
+&amp;#39;&amp;#39;&amp;#39;
+1   In  _   ADP IN  _   5   case    _   _
+2   an  _   DET DT  _   5   det _   _
+3   Oct.    _   PROPN   NNP _   5   compound    _   _
+4   19  _   NUM CD  _   5   nummod  _   _
+5   review  _   NOUN    NN  _   45  nmod    _   _
+&amp;#39;&amp;#39;&amp;#39;
+
+def read_conll(in_file, lowercase=False, max_example=None):
+    examples = []
+    with open(in_file) as f:
+        word, pos, head, label = [], [], [], []
+        for line in f.readlines():
+            sp = line.strip().split(&amp;#39;\t&amp;#39;) #tokenize each line of the file
+            if len(sp) == 10:
+                if &amp;#39;-&amp;#39; not in sp[0]:  #that means the sentence is not complete, continue accumulate words in the sentence
+                    word.append(sp[1].lower() if lowercase else sp[1])
+                    pos.append(sp[4])
+                    head.append(int(sp[6]))
+                    label.append(sp[7])
+            elif len(word) &amp;gt; 0: #accumulate to a dictionary
+                examples.append({&amp;#39;word&amp;#39;: word, &amp;#39;pos&amp;#39;: pos, &amp;#39;head&amp;#39;: head, &amp;#39;label&amp;#39;: label})
+                word, pos, head, label = [], [], [], []
+                if (max_example is not None) and (len(examples) == max_example):
+                    break
+        if len(word) &amp;gt; 0: #if the sentence has &amp;gt;0 words, accumulate the sentence dictionary to a list called examples.
+            examples.append({&amp;#39;word&amp;#39;: word, &amp;#39;pos&amp;#39;: pos, &amp;#39;head&amp;#39;: head, &amp;#39;label&amp;#39;: label})
+    return examples&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;def build_dict(keys, n_max=None, offset=0):
+    count = Counter()
+    for key in keys:
+        count[key] += 1
+    ls = count.most_common() if n_max is None \
+        else count.most_common(n_max)
+
+    return {w[0]: index + offset for (index, w) in enumerate(ls)}
+
+def punct(language, pos):
+    if language == &amp;#39;english&amp;#39;:
+        return pos in [&amp;quot;&amp;#39;&amp;#39;&amp;quot;, &amp;quot;,&amp;quot;, &amp;quot;.&amp;quot;, &amp;quot;:&amp;quot;, &amp;quot;``&amp;quot;, &amp;quot;-LRB-&amp;quot;, &amp;quot;-RRB-&amp;quot;]
+    elif language == &amp;#39;chinese&amp;#39;:
+        return pos == &amp;#39;PU&amp;#39;
+    elif language == &amp;#39;french&amp;#39;:
+        return pos == &amp;#39;PUNC&amp;#39;
+    elif language == &amp;#39;german&amp;#39;:
+        return pos in [&amp;quot;$.&amp;quot;, &amp;quot;$,&amp;quot;, &amp;quot;$[&amp;quot;]
+    elif language == &amp;#39;spanish&amp;#39;:
+        # http://nlp.stanford.edu/software/spanish-faq.shtml
+        return pos in [&amp;quot;f0&amp;quot;, &amp;quot;faa&amp;quot;, &amp;quot;fat&amp;quot;, &amp;quot;fc&amp;quot;, &amp;quot;fd&amp;quot;, &amp;quot;fe&amp;quot;, &amp;quot;fg&amp;quot;, &amp;quot;fh&amp;quot;,
+                       &amp;quot;fia&amp;quot;, &amp;quot;fit&amp;quot;, &amp;quot;fp&amp;quot;, &amp;quot;fpa&amp;quot;, &amp;quot;fpt&amp;quot;, &amp;quot;fs&amp;quot;, &amp;quot;ft&amp;quot;,
+                       &amp;quot;fx&amp;quot;, &amp;quot;fz&amp;quot;]
+    elif language == &amp;#39;universal&amp;#39;:
+        return pos == &amp;#39;PUNCT&amp;#39;
+    else:
+        raise ValueError(&amp;#39;language: %s is not supported.&amp;#39; % language)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, define Preprocessor (in the assignment it is called Parser. I was confused about the parse method in that object, so I take the parse method out as an independent method, so the Parser object was renamed as Preprocessor, which will be used as an argument in the parse() method) object to extract features of the context words of each word in the training data (word, pos, label features), get the correct transitions, get the legal transitions , then create instances containing [a long list of tuples of (features, legal labels, gold_t (correct transitions))]&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Preprocessor(object):
+    # initialize the dictionary {token: id}, and {id: token},  
+    def __init__(self, dataset):
+        root_labels = list([l for ex in dataset
+                           for (h, l) in zip(ex[&amp;#39;head&amp;#39;], ex[&amp;#39;label&amp;#39;]) if h == 0]) #h==0 is root
+        counter = Counter(root_labels)
+        if len(counter) &amp;gt; 1:
+            logging.info(&amp;#39;Warning: more than one root label&amp;#39;)
+            logging.info(counter)
+        self.root_label = counter.most_common()[0][0]
+        deprel = [self.root_label] + list(set([w for ex in dataset
+                                               for w in ex[&amp;#39;label&amp;#39;]
+                                               if w != self.root_label]))
+        &amp;#39;&amp;#39;&amp;#39;
+        the deprel (dependent relations) are:
+        
+        &amp;#39;&amp;#39;&amp;#39;
+        
+        tok2id = {L_PREFIX + l: i for (i, l) in enumerate(deprel)}
+        tok2id[L_PREFIX + NULL] = self.L_NULL = len(tok2id)
+
+        config = Config()
+        self.unlabeled = config.unlabeled
+        self.with_punct = config.with_punct
+        self.use_pos = config.use_pos
+        self.use_dep = config.use_dep
+        self.language = config.language
+
+        if self.unlabeled: #just S, LA, RA
+            trans = [&amp;#39;L&amp;#39;, &amp;#39;R&amp;#39;, &amp;#39;S&amp;#39;]
+            self.n_deprel = 1
+        else: #S_NN
+            trans = [&amp;#39;L-&amp;#39; + l for l in deprel] + [&amp;#39;R-&amp;#39; + l for l in deprel] + [&amp;#39;S&amp;#39;]
+            self.n_deprel = len(deprel)
+
+        self.n_trans = len(trans)
+        self.tran2id = {t: i for (i, t) in enumerate(trans)}
+        self.id2tran = {i: t for (i, t) in enumerate(trans)}
+        
+        &amp;#39;&amp;#39;&amp;#39;
+        example of id2tran is:
+        {0: &amp;#39;L&amp;#39;, 1: &amp;#39;R&amp;#39;, 2: &amp;#39;S&amp;#39;}
+        &amp;#39;&amp;#39;&amp;#39;
+        # logging.info(&amp;#39;Build dictionary for part-of-speech tags.&amp;#39;)
+        tok2id.update(build_dict([P_PREFIX + w for ex in dataset for w in ex[&amp;#39;pos&amp;#39;]],
+                                  offset=len(tok2id)))
+        tok2id[P_PREFIX + UNK] = self.P_UNK = len(tok2id)
+        tok2id[P_PREFIX + NULL] = self.P_NULL = len(tok2id)
+        tok2id[P_PREFIX + ROOT] = self.P_ROOT = len(tok2id)
+
+        # logging.info(&amp;#39;Build dictionary for words.&amp;#39;)
+        tok2id.update(build_dict([w for ex in dataset for w in ex[&amp;#39;word&amp;#39;]],
+                                  offset=len(tok2id)))
+        tok2id[UNK] = self.UNK = len(tok2id)
+        tok2id[NULL] = self.NULL = len(tok2id)
+        tok2id[ROOT] = self.ROOT = len(tok2id)
+        
+        &amp;#39;&amp;#39;&amp;#39;
+        example of id2tok is:
+        {0: &amp;#39;&amp;lt;l&amp;gt;:root&amp;#39;, 1: &amp;#39;&amp;lt;l&amp;gt;:nsubj&amp;#39;, 2: &amp;#39;&amp;lt;l&amp;gt;:advmod&amp;#39;, 3: &amp;#39;&amp;lt;l&amp;gt;:dobj&amp;#39;, 4: &amp;#39;&amp;lt;l&amp;gt;:acl&amp;#39;, 5: &amp;#39;&amp;lt;l&amp;gt;:nummod&amp;#39;, 6: &amp;#39;&amp;lt;l&amp;gt;:nmod&amp;#39;, 7: &amp;#39;&amp;lt;l&amp;gt;:compound&amp;#39;, 8: &amp;#39;&amp;lt;l&amp;gt;:xcomp&amp;#39;, 
+        9: &amp;#39;&amp;lt;l&amp;gt;:auxpass&amp;#39;, 10: &amp;#39;&amp;lt;l&amp;gt;:det&amp;#39;, 11: &amp;#39;&amp;lt;l&amp;gt;:punct&amp;#39;, 12: &amp;#39;&amp;lt;l&amp;gt;:mark&amp;#39;, 13: &amp;#39;&amp;lt;l&amp;gt;:case&amp;#39;, 14: &amp;#39;&amp;lt;l&amp;gt;:conj&amp;#39;, 15: &amp;#39;&amp;lt;l&amp;gt;:appos&amp;#39;, 16: &amp;#39;&amp;lt;l&amp;gt;:nmod:tmod&amp;#39;, 
+        17: &amp;#39;&amp;lt;l&amp;gt;:dep&amp;#39;, 18: &amp;#39;&amp;lt;l&amp;gt;:amod&amp;#39;, 19: &amp;#39;&amp;lt;l&amp;gt;:nmod:poss&amp;#39;, 20: &amp;#39;&amp;lt;l&amp;gt;:nsubjpass&amp;#39;, 21: &amp;#39;&amp;lt;l&amp;gt;:cc&amp;#39;, 22: &amp;#39;&amp;lt;l&amp;gt;:ccomp&amp;#39;, 23: &amp;#39;&amp;lt;l&amp;gt;:&amp;lt;NULL&amp;gt;&amp;#39;, 24: &amp;#39;&amp;lt;p&amp;gt;:NNP&amp;#39;, 
+        25: &amp;#39;&amp;lt;p&amp;gt;:NN&amp;#39;, 26: &amp;#39;&amp;lt;p&amp;gt;:IN&amp;#39;, 27: &amp;#39;&amp;lt;p&amp;gt;:DT&amp;#39;, 28: &amp;#39;&amp;lt;p&amp;gt;:,&amp;#39;, 29: &amp;#39;&amp;lt;p&amp;gt;:NNS&amp;#39;, 30: &amp;#39;&amp;lt;p&amp;gt;:JJ&amp;#39;, 31: &amp;#39;&amp;lt;p&amp;gt;:CD&amp;#39;, 32: &amp;#39;&amp;lt;p&amp;gt;:CC&amp;#39;, 33: &amp;#39;&amp;lt;p&amp;gt;:VBD&amp;#39;, 34: &amp;#39;&amp;lt;p&amp;gt;:.&amp;#39;, 
+        35: &amp;#39;&amp;lt;p&amp;gt;:VBN&amp;#39;, 36: &amp;#39;&amp;lt;p&amp;gt;:VBZ&amp;#39;, 37: &amp;#39;&amp;lt;p&amp;gt;:``&amp;#39;, 38: &amp;quot;&amp;lt;p&amp;gt;:&amp;#39;&amp;#39;&amp;quot;, 39: &amp;#39;&amp;lt;p&amp;gt;:VB&amp;#39;, 40: &amp;#39;&amp;lt;p&amp;gt;:TO&amp;#39;, 41: &amp;#39;&amp;lt;p&amp;gt;:PRP&amp;#39;, 42: &amp;#39;&amp;lt;p&amp;gt;:POS&amp;#39;, 43: &amp;#39;&amp;lt;p&amp;gt;:-LRB-&amp;#39;, 
+        44: &amp;#39;&amp;lt;p&amp;gt;:-RRB-&amp;#39;, 45: &amp;#39;&amp;lt;p&amp;gt;:RB&amp;#39;, 46: &amp;#39;&amp;lt;p&amp;gt;:NNPS&amp;#39;, 47: &amp;#39;&amp;lt;p&amp;gt;:PRP$&amp;#39;, 48: &amp;#39;&amp;lt;p&amp;gt;:&amp;lt;UNK&amp;gt;&amp;#39;, 49: &amp;#39;&amp;lt;p&amp;gt;:&amp;lt;NULL&amp;gt;&amp;#39;, 50: &amp;#39;&amp;lt;p&amp;gt;:&amp;lt;ROOT&amp;gt;&amp;#39;, 51: &amp;#39;,&amp;#39;, 52: &amp;#39;in&amp;#39;, 53: &amp;#39;the&amp;#39;, 
+        54: &amp;#39;.&amp;#39;, 55: &amp;#39;cars&amp;#39;, 56: &amp;#39;and&amp;#39;, 57: &amp;#39;of&amp;#39;, 58: &amp;#39;``&amp;#39;, 59: &amp;quot;&amp;#39;&amp;#39;&amp;quot;, 60: &amp;#39;at&amp;#39;, 61: &amp;#39;to&amp;#39;, 62: &amp;#39;haag&amp;#39;, 63: &amp;#39;said&amp;#39;, 64: &amp;#39;u.s.&amp;#39;, 65: &amp;#39;luxury&amp;#39;, 66: &amp;#39;auto&amp;#39;, 
+        67: &amp;#39;maker&amp;#39;, 68: &amp;#39;an&amp;#39;, 69: &amp;#39;oct.&amp;#39;, 70: &amp;#39;19&amp;#39;, 71: &amp;#39;review&amp;#39;, 72: &amp;#39;misanthrope&amp;#39;, 73: &amp;#39;chicago&amp;#39;, 74: &amp;quot;&amp;#39;s&amp;quot;, 75: &amp;#39;goodman&amp;#39;, 76: &amp;#39;theatre&amp;#39;, 77: &amp;#39;-lrb-&amp;#39;, 
+        78: &amp;#39;revitalized&amp;#39;, 79: &amp;#39;classics&amp;#39;, 80: &amp;#39;take&amp;#39;, 81: &amp;#39;stage&amp;#39;, 82: &amp;#39;windy&amp;#39;, 83: &amp;#39;city&amp;#39;, 84: &amp;#39;leisure&amp;#39;, 85: &amp;#39;&amp;amp;&amp;#39;, 86: &amp;#39;arts&amp;#39;, 87: &amp;#39;-rrb-&amp;#39;, 88: &amp;#39;role&amp;#39;,
+        89: &amp;#39;celimene&amp;#39;, 90: &amp;#39;played&amp;#39;, 91: &amp;#39;by&amp;#39;, 92: &amp;#39;kim&amp;#39;, 93: &amp;#39;cattrall&amp;#39;, 94: &amp;#39;was&amp;#39;, 95: &amp;#39;mistakenly&amp;#39;, 96: &amp;#39;attributed&amp;#39;, 97: &amp;#39;christina&amp;#39;, 98: &amp;#39;ms.&amp;#39;, 
+        99: &amp;#39;plays&amp;#39;, 100: &amp;#39;elianti&amp;#39;, 101: &amp;#39;rolls-royce&amp;#39;, 102: &amp;#39;motor&amp;#39;, 103: &amp;#39;inc.&amp;#39;, 104: &amp;#39;it&amp;#39;, 105: &amp;#39;expects&amp;#39;, 106: &amp;#39;its&amp;#39;, 107: &amp;#39;sales&amp;#39;, 108: &amp;#39;remain&amp;#39;, 
+        109: &amp;#39;steady&amp;#39;, 110: &amp;#39;about&amp;#39;, 111: &amp;#39;1,200&amp;#39;, 112: &amp;#39;1990&amp;#39;, 113: &amp;#39;last&amp;#39;, 114: &amp;#39;year&amp;#39;, 115: &amp;#39;sold&amp;#39;, 116: &amp;#39;1,214&amp;#39;, 117: &amp;#39;howard&amp;#39;, 118: &amp;#39;mosher&amp;#39;, 
+        119: &amp;#39;president&amp;#39;, 120: &amp;#39;chief&amp;#39;, 121: &amp;#39;executive&amp;#39;, 122: &amp;#39;officer&amp;#39;, 123: &amp;#39;he&amp;#39;, 124: &amp;#39;anticipates&amp;#39;, 125: &amp;#39;growth&amp;#39;, 126: &amp;#39;for&amp;#39;, 127: &amp;#39;britain&amp;#39;, 
+        128: &amp;#39;europe&amp;#39;, 129: &amp;#39;far&amp;#39;, 130: &amp;#39;eastern&amp;#39;, 131: &amp;#39;markets&amp;#39;, 132: &amp;#39;&amp;lt;UNK&amp;gt;&amp;#39;, 133: &amp;#39;&amp;lt;NULL&amp;gt;&amp;#39;, 134: &amp;#39;&amp;lt;ROOT&amp;gt;&amp;#39;}
+        &amp;#39;&amp;#39;&amp;#39;
+        self.tok2id = tok2id
+        self.id2tok = {v: k for (k, v) in tok2id.items()}
+
+        self.n_features = 18 + (18 if config.use_pos else 0) + (12 if config.use_dep else 0) #? why 18?
+        self.n_tokens = len(tok2id) 
+    
+    &amp;#39;&amp;#39;&amp;#39;
+    arranging each set as this form: [{&amp;#39;word&amp;#39;: [corresponding id of each token], &amp;#39;pos&amp;#39;: [corresponding id in pos from tok2id], &amp;#39;head&amp;#39;: [id...], &amp;#39;label&amp;#39;: [id...]},...,      #{last sentence in the set}]
+        The resulting vec_examples are (this is vectorized training data in id form from tok2id):
+        [{&amp;#39;word&amp;#39;: [134, 52, 68, 69, 70, 71, 57, 58, 53, 72, 59, 60, 73, 74, 75, 76, 77, 58, 78, 79, 80, 53, 81, 52, 82, 83, 51, 59, 84, 85, 86, 87, 51, 53, 88, 57, 89, 51, 90, 91, 92, 93, 51, 94, 95, 96, 61, 97, 62, 54], 
+        &amp;#39;pos&amp;#39;: [50, 26, 27, 24, 31, 25, 26, 37, 27, 25, 38, 26, 24, 42, 24, 24, 43, 37, 35, 29, 39, 27, 25, 26, 24, 24, 28, 38, 25, 32, 29, 44, 28, 27, 25, 26, 24, 28, 35, 26, 24, 24, 28, 33, 45, 35, 40, 24, 24, 34], 
+        &amp;#39;head&amp;#39;: [-1, 5, 5, 5, 5, 45, 9, 9, 9, 5, 9, 15, 15, 12, 15, 9, 20, 20, 19, 20, 5, 22, 20, 25, 25, 20, 20, 20, 20, 28, 28, 20, 45, 34, 45, 36, 34, 34, 34, 41, 41, 38, 34, 45, 45, 0, 48, 48, 45, 45], 
+        &amp;#39;label&amp;#39;: [-1, 13, 10, 7, 5, 6, 13, 11, 10, 6, 11, 13, 19, 13, 7, 6, 11, 11, 18, 1, 17, 10, 3, 13, 7, 6, 11, 11, 17, 21, 14, 11, 11, 10, 20, 13, 6, 11, 4, 13, 7, 6, 11, 9, 2, 0, 13, 7, 6, 11]}, 
+        {&amp;#39;word&amp;#39;: [134, 98, 62, 99, 100, 54], &amp;#39;pos&amp;#39;: [50, 24, 24, 36, 24, 34], &amp;#39;head&amp;#39;: [-1, 2, 3, 0, 3, 3], &amp;#39;label&amp;#39;: [-1, 7, 1, 0, 3, 11]},{...}...{...}
+    &amp;#39;&amp;#39;&amp;#39;
+    def vectorize(self, examples): 
+        vec_examples = []
+        for ex in examples:
+            word = [self.ROOT] + [self.tok2id[w] if w in self.tok2id
+                                  else self.UNK for w in ex[&amp;#39;word&amp;#39;]] # a list of word id for each sentence in dataset
+            pos = [self.P_ROOT] + [self.tok2id[P_PREFIX + w] if P_PREFIX + w in self.tok2id # a list of POS id
+                                   else self.P_UNK for w in ex[&amp;#39;pos&amp;#39;]]
+            head = [-1] + ex[&amp;#39;head&amp;#39;]
+            label = [-1] + [self.tok2id[L_PREFIX + w] if L_PREFIX + w in self.tok2id
+                            else -1 for w in ex[&amp;#39;label&amp;#39;]]
+            vec_examples.append({&amp;#39;word&amp;#39;: word, &amp;#39;pos&amp;#39;: pos,
+                                 &amp;#39;head&amp;#39;: head, &amp;#39;label&amp;#39;: label})
+        return vec_examples # each sentence is a dictionary with list of &amp;#39;word&amp;#39;,&amp;#39;POS&amp;#39;, &amp;#39;head&amp;#39; and &amp;#39;label
+    
+    &amp;#39;&amp;#39;&amp;#39;
+    This function is important, it extracts context words first, then extract the corresping word from ex[&amp;#39;word&amp;#39;], pos from ex[&amp;#39;pos&amp;#39;]
+    and label features from ex[&amp;#39;label&amp;#39;], finally concatenate them into a long vector for each sentence, an example of one set of features for one sentence is:
+    [133, 133, 134, 52, 68, 69, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 49, 49, 50, 26, 27, 24, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49] #36 features of context words with corresponding id from tok2id,  that is a long list containing [features, p_features, l_features] 
+    &amp;#39;&amp;#39;&amp;#39;
+    def extract_features(self, stack, buf, arcs, ex):
+        if stack[0] == &amp;quot;ROOT&amp;quot;:
+            stack[0] = 0
+
+        def get_lc(k): # lc: left context, since arc = (stack[-1], stack[-2], gold_t) or (stack[-2], stack[-1], gold_t), if arc[1]&amp;#39;s id &amp;lt; arc[0]&amp;#39;s id, then extract lc
+            return sorted([arc[1] for arc in arcs if arc[0] == k and arc[1] &amp;lt; k])
+
+        def get_rc(k): #if arc[1]&amp;#39;s id &amp;gt; arc[0]&amp;#39;s id, rc
+            return sorted([arc[1] for arc in arcs if arc[0] == k and arc[1] &amp;gt; k],
+                          reverse=True)
+
+        p_features = []
+        l_features = []
+        features = [self.NULL] * (3 - len(stack)) + [ex[&amp;#39;word&amp;#39;][x] for x in stack[-3:]] #if len(stack)&amp;gt;=3, no NULL, features contain the last 3 words in the stack
+        features += [ex[&amp;#39;word&amp;#39;][x] for x in buf[:3]] + [self.NULL] * (3 - len(buf)) # extract the first 3 words in the buffer if len(buf) &amp;gt;=3
+        if self.use_pos: # extracting the corresponding pos features, 3 from stack, 3 from buffer if stack and buffer have length&amp;gt;=3
+            p_features = [self.P_NULL] * (3 - len(stack)) + [ex[&amp;#39;pos&amp;#39;][x] for x in stack[-3:]]
+            p_features += [ex[&amp;#39;pos&amp;#39;][x] for x in buf[:3]] + [self.P_NULL] * (3 - len(buf))
+
+        for i in range(2): #i = 0, 1
+            if i &amp;lt; len(stack):
+                k = stack[-i-1] #the kth word&amp;#39;s context: i=0, the -1 word&amp;#39;s context, i=1, the -2 word&amp;#39;s context
+                lc = get_lc(k) # the left context word of kth word in stack = [(s3,) s2, s1]
+                rc = get_rc(k) # the right context word
+                llc = get_lc(lc[0]) if len(lc) &amp;gt; 0 else [] #llc
+                rrc = get_rc(rc[0]) if len(rc) &amp;gt; 0 else [] #rrc
+
+                features.append(ex[&amp;#39;word&amp;#39;][lc[0]] if len(lc) &amp;gt; 0 else self.NULL)
+                features.append(ex[&amp;#39;word&amp;#39;][rc[0]] if len(rc) &amp;gt; 0 else self.NULL)
+                features.append(ex[&amp;#39;word&amp;#39;][lc[1]] if len(lc) &amp;gt; 1 else self.NULL)
+                features.append(ex[&amp;#39;word&amp;#39;][rc[1]] if len(rc) &amp;gt; 1 else self.NULL)
+                features.append(ex[&amp;#39;word&amp;#39;][llc[0]] if len(llc) &amp;gt; 0 else self.NULL)
+                features.append(ex[&amp;#39;word&amp;#39;][rrc[0]] if len(rrc) &amp;gt; 0 else self.NULL)
+
+                if self.use_pos:
+                    p_features.append(ex[&amp;#39;pos&amp;#39;][lc[0]] if len(lc) &amp;gt; 0 else self.P_NULL)
+                    p_features.append(ex[&amp;#39;pos&amp;#39;][rc[0]] if len(rc) &amp;gt; 0 else self.P_NULL)
+                    p_features.append(ex[&amp;#39;pos&amp;#39;][lc[1]] if len(lc) &amp;gt; 1 else self.P_NULL)
+                    p_features.append(ex[&amp;#39;pos&amp;#39;][rc[1]] if len(rc) &amp;gt; 1 else self.P_NULL)
+                    p_features.append(ex[&amp;#39;pos&amp;#39;][llc[0]] if len(llc) &amp;gt; 0 else self.P_NULL)
+                    p_features.append(ex[&amp;#39;pos&amp;#39;][rrc[0]] if len(rrc) &amp;gt; 0 else self.P_NULL)
+
+                if self.use_dep:
+                    l_features.append(ex[&amp;#39;label&amp;#39;][lc[0]] if len(lc) &amp;gt; 0 else self.L_NULL)
+                    l_features.append(ex[&amp;#39;label&amp;#39;][rc[0]] if len(rc) &amp;gt; 0 else self.L_NULL)
+                    l_features.append(ex[&amp;#39;label&amp;#39;][lc[1]] if len(lc) &amp;gt; 1 else self.L_NULL)
+                    l_features.append(ex[&amp;#39;label&amp;#39;][rc[1]] if len(rc) &amp;gt; 1 else self.L_NULL)
+                    l_features.append(ex[&amp;#39;label&amp;#39;][llc[0]] if len(llc) &amp;gt; 0 else self.L_NULL)
+                    l_features.append(ex[&amp;#39;label&amp;#39;][rrc[0]] if len(rrc) &amp;gt; 0 else self.L_NULL)
+            else:
+                features += [self.NULL] * 6
+                if self.use_pos:
+                    p_features += [self.P_NULL] * 6
+                if self.use_dep:
+                    l_features += [self.L_NULL] * 6
+
+        features += p_features + l_features
+        assert len(features) == self.n_features
+        return features 
+
+    &amp;#39;&amp;#39;&amp;#39;
+    This is to get the correct transitions for training purposes. 
+    1. if there is only ROOT in stack, the only correct transition is shift
+    2. if stack = [i1, i0] or more, i2 is not ROOT, i1&amp;#39;s head == i0, then left arc is the correct transition
+    3. if stack = [i1, i0] or more, i0&amp;#39;s head == i1, i1 can be ROOT or not ROOT, right arc is the correct transition
+    4. ow shift
+    &amp;#39;&amp;#39;&amp;#39;
+    def get_oracle(self, stack, buf, ex):
+        if len(stack) &amp;lt; 2:
+            return self.n_trans - 1 #如果stack只有root, 就执行shift, shift对应id是48 or 2: n_tran = 3-1 if unlabel or 49-1  if label1
+        i0 = stack[-1]
+        i1 = stack[-2]
+        h0 = ex[&amp;#39;head&amp;#39;][i0]
+        h1 = ex[&amp;#39;head&amp;#39;][i1]
+        l0 = ex[&amp;#39;label&amp;#39;][i0]
+        l1 = ex[&amp;#39;label&amp;#39;][i1]
+
+        if self.unlabeled:
+            if (i1 &amp;gt; 0) and (h1 == i0): #if i1 is not ROOT, stack[i1, i0], head is i0, left_arc i1
+                return 0
+            elif (i1 &amp;gt;= 0) and (h0 == i1) and (not any([x for x in buf if ex[&amp;#39;head&amp;#39;][x] == i0])): 
+                return 1 # if head is i1, no i0 head in buffer , right_arc
+            else:
+                return None if len(buf) == 0 else 2 #if len(buf) =0, no transition, ow, shift
+        else:
+            if (i1 &amp;gt; 0) and (h1 == i0):
+                return l1 if (l1 &amp;gt;= 0) and (l1 &amp;lt; self.n_deprel) else None
+            elif (i1 &amp;gt;= 0) and (h0 == i1) and \
+                 (not any([x for x in buf if ex[&amp;#39;head&amp;#39;][x] == i0])):
+                return l0 + self.n_deprel if (l0 &amp;gt;= 0) and (l0 &amp;lt; self.n_deprel) else None
+            else:
+                return None if len(buf) == 0 else self.n_trans - 1
+    
+    &amp;#39;&amp;#39;&amp;#39;
+    for each sentence in training data, create stack with only ROOT in id form [0], buf with all tokens of the sentence, and empty arcs, get oracle for the 
+    stack[ROOT] and full buffer (oracle should be shift for this case), get legal labels (only shift is legal for stack[ROOT] and full buffer), so in this
+    round the legal_labels will return [0,0,1], then update stack, buffer and arcs, repeate this procedure for the updated stack, buffer and arcs for 
+    2*#ofwords times. for each update, instances are accumulated as walking through the whole sentence as [], each sentence is an instances, all_instances  =
+    [[instances1], [instances2], ...[]]
+    &amp;#39;&amp;#39;&amp;#39;
+    def create_instances(self, examples):
+        all_instances = []
+        succ = 0
+        for n_ex, ex in enumerate(examples):
+            n_words = len(ex[&amp;#39;word&amp;#39;]) - 1
+
+            # arcs = {(h, t, label)}
+            stack = [0]
+            buf = [i + 1 for i in range(n_words)]
+            arcs = []
+            instances = []
+            for i in range(n_words * 2): # rolling over each word to get the features (legal label and gold_t) for each transition in (llc, lc, w, rc, rrc) for each sentence, the transitions have 2*n_word times 
+                gold_t = self.get_oracle(stack, buf, ex)
+                if gold_t is None:
+                    break
+                legal_labels = self.legal_labels(stack, buf)
+                assert legal_labels[gold_t] == 1 # correct transition must belong to legal lables
+                instances.append((self.extract_features(stack, buf, arcs, ex),
+                                  legal_labels, gold_t)) 
+                if gold_t == self.n_trans - 1: # gold_t is shift= 2
+                    stack.append(buf[0])
+                    buf = buf[1:]
+                elif gold_t &amp;lt; self.n_deprel: #n_deprel = 1, when gold_t ==0,
+                    arcs.append((stack[-1], stack[-2], gold_t)) # i.e. L_arc, next gold_t must be 2, i.e. shift, stack is all the words except the -2 word, then next loop will be adding the first word in buffer to stack (execute the first if).
+                    stack = stack[:-2] + [stack[-1]]
+                else:
+                    arcs.append((stack[-2], stack[-1], gold_t - self.n_deprel))
+                    stack = stack[:-1] #when gold_t ==1, R_arc, next gold_t must be 0, i.e. shift, stack will be all the words except the last word, then next loop will be adding the first word in buffer to stack (execute the first if).
+            succ += 1
+            all_instances += instances # one instance is one sentence with 2*n_word tuples, each tuple contains context features, legal_labels, gold_t
+        return all_instances
+
+    def legal_labels(self, stack, buf):
+        labels = ([1] if len(stack) &amp;gt; 2 else [0]) * self.n_deprel #stack&amp;lt;=2 must not be L-arc, stack&amp;gt;2, L-arc is legal
+        labels += ([1] if len(stack) &amp;gt;= 2 else [0]) * self.n_deprel
+        labels += [1] if len(buf) &amp;gt; 0 else [0] #buf &amp;gt; 0,  shift is legal 
+        return labels # labels&amp;#39; length == n_tran, 3 or 49&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Defining the Preprocessor, it is ready to load and preprocess data. It read in the train set, dev set and test set first, and slice sentences for debugging purpose, initialize Preprocessor, initalize embedding matrix for all tokens in train set and then map each row in embedding matrix to corresponding token (this is the pretrained embedding matrix), vectorize train, dev and test sets.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def load_and_preprocess_data(reduced=True):
+    config = Config()
+
+    print(&amp;quot;Loading data...&amp;quot;),
+    start = time.time()
+    train_set = read_conll(os.path.join(config.data_path, config.train_file),
+                           lowercase=config.lowercase)
+    dev_set = read_conll(os.path.join(config.data_path, config.dev_file),
+                         lowercase=config.lowercase)
+    test_set = read_conll(os.path.join(config.data_path, config.test_file),
+                          lowercase=config.lowercase)
+    if reduced:
+        train_set = train_set[:1000]
+        dev_set = dev_set[:500]
+        test_set = test_set[:500]
+    print(&amp;quot;took {:.2f} seconds&amp;quot;.format(time.time() - start))
+
+    print(&amp;quot;Building parser...&amp;quot;),
+    start = time.time()
+    preprocessor = Preprocessor(train_set)
+    print(&amp;quot;took {:.2f} seconds&amp;quot;.format(time.time() - start))
+
+    print(&amp;quot;Loading pretrained embeddings...&amp;quot;),
+    start = time.time()
+    word_vectors = {}
+    for line in open(config.embedding_file).readlines():
+        sp = line.strip().split()
+        word_vectors[sp[0]] = [float(x) for x in sp[1:]] #sp[0] is all vocabulary, sp[1:] is the corresponding word vector 
+    embeddings_matrix = np.asarray(np.random.normal(0, 0.9, (preprocessor.n_tokens, 50)), dtype=&amp;#39;float32&amp;#39;) #embeding: is n_tokens * 50
+
+    for token in preprocessor.tok2id: #all token/ POS/ label in train set
+        i = preprocessor.tok2id[token]
+        if token in word_vectors:
+            embeddings_matrix[i] = word_vectors[token]
+        elif token.lower() in word_vectors:
+            embeddings_matrix[i] = word_vectors[token.lower()] #fill embedding matrix with corresponding word_vectors as input x
+    print(&amp;quot;took {:.2f} seconds&amp;quot;.format(time.time() - start))
+    
+    print(&amp;quot;Vectorizing data...&amp;quot;),
+    start = time.time()
+    train_set = preprocessor.vectorize(train_set)
+    dev_set = preprocessor.vectorize(dev_set) # each sentence conresponds to a dictionary of {&amp;#39;word&amp;#39;:id, &amp;#39;head&amp;#39;: id, &amp;#39;pos&amp;#39;: id, &amp;#39;label&amp;#39;: id}
+    test_set = preprocessor.vectorize(test_set)
+    print(&amp;quot;took {:.2f} seconds&amp;quot;.format(time.time() - start))
+
+    print(&amp;quot;Preprocessing training data...&amp;quot;),
+    start = time.time()
+    train_examples = preprocessor.create_instances(train_set) # each sentence contain 2*n_word tuple of context features in word, POS, legal lable and gold_t
+    print(&amp;quot;took {:.2f} seconds&amp;quot;.format(time.time() - start))
+
+    return preprocessor, embeddings_matrix, train_examples, dev_set, test_set,&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is creating partial parses object. Treating each sentence as a partial parse with attribute ‘stack’, ‘buffer’, ‘dependencies’, and with method ‘parse_step’ to update words in stack and buffers according to predicted transitions, the parse method returns dependencies for each transition.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class PartialParse(object):
+    def __init__(self, sentence):
+        &amp;quot;&amp;quot;&amp;quot;Initializes this partial parse.
+        Your code should initialize the following fields:
+            self.stack: The current stack represented as a list with the top of the stack as the
+                        last element of the list.
+            self.buffer: The current buffer represented as a list with the first item on the
+                         buffer as the first item of the list
+            self.dependencies: The list of dependencies produced so far. Represented as a list of
+                    tuples where each tuple is of the form (head, dependent).
+                    Order for this list doesn&amp;#39;t matter.
+        The root token should be represented with the string &amp;quot;ROOT&amp;quot;
+        Args:
+            sentence: The sentence to be parsed as a list of words.
+                      Your code should not modify the sentence.
+        &amp;quot;&amp;quot;&amp;quot;
+        # The sentence being parsed is kept for bookkeeping purposes. Do not use it in your code.
+        self.sentence = sentence
+
+        ### YOUR CODE HERE
+        self.stack = [&amp;#39;ROOT&amp;#39;]
+        self.buffer = sentence[:]
+        self.dependencies = []
+        ### END YOUR CODE
+
+    def parse_step(self, transition):
+        &amp;quot;&amp;quot;&amp;quot;Performs a single parse step by applying the given transition to this partial parse
+        Args:
+            transition: A string that equals &amp;quot;S&amp;quot;, &amp;quot;LA&amp;quot;, or &amp;quot;RA&amp;quot; representing the shift, left-arc,
+                        and right-arc transitions.
+        &amp;quot;&amp;quot;&amp;quot;
+        ### YOUR CODE HERE
+        if transition == &amp;quot;S&amp;quot;:
+            self.stack.append(self.buffer[0])
+            self.buffer.pop(0)
+        elif transition == &amp;quot;LA&amp;quot;:
+            self.dependencies.append((self.stack[-1], self.stack[-2]))
+            self.stack.pop(-2)
+        else:
+            self.dependencies.append((self.stack[-2], self.stack[-1]))
+            self.stack.pop(-1)
+            ### END YOUR CODE
+
+    def parse(self, transitions):
+        &amp;quot;&amp;quot;&amp;quot;Applies the provided transitions to this PartialParse
+        Args:
+            transitions: The list of transitions in the order they should be applied
+        Returns:
+            dependencies: The list of dependencies produced when parsing the sentence. Represented
+                          as a list of tuples where each tuple is of the form (head, dependent)
+        &amp;quot;&amp;quot;&amp;quot;
+        for transition in transitions:
+            self.parse_step(transition)
+        return self.dependencies&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, define the model used to predict the transitions for each set of features in each sentences. This is used when evaluating the dev_set and test_set. It is important to use sess as the argument in the predict method so that the most updated variables (the weight matrices and the bias terms in this cases) in TensorFlow in the training stage can be applied to the evaluation set.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from utils.model import Model #want to use its predict_on_batch method
+
+class ModelWrapper(object):
+    def __init__(self, sess, preprocessor, dataset, sentence_id_to_idx):
+        self.sess = sess
+        self.preprocessor = preprocessor
+        self.dataset = dataset
+        self.sentence_id_to_idx = sentence_id_to_idx
+
+    def predict(self, model, partial_parses): #model and partial_parses are imported and defined above.
+        mb_x = [self.preprocessor.extract_features(p.stack, p.buffer, p.dependencies,
+                                                   self.dataset[self.sentence_id_to_idx[id(p.sentence)]]) #get context features, pos, label in ID FORM for each sentence in partial_parses, since dev_set&amp;#39;s word are expressed in id form, rather than character like in train_set, mb_x can be type of &amp;#39;int32&amp;#39;
+                for p in partial_parses] #partial parses are initialized in parse() method below 
+        mb_x = np.array(mb_x).astype(&amp;#39;int32&amp;#39;) #inputs_batch, which is from dev_set
+        mb_l = [self.preprocessor.legal_labels(p.stack, p.buffer) for p in partial_parses]
+        
+        pred = model.predict_on_batch(self.sess, mb_x)
+        pred = np.argmax(pred + 10000 * np.array(mb_l).astype(&amp;#39;float32&amp;#39;), 1)
+        pred = [&amp;quot;S&amp;quot; if p == 2 else (&amp;quot;LA&amp;quot; if p == 0 else &amp;quot;RA&amp;quot;) for p in pred]
+        return pred
+
+def parse(sess, model, preprocessor, dataset, eval_batch_size=5000): #here dataset is dev_set
+    sentences = []
+    sentence_id_to_idx = {}
+    for i, example in enumerate(dataset):
+        n_words = len(example[&amp;#39;word&amp;#39;]) - 1
+        sentence = [j + 1 for j in range(n_words)]
+        #sentence = [j for j in example[&amp;#39;word&amp;#39;]]
+        sentences.append(sentence)
+        sentence_id_to_idx[id(sentence)] = i
+    
+    MW = ModelWrapper(sess, preprocessor, dataset, sentence_id_to_idx)
+    #dependencies = minibatch_parse(sentences, model, eval_batch_size)
+    partial_parses = [PartialParse(s) for s in sentences]
+
+    unfinished_parse = partial_parses
+
+    while len(unfinished_parse) &amp;gt; 0:
+        minibatch = unfinished_parse[0:eval_batch_size]
+        # perform transition and single step parser on the minibatch until it is empty
+        while len(minibatch) &amp;gt; 0:
+            transitions =MW.predict(model, minibatch) #the model remembers the optimized variables for the sess, so it can predict on the minibatch from dev_set, get the predicted transitions, feature extractions are done within predict() method in ModelWrapper
+            for index, action in enumerate(transitions):
+                minibatch[index].parse_step(action) #update the stack and buff for each features (list of context word, pos and labels) in each sentence
+            minibatch = [parse for parse in minibatch if len(parse.stack) &amp;gt; 1 or len(parse.buffer) &amp;gt; 0]
+
+        # move to the next batch
+        unfinished_parse = unfinished_parse[eval_batch_size:]
+
+    dependencies = []
+    for n in range(len(sentences)):
+        dependencies.append(partial_parses[n].dependencies)
+    
+    # get the Unlabeled Accuracy Score (maybe)
+    UAS = all_tokens = 0.0 
+    for i, ex in enumerate(dataset):
+        head = [-1] * len(ex[&amp;#39;word&amp;#39;])
+        for h, t, in dependencies[i]:
+            head[t] = h
+        for pred_h, gold_h, gold_l, pos in zip(head[1:], ex[&amp;#39;head&amp;#39;][1:], ex[&amp;#39;label&amp;#39;][1:], ex[&amp;#39;pos&amp;#39;][1:]):
+            assert preprocessor.id2tok[pos].startswith(P_PREFIX)
+            pos_str = preprocessor.id2tok[pos][len(P_PREFIX):]
+            if (preprocessor.with_punct) or (not punct(preprocessor.language, pos_str)):
+                UAS += 1 if pred_h == gold_h else 0
+                all_tokens += 1
+    UAS /= all_tokens
+    return UAS, dependencies &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
   </channel>
