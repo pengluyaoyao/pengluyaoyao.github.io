@@ -229,7 +229,7 @@ code {
     <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/nlp/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Assignment2 Q2</title>
+      <title>Assignment2 Q2 (So happy I finally worked it out)</title>
       <link>/post/assignment2/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/assignment2/</guid>
@@ -331,7 +331,7 @@ def punct(language, pos):
         raise ValueError(&amp;#39;language: %s is not supported.&amp;#39; % language)
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, define Preprocessor (in the assignment it is called Parser. I was confused about the parse method in that object, so I take the parse method out as an independent method, so the Parser object was renamed as Preprocessor, which will be used as an argument in the parse() method) object to extract features of the context words of each word in the training data (word, pos, label features), get the correct transitions, get the legal transitions , then create instances containing [a long list of tuples of (features, legal labels, gold_t (correct transitions))]&lt;/p&gt;
+&lt;p&gt;Now, define Preprocessor object (in the assignment it is called Parser. I was confused about the parse method in that object, so I take the parse method out as an independent method, so the Parser object was renamed as Preprocessor, which will be used as an argument in the parse() method) to extract features of the context words of each word in the training data (word, pos, label features), get the correct transitions, get the legal transitions , then create instances containing [a long list of tuples of (features, legal labels, gold_t (correct transitions))]&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;class Preprocessor(object):
     # initialize the dictionary {token: id}, and {id: token},  
     def __init__(self, dataset):
@@ -577,7 +577,7 @@ def punct(language, pos):
         labels += ([1] if len(stack) &amp;gt;= 2 else [0]) * self.n_deprel
         labels += [1] if len(buf) &amp;gt; 0 else [0] #buf &amp;gt; 0,  shift is legal 
         return labels # labels&amp;#39; length == n_tran, 3 or 49&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Defining the Preprocessor, it is ready to load and preprocess data. It read in the train set, dev set and test set first, and slice sentences for debugging purpose, initialize Preprocessor, initalize embedding matrix for all tokens in train set and then map each row in embedding matrix to corresponding token (this is the pretrained embedding matrix), vectorize train, dev and test sets.&lt;/p&gt;
+&lt;p&gt;After defining the Preprocessor, it is ready to load and preprocess data. It read in the train set, dev set and test set first, and slice sentences for debugging purpose, initialize Preprocessor, initalize embedding matrix for all tokens in train set and then map each row in embedding matrix to corresponding token (this is the pretrained embedding matrix), vectorize train, dev and test sets.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;def load_and_preprocess_data(reduced=True):
     config = Config()
 
@@ -752,6 +752,346 @@ def parse(sess, model, preprocessor, dataset, eval_batch_size=5000): #here datas
                 all_tokens += 1
     UAS /= all_tokens
     return UAS, dependencies &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, the deep neural network can be built in TensorFlow framework&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import os
+import time
+import tensorflow as tf
+import pickle
+
+class Config(object):
+    &amp;quot;&amp;quot;&amp;quot;Holds model hyperparams and data information.
+    The config class is used to store various hyperparameters and dataset
+    information parameters. Model objects are passed a Config() object at
+    instantiation.
+    &amp;quot;&amp;quot;&amp;quot;
+    n_features = 36
+    n_classes = 3
+    dropout = 0.5
+    embed_size = 50
+    hidden_size = 200
+    batch_size = 2048
+    n_epochs = 10
+    lr = 0.001
+    language = &amp;#39;english&amp;#39;
+    with_punct = True
+    unlabeled = True
+    lowercase = True
+    use_pos = True
+    use_dep = True
+    use_dep = use_dep and (not unlabeled)
+    data_path = &amp;#39;./data&amp;#39;
+    train_file = &amp;#39;train.conll&amp;#39;
+    dev_file = &amp;#39;dev.conll&amp;#39;
+    test_file = &amp;#39;test.conll&amp;#39;
+    embedding_file = &amp;#39;./data/en-cw.txt&amp;#39;
+    
+class ParserModel(Model):
+    &amp;quot;&amp;quot;&amp;quot;
+    Implements a feedforward neural network with an embedding layer and single hidden layer.
+    This network will predict which transition should be applied to a given partial parse
+    configuration.
+    &amp;quot;&amp;quot;&amp;quot;
+
+    def add_placeholders(self):
+ 
+        ### YOUR CODE HERE
+        self.input_placeholder = tf.placeholder(tf.int32, [None, self.config.n_features])
+        self.labels_placeholder = tf.placeholder(tf.float32, [None, self.config.n_classes])
+        self.dropout_placeholder = tf.placeholder(tf.float32)
+        self.beta_regul = tf.placeholder(tf.float32)
+        ### END YOUR CODE
+
+    def create_feed_dict(self, inputs_batch, labels_batch=None, dropout=1, beta_regul=10e-7):
+  
+        ### YOUR CODE HERE
+        feed_dict = {self.input_placeholder: inputs_batch, \
+                     self.dropout_placeholder: dropout, \
+                     self.beta_regul: beta_regul
+                     }
+        if labels_batch is not None:
+            feed_dict[self.labels_placeholder] = labels_batch
+        ### END YOUR CODE
+        return feed_dict
+
+    def add_embedding(self):
+
+        ### YOUR CODE HERE
+        embedded = tf.Variable(self.pretrained_embeddings)
+        embeddings = tf.nn.embedding_lookup(embedded,self.input_placeholder)
+        embeddings = tf.reshape(embeddings, [-1, self.config.n_features * self.config.embed_size])
+        ### END YOUR CODE
+        return embeddings
+
+    def add_prediction_op(self):
+
+        x = self.add_embedding()
+        ### YOUR CODE HERE
+        xavier = xavier_weight_init()
+        with tf.variable_scope(&amp;quot;transformation&amp;quot;):
+            b1 = tf.Variable(tf.random_uniform([self.config.hidden_size,]))
+            b2 = tf.Variable(tf.random_uniform([self.config.n_classes]))
+
+            self.W = W = xavier([self.config.n_features * self.config.embed_size, self.config.hidden_size])
+            U = xavier([self.config.hidden_size, self.config.n_classes])
+
+            z1 = tf.matmul(x,W) + b1
+            h = tf.nn.relu(z1)
+            h_drop = tf.nn.dropout(h,self.dropout_placeholder)
+            pred = tf.matmul(h_drop, U) + b2
+        ### END YOUR CODE
+        return pred
+
+    def add_loss_op(self, pred):
+ 
+        ### YOUR CODE HERE
+        loss = tf.nn.softmax_cross_entropy_with_logits_v2(logits=pred, labels=self.labels_placeholder)
+        loss += self.beta_regul * tf.nn.l2_loss(self.W)
+        loss = tf.reduce_mean(loss)
+        ### END YOUR CODE
+        return loss
+
+    def add_training_op(self, loss):
+
+        ### YOUR CODE HERE
+        adam_optim = tf.train.AdamOptimizer(self.config.lr)
+        train_op = adam_optim.minimize(loss)
+        ### END YOUR CODE
+        return train_op
+
+    def train_on_batch(self, sess, inputs_batch, labels_batch):
+        feed = self.create_feed_dict(inputs_batch, labels_batch=labels_batch,
+                                     dropout=self.config.dropout)
+        _, loss = sess.run([self.train_op, self.loss], feed_dict=feed)
+        return loss
+
+    def run_epoch(self, sess, model, preprocessor,train_examples, dev_set):
+        prog = tf.keras.utils.Progbar(target=1 + len(train_examples) / self.config.batch_size)
+        for i, (train_x, train_y) in enumerate(minibatches(train_examples, self.config.batch_size)):
+            loss = self.train_on_batch(sess, train_x, train_y)
+            prog.update(i + 1, [(&amp;quot;train loss&amp;quot;, loss)])
+
+        print(&amp;quot;Evaluating on dev set&amp;quot;),
+        dev_UAS, _ = parse(sess, model, preprocessor, dev_set)
+        print(&amp;quot;- dev UAS: {:.2f}&amp;quot;.format(dev_UAS * 100.0))
+        return dev_UAS
+
+    def fit(self, sess, model, saver, preprocessor,train_examples, dev_set):
+        best_dev_UAS = 0
+        for epoch in range(self.config.n_epochs):
+            print(&amp;quot;Epoch {:} out of {:}&amp;quot;.format(epoch + 1, self.config.n_epochs))
+            dev_UAS = self.run_epoch(sess, model, preprocessor,train_examples, dev_set)
+            if dev_UAS &amp;gt; best_dev_UAS:
+                best_dev_UAS = dev_UAS
+                if saver:
+                    print(&amp;quot;New best dev UAS! Saving model in ./data/weights/parser.weights&amp;quot;)
+                    saver.save(sess, &amp;#39;./data/weights/parser.weights&amp;#39;)
+            print
+
+    def __init__(self, config, pretrained_embeddings):
+        self.pretrained_embeddings = pretrained_embeddings
+        self.config = config
+        self.build()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Before combining everything together, define the follow methods. minibatches() are used to extract the input batch and lable batch for the feeder in tensorflow; xavier_weight_init() used to randomly generate W and U matrices in the prediction functions.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from utils.general_utils import get_minibatches
+
+def minibatches(data, batch_size):
+    x = np.array([d[0] for d in data])
+    y = np.array([d[2] for d in data])
+    one_hot = np.zeros((y.size, 3))
+    one_hot[np.arange(y.size), y] = 1
+    return get_minibatches([x, one_hot], batch_size)
+
+def xavier_weight_init():
+    &amp;quot;&amp;quot;&amp;quot;Returns function that creates random tensor.
+    The specified function will take in a shape (tuple or 1-d array) and
+    returns a random tensor of the specified shape drawn from the
+    Xavier initialization distribution.
+    Hint: You might find tf.random_uniform useful.
+    &amp;quot;&amp;quot;&amp;quot;
+    def _xavier_initializer(shape, **kwargs):
+        &amp;quot;&amp;quot;&amp;quot;Defines an initializer for the Xavier distribution.
+        Specifically, the output should be sampled uniformly from [-epsilon, epsilon] where
+            epsilon = sqrt(6) / &amp;lt;sum of the sizes of shape&amp;#39;s dimensions&amp;gt;
+        e.g., if shape = (2, 3), epsilon = sqrt(6 / (2 + 3))
+        This function will be used as a variable initializer.
+        Args:
+            shape: Tuple or 1-d array that species the dimensions of the requested tensor.
+        Returns:
+            out: tf.Tensor of specified shape sampled from the Xavier distribution.
+        &amp;quot;&amp;quot;&amp;quot;
+        ### YOUR CODE HERE
+        epsilon = np.sqrt(6 / np.sum(shape))
+        out = tf.Variable(tf.random_uniform(shape=shape, minval=-epsilon, maxval=epsilon))
+        ### END YOUR CODE
+        return out
+    # Returns defined initializer function.
+    return _xavier_initializer&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Combining everything to the main() function:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def main(debug=True):
+    print(80 * &amp;quot;=&amp;quot;)
+    print(&amp;quot;INITIALIZING&amp;quot;)
+    print(80 * &amp;quot;=&amp;quot;)
+    config = Config()
+    preprocessor, embeddings, train_examples, dev_set, test_set = load_and_preprocess_data(debug)
+    if not os.path.exists(&amp;#39;./data/weights/&amp;#39;):
+        os.makedirs(&amp;#39;./data/weights/&amp;#39;)
+
+    with tf.Graph().as_default():
+        print(&amp;quot;Building model...&amp;quot;),
+        start = time.time()
+        model = ParserModel(config, embeddings)
+        #parser.model = model
+        print(&amp;quot;took {:.2f} seconds\n&amp;quot;.format(time.time() - start))
+
+        init = tf.global_variables_initializer()
+        # If you are using an old version of TensorFlow, you may have to use
+        # this initializer instead.
+        # init = tf.initialize_all_variables()
+        saver = None if debug else tf.train.Saver()
+
+        with tf.Session() as sess:
+            #parser.session = sess
+            sess.run(init)
+
+            print(80 * &amp;quot;=&amp;quot;)
+            print(&amp;quot;TRAINING&amp;quot;)
+            print(80 * &amp;quot;=&amp;quot;)
+            model.fit(sess, model, saver, preprocessor,train_examples, dev_set) #train_examples provide the input_batch and label batch by minibatches() method defined above 
+
+            if not debug:
+                print(80 * &amp;quot;=&amp;quot;)
+                print(&amp;quot;TESTING&amp;quot;)
+                print(80 * &amp;quot;=&amp;quot;)
+                print(&amp;quot;Restoring the best model weights found on the dev set&amp;quot;)
+                saver.restore(sess, &amp;#39;./data/weights/parser.weights&amp;#39;)
+                print(&amp;quot;Final evaluation on test set&amp;quot;,)
+                UAS, dependencies = parse(sess, model, preprocessor, test_set)
+                print(&amp;quot;- test UAS: {:.2f}&amp;quot;.format(UAS * 100.0))
+                print(&amp;quot;Writing predictions&amp;quot;)
+                with open(&amp;#39;q2_test.predicted.pkl&amp;#39;, &amp;#39;wb&amp;#39;) as f:
+                    pickle.dump(dependencies, f, -1)
+                print(&amp;quot;Done!&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, run the main function with debug mode:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;main(True)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The results under debug mode. After 10 epoch of training, UAS is 68.56.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;================================================================================
+INITIALIZING
+================================================================================
+Loading data...
+took 11.97 seconds
+Building parser...
+took 0.09 seconds
+Loading pretrained embeddings...
+took 6.36 seconds
+Vectorizing data...
+took 0.17 seconds
+Preprocessing training data...
+took 3.79 seconds
+Building model...
+took 0.52 seconds
+
+================================================================================
+TRAINING
+================================================================================
+Epoch 1 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 1.0069Evaluating on dev set
+- dev UAS: 45.86
+Epoch 2 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.4400Evaluating on dev set
+- dev UAS: 53.38
+Epoch 3 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.3473Evaluating on dev set
+- dev UAS: 58.92
+Epoch 4 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.3010Evaluating on dev set
+- dev UAS: 61.86
+Epoch 5 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.2675Evaluating on dev set
+- dev UAS: 62.74
+Epoch 6 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.2419Evaluating on dev set
+- dev UAS: 64.17
+Epoch 7 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.2214Evaluating on dev set
+- dev UAS: 65.05
+Epoch 8 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.2016Evaluating on dev set
+- dev UAS: 67.05
+Epoch 9 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.1881Evaluating on dev set
+- dev UAS: 67.45
+Epoch 10 out of 10
+24/24 [============================&amp;gt;.] - ETA: 0s - train loss: 0.1733Evaluating on dev set
+- dev UAS: 68.56&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Training on the full data, the final UAS is 88.91.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;================================================================================
+INITIALIZING
+================================================================================
+Loading data...
+took 5.62 seconds
+Building parser...
+took 4.05 seconds
+Loading pretrained embeddings...
+took 6.82 seconds
+Vectorizing data...
+took 4.56 seconds
+Preprocessing training data...
+took 144.24 seconds
+Building model...
+took 0.65 seconds
+
+================================================================================
+TRAINING
+================================================================================
+Epoch 1 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.2253Evaluating on dev set
+- dev UAS: 82.99
+New best dev UAS! Saving model in ./data/weights/parser.weights
+Epoch 2 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.1231Evaluating on dev set
+- dev UAS: 85.37
+New best dev UAS! Saving model in ./data/weights/parser.weights
+Epoch 3 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.1069Evaluating on dev set
+- dev UAS: 86.63
+New best dev UAS! Saving model in ./data/weights/parser.weights
+Epoch 4 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.0969Evaluating on dev set
+- dev UAS: 87.34
+New best dev UAS! Saving model in ./data/weights/parser.weights
+Epoch 5 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.0902Evaluating on dev set
+- dev UAS: 87.09
+Epoch 6 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.0839Evaluating on dev set
+- dev UAS: 87.84
+New best dev UAS! Saving model in ./data/weights/parser.weights
+Epoch 7 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.0792Evaluating on dev set
+- dev UAS: 88.21
+New best dev UAS! Saving model in ./data/weights/parser.weights
+Epoch 8 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.0747Evaluating on dev set
+- dev UAS: 88.08
+Epoch 9 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.0711Evaluating on dev set
+- dev UAS: 88.26
+New best dev UAS! Saving model in ./data/weights/parser.weights
+Epoch 10 out of 10
+928/928 [============================&amp;gt;.] - ETA: 0s - train loss: 0.0675Evaluating on dev set
+- dev UAS: 88.52
+New best dev UAS! Saving model in ./data/weights/parser.weights
+================================================================================
+TESTING
+================================================================================
+Restoring the best model weights found on the dev set
+INFO:tensorflow:Restoring parameters from ./data/weights/parser.weights
+Final evaluation on test set
+- test UAS: 88.91
+Writing predictions
+Done!&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The final dependencies for each transition is in id form and will look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[(7, 6), (7, 5), (7, 4), (7, 3), (7, 2), (7, 1), (7, 8), (0, 7)], [],...]&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
   </channel>
