@@ -246,8 +246,43 @@ code {
     <description>Recent content in Nlp on Luyao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/categories/nlp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NLP in Automated Essay Scoring</title>
+      <link>/post/nlp-in-automated-essay-scoring/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/nlp-in-automated-essay-scoring/</guid>
+      <description>
+
+
+&lt;p&gt;In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://easygrader.herokuapp.com/&#34;&gt;Link to the MMeM github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results. This is what I need to improve to add some ‘backend worker’ in Python to avoid the situation)&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;About this project&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Essay are crucial testing tools for assessing academic achievement, integration of ideas and ability, but are expensive and time consuming to grade manually. Automated Essay Scoring (AES) saves the efforts of human graders and hence significantly reduces costs and time.&lt;/p&gt;
+&lt;p&gt;The essay data are from Kaggle.com, by the William and Flora Hewlett Foundation, containing 8 essay categories. For each essay, there are two human graders to grade the essay. The goal is to train the models to grade the essays as close as to the human graders.&lt;/p&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Features&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is traditional NLP method, so input features were extraced manually, they are: + Bag of Words (BOW) + Number of words + Number of sentences + Variation of sentences + Average word length + Number of lemms + Number of spelling errors + Number of nouns, adjectives, verbs and adverbs&lt;/p&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Model and results&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Four regression models are compared: + random forest + ridge regression + lasson regression + gradient boosting regressor Gradient boosting regressor performed better in terms of Variance Explained metric, so gradi- ent boosting was used to make prediction on the validate essay set for set1 and set 5, respectively.&lt;/p&gt;
+&lt;p&gt;After applying the early stopping, the results of gradient boosting regressor of the 3-fold cross validation results for essay set1 and essay set5 are (the &lt;span class=&#34;math inline&#34;&gt;\(R^2\)&lt;/span&gt; for other categories are 0.5-0.6, which is relatively low):&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/results_AES_TDI.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Problems&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The model has overfitting problem, need to tune the parameters further; change the website waiting mode when requesting.&lt;/p&gt;
+</description>
+    </item>
     <item>
       <title>Assignment2 Q2 (So happy I finally worked it out)</title>
       <link>/post/assignment2/</link>

@@ -8,11 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
     
-    Nlp | Luyao&#39;s Blog
+    NLP in Automated Essay Scoring | Luyao&#39;s Blog
     
   </title>
-  
-  <link rel="alternate" type="application/rss+xml" href="/tags/nlp/index.xml" title="Luyao's Blog">
   
   <style>
     body {
@@ -202,10 +200,15 @@ code {
       <div class="u-padding">
         
 
-<header class="Heading">
+<article>
+  <header class="Heading">
   <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/tags/nlp/" rel="bookmark">Nlp</a>
+    <a class="Heading-link u-clickable" href="/post/nlp-in-automated-essay-scoring/" rel="bookmark">NLP in Automated Essay Scoring</a>
   </h2>
+  
+  <time datetime="2019-03-07T00:00:00Z">
+    7 March, 2019
+  </time>
   
 </header>
 <link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
@@ -240,17 +243,57 @@ code {
   });
 </script>
 
+  
 
 
-<h3>2019</h3>
-<ul>
-  
-  <li>2019-03-07 – <a href="/post/nlp-in-automated-essay-scoring/">NLP in Automated Essay Scoring</a></li>
-  
-  <li>2019-03-04 – <a href="/post/assignment2/">Assignment2 Q2 (So happy I finally worked it out)</a></li>
-  
-</ul>
+<p>In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.</p>
+<p><a href="https://easygrader.herokuapp.com/">Link to the MMeM github</a></p>
+<p>(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results. This is what I need to improve to add some ‘backend worker’ in Python to avoid the situation)</p>
+<ol style="list-style-type: decimal">
+<li>About this project</li>
+</ol>
+<p>Essay are crucial testing tools for assessing academic achievement, integration of ideas and ability, but are expensive and time consuming to grade manually. Automated Essay Scoring (AES) saves the efforts of human graders and hence significantly reduces costs and time.</p>
+<p>The essay data are from Kaggle.com, by the William and Flora Hewlett Foundation, containing 8 essay categories. For each essay, there are two human graders to grade the essay. The goal is to train the models to grade the essays as close as to the human graders.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Features</li>
+</ol>
+<p>This is traditional NLP method, so input features were extraced manually, they are: + Bag of Words (BOW) + Number of words + Number of sentences + Variation of sentences + Average word length + Number of lemms + Number of spelling errors + Number of nouns, adjectives, verbs and adverbs</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Model and results</li>
+</ol>
+<p>Four regression models are compared: + random forest + ridge regression + lasson regression + gradient boosting regressor Gradient boosting regressor performed better in terms of Variance Explained metric, so gradi- ent boosting was used to make prediction on the validate essay set for set1 and set 5, respectively.</p>
+<p>After applying the early stopping, the results of gradient boosting regressor of the 3-fold cross validation results for essay set1 and essay set5 are (the <span class="math inline">\(R^2\)</span> for other categories are 0.5-0.6, which is relatively low):</p>
+<div class="figure">
+<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/results_AES_TDI.jpg" />
 
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Problems</li>
+</ol>
+<p>The model has overfitting problem, need to tune the parameters further; change the website waiting mode when requesting.</p>
+
+  
+<footer>
+  <ul class="Tags">
+    
+    
+    
+    <li class="Tags-item u-background">
+      <a class="Tags-link u-clickable" href="/tags/nlp/" rel="tag">NLP</a>
+    </li>
+    
+    
+    
+    
+    <li class="Tags-item u-background">
+      <a class="Tags-link u-clickable" href="/tags/python/" rel="tag">Python</a>
+    </li>
+    
+    
+  </ul>
+</footer>
+
+</article>
 
 
       </div>
