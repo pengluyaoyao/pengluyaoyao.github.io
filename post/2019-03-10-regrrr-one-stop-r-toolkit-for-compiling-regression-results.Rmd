@@ -1,0 +1,64 @@
+---
+title: '''“regrrr”: One-stop R-toolkit for Compiling Regression Results'''
+author: ''
+date: '2019-03-10'
+slug: regrrr-one-stop-r-toolkit-for-compiling-regression-results
+categories: []
+tags:
+  - regression
+  - R
+---
+
+This is an R package <a href="https://CRAN.R-project.org/package=regrrr" target="_blank"> "regrrr"</a> on <a href="https://cran.r-project.org" target="_blank">Cran</a> by Rui Yang, Luyao Peng. 
+
+In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job. 
+
+Here is the quickstart guide.
+
+[![Rdoc](http://www.rdocumentation.org/badges/version/regrrr)](http://www.rdocumentation.org/packages/regrrr)
+[![](https://cranlogs.r-pkg.org/badges/regrrr)](https://cran.r-project.org/package=regrrr)
+
+# Installation
+To install from CRAN:
+```
+install.packages("regrrr")
+library(regrrr)
+```
+You can also use devtools to install the latest development version:
+```
+devtools::install_github("raykyang/regrrr")
+library(regrrr)
+```
+
+# Examples 
+## compile the correlation table
+```{r}
+library(regrrr)
+data(mtcars)
+m0 <- lm(mpg ~ vs + carb + hp + wt, data = mtcars)
+m1 <- update(m0, . ~ . + wt * hp)
+m2 <- update(m1, . ~ . + wt * vs)
+cor.table(data = m2$model)
+```
+## compile the regression table
+```{r}
+regression_table <- rbind(
+combine_long_tab(to_long_tab(summary(m0)$coef),
+                 to_long_tab(summary(m1)$coef),
+                 to_long_tab(summary(m2)$coef)),
+compare_models(m0, m1, m2))
+rownames(regression_table) <- NULL
+print(regression_table)
+```
+## plot the moderating effect
+```{r}
+plot_effect(reg.coef = summary(m2)$coefficients, data = mtcars, model = m2,
+            x_var.name = "wt", y_var.name = "mpg", moderator.name = "hp",
+            confidence_interval = TRUE,  CI_Ribbon = FALSE, 
+            xlab = "Weight", ylab = "MPG", moderator.lab = "Horsepower") +
+ggplot2::theme(text=ggplot2::element_text(family="Times New Roman", size = 16))
+```
+
+As you can see from the last line of code, the plot is customizable using <a href="https://CRAN.R-project.org/package=ggplot2" target="_blank">"ggplot2"</a>. There are a couple of other functions. Please see the <a href="https://www.rdocumentation.org/packages/regrrr" target="_blank">reference manual on R documentation</a> for details.
+
+

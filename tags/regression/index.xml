@@ -210,11 +210,32 @@ code {
 <footer class="Footer">
   <div class="u-wrapper">
     <div class="u-padding">
-      Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" rel="license"> Creative Commons Attribution 4.0 International License</a>.
+      © 2019 Luyao Peng
     </div>
   </div>
 </footer>
 
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "pengluyaoyao" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
         </body>
       </html>
     </xsl:template>
@@ -225,49 +246,86 @@ code {
     <description>Recent content in Regression on Luyao&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <title>&#39;“regrrr”: One-stop R-toolkit for Compiling Regression Results&#39;</title>
+      <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</guid>
       <description>
 
 
-&lt;pre&gt;&lt;code&gt;import time
-import os
-import logging
-from collections import Counter
-import numpy as np
-
-P_PREFIX = &amp;#39;&amp;lt;p&amp;gt;:&amp;#39;
-L_PREFIX = &amp;#39;&amp;lt;l&amp;gt;:&amp;#39;
-UNK = &amp;#39;&amp;lt;UNK&amp;gt;&amp;#39;
-NULL = &amp;#39;&amp;lt;NULL&amp;gt;&amp;#39;
-ROOT = &amp;#39;&amp;lt;ROOT&amp;gt;&amp;#39;
-
-class Config(object): 
-    language = &amp;#39;english&amp;#39;
-    with_punct = True
-    unlabeled = True
-    lowercase = True
-    use_pos = True
-    use_dep = True
-    use_dep = use_dep and (not unlabeled)
-    data_path = &amp;#39;./data&amp;#39;
-    train_file = &amp;#39;train.conll&amp;#39;
-    dev_file = &amp;#39;dev.conll&amp;#39;
-    test_file = &amp;#39;test.conll&amp;#39;
-    embedding_file = &amp;#39;./data/en-cw.txt&amp;#39;   
-    n_features = 36
-    n_classes = 3
-    dropout = 0.5
-    embed_size = 50
-    hidden_size = 200
-    batch_size = 2048
-    n_epochs = 10
-    lr = 0.001&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is an R package &lt;a href=&#34;https://CRAN.R-project.org/package=regrrr&#34; target=&#34;_blank&#34;&gt; “regrrr”&lt;/a&gt; on &lt;a href=&#34;https://cran.r-project.org&#34; target=&#34;_blank&#34;&gt;Cran&lt;/a&gt; by Rui Yang, Luyao Peng.&lt;/p&gt;
+&lt;p&gt;In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.&lt;/p&gt;
+&lt;p&gt;Here is the quickstart guide.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.rdocumentation.org/packages/regrrr&#34;&gt;&lt;img src=&#34;http://www.rdocumentation.org/badges/version/regrrr&#34; alt=&#34;Rdoc&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://cran.r-project.org/package=regrrr&#34;&gt;&lt;img src=&#34;https://cranlogs.r-pkg.org/badges/regrrr&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;installation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Installation&lt;/h1&gt;
+&lt;p&gt;To install from CRAN:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;install.packages(&amp;quot;regrrr&amp;quot;)
+library(regrrr)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also use devtools to install the latest development version:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;)
+library(regrrr)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;examples&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Examples&lt;/h1&gt;
+&lt;div id=&#34;compile-the-correlation-table&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;compile the correlation table&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(regrrr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.5.2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(mtcars)
+m0 &amp;lt;- lm(mpg ~ vs + carb + hp + wt, data = mtcars)
+m1 &amp;lt;- update(m0, . ~ . + wt * hp)
+m2 &amp;lt;- update(m1, . ~ . + wt * vs)
+cor.table(data = m2$model)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##          Mean  S.D.     1     2    3    4    5
+## 1.mpg   20.09  6.03  1.00                     
+## 2.vs     0.44  0.50  0.66  1.00               
+## 3.carb   2.81  1.62 -0.55 -0.57 1.00          
+## 4.hp   146.69 68.56 -0.78 -0.72 0.75 1.00     
+## 5.wt     3.22  0.98 -0.87 -0.55 0.43 0.66 1.00&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;compile-the-regression-table&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;compile the regression table&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;regression_table &amp;lt;- rbind(
+combine_long_tab(to_long_tab(summary(m0)$coef),
+                 to_long_tab(summary(m1)$coef),
+                 to_long_tab(summary(m2)$coef)),
+compare_models(m0, m1, m2))
+rownames(regression_table) &amp;lt;- NULL
+print(regression_table)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        Variables   Model 0   Model 1   Model 2
+## 1    (Intercept) 35.435*** 48.157*** 46.698***
+## 2                  (2.503)   (4.097)   (9.272)
+## 3             vs     1.353     1.077     2.171
+## 4                  (1.382)   (1.152)   (6.320)
+## 5           carb    -0.057    -0.043    -0.009
+## 6                  (0.449)   (0.374)   (0.426)
+## 7             hp   -0.024† -0.113***   -0.107*
+## 8                  (0.014)   (0.027)   (0.044)
+## 9             wt -3.792*** -8.071***   -7.594*
+## 10                 (0.658)   (1.307)   (3.016)
+## 11         hp:wt             0.027**    0.025†
+## 12                           (0.008)   (0.015)
+## 13         vs:wt                        -0.367
+## 14                                     (2.081)
+## 15     R_squared     0.833     0.889     0.889
+## 16 Adj_R_squared     0.808     0.867     0.862
+## 17       Delta_F            12.517**     0.031&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plot-the-moderating-effect&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;plot the moderating effect&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_effect(reg.coef = summary(m2)$coefficients, data = mtcars, model = m2,
+            x_var.name = &amp;quot;wt&amp;quot;, y_var.name = &amp;quot;mpg&amp;quot;, moderator.name = &amp;quot;hp&amp;quot;,
+            confidence_interval = TRUE,  CI_Ribbon = FALSE, 
+            xlab = &amp;quot;Weight&amp;quot;, ylab = &amp;quot;MPG&amp;quot;, moderator.lab = &amp;quot;Horsepower&amp;quot;) +
+ggplot2::theme(text=ggplot2::element_text(family=&amp;quot;Times New Roman&amp;quot;, size = 16))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-03-10-regrrr-one-stop-r-toolkit-for-compiling-regression-results_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;As you can see from the last line of code, the plot is customizable using &lt;a href=&#34;https://CRAN.R-project.org/package=ggplot2&#34; target=&#34;_blank&#34;&gt;“ggplot2”&lt;/a&gt;. There are a couple of other functions. Please see the &lt;a href=&#34;https://www.rdocumentation.org/packages/regrrr&#34; target=&#34;_blank&#34;&gt;reference manual on R documentation&lt;/a&gt; for details.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
   </channel>
