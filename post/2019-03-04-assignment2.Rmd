@@ -8,6 +8,8 @@ categories:
   - Python
 tags:
   - NLP
+  - Deep Learning
+  - TensorFlow
 ---
 
 This blog is a detailed annotation of the python code for cs224n Assignment#2 Q2. The goal of this assignment is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code is for Python2, I revised some of them so that it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, each sentence has 'word', 'POS', 'head' and 'label', where the 'head' is the correct dependency relation. Some code still puzzles me, so I left question mark as comment and will remove them if I understand them later.
