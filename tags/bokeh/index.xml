@@ -1,21 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 
 
 
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    
-    Machine Learning | Luyao Peng&#39;s Blog
-    
-  </title>
-  
-  <link rel="alternate" type="application/rss+xml" href="/tags/machine-learning/index.xml" title="Luyao Peng's Blog">
-  
-  <style>
-    body {
+<?xml-stylesheet type="text/xsl" href="#stylesheet" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <xsl:stylesheet id="stylesheet" version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="xsl">
+    <xsl:output method="html" doctype-system="about:legacy-compat" />
+    <xsl:template match="/rss">
+      <html lang="en-us">
+        <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Bokeh RSS | Luyao Peng&#39;s Blog</title>
+          <style>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
   display: flex;
@@ -161,13 +157,10 @@ code {
   font-weight: bold;
   text-decoration: none;
   display: inline-block;
-}
-    
-  </style>
-  <meta name="generator" content="Hugo 0.54.0" />
-</head>
-<body>
-  <nav class="u-background">
+}</style>
+        </head>
+        <body>
+          <nav class="u-background">
   <div class="u-wrapper">
     <ul class="Banner">
       <li class="Banner-item Banner-item--title">
@@ -197,64 +190,23 @@ code {
     </ul>
   </div>
 </nav>
-  <main>
-    <div class="u-wrapper">
-      <div class="u-padding">
-        
-
-<header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/tags/machine-learning/" rel="bookmark">Machine Learning</a>
-  </h2>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-
-
-<h3>2019</h3>
-<ul>
-  
-  <li>2019-03-07 – <a href="/post/kpca-for-one-class-classification/">Project: KPCA for one-class classification in automated essay scoring and forensic analysis</a></li>
-  
-</ul>
-
-
-
-      </div>
-    </div>
-  </main>
-  
+          <main>
+            <div class="u-wrapper">
+              <div class="u-padding">
+                <h2 class="Heading-title">
+                  
+                  <a class="Heading-link u-clickable" href="/tags/bokeh/index.xml" rel="bookmark">Bokeh RSS</a>
+                  
+                </h2>
+                
+                <p>
+                  To subscribe to this RSS feed, copy its address and paste it into your favorite feed reader.
+                </p>
+                
+              </div>
+            </div>
+          </main>
+          
 <footer class="Footer">
   <div class="u-wrapper">
     <div class="u-padding">
@@ -284,6 +236,37 @@ code {
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-  
-</body>
-</html>
+        </body>
+      </html>
+    </xsl:template>
+  </xsl:stylesheet>
+  <channel>
+    <title>Bokeh on Luyao Peng&#39;s Blog</title>
+    <link>/tags/bokeh/</link>
+    <description>Recent content in Bokeh on Luyao Peng&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/bokeh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project: Web Application for Interactive Visualization of Stock Price </title>
+      <link>/post/project/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/project/</guid>
+      <description>
+
+
+&lt;p&gt;In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://luyao-tdi-milestone.herokuapp.com/&#34;&gt;Link to the Stock Prince app&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot2.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot.jpg&#34; /&gt;
+
+&lt;/div&gt;
+</description>
+    </item>
+  </channel>
+</rss>

@@ -1,5 +1,5 @@
 ---
-title: KPCA for one-class classification in automated essay scoring and erasure analysis
+title: 'Project: KPCA for one-class classification in automated essay scoring and forensic analysis'
 author: Luyao Peng
 date: '2019-03-07'
 slug: kpca-for-one-class-classification

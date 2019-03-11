@@ -1,5 +1,5 @@
 ---
-title: Assignment2 Q2 (So happy I finally worked it out)
+title: 'NLP with Deep Learning: CS224n A2Q2'
 author: ''
 date: '2019-03-04'
 slug: assignment2

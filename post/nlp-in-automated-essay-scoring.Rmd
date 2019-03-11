@@ -1,5 +1,5 @@
 ---
-title: NLP in Automated Essay Scoring
+title: 'Project: NLP in Automated Essay Scoring'
 author: Luyao Peng
 date: '2019-03-07'
 slug: nlp-in-automated-essay-scoring
@@ -10,6 +10,8 @@ categories:
 tags:
   - NLP
   - Python
+  - Flask
+  - html
 ---
 
 In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven't learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model. 

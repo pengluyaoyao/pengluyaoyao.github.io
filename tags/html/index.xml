@@ -10,7 +10,7 @@
       <html lang="en-us">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Python RSS | Luyao Peng&#39;s Blog</title>
+          <title>Html RSS | Luyao Peng&#39;s Blog</title>
           <style>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -195,7 +195,7 @@ code {
               <div class="u-padding">
                 <h2 class="Heading-title">
                   
-                  <a class="Heading-link u-clickable" href="/tags/python/index.xml" rel="bookmark">Python RSS</a>
+                  <a class="Heading-link u-clickable" href="/tags/html/index.xml" rel="bookmark">Html RSS</a>
                   
                 </h2>
                 
@@ -241,33 +241,13 @@ code {
     </xsl:template>
   </xsl:stylesheet>
   <channel>
-    <title>Python on Luyao Peng&#39;s Blog</title>
-    <link>/tags/python/</link>
-    <description>Recent content in Python on Luyao Peng&#39;s Blog</description>
+    <title>Html on Luyao Peng&#39;s Blog</title>
+    <link>/tags/html/</link>
+    <description>Recent content in Html on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Project: Web Application for Interactive Visualization of Stock Price </title>
-      <link>/post/project/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>/post/project/</guid>
-      <description>
-
-
-&lt;p&gt;In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://luyao-tdi-milestone.herokuapp.com/&#34;&gt;Link to the Stock Prince app&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot2.jpg&#34; /&gt;
-
-&lt;/div&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot.jpg&#34; /&gt;
-
-&lt;/div&gt;
-</description>
-    </item>
+    <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/html/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Project: NLP in Automated Essay Scoring</title>
       <link>/post/nlp-in-automated-essay-scoring/</link>

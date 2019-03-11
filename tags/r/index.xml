@@ -10,7 +10,7 @@
       <html lang="en-us">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>R RSS | Luyao&#39;s Blog</title>
+          <title>R RSS | Luyao Peng&#39;s Blog</title>
           <style>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -164,7 +164,7 @@ code {
   <div class="u-wrapper">
     <ul class="Banner">
       <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao&#39;s Blog</a>
+        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
       </li>
       
       <li class="Banner-item">
@@ -241,15 +241,15 @@ code {
     </xsl:template>
   </xsl:stylesheet>
   <channel>
-    <title>R on Luyao&#39;s Blog</title>
+    <title>R on Luyao Peng&#39;s Blog</title>
     <link>/tags/r/</link>
-    <description>Recent content in R on Luyao&#39;s Blog</description>
+    <description>Recent content in R on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>&#39;“regrrr”: One-stop R-toolkit for Compiling Regression Results&#39;</title>
+      <title>R Package “regrrr”: Compiling and Visualizing Regression Results</title>
       <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</guid>
@@ -329,7 +329,7 @@ ggplot2::theme(text=ggplot2::element_text(family=&amp;quot;Times New Roman&amp;q
 </description>
     </item>
     <item>
-      <title>KPCA for one-class classification in automated essay scoring and erasure analysis</title>
+      <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
       <link>/post/kpca-for-one-class-classification/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/kpca-for-one-class-classification/</guid>
@@ -344,7 +344,7 @@ ggplot2::theme(text=ggplot2::element_text(family=&amp;quot;Times New Roman&amp;q
 </description>
     </item>
     <item>
-      <title>MMeM (Multivariate Mixed Effects Model) ---- My first R Package</title>
+      <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
       <link>/post/multivariate-mixed-effects-model-r-package/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/multivariate-mixed-effects-model-r-package/</guid>

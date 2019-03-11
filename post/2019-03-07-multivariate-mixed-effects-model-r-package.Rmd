@@ -1,5 +1,5 @@
 ---
-title: MMeM (Multivariate Mixed Effects Model) ---- My first R Package
+title: 'R Package “MMeM”: Multivariate Mixed-effects Model'
 author: Luyao Peng
 date: '2019-03-07'
 slug: multivariate-mixed-effects-model-r-package

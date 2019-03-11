@@ -10,7 +10,7 @@
       <html lang="en-us">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>My Projects RSS | Luyao&#39;s Blog</title>
+          <title>My Projects RSS | Luyao Peng&#39;s Blog</title>
           <style>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -164,7 +164,7 @@ code {
   <div class="u-wrapper">
     <ul class="Banner">
       <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao&#39;s Blog</a>
+        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
       </li>
       
       <li class="Banner-item">
@@ -241,15 +241,15 @@ code {
     </xsl:template>
   </xsl:stylesheet>
   <channel>
-    <title>My Projects on Luyao&#39;s Blog</title>
+    <title>My Projects on Luyao Peng&#39;s Blog</title>
     <link>/categories/my-projects/</link>
-    <description>Recent content in My Projects on Luyao&#39;s Blog</description>
+    <description>Recent content in My Projects on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/categories/my-projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>KPCA for one-class classification in automated essay scoring and erasure analysis</title>
+      <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
       <link>/post/kpca-for-one-class-classification/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/kpca-for-one-class-classification/</guid>
@@ -264,36 +264,7 @@ code {
 </description>
     </item>
     <item>
-      <title>MMeM (Multivariate Mixed Effects Model) ---- My first R Package</title>
-      <link>/post/multivariate-mixed-effects-model-r-package/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
-      <description>
-
-
-&lt;p&gt;This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) &lt;a href=&#34;doi:10.2307/2530651&#34; class=&#34;uri&#34;&gt;doi:10.2307/2530651&lt;/a&gt; and Wesolowska Janczarek (1984) &lt;a href=&#34;doi:10.1002/bimj.4710260613&#34; class=&#34;uri&#34;&gt;doi:10.1002/bimj.4710260613&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;It is available on CRAN and my github page:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/pengluyaoyao/MMeM&#34;&gt;Link to the MMeM github&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/MMeM/index.html&#34;&gt;Link to the MMeM CRAN&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = (\mathbf{I} \otimes \mathbf{X})\mathbf{b} + (\mathbf{I} \otimes \mathbf{Z} )\mathbf{u} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;with&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \left\{\mathbf{y}_i\right\}_c, \mathbf{b} = \left\{\mathbf{b}_i\right\}_c, \mathbf{u} = \left\{\mathbf{u}_i\right\}_c, \mathbf{e} = \left\{\mathbf{e}_i\right\}_c, i =1, \dots, q\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n&lt;em&gt;q by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; is n by p design matrix for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p&lt;/em&gt;q by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; is n by s design matrix for the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s&lt;em&gt;q by 1 vector of the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n&lt;/em&gt;q by 1 vector of random errors.&lt;/p&gt;
-&lt;p&gt;It is assumed that&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(cov(\mathbf{u}_i, \mathbf{u}_j&amp;#39;) = \mathbf{G}_{ij}, cov(\mathbf{e}_i, \mathbf{e}_j&amp;#39;) = \mathbf{R}_{ij}, cov(\mathbf{u}_i, \mathbf{e}_j&amp;#39;) = \mathbf{0}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;or&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(var(\mathbf{u}) = \mathbf{G} = \mathbf{T}\otimes \mathbf{I}_s, var(\mathbf{e}) = \mathbf{R} = \mathbf{E} \otimes \mathbf{I}_n, var(\mathbf{y}) = \mathbf{V} = \mathbf{T}\otimes \mathbf{ZZ}&amp;#39; + \mathbf{E} \otimes \mathbf{I}_n\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;The goal is to estimate the variance-covariance matrix of random effects &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt; response variates, i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{E}\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;The model also supports the variance component estimations using univariate mixed-effects model regression, which is equivalent to R package lme4:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; are n by p and n by s known design matrix; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s by 1 matrix for the random effects, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n by 1 vector of random errors. }&lt;/p&gt;
-&lt;p&gt;The goal is to estimate &lt;span class=&#34;math inline&#34;&gt;\(\sigma_u^2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\sigma_e^2\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u} \sim N(\mathbf{0}, \sigma_u^2\mathbf{I}), \mathbf{e} \sim N(\mathbf{0}, \sigma_e^2\mathbf{I})\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Currently this package supports multivariate mixed effects model with two response variables, one fixed effects and one random effects, the package only estimates the variance covariance components under multivariate mixed effects model, it doesn’t provide the estimation and hypothesis testing for the fixed effects parameters, which will be incorporated in the future. Users can compute the estimated fixed effects parameters by using the generalized least square formula for the fixed effect parameters after estimating the variance covariance components using this package.&lt;/p&gt;
-</description>
-    </item>
-    <item>
-      <title>NLP in Automated Essay Scoring</title>
+      <title>Project: NLP in Automated Essay Scoring</title>
       <link>/post/nlp-in-automated-essay-scoring/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/nlp-in-automated-essay-scoring/</guid>
@@ -325,6 +296,35 @@ code {
 &lt;li&gt;Problems&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The model has overfitting problem, need to tune the parameters further; change the website waiting mode when requesting.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
+      <link>/post/multivariate-mixed-effects-model-r-package/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
+      <description>
+
+
+&lt;p&gt;This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) &lt;a href=&#34;doi:10.2307/2530651&#34; class=&#34;uri&#34;&gt;doi:10.2307/2530651&lt;/a&gt; and Wesolowska Janczarek (1984) &lt;a href=&#34;doi:10.1002/bimj.4710260613&#34; class=&#34;uri&#34;&gt;doi:10.1002/bimj.4710260613&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It is available on CRAN and my github page:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/pengluyaoyao/MMeM&#34;&gt;Link to the MMeM github&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/MMeM/index.html&#34;&gt;Link to the MMeM CRAN&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = (\mathbf{I} \otimes \mathbf{X})\mathbf{b} + (\mathbf{I} \otimes \mathbf{Z} )\mathbf{u} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;with&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \left\{\mathbf{y}_i\right\}_c, \mathbf{b} = \left\{\mathbf{b}_i\right\}_c, \mathbf{u} = \left\{\mathbf{u}_i\right\}_c, \mathbf{e} = \left\{\mathbf{e}_i\right\}_c, i =1, \dots, q\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n&lt;em&gt;q by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; is n by p design matrix for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p&lt;/em&gt;q by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; is n by s design matrix for the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s&lt;em&gt;q by 1 vector of the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n&lt;/em&gt;q by 1 vector of random errors.&lt;/p&gt;
+&lt;p&gt;It is assumed that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(cov(\mathbf{u}_i, \mathbf{u}_j&amp;#39;) = \mathbf{G}_{ij}, cov(\mathbf{e}_i, \mathbf{e}_j&amp;#39;) = \mathbf{R}_{ij}, cov(\mathbf{u}_i, \mathbf{e}_j&amp;#39;) = \mathbf{0}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(var(\mathbf{u}) = \mathbf{G} = \mathbf{T}\otimes \mathbf{I}_s, var(\mathbf{e}) = \mathbf{R} = \mathbf{E} \otimes \mathbf{I}_n, var(\mathbf{y}) = \mathbf{V} = \mathbf{T}\otimes \mathbf{ZZ}&amp;#39; + \mathbf{E} \otimes \mathbf{I}_n\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The goal is to estimate the variance-covariance matrix of random effects &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt; response variates, i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{E}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The model also supports the variance component estimations using univariate mixed-effects model regression, which is equivalent to R package lme4:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; are n by p and n by s known design matrix; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s by 1 matrix for the random effects, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n by 1 vector of random errors. }&lt;/p&gt;
+&lt;p&gt;The goal is to estimate &lt;span class=&#34;math inline&#34;&gt;\(\sigma_u^2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\sigma_e^2\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u} \sim N(\mathbf{0}, \sigma_u^2\mathbf{I}), \mathbf{e} \sim N(\mathbf{0}, \sigma_e^2\mathbf{I})\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Currently this package supports multivariate mixed effects model with two response variables, one fixed effects and one random effects, the package only estimates the variance covariance components under multivariate mixed effects model, it doesn’t provide the estimation and hypothesis testing for the fixed effects parameters, which will be incorporated in the future. Users can compute the estimated fixed effects parameters by using the generalized least square formula for the fixed effect parameters after estimating the variance covariance components using this package.&lt;/p&gt;
 </description>
     </item>
   </channel>

@@ -10,7 +10,7 @@
       <html lang="en-us">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Categories RSS | Luyao&#39;s Blog</title>
+          <title>Categories RSS | Luyao Peng&#39;s Blog</title>
           <style>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -164,7 +164,7 @@ code {
   <div class="u-wrapper">
     <ul class="Banner">
       <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao&#39;s Blog</a>
+        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
       </li>
       
       <li class="Banner-item">
@@ -241,9 +241,9 @@ code {
     </xsl:template>
   </xsl:stylesheet>
   <channel>
-    <title>Categories on Luyao&#39;s Blog</title>
+    <title>Categories on Luyao Peng&#39;s Blog</title>
     <link>/categories/</link>
-    <description>Recent content in Categories on Luyao&#39;s Blog</description>
+    <description>Recent content in Categories on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />

@@ -1,0 +1,20 @@
+---
+title: 'Project: Web Application for Interactive Visualization of Stock Price '
+author: ''
+date: '2019-03-10'
+slug: project
+categories:
+  - Visualization
+tags:
+  - Python
+  - Flask
+  - Bokeh
+---
+
+In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company. 
+
+[Link to the Stock Prince app](https://luyao-tdi-milestone.herokuapp.com/)
+
+![](/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot2.jpg)
+
+![](/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot.jpg)

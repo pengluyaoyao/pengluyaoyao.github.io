@@ -10,7 +10,7 @@
       <html lang="en-us">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Multivariate Mixed Effects Model RSS | Luyao&#39;s Blog</title>
+          <title>Multivariate Mixed Effects Model RSS | Luyao Peng&#39;s Blog</title>
           <style>body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -164,7 +164,7 @@ code {
   <div class="u-wrapper">
     <ul class="Banner">
       <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao&#39;s Blog</a>
+        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
       </li>
       
       <li class="Banner-item">
@@ -241,15 +241,15 @@ code {
     </xsl:template>
   </xsl:stylesheet>
   <channel>
-    <title>Multivariate Mixed Effects Model on Luyao&#39;s Blog</title>
+    <title>Multivariate Mixed Effects Model on Luyao Peng&#39;s Blog</title>
     <link>/tags/multivariate-mixed-effects-model/</link>
-    <description>Recent content in Multivariate Mixed Effects Model on Luyao&#39;s Blog</description>
+    <description>Recent content in Multivariate Mixed Effects Model on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/multivariate-mixed-effects-model/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MMeM (Multivariate Mixed Effects Model) ---- My first R Package</title>
+      <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
       <link>/post/multivariate-mixed-effects-model-r-package/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       <guid>/post/multivariate-mixed-effects-model-r-package/</guid>

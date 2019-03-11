@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
     
-    R Package “regrrr”: Compiling and Visualizing Regression Results | Luyao Peng&#39;s Blog
+    Project: Web Application for Interactive Visualization of Stock Price  | Luyao Peng&#39;s Blog
     
   </title>
   
@@ -203,7 +203,7 @@ code {
 <article>
   <header class="Heading">
   <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/" rel="bookmark">R Package “regrrr”: Compiling and Visualizing Regression Results</a>
+    <a class="Heading-link u-clickable" href="/post/project/" rel="bookmark">Project: Web Application for Interactive Visualization of Stock Price </a>
   </h2>
   
   <time datetime="2019-03-10T00:00:00Z">
@@ -246,75 +246,15 @@ code {
   
 
 
-<p>This is an R package <a href="https://CRAN.R-project.org/package=regrrr" target="_blank"> “regrrr”</a> on <a href="https://cran.r-project.org" target="_blank">Cran</a> by Rui Yang, Luyao Peng.</p>
-<p>In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.</p>
-<p>Here is the quickstart guide.</p>
-<p><a href="http://www.rdocumentation.org/packages/regrrr"><img src="http://www.rdocumentation.org/badges/version/regrrr" alt="Rdoc" /></a> <a href="https://cran.r-project.org/package=regrrr"><img src="https://cranlogs.r-pkg.org/badges/regrrr" /></a></p>
-<div id="installation" class="section level1">
-<h1>Installation</h1>
-<p>To install from CRAN:</p>
-<pre><code>install.packages(&quot;regrrr&quot;)
-library(regrrr)</code></pre>
-<p>You can also use devtools to install the latest development version:</p>
-<pre><code>devtools::install_github(&quot;raykyang/regrrr&quot;)
-library(regrrr)</code></pre>
+<p>In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.</p>
+<p><a href="https://luyao-tdi-milestone.herokuapp.com/">Link to the Stock Prince app</a></p>
+<div class="figure">
+<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot2.jpg" />
+
 </div>
-<div id="examples" class="section level1">
-<h1>Examples</h1>
-<div id="compile-the-correlation-table" class="section level2">
-<h2>compile the correlation table</h2>
-<pre class="r"><code>library(regrrr)</code></pre>
-<pre><code>## Warning: package &#39;regrrr&#39; was built under R version 3.5.2</code></pre>
-<pre class="r"><code>data(mtcars)
-m0 &lt;- lm(mpg ~ vs + carb + hp + wt, data = mtcars)
-m1 &lt;- update(m0, . ~ . + wt * hp)
-m2 &lt;- update(m1, . ~ . + wt * vs)
-cor.table(data = m2$model)</code></pre>
-<pre><code>##          Mean  S.D.     1     2    3    4    5
-## 1.mpg   20.09  6.03  1.00                     
-## 2.vs     0.44  0.50  0.66  1.00               
-## 3.carb   2.81  1.62 -0.55 -0.57 1.00          
-## 4.hp   146.69 68.56 -0.78 -0.72 0.75 1.00     
-## 5.wt     3.22  0.98 -0.87 -0.55 0.43 0.66 1.00</code></pre>
-</div>
-<div id="compile-the-regression-table" class="section level2">
-<h2>compile the regression table</h2>
-<pre class="r"><code>regression_table &lt;- rbind(
-combine_long_tab(to_long_tab(summary(m0)$coef),
-                 to_long_tab(summary(m1)$coef),
-                 to_long_tab(summary(m2)$coef)),
-compare_models(m0, m1, m2))
-rownames(regression_table) &lt;- NULL
-print(regression_table)</code></pre>
-<pre><code>##        Variables   Model 0   Model 1   Model 2
-## 1    (Intercept) 35.435*** 48.157*** 46.698***
-## 2                  (2.503)   (4.097)   (9.272)
-## 3             vs     1.353     1.077     2.171
-## 4                  (1.382)   (1.152)   (6.320)
-## 5           carb    -0.057    -0.043    -0.009
-## 6                  (0.449)   (0.374)   (0.426)
-## 7             hp   -0.024† -0.113***   -0.107*
-## 8                  (0.014)   (0.027)   (0.044)
-## 9             wt -3.792*** -8.071***   -7.594*
-## 10                 (0.658)   (1.307)   (3.016)
-## 11         hp:wt             0.027**    0.025†
-## 12                           (0.008)   (0.015)
-## 13         vs:wt                        -0.367
-## 14                                     (2.081)
-## 15     R_squared     0.833     0.889     0.889
-## 16 Adj_R_squared     0.808     0.867     0.862
-## 17       Delta_F            12.517**     0.031</code></pre>
-</div>
-<div id="plot-the-moderating-effect" class="section level2">
-<h2>plot the moderating effect</h2>
-<pre class="r"><code>plot_effect(reg.coef = summary(m2)$coefficients, data = mtcars, model = m2,
-            x_var.name = &quot;wt&quot;, y_var.name = &quot;mpg&quot;, moderator.name = &quot;hp&quot;,
-            confidence_interval = TRUE,  CI_Ribbon = FALSE, 
-            xlab = &quot;Weight&quot;, ylab = &quot;MPG&quot;, moderator.lab = &quot;Horsepower&quot;) +
-ggplot2::theme(text=ggplot2::element_text(family=&quot;Times New Roman&quot;, size = 16))</code></pre>
-<p><img src="/post/2019-03-10-regrrr-one-stop-r-toolkit-for-compiling-regression-results_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>As you can see from the last line of code, the plot is customizable using <a href="https://CRAN.R-project.org/package=ggplot2" target="_blank">“ggplot2”</a>. There are a couple of other functions. Please see the <a href="https://www.rdocumentation.org/packages/regrrr" target="_blank">reference manual on R documentation</a> for details.</p>
-</div>
+<div class="figure">
+<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot.jpg" />
+
 </div>
 
   
@@ -324,14 +264,21 @@ ggplot2::theme(text=ggplot2::element_text(family=&quot;Times New Roman&quot;, si
     
     
     <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/regression/" rel="tag">regression</a>
+      <a class="Tags-link u-clickable" href="/tags/python/" rel="tag">Python</a>
     </li>
     
     
     
     
     <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/r/" rel="tag">R</a>
+      <a class="Tags-link u-clickable" href="/tags/flask/" rel="tag">Flask</a>
+    </li>
+    
+    
+    
+    
+    <li class="Tags-item u-background">
+      <a class="Tags-link u-clickable" href="/tags/bokeh/" rel="tag">Bokeh</a>
     </li>
     
     
