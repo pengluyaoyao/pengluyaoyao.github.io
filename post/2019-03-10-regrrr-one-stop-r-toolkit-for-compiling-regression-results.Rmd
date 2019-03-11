@@ -9,7 +9,7 @@ tags:
   - R
 ---
 
-This is an R package <a href="https://CRAN.R-project.org/package=regrrr" target="_blank"> "regrrr"</a> on <a href="https://cran.r-project.org" target="_blank">Cran</a> by Rui Yang, Luyao Peng. 
+This is an R package <a href="https://CRAN.R-project.org/package=regrrr" target="_blank"> "regrrr"</a> on <a href="https://cran.r-project.org" target="_blank">Cran</a> I coauthored with Rui Yang.
 
 In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job. 
 

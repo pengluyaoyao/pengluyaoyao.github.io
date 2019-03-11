@@ -256,7 +256,7 @@ code {
       <description>
 
 
-&lt;p&gt;This is an R package &lt;a href=&#34;https://CRAN.R-project.org/package=regrrr&#34; target=&#34;_blank&#34;&gt; “regrrr”&lt;/a&gt; on &lt;a href=&#34;https://cran.r-project.org&#34; target=&#34;_blank&#34;&gt;Cran&lt;/a&gt; by Rui Yang, Luyao Peng.&lt;/p&gt;
+&lt;p&gt;This is an R package &lt;a href=&#34;https://CRAN.R-project.org/package=regrrr&#34; target=&#34;_blank&#34;&gt; “regrrr”&lt;/a&gt; on &lt;a href=&#34;https://cran.r-project.org&#34; target=&#34;_blank&#34;&gt;Cran&lt;/a&gt; I coauthored with Rui Yang.&lt;/p&gt;
 &lt;p&gt;In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.&lt;/p&gt;
 &lt;p&gt;Here is the quickstart guide.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://www.rdocumentation.org/packages/regrrr&#34;&gt;&lt;img src=&#34;http://www.rdocumentation.org/badges/version/regrrr&#34; alt=&#34;Rdoc&#34; /&gt;&lt;/a&gt; &lt;a href=&#34;https://cran.r-project.org/package=regrrr&#34;&gt;&lt;img src=&#34;https://cranlogs.r-pkg.org/badges/regrrr&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
