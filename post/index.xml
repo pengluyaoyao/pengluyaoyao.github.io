@@ -349,6 +349,32 @@ ggplot2::theme(text=ggplot2::element_text(family=&amp;quot;Times New Roman&amp;q
 </description>
     </item>
     <item>
+      <title>Research: Dissertation</title>
+      <link>/post/dissertation/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/dissertation/</guid>
+      <description>&lt;p&gt;Abstract&lt;/p&gt;
+
+&lt;p&gt;The closed form expressions of all unbiased estimators of variance components in
+linear mixed effects models are presented. The method of moment (MOM) estimators
+are chosen as benchmarks for finding the unbiased estimators having smaller estimated
+variances than the corresponding MOM estimators. Examples are presented from small
+area estimation.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Research: Using linear mixed-effects model to detect fraudulent erasures at an aggregate level</title>
+      <link>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      <guid>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</guid>
+      <description>
+
+
+&lt;p&gt;Abstract&lt;/p&gt;
+&lt;p&gt;Wollack and Eckerly (2017) extended the ‘erasure detection index’ (EDI) to detect fraudulent erasures at the group level. Sinharay (2018) suggested two modifications of the EDI at the group level. Those EDIs were not developed specifically for the fraudulent schools with small number of examinees with erasures. This paper suggested a new modification of the group-level EDI in Wollack and Eckerly (2017) by incorporating the ‘empirical best linear unbiased predictor’ (EBLUP) from the linear mixed-effects model. Simulation study shows that the suggested EDI has higher power than the indices of Wollack and Eckerly (2017) and Sinharay (2018), especially in schools with small number of examinees with erasures. It also has satisfactory Type I error rates. A real data example is also included.&lt;/p&gt;
+</description>
+    </item>
+    <item>
       <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
       <link>/post/kpca-for-one-class-classification/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
