@@ -1,1851 +1,350 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    
-    Luyao Peng&#39;s Blog
-    
-  </title>
-  
-  <link rel="alternate" type="application/rss+xml" href="/index.xml" title="Luyao Peng's Blog">
-  
-  <style>
-    body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-main {
-  flex-grow: 1;
-}
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-img {
-  max-width: 100%;
-  border-radius: 0.2rem;
-}
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-pre {
-  overflow-x: auto;
-  border: 0.1rem solid lightgray;
-  padding: 1rem;
-}
 
-code {
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
-}
-
-.Banner {
-  list-style: none;
-  display: flex;
-  flex-flow: row-reverse wrap-reverse;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-}
+<meta name="author" content="olOwOlo" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
 
-.Banner-item:nth-child(1) {
-  order: 5;
-}
 
 
-
-.Banner-item:nth-child(2) {
-  order: 4;
-}
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
-
-.Banner-item:nth-child(3) {
-  order: 3;
-}
-
-
-
-.Banner-item:nth-child(4) {
-  order: 2;
-}
+<link rel="canonical" href="/" />
+  <link href="/index.xml" rel="alternate" type="application/rss+xml" title="Even - A super concise theme for Hugo" />
+  <link href="/index.xml" rel="feed" type="application/rss+xml" title="Even - A super concise theme for Hugo" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-
-.Banner-item:nth-child(5) {
-  order: 1;
-}
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
+<meta property="og:title" content="Even - A super concise theme for Hugo" />
+<meta property="og:description" content="Hugo theme even example site." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/" />
 
-.Banner-item--title {
-  flex-grow: 1;
-}
+<meta property="og:updated_time" content="2018-07-10T00:00:00&#43;08:00"/>
 
-.Banner-link {
-  font-size: 1.25rem;
-  color: white;
-  padding: 0.5rem 1rem;
-}
+<meta itemprop="name" content="Even - A super concise theme for Hugo">
+<meta itemprop="description" content="Hugo theme even example site.">
 
-.Heading {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-}
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Even - A super concise theme for Hugo"/>
+<meta name="twitter:description" content="Hugo theme even example site."/>
 
-.Heading-title {
-  margin: 1.5rem 0.5rem 0 0;
-}
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
 
-.Heading-link {
-  color: inherit;
-}
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
 
-.Tags {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 1.5rem 0;
-  padding: 0;
-}
-
-.Tags-item {
-  border-radius: 0.2rem;
-  margin: 0.2rem;
-  padding: 0 0.3rem;
-}
-
-.Tags-link {
-  color: white;
-}
-
-.Pagination {
-  font-size: 1.25rem;
-  color: inherit;
-}
-
-.Pagination--right {
-  float: right;
-}
-
-.Footer {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-.u-wrapper {
-  max-width: 42rem;
-  margin: auto;
-}
-
-.u-padding {
-  padding: 0 1rem;
-}
-
-.u-background {
-  background: teal;
-}
-
-.u-clickable {
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-}
-    
-  </style>
-  <meta name="generator" content="Hugo 0.54.0" />
 </head>
 <body>
-  <nav class="u-background">
-  <div class="u-wrapper">
-    <ul class="Banner">
-      <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/about/">About</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/post/">Posts</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/tags/">Tags</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/categories/">Categories</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/index.xml">RSS</a>
-      </li>
-      
-    </ul>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
   </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
 </nav>
-  <main>
-    <div class="u-wrapper">
-      <div class="u-padding">
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/even-preview/">Theme preview</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-07-10 </span>
+      <div class="post-category">
+          <a href="/categories/theme-preview/"> Theme preview </a>
+          <a href="/categories/category-2/"> category-2 </a>
+          <a href="/categories/category-3/"> category-3 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.
+    </div>
+    <div class="read-more">
+      <a href="/post/even-preview/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/english-preview/">[English] Creating a New Theme</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-31 </span>
+      <div class="post-category">
+          <a href="/categories/english/"> English </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&rsquo;t cover using CSS to style your theme.
+We&rsquo;ll start with creating a new site with a very basic template.
+    </div>
+    <div class="read-more">
+      <a href="/post/english-preview/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/japanese-preview/">[日本語] 敬語体系</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-30 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/"> 日本語 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      日本語の敬語体系は、一般に、大きく尊敬語・謙譲語・丁寧語に分類される。文化審議会国語分科会は、2007年2月に「敬語の指針」を答申し、これに
+    </div>
+    <div class="read-more">
+      <a href="/post/japanese-preview/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/chinese-preview/">[中文] 《长恨歌》</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-30 </span>
+      <div class="post-category">
+          <a href="/categories/%E4%B8%AD%E6%96%87/"> 中文 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难
+    </div>
+    <div class="read-more">
+      <a href="/post/chinese-preview/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/shortcodes/">Shortcodes</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2016-08-30 </span>
+      <div class="post-category">
+          <a href="/categories/shortcodes/"> shortcodes </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h1 id="admonition">Admonition</h1>
+
+<div class="admonition note"><p class="admonition-title">I&#39;m title!</p>
+  <p>biu biu biu.</p>
+
+<p><details class="admonition note"><summary class="admonition-title">note</summary>
+  <p>biu biu biu.</p></p>
+
+<p></details></p>
+
+<div class="admonition example">
+  <p>Without title.</p>
+
+</div>
+
+</div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-markdown" data-lang="markdown">{{% admonition note &#34;I&#39;m title!&#34; false %}}<span class="err">
+</span><span class="err"></span>biu biu biu.<span class="err">
+</span><span class="err">
+</span><span class="err"></span>{{% admonition type=&#34;note&#34; title=&#34;note&#34; details=&#34;true&#34; %}}<span class="err">
+</span><span class="err"></span>biu biu biu.<span class="err">
+</span><span class="err"></span>{{% /admonition %}}<span class="err">
+</span><span class="err">
+</span><span class="err"></span>{{% admonition example %}}<span class="err">
+</span><span class="err"></span>Without title.<span class="err">
+</span><span class="err"></span>{{% /admonition %}}<span class="err">
+</span><span class="err">
+</span><span class="err"></span>{{% /admonition %}}</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/post/shortcodes/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    
+    <a class="next" href="/page/2/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+  </nav>
+        </div>
         
-
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/project/" rel="bookmark">Project: Web Application for Interactive Visualization of Stock Price </a>
-  </h2>
-  
-  <time datetime="2019-03-10T00:00:00Z">
-    10 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  
-
-
-<p>In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.</p>
-<p><a href="https://luyao-tdi-milestone.herokuapp.com/">Link to the Stock Prince app</a></p>
-<div class="figure">
-<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot2.jpg" />
-
-</div>
-<div class="figure">
-<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/stockprice_screenshot.jpg" />
-
-</div>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/python/" rel="tag">Python</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/flask/" rel="tag">Flask</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/bokeh/" rel="tag">Bokeh</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/" rel="bookmark">R Package “regrrr”: Compiling and Visualizing Regression Results</a>
-  </h2>
-  
-  <time datetime="2019-03-10T00:00:00Z">
-    10 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  
-
-
-<p>This is an R package <a href="https://CRAN.R-project.org/package=regrrr" target="_blank"> “regrrr”</a> on <a href="https://cran.r-project.org" target="_blank">Cran</a> I coauthored with Rui Yang.</p>
-<p>In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.</p>
-<p>Here is the quickstart guide.</p>
-<p><a href="http://www.rdocumentation.org/packages/regrrr"><img src="http://www.rdocumentation.org/badges/version/regrrr" alt="Rdoc" /></a> <a href="https://cran.r-project.org/package=regrrr"><img src="https://cranlogs.r-pkg.org/badges/regrrr" /></a></p>
-<div id="installation" class="section level1">
-<h1>Installation</h1>
-<p>To install from CRAN:</p>
-<pre><code>install.packages(&quot;regrrr&quot;)
-library(regrrr)</code></pre>
-<p>You can also use devtools to install the latest development version:</p>
-<pre><code>devtools::install_github(&quot;raykyang/regrrr&quot;)
-library(regrrr)</code></pre>
-</div>
-<div id="examples" class="section level1">
-<h1>Examples</h1>
-<div id="compile-the-correlation-table" class="section level2">
-<h2>compile the correlation table</h2>
-<pre class="r"><code>library(regrrr)</code></pre>
-<pre><code>## Warning: package &#39;regrrr&#39; was built under R version 3.5.2</code></pre>
-<pre class="r"><code>data(mtcars)
-m0 &lt;- lm(mpg ~ vs + carb + hp + wt, data = mtcars)
-m1 &lt;- update(m0, . ~ . + wt * hp)
-m2 &lt;- update(m1, . ~ . + wt * vs)
-cor.table(data = m2$model)</code></pre>
-<pre><code>##          Mean  S.D.     1     2    3    4    5
-## 1.mpg   20.09  6.03  1.00                     
-## 2.vs     0.44  0.50  0.66  1.00               
-## 3.carb   2.81  1.62 -0.55 -0.57 1.00          
-## 4.hp   146.69 68.56 -0.78 -0.72 0.75 1.00     
-## 5.wt     3.22  0.98 -0.87 -0.55 0.43 0.66 1.00</code></pre>
-</div>
-<div id="compile-the-regression-table" class="section level2">
-<h2>compile the regression table</h2>
-<pre class="r"><code>regression_table &lt;- rbind(
-combine_long_tab(to_long_tab(summary(m0)$coef),
-                 to_long_tab(summary(m1)$coef),
-                 to_long_tab(summary(m2)$coef)),
-compare_models(m0, m1, m2))
-rownames(regression_table) &lt;- NULL
-print(regression_table)</code></pre>
-<pre><code>##        Variables   Model 0   Model 1   Model 2
-## 1    (Intercept) 35.435*** 48.157*** 46.698***
-## 2                  (2.503)   (4.097)   (9.272)
-## 3             vs     1.353     1.077     2.171
-## 4                  (1.382)   (1.152)   (6.320)
-## 5           carb    -0.057    -0.043    -0.009
-## 6                  (0.449)   (0.374)   (0.426)
-## 7             hp   -0.024† -0.113***   -0.107*
-## 8                  (0.014)   (0.027)   (0.044)
-## 9             wt -3.792*** -8.071***   -7.594*
-## 10                 (0.658)   (1.307)   (3.016)
-## 11         hp:wt             0.027**    0.025†
-## 12                           (0.008)   (0.015)
-## 13         vs:wt                        -0.367
-## 14                                     (2.081)
-## 15     R_squared     0.833     0.889     0.889
-## 16 Adj_R_squared     0.808     0.867     0.862
-## 17       Delta_F            12.517**     0.031</code></pre>
-</div>
-<div id="plot-the-moderating-effect" class="section level2">
-<h2>plot the moderating effect</h2>
-<pre class="r"><code>plot_effect(reg.coef = summary(m2)$coefficients, data = mtcars, model = m2,
-            x_var.name = &quot;wt&quot;, y_var.name = &quot;mpg&quot;, moderator.name = &quot;hp&quot;,
-            confidence_interval = TRUE,  CI_Ribbon = FALSE, 
-            xlab = &quot;Weight&quot;, ylab = &quot;MPG&quot;, moderator.lab = &quot;Horsepower&quot;) +
-ggplot2::theme(text=ggplot2::element_text(family=&quot;Times New Roman&quot;, size = 16))</code></pre>
-<p><img src="/post/2019-03-10-regrrr-one-stop-r-toolkit-for-compiling-regression-results_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>As you can see from the last line of code, the plot is customizable using <a href="https://CRAN.R-project.org/package=ggplot2" target="_blank">“ggplot2”</a>. There are a couple of other functions. Please see the <a href="https://www.rdocumentation.org/packages/regrrr" target="_blank">reference manual on R documentation</a> for details.</p>
-</div>
-</div>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/regression/" rel="tag">regression</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/r/" rel="tag">R</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/dissertation/" rel="bookmark">Research: Dissertation</a>
-  </h2>
-  
-  <time datetime="2019-03-10T00:00:00Z">
-    10 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  <p>Abstract</p>
-
-<p>The closed form expressions of all unbiased estimators of variance components in
-linear mixed effects models are presented. The method of moment (MOM) estimators
-are chosen as benchmarks for finding the unbiased estimators having smaller estimated
-variances than the corresponding MOM estimators. Examples are presented from small
-area estimation.</p>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/mixed-effects-model/" rel="tag">Mixed-effects Model</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/" rel="bookmark">Research: Using linear mixed-effects model to detect fraudulent erasures at an aggregate level</a>
-  </h2>
-  
-  <time datetime="2019-03-10T00:00:00Z">
-    10 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  
-
-
-<p>Abstract</p>
-<p>Wollack and Eckerly (2017) extended the ‘erasure detection index’ (EDI) to detect fraudulent erasures at the group level. Sinharay (2018) suggested two modifications of the EDI at the group level. Those EDIs were not developed specifically for the fraudulent schools with small number of examinees with erasures. This paper suggested a new modification of the group-level EDI in Wollack and Eckerly (2017) by incorporating the ‘empirical best linear unbiased predictor’ (EBLUP) from the linear mixed-effects model. Simulation study shows that the suggested EDI has higher power than the indices of Wollack and Eckerly (2017) and Sinharay (2018), especially in schools with small number of examinees with erasures. It also has satisfactory Type I error rates. A real data example is also included.</p>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/mixed-effects-model/" rel="tag">Mixed-effects Model</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/kpca-for-one-class-classification/" rel="bookmark">Project: KPCA for one-class classification in automated essay scoring and forensic analysis</a>
-  </h2>
-  
-  <time datetime="2019-03-07T00:00:00Z">
-    7 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  
-
-
-<p>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</p>
-<p>The challenge of one-class classification problem is that people only have the data for normal class to train and to decide whether a new observation is alike or not. In this project, we used Kernel Principal Component Analysis (KPCA) and Support Vector Machine (SVM) to detect cheating behavior in automated essay scoring and forensic analysis when only the data for normal essays are available.</p>
-<p>In automated essay scoring, an abnormal essay can be gibberish, copying, writing in foreign language etc. We train the KPCA and SVM models using normal essay data for argumentative essays to identify whether a new essay is similar to normal essay or not, if a new essay is not similar to the normal essay in terms of KPCA score, we consider it as an abnormal essay.</p>
-<p>Similarly, in erasure analysis, we extraced the features of the pattern of pencil bubbles for each student, which are the training data of normal bubbles, then we randomly sample the pencil bubbles from another student as the new observations and compare the features of the new pencil bubbles with that of the normal bubbles to see how many new pencil bubbles can be classified as abnormal bubbles using KPCA and SVM models.</p>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/kpca1.jpg" /> <img src="/post/2015-07-23-r-rmarkdown_files/figure-html/kpca2.jpg" /> <a href="https://kpca-outlier-detection.shinyapps.io/Shiny/">Link to the KPCA app</a></p>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/r/" rel="tag">R</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/shiny/" rel="tag">Shiny</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/machine-learning/" rel="tag">Machine Learning</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/nlp-in-automated-essay-scoring/" rel="bookmark">Project: NLP in Automated Essay Scoring</a>
-  </h2>
-  
-  <time datetime="2019-03-07T00:00:00Z">
-    7 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  
-
-
-<p>In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.</p>
-<p><a href="https://easygrader.herokuapp.com/">Link to the MMeM github</a></p>
-<p>(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results. This is what I need to improve to add some ‘backend worker’ in Python to avoid the situation)</p>
-<ol style="list-style-type: decimal">
-<li>About this project</li>
-</ol>
-<p>Essay are crucial testing tools for assessing academic achievement, integration of ideas and ability, but are expensive and time consuming to grade manually. Automated Essay Scoring (AES) saves the efforts of human graders and hence significantly reduces costs and time.</p>
-<p>The essay data are from Kaggle.com, by the William and Flora Hewlett Foundation, containing 8 essay categories. For each essay, there are two human graders to grade the essay. The goal is to train the models to grade the essays as close as to the human graders.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Features</li>
-</ol>
-<p>This is traditional NLP method, so input features were extraced manually, they are: + Bag of Words (BOW) + Number of words + Number of sentences + Variation of sentences + Average word length + Number of lemms + Number of spelling errors + Number of nouns, adjectives, verbs and adverbs</p>
-<ol start="3" style="list-style-type: decimal">
-<li>Model and results</li>
-</ol>
-<p>Four regression models are compared: + random forest + ridge regression + lasson regression + gradient boosting regressor Gradient boosting regressor performed better in terms of Variance Explained metric, so gradi- ent boosting was used to make prediction on the validate essay set for set1 and set 5, respectively.</p>
-<p>After applying the early stopping, the results of gradient boosting regressor of the 3-fold cross validation results for essay set1 and essay set5 are (the <span class="math inline">\(R^2\)</span> for other categories are 0.5-0.6, which is relatively low):</p>
-<div class="figure">
-<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/results_AES_TDI.jpg" />
-
-</div>
-<ol start="4" style="list-style-type: decimal">
-<li>Problems</li>
-</ol>
-<p>The model has overfitting problem, need to tune the parameters further; change the website waiting mode when requesting.</p>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/nlp/" rel="tag">NLP</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/python/" rel="tag">Python</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/flask/" rel="tag">Flask</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/html/" rel="tag">html</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/multivariate-mixed-effects-model-r-package/" rel="bookmark">R Package “MMeM”: Multivariate Mixed-effects Model</a>
-  </h2>
-  
-  <time datetime="2019-03-07T00:00:00Z">
-    7 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  
-
-
-<p>This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) <a href="doi:10.2307/2530651" class="uri">doi:10.2307/2530651</a> and Wesolowska Janczarek (1984) <a href="doi:10.1002/bimj.4710260613" class="uri">doi:10.1002/bimj.4710260613</a>.</p>
-<p>It is available on CRAN and my github page:</p>
-<p><a href="https://github.com/pengluyaoyao/MMeM">Link to the MMeM github</a></p>
-<p><a href="https://cran.r-project.org/web/packages/MMeM/index.html">Link to the MMeM CRAN</a></p>
-<p>The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</p>
-<p><span class="math inline">\(\mathbf{y} = (\mathbf{I} \otimes \mathbf{X})\mathbf{b} + (\mathbf{I} \otimes \mathbf{Z} )\mathbf{u} + \mathbf{e}\)</span></p>
-<p>with</p>
-<p><span class="math inline">\(\mathbf{y} = \left\{\mathbf{y}_i\right\}_c, \mathbf{b} = \left\{\mathbf{b}_i\right\}_c, \mathbf{u} = \left\{\mathbf{u}_i\right\}_c, \mathbf{e} = \left\{\mathbf{e}_i\right\}_c, i =1, \dots, q\)</span></p>
-<p>where <span class="math inline">\(\mathbf{y}\)</span> is n<em>q by 1 response vector; <span class="math inline">\(\mathbf{X}\)</span> is n by p design matrix for the fixed effects; <span class="math inline">\(\mathbf{b}\)</span> is p</em>q by 1 coefficients vector for the fixed effects; <span class="math inline">\(\mathbf{Z}\)</span> is n by s design matrix for the random effects; <span class="math inline">\(\mathbf{u}\)</span> is s<em>q by 1 vector of the random effects; <span class="math inline">\(\mathbf{e}\)</span> is n</em>q by 1 vector of random errors.</p>
-<p>It is assumed that</p>
-<p><span class="math inline">\(cov(\mathbf{u}_i, \mathbf{u}_j&#39;) = \mathbf{G}_{ij}, cov(\mathbf{e}_i, \mathbf{e}_j&#39;) = \mathbf{R}_{ij}, cov(\mathbf{u}_i, \mathbf{e}_j&#39;) = \mathbf{0}\)</span></p>
-<p>or</p>
-<p><span class="math inline">\(var(\mathbf{u}) = \mathbf{G} = \mathbf{T}\otimes \mathbf{I}_s, var(\mathbf{e}) = \mathbf{R} = \mathbf{E} \otimes \mathbf{I}_n, var(\mathbf{y}) = \mathbf{V} = \mathbf{T}\otimes \mathbf{ZZ}&#39; + \mathbf{E} \otimes \mathbf{I}_n\)</span>.</p>
-<p>The goal is to estimate the variance-covariance matrix of random effects <span class="math inline">\(\mathbf{u}\)</span> and <span class="math inline">\(\mathbf{e}\)</span> on <span class="math inline">\(q\)</span> response variates, i.e. <span class="math inline">\(\mathbf{T}\)</span> and <span class="math inline">\(\mathbf{E}\)</span>.</p>
-<p>The model also supports the variance component estimations using univariate mixed-effects model regression, which is equivalent to R package lme4:</p>
-<p><span class="math inline">\(\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}\)</span></p>
-<p>where <span class="math inline">\(\mathbf{y}\)</span> is n by 1 response vector; <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Z}\)</span> are n by p and n by s known design matrix; <span class="math inline">\(\mathbf{b}\)</span> is p by 1 coefficients vector for the fixed effects; <span class="math inline">\(\mathbf{u}\)</span> is s by 1 matrix for the random effects, <span class="math inline">\(\mathbf{e}\)</span> is n by 1 vector of random errors. }</p>
-<p>The goal is to estimate <span class="math inline">\(\sigma_u^2\)</span> and <span class="math inline">\(\sigma_e^2\)</span> for <span class="math inline">\(\mathbf{u} \sim N(\mathbf{0}, \sigma_u^2\mathbf{I}), \mathbf{e} \sim N(\mathbf{0}, \sigma_e^2\mathbf{I})\)</span>.</p>
-<p>Currently this package supports multivariate mixed effects model with two response variables, one fixed effects and one random effects, the package only estimates the variance covariance components under multivariate mixed effects model, it doesn’t provide the estimation and hypothesis testing for the fixed effects parameters, which will be incorporated in the future. Users can compute the estimated fixed effects parameters by using the generalized least square formula for the fixed effect parameters after estimating the variance covariance components using this package.</p>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/r/" rel="tag">R</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/multivariate-mixed-effects-model/" rel="tag">Multivariate Mixed-effects Model</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-<article>
-  <header class="Heading">
-  <h2 class="Heading-title">
-    <a class="Heading-link u-clickable" href="/post/automated-essay-scoring2/" rel="bookmark">Project: NLP with Deep Learning-dependancy parser</a>
-  </h2>
-  
-  <time datetime="2019-03-04T00:00:00Z">
-    4 March, 2019
-  </time>
-  
-</header>
-<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
-<script src="/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-  });
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-
-  MathJax.Hub.Config({
-  
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
-  });
-</script>
-
-  
-
-
-<p>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The <a href="https://github.com/hankcs/CS224n/tree/master/assignment2">orignal code</a> contributed by <a href="https://github.com/hankcs">hankcs</a> is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has ‘word’, ‘POS’, ‘head’ and ‘label’, where the ‘head’ is the correct dependency relation.</p>
-<p>First, import necessary modules and set up the configurations for the parser:</p>
-<pre><code>import time
-import os
-import logging
-from collections import Counter
-import numpy as np
-
-P_PREFIX = &#39;&lt;p&gt;:&#39;
-L_PREFIX = &#39;&lt;l&gt;:&#39;
-UNK = &#39;&lt;UNK&gt;&#39;
-NULL = &#39;&lt;NULL&gt;&#39;
-ROOT = &#39;&lt;ROOT&gt;&#39;
-
-class Config(object): 
-    language = &#39;english&#39;
-    with_punct = True
-    unlabeled = True 
-    lowercase = True
-    use_pos = True # use part of speech as input features
-    use_dep = True #?
-    use_dep = use_dep and (not unlabeled)
-    data_path = &#39;./data&#39;
-    train_file = &#39;train.conll&#39;
-    dev_file = &#39;dev.conll&#39;
-    test_file = &#39;test.conll&#39;
-    embedding_file = &#39;./data/en-cw.txt&#39;   
-    n_features = 36 #?
-    n_classes = 3 # want to predict shift, left-arc or right-arc
-    dropout = 0.5
-    embed_size = 50
-    hidden_size = 200
-    batch_size = 2048
-    n_epochs = 10
-    lr = 0.001</code></pre>
-<p>Define some utility functions:</p>
-<pre><code># read the training data in:
-# The first 5 rows in the training data:
-&#39;&#39;&#39;
-1   In  _   ADP IN  _   5   case    _   _
-2   an  _   DET DT  _   5   det _   _
-3   Oct.    _   PROPN   NNP _   5   compound    _   _
-4   19  _   NUM CD  _   5   nummod  _   _
-5   review  _   NOUN    NN  _   45  nmod    _   _
-&#39;&#39;&#39;
-
-def read_conll(in_file, lowercase=False, max_example=None):
-    examples = []
-    with open(in_file) as f:
-        word, pos, head, label = [], [], [], []
-        for line in f.readlines():
-            sp = line.strip().split(&#39;\t&#39;) #tokenize each line of the file
-            if len(sp) == 10:
-                if &#39;-&#39; not in sp[0]:  #that means the sentence is not complete, continue accumulate words in the sentence
-                    word.append(sp[1].lower() if lowercase else sp[1])
-                    pos.append(sp[4])
-                    head.append(int(sp[6]))
-                    label.append(sp[7])
-            elif len(word) &gt; 0: #accumulate to a dictionary
-                examples.append({&#39;word&#39;: word, &#39;pos&#39;: pos, &#39;head&#39;: head, &#39;label&#39;: label})
-                word, pos, head, label = [], [], [], []
-                if (max_example is not None) and (len(examples) == max_example):
-                    break
-        if len(word) &gt; 0: #if the sentence has &gt;0 words, accumulate the sentence dictionary to a list called examples.
-            examples.append({&#39;word&#39;: word, &#39;pos&#39;: pos, &#39;head&#39;: head, &#39;label&#39;: label})
-    return examples</code></pre>
-<pre><code>def build_dict(keys, n_max=None, offset=0):
-    count = Counter()
-    for key in keys:
-        count[key] += 1
-    ls = count.most_common() if n_max is None \
-        else count.most_common(n_max)
-
-    return {w[0]: index + offset for (index, w) in enumerate(ls)}
-
-def punct(language, pos):
-    if language == &#39;english&#39;:
-        return pos in [&quot;&#39;&#39;&quot;, &quot;,&quot;, &quot;.&quot;, &quot;:&quot;, &quot;``&quot;, &quot;-LRB-&quot;, &quot;-RRB-&quot;]
-    elif language == &#39;chinese&#39;:
-        return pos == &#39;PU&#39;
-    elif language == &#39;french&#39;:
-        return pos == &#39;PUNC&#39;
-    elif language == &#39;german&#39;:
-        return pos in [&quot;$.&quot;, &quot;$,&quot;, &quot;$[&quot;]
-    elif language == &#39;spanish&#39;:
-        # http://nlp.stanford.edu/software/spanish-faq.shtml
-        return pos in [&quot;f0&quot;, &quot;faa&quot;, &quot;fat&quot;, &quot;fc&quot;, &quot;fd&quot;, &quot;fe&quot;, &quot;fg&quot;, &quot;fh&quot;,
-                       &quot;fia&quot;, &quot;fit&quot;, &quot;fp&quot;, &quot;fpa&quot;, &quot;fpt&quot;, &quot;fs&quot;, &quot;ft&quot;,
-                       &quot;fx&quot;, &quot;fz&quot;]
-    elif language == &#39;universal&#39;:
-        return pos == &#39;PUNCT&#39;
-    else:
-        raise ValueError(&#39;language: %s is not supported.&#39; % language)
-
-</code></pre>
-<p>Now, define Preprocessor object (in the assignment it is called Parser. I was confused about the parse method in that object, so I take the parse method out as an independent method, so the Parser object was renamed as Preprocessor, which will be used as an argument in the parse() method) to extract features of the context words of each word in the training data (word, pos, label features), get the correct transitions, get the legal transitions , then create instances containing [a long list of tuples of (features, legal labels, gold_t (correct transitions))]</p>
-<pre><code>class Preprocessor(object):
-    # initialize the dictionary {token: id}, and {id: token},  
-    def __init__(self, dataset):
-        root_labels = list([l for ex in dataset
-                           for (h, l) in zip(ex[&#39;head&#39;], ex[&#39;label&#39;]) if h == 0]) #h==0 is root
-        counter = Counter(root_labels)
-        if len(counter) &gt; 1:
-            logging.info(&#39;Warning: more than one root label&#39;)
-            logging.info(counter)
-        self.root_label = counter.most_common()[0][0]
-        deprel = [self.root_label] + list(set([w for ex in dataset
-                                               for w in ex[&#39;label&#39;]
-                                               if w != self.root_label]))
-        &#39;&#39;&#39;
-        the deprel (dependent relations) are:
-        
-        &#39;&#39;&#39;
-        
-        tok2id = {L_PREFIX + l: i for (i, l) in enumerate(deprel)}
-        tok2id[L_PREFIX + NULL] = self.L_NULL = len(tok2id)
-
-        config = Config()
-        self.unlabeled = config.unlabeled
-        self.with_punct = config.with_punct
-        self.use_pos = config.use_pos
-        self.use_dep = config.use_dep
-        self.language = config.language
-
-        if self.unlabeled: #just S, LA, RA
-            trans = [&#39;L&#39;, &#39;R&#39;, &#39;S&#39;]
-            self.n_deprel = 1
-        else: #S_NN
-            trans = [&#39;L-&#39; + l for l in deprel] + [&#39;R-&#39; + l for l in deprel] + [&#39;S&#39;]
-            self.n_deprel = len(deprel)
-
-        self.n_trans = len(trans)
-        self.tran2id = {t: i for (i, t) in enumerate(trans)}
-        self.id2tran = {i: t for (i, t) in enumerate(trans)}
-        
-        &#39;&#39;&#39;
-        example of id2tran is:
-        {0: &#39;L&#39;, 1: &#39;R&#39;, 2: &#39;S&#39;}
-        &#39;&#39;&#39;
-        # logging.info(&#39;Build dictionary for part-of-speech tags.&#39;)
-        tok2id.update(build_dict([P_PREFIX + w for ex in dataset for w in ex[&#39;pos&#39;]],
-                                  offset=len(tok2id)))
-        tok2id[P_PREFIX + UNK] = self.P_UNK = len(tok2id)
-        tok2id[P_PREFIX + NULL] = self.P_NULL = len(tok2id)
-        tok2id[P_PREFIX + ROOT] = self.P_ROOT = len(tok2id)
-
-        # logging.info(&#39;Build dictionary for words.&#39;)
-        tok2id.update(build_dict([w for ex in dataset for w in ex[&#39;word&#39;]],
-                                  offset=len(tok2id)))
-        tok2id[UNK] = self.UNK = len(tok2id)
-        tok2id[NULL] = self.NULL = len(tok2id)
-        tok2id[ROOT] = self.ROOT = len(tok2id)
-        
-        &#39;&#39;&#39;
-        example of id2tok is:
-        {0: &#39;&lt;l&gt;:root&#39;, 1: &#39;&lt;l&gt;:nsubj&#39;, 2: &#39;&lt;l&gt;:advmod&#39;, 3: &#39;&lt;l&gt;:dobj&#39;, 4: &#39;&lt;l&gt;:acl&#39;, 5: &#39;&lt;l&gt;:nummod&#39;, 6: &#39;&lt;l&gt;:nmod&#39;, 7: &#39;&lt;l&gt;:compound&#39;, 8: &#39;&lt;l&gt;:xcomp&#39;, 
-        9: &#39;&lt;l&gt;:auxpass&#39;, 10: &#39;&lt;l&gt;:det&#39;, 11: &#39;&lt;l&gt;:punct&#39;, 12: &#39;&lt;l&gt;:mark&#39;, 13: &#39;&lt;l&gt;:case&#39;, 14: &#39;&lt;l&gt;:conj&#39;, 15: &#39;&lt;l&gt;:appos&#39;, 16: &#39;&lt;l&gt;:nmod:tmod&#39;, 
-        17: &#39;&lt;l&gt;:dep&#39;, 18: &#39;&lt;l&gt;:amod&#39;, 19: &#39;&lt;l&gt;:nmod:poss&#39;, 20: &#39;&lt;l&gt;:nsubjpass&#39;, 21: &#39;&lt;l&gt;:cc&#39;, 22: &#39;&lt;l&gt;:ccomp&#39;, 23: &#39;&lt;l&gt;:&lt;NULL&gt;&#39;, 24: &#39;&lt;p&gt;:NNP&#39;, 
-        25: &#39;&lt;p&gt;:NN&#39;, 26: &#39;&lt;p&gt;:IN&#39;, 27: &#39;&lt;p&gt;:DT&#39;, 28: &#39;&lt;p&gt;:,&#39;, 29: &#39;&lt;p&gt;:NNS&#39;, 30: &#39;&lt;p&gt;:JJ&#39;, 31: &#39;&lt;p&gt;:CD&#39;, 32: &#39;&lt;p&gt;:CC&#39;, 33: &#39;&lt;p&gt;:VBD&#39;, 34: &#39;&lt;p&gt;:.&#39;, 
-        35: &#39;&lt;p&gt;:VBN&#39;, 36: &#39;&lt;p&gt;:VBZ&#39;, 37: &#39;&lt;p&gt;:``&#39;, 38: &quot;&lt;p&gt;:&#39;&#39;&quot;, 39: &#39;&lt;p&gt;:VB&#39;, 40: &#39;&lt;p&gt;:TO&#39;, 41: &#39;&lt;p&gt;:PRP&#39;, 42: &#39;&lt;p&gt;:POS&#39;, 43: &#39;&lt;p&gt;:-LRB-&#39;, 
-        44: &#39;&lt;p&gt;:-RRB-&#39;, 45: &#39;&lt;p&gt;:RB&#39;, 46: &#39;&lt;p&gt;:NNPS&#39;, 47: &#39;&lt;p&gt;:PRP$&#39;, 48: &#39;&lt;p&gt;:&lt;UNK&gt;&#39;, 49: &#39;&lt;p&gt;:&lt;NULL&gt;&#39;, 50: &#39;&lt;p&gt;:&lt;ROOT&gt;&#39;, 51: &#39;,&#39;, 52: &#39;in&#39;, 53: &#39;the&#39;, 
-        54: &#39;.&#39;, 55: &#39;cars&#39;, 56: &#39;and&#39;, 57: &#39;of&#39;, 58: &#39;``&#39;, 59: &quot;&#39;&#39;&quot;, 60: &#39;at&#39;, 61: &#39;to&#39;, 62: &#39;haag&#39;, 63: &#39;said&#39;, 64: &#39;u.s.&#39;, 65: &#39;luxury&#39;, 66: &#39;auto&#39;, 
-        67: &#39;maker&#39;, 68: &#39;an&#39;, 69: &#39;oct.&#39;, 70: &#39;19&#39;, 71: &#39;review&#39;, 72: &#39;misanthrope&#39;, 73: &#39;chicago&#39;, 74: &quot;&#39;s&quot;, 75: &#39;goodman&#39;, 76: &#39;theatre&#39;, 77: &#39;-lrb-&#39;, 
-        78: &#39;revitalized&#39;, 79: &#39;classics&#39;, 80: &#39;take&#39;, 81: &#39;stage&#39;, 82: &#39;windy&#39;, 83: &#39;city&#39;, 84: &#39;leisure&#39;, 85: &#39;&amp;&#39;, 86: &#39;arts&#39;, 87: &#39;-rrb-&#39;, 88: &#39;role&#39;,
-        89: &#39;celimene&#39;, 90: &#39;played&#39;, 91: &#39;by&#39;, 92: &#39;kim&#39;, 93: &#39;cattrall&#39;, 94: &#39;was&#39;, 95: &#39;mistakenly&#39;, 96: &#39;attributed&#39;, 97: &#39;christina&#39;, 98: &#39;ms.&#39;, 
-        99: &#39;plays&#39;, 100: &#39;elianti&#39;, 101: &#39;rolls-royce&#39;, 102: &#39;motor&#39;, 103: &#39;inc.&#39;, 104: &#39;it&#39;, 105: &#39;expects&#39;, 106: &#39;its&#39;, 107: &#39;sales&#39;, 108: &#39;remain&#39;, 
-        109: &#39;steady&#39;, 110: &#39;about&#39;, 111: &#39;1,200&#39;, 112: &#39;1990&#39;, 113: &#39;last&#39;, 114: &#39;year&#39;, 115: &#39;sold&#39;, 116: &#39;1,214&#39;, 117: &#39;howard&#39;, 118: &#39;mosher&#39;, 
-        119: &#39;president&#39;, 120: &#39;chief&#39;, 121: &#39;executive&#39;, 122: &#39;officer&#39;, 123: &#39;he&#39;, 124: &#39;anticipates&#39;, 125: &#39;growth&#39;, 126: &#39;for&#39;, 127: &#39;britain&#39;, 
-        128: &#39;europe&#39;, 129: &#39;far&#39;, 130: &#39;eastern&#39;, 131: &#39;markets&#39;, 132: &#39;&lt;UNK&gt;&#39;, 133: &#39;&lt;NULL&gt;&#39;, 134: &#39;&lt;ROOT&gt;&#39;}
-        &#39;&#39;&#39;
-        self.tok2id = tok2id
-        self.id2tok = {v: k for (k, v) in tok2id.items()}
-
-        self.n_features = 18 + (18 if config.use_pos else 0) + (12 if config.use_dep else 0) #? why 18?
-        self.n_tokens = len(tok2id) 
-    
-    &#39;&#39;&#39;
-    arranging each set as this form: [{&#39;word&#39;: [corresponding id of each token], &#39;pos&#39;: [corresponding id in pos from tok2id], &#39;head&#39;: [id...], &#39;label&#39;: [id...]},...,      #{last sentence in the set}]
-        The resulting vec_examples are (this is vectorized training data in id form from tok2id):
-        [{&#39;word&#39;: [134, 52, 68, 69, 70, 71, 57, 58, 53, 72, 59, 60, 73, 74, 75, 76, 77, 58, 78, 79, 80, 53, 81, 52, 82, 83, 51, 59, 84, 85, 86, 87, 51, 53, 88, 57, 89, 51, 90, 91, 92, 93, 51, 94, 95, 96, 61, 97, 62, 54], 
-        &#39;pos&#39;: [50, 26, 27, 24, 31, 25, 26, 37, 27, 25, 38, 26, 24, 42, 24, 24, 43, 37, 35, 29, 39, 27, 25, 26, 24, 24, 28, 38, 25, 32, 29, 44, 28, 27, 25, 26, 24, 28, 35, 26, 24, 24, 28, 33, 45, 35, 40, 24, 24, 34], 
-        &#39;head&#39;: [-1, 5, 5, 5, 5, 45, 9, 9, 9, 5, 9, 15, 15, 12, 15, 9, 20, 20, 19, 20, 5, 22, 20, 25, 25, 20, 20, 20, 20, 28, 28, 20, 45, 34, 45, 36, 34, 34, 34, 41, 41, 38, 34, 45, 45, 0, 48, 48, 45, 45], 
-        &#39;label&#39;: [-1, 13, 10, 7, 5, 6, 13, 11, 10, 6, 11, 13, 19, 13, 7, 6, 11, 11, 18, 1, 17, 10, 3, 13, 7, 6, 11, 11, 17, 21, 14, 11, 11, 10, 20, 13, 6, 11, 4, 13, 7, 6, 11, 9, 2, 0, 13, 7, 6, 11]}, 
-        {&#39;word&#39;: [134, 98, 62, 99, 100, 54], &#39;pos&#39;: [50, 24, 24, 36, 24, 34], &#39;head&#39;: [-1, 2, 3, 0, 3, 3], &#39;label&#39;: [-1, 7, 1, 0, 3, 11]},{...}...{...}
-    &#39;&#39;&#39;
-    def vectorize(self, examples): 
-        vec_examples = []
-        for ex in examples:
-            word = [self.ROOT] + [self.tok2id[w] if w in self.tok2id
-                                  else self.UNK for w in ex[&#39;word&#39;]] # a list of word id for each sentence in dataset
-            pos = [self.P_ROOT] + [self.tok2id[P_PREFIX + w] if P_PREFIX + w in self.tok2id # a list of POS id
-                                   else self.P_UNK for w in ex[&#39;pos&#39;]]
-            head = [-1] + ex[&#39;head&#39;]
-            label = [-1] + [self.tok2id[L_PREFIX + w] if L_PREFIX + w in self.tok2id
-                            else -1 for w in ex[&#39;label&#39;]]
-            vec_examples.append({&#39;word&#39;: word, &#39;pos&#39;: pos,
-                                 &#39;head&#39;: head, &#39;label&#39;: label})
-        return vec_examples # each sentence is a dictionary with list of &#39;word&#39;,&#39;POS&#39;, &#39;head&#39; and &#39;label
-    
-    &#39;&#39;&#39;
-    This function is important, it extracts context words first, then extract the corresping word from ex[&#39;word&#39;], pos from ex[&#39;pos&#39;]
-    and label features from ex[&#39;label&#39;], finally concatenate them into a long vector for each sentence, an example of one set of features for one sentence is:
-    [133, 133, 134, 52, 68, 69, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 133, 49, 49, 50, 26, 27, 24, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49] #36 features of context words with corresponding id from tok2id,  that is a long list containing [features, p_features, l_features] 
-    &#39;&#39;&#39;
-    def extract_features(self, stack, buf, arcs, ex):
-        if stack[0] == &quot;ROOT&quot;:
-            stack[0] = 0
-
-        def get_lc(k): # lc: left context, since arc = (stack[-1], stack[-2], gold_t) or (stack[-2], stack[-1], gold_t), if arc[1]&#39;s id &lt; arc[0]&#39;s id, then extract lc
-            return sorted([arc[1] for arc in arcs if arc[0] == k and arc[1] &lt; k])
-
-        def get_rc(k): #if arc[1]&#39;s id &gt; arc[0]&#39;s id, rc
-            return sorted([arc[1] for arc in arcs if arc[0] == k and arc[1] &gt; k],
-                          reverse=True)
-
-        p_features = []
-        l_features = []
-        features = [self.NULL] * (3 - len(stack)) + [ex[&#39;word&#39;][x] for x in stack[-3:]] #if len(stack)&gt;=3, no NULL, features contain the last 3 words in the stack
-        features += [ex[&#39;word&#39;][x] for x in buf[:3]] + [self.NULL] * (3 - len(buf)) # extract the first 3 words in the buffer if len(buf) &gt;=3
-        if self.use_pos: # extracting the corresponding pos features, 3 from stack, 3 from buffer if stack and buffer have length&gt;=3
-            p_features = [self.P_NULL] * (3 - len(stack)) + [ex[&#39;pos&#39;][x] for x in stack[-3:]]
-            p_features += [ex[&#39;pos&#39;][x] for x in buf[:3]] + [self.P_NULL] * (3 - len(buf))
-
-        for i in range(2): #i = 0, 1
-            if i &lt; len(stack):
-                k = stack[-i-1] #the kth word&#39;s context: i=0, the -1 word&#39;s context, i=1, the -2 word&#39;s context
-                lc = get_lc(k) # the left context word of kth word in stack = [(s3,) s2, s1]
-                rc = get_rc(k) # the right context word
-                llc = get_lc(lc[0]) if len(lc) &gt; 0 else [] #llc
-                rrc = get_rc(rc[0]) if len(rc) &gt; 0 else [] #rrc
-
-                features.append(ex[&#39;word&#39;][lc[0]] if len(lc) &gt; 0 else self.NULL)
-                features.append(ex[&#39;word&#39;][rc[0]] if len(rc) &gt; 0 else self.NULL)
-                features.append(ex[&#39;word&#39;][lc[1]] if len(lc) &gt; 1 else self.NULL)
-                features.append(ex[&#39;word&#39;][rc[1]] if len(rc) &gt; 1 else self.NULL)
-                features.append(ex[&#39;word&#39;][llc[0]] if len(llc) &gt; 0 else self.NULL)
-                features.append(ex[&#39;word&#39;][rrc[0]] if len(rrc) &gt; 0 else self.NULL)
-
-                if self.use_pos:
-                    p_features.append(ex[&#39;pos&#39;][lc[0]] if len(lc) &gt; 0 else self.P_NULL)
-                    p_features.append(ex[&#39;pos&#39;][rc[0]] if len(rc) &gt; 0 else self.P_NULL)
-                    p_features.append(ex[&#39;pos&#39;][lc[1]] if len(lc) &gt; 1 else self.P_NULL)
-                    p_features.append(ex[&#39;pos&#39;][rc[1]] if len(rc) &gt; 1 else self.P_NULL)
-                    p_features.append(ex[&#39;pos&#39;][llc[0]] if len(llc) &gt; 0 else self.P_NULL)
-                    p_features.append(ex[&#39;pos&#39;][rrc[0]] if len(rrc) &gt; 0 else self.P_NULL)
-
-                if self.use_dep:
-                    l_features.append(ex[&#39;label&#39;][lc[0]] if len(lc) &gt; 0 else self.L_NULL)
-                    l_features.append(ex[&#39;label&#39;][rc[0]] if len(rc) &gt; 0 else self.L_NULL)
-                    l_features.append(ex[&#39;label&#39;][lc[1]] if len(lc) &gt; 1 else self.L_NULL)
-                    l_features.append(ex[&#39;label&#39;][rc[1]] if len(rc) &gt; 1 else self.L_NULL)
-                    l_features.append(ex[&#39;label&#39;][llc[0]] if len(llc) &gt; 0 else self.L_NULL)
-                    l_features.append(ex[&#39;label&#39;][rrc[0]] if len(rrc) &gt; 0 else self.L_NULL)
-            else:
-                features += [self.NULL] * 6
-                if self.use_pos:
-                    p_features += [self.P_NULL] * 6
-                if self.use_dep:
-                    l_features += [self.L_NULL] * 6
-
-        features += p_features + l_features
-        assert len(features) == self.n_features
-        return features 
-
-    &#39;&#39;&#39;
-    This is to get the correct transitions for training purposes. 
-    1. if there is only ROOT in stack, the only correct transition is shift
-    2. if stack = [i1, i0] or more, i2 is not ROOT, i1&#39;s head == i0, then left arc is the correct transition
-    3. if stack = [i1, i0] or more, i0&#39;s head == i1, i1 can be ROOT or not ROOT, right arc is the correct transition
-    4. ow shift
-    &#39;&#39;&#39;
-    def get_oracle(self, stack, buf, ex):
-        if len(stack) &lt; 2:
-            return self.n_trans - 1 #如果stack只有root, 就执行shift, shift对应id是48 or 2: n_tran = 3-1 if unlabel or 49-1  if label1
-        i0 = stack[-1]
-        i1 = stack[-2]
-        h0 = ex[&#39;head&#39;][i0]
-        h1 = ex[&#39;head&#39;][i1]
-        l0 = ex[&#39;label&#39;][i0]
-        l1 = ex[&#39;label&#39;][i1]
-
-        if self.unlabeled:
-            if (i1 &gt; 0) and (h1 == i0): #if i1 is not ROOT, stack[i1, i0], head is i0, left_arc i1
-                return 0
-            elif (i1 &gt;= 0) and (h0 == i1) and (not any([x for x in buf if ex[&#39;head&#39;][x] == i0])): 
-                return 1 # if head is i1, no i0 head in buffer , right_arc
-            else:
-                return None if len(buf) == 0 else 2 #if len(buf) =0, no transition, ow, shift
-        else:
-            if (i1 &gt; 0) and (h1 == i0):
-                return l1 if (l1 &gt;= 0) and (l1 &lt; self.n_deprel) else None
-            elif (i1 &gt;= 0) and (h0 == i1) and \
-                 (not any([x for x in buf if ex[&#39;head&#39;][x] == i0])):
-                return l0 + self.n_deprel if (l0 &gt;= 0) and (l0 &lt; self.n_deprel) else None
-            else:
-                return None if len(buf) == 0 else self.n_trans - 1
-    
-    &#39;&#39;&#39;
-    for each sentence in training data, create stack with only ROOT in id form [0], buf with all tokens of the sentence, and empty arcs, get oracle for the 
-    stack[ROOT] and full buffer (oracle should be shift for this case), get legal labels (only shift is legal for stack[ROOT] and full buffer), so in this
-    round the legal_labels will return [0,0,1], then update stack, buffer and arcs, repeate this procedure for the updated stack, buffer and arcs for 
-    2*#ofwords times. for each update, instances are accumulated as walking through the whole sentence as [], each sentence is an instances, all_instances  =
-    [[instances1], [instances2], ...[]]
-    &#39;&#39;&#39;
-    def create_instances(self, examples):
-        all_instances = []
-        succ = 0
-        for n_ex, ex in enumerate(examples):
-            n_words = len(ex[&#39;word&#39;]) - 1
-
-            # arcs = {(h, t, label)}
-            stack = [0]
-            buf = [i + 1 for i in range(n_words)]
-            arcs = []
-            instances = []
-            for i in range(n_words * 2): # rolling over each word to get the features (legal label and gold_t) for each transition in (llc, lc, w, rc, rrc) for each sentence, the transitions have 2*n_word times 
-                gold_t = self.get_oracle(stack, buf, ex)
-                if gold_t is None:
-                    break
-                legal_labels = self.legal_labels(stack, buf)
-                assert legal_labels[gold_t] == 1 # correct transition must belong to legal lables
-                instances.append((self.extract_features(stack, buf, arcs, ex),
-                                  legal_labels, gold_t)) 
-                if gold_t == self.n_trans - 1: # gold_t is shift= 2
-                    stack.append(buf[0])
-                    buf = buf[1:]
-                elif gold_t &lt; self.n_deprel: #n_deprel = 1, when gold_t ==0,
-                    arcs.append((stack[-1], stack[-2], gold_t)) # i.e. L_arc, next gold_t must be 2, i.e. shift, stack is all the words except the -2 word, then next loop will be adding the first word in buffer to stack (execute the first if).
-                    stack = stack[:-2] + [stack[-1]]
-                else:
-                    arcs.append((stack[-2], stack[-1], gold_t - self.n_deprel))
-                    stack = stack[:-1] #when gold_t ==1, R_arc, next gold_t must be 0, i.e. shift, stack will be all the words except the last word, then next loop will be adding the first word in buffer to stack (execute the first if).
-            succ += 1
-            all_instances += instances # one instance is one sentence with 2*n_word tuples, each tuple contains context features, legal_labels, gold_t
-        return all_instances
-
-    def legal_labels(self, stack, buf):
-        labels = ([1] if len(stack) &gt; 2 else [0]) * self.n_deprel #stack&lt;=2 must not be L-arc, stack&gt;2, L-arc is legal
-        labels += ([1] if len(stack) &gt;= 2 else [0]) * self.n_deprel
-        labels += [1] if len(buf) &gt; 0 else [0] #buf &gt; 0,  shift is legal 
-        return labels # labels&#39; length == n_tran, 3 or 49</code></pre>
-<p>After defining the Preprocessor, it is ready to load and preprocess data. It read in the train set, dev set and test set first, and slice sentences for debugging purpose, initialize Preprocessor, initalize embedding matrix for all tokens in train set and then map each row in embedding matrix to corresponding token (this is the pretrained embedding matrix), vectorize train, dev and test sets.</p>
-<pre><code>def load_and_preprocess_data(reduced=True):
-    config = Config()
-
-    print(&quot;Loading data...&quot;),
-    start = time.time()
-    train_set = read_conll(os.path.join(config.data_path, config.train_file),
-                           lowercase=config.lowercase)
-    dev_set = read_conll(os.path.join(config.data_path, config.dev_file),
-                         lowercase=config.lowercase)
-    test_set = read_conll(os.path.join(config.data_path, config.test_file),
-                          lowercase=config.lowercase)
-    if reduced:
-        train_set = train_set[:1000]
-        dev_set = dev_set[:500]
-        test_set = test_set[:500]
-    print(&quot;took {:.2f} seconds&quot;.format(time.time() - start))
-
-    print(&quot;Building parser...&quot;),
-    start = time.time()
-    preprocessor = Preprocessor(train_set)
-    print(&quot;took {:.2f} seconds&quot;.format(time.time() - start))
-
-    print(&quot;Loading pretrained embeddings...&quot;),
-    start = time.time()
-    word_vectors = {}
-    for line in open(config.embedding_file).readlines():
-        sp = line.strip().split()
-        word_vectors[sp[0]] = [float(x) for x in sp[1:]] #sp[0] is all vocabulary, sp[1:] is the corresponding word vector 
-    embeddings_matrix = np.asarray(np.random.normal(0, 0.9, (preprocessor.n_tokens, 50)), dtype=&#39;float32&#39;) #embeding: is n_tokens * 50
-
-    for token in preprocessor.tok2id: #all token/ POS/ label in train set
-        i = preprocessor.tok2id[token]
-        if token in word_vectors:
-            embeddings_matrix[i] = word_vectors[token]
-        elif token.lower() in word_vectors:
-            embeddings_matrix[i] = word_vectors[token.lower()] #fill embedding matrix with corresponding word_vectors as input x
-    print(&quot;took {:.2f} seconds&quot;.format(time.time() - start))
-    
-    print(&quot;Vectorizing data...&quot;),
-    start = time.time()
-    train_set = preprocessor.vectorize(train_set)
-    dev_set = preprocessor.vectorize(dev_set) # each sentence conresponds to a dictionary of {&#39;word&#39;:id, &#39;head&#39;: id, &#39;pos&#39;: id, &#39;label&#39;: id}
-    test_set = preprocessor.vectorize(test_set)
-    print(&quot;took {:.2f} seconds&quot;.format(time.time() - start))
-
-    print(&quot;Preprocessing training data...&quot;),
-    start = time.time()
-    train_examples = preprocessor.create_instances(train_set) # each sentence contain 2*n_word tuple of context features in word, POS, legal lable and gold_t
-    print(&quot;took {:.2f} seconds&quot;.format(time.time() - start))
-
-    return preprocessor, embeddings_matrix, train_examples, dev_set, test_set,</code></pre>
-<p>This is creating partial parses object. Treating each sentence as a partial parse with attribute ‘stack’, ‘buffer’, ‘dependencies’, and with method ‘parse_step’ to update words in stack and buffers according to predicted transitions, the parse method returns dependencies for each transition.</p>
-<pre><code>class PartialParse(object):
-    def __init__(self, sentence):
-        &quot;&quot;&quot;Initializes this partial parse.
-        Your code should initialize the following fields:
-            self.stack: The current stack represented as a list with the top of the stack as the
-                        last element of the list.
-            self.buffer: The current buffer represented as a list with the first item on the
-                         buffer as the first item of the list
-            self.dependencies: The list of dependencies produced so far. Represented as a list of
-                    tuples where each tuple is of the form (head, dependent).
-                    Order for this list doesn&#39;t matter.
-        The root token should be represented with the string &quot;ROOT&quot;
-        Args:
-            sentence: The sentence to be parsed as a list of words.
-                      Your code should not modify the sentence.
-        &quot;&quot;&quot;
-        # The sentence being parsed is kept for bookkeeping purposes. Do not use it in your code.
-        self.sentence = sentence
-
-        ### YOUR CODE HERE
-        self.stack = [&#39;ROOT&#39;]
-        self.buffer = sentence[:]
-        self.dependencies = []
-        ### END YOUR CODE
-
-    def parse_step(self, transition):
-        &quot;&quot;&quot;Performs a single parse step by applying the given transition to this partial parse
-        Args:
-            transition: A string that equals &quot;S&quot;, &quot;LA&quot;, or &quot;RA&quot; representing the shift, left-arc,
-                        and right-arc transitions.
-        &quot;&quot;&quot;
-        ### YOUR CODE HERE
-        if transition == &quot;S&quot;:
-            self.stack.append(self.buffer[0])
-            self.buffer.pop(0)
-        elif transition == &quot;LA&quot;:
-            self.dependencies.append((self.stack[-1], self.stack[-2]))
-            self.stack.pop(-2)
-        else:
-            self.dependencies.append((self.stack[-2], self.stack[-1]))
-            self.stack.pop(-1)
-            ### END YOUR CODE
-
-    def parse(self, transitions):
-        &quot;&quot;&quot;Applies the provided transitions to this PartialParse
-        Args:
-            transitions: The list of transitions in the order they should be applied
-        Returns:
-            dependencies: The list of dependencies produced when parsing the sentence. Represented
-                          as a list of tuples where each tuple is of the form (head, dependent)
-        &quot;&quot;&quot;
-        for transition in transitions:
-            self.parse_step(transition)
-        return self.dependencies</code></pre>
-<p>Next, define the model used to predict the transitions for each set of features in each sentences. This is used when evaluating the dev_set and test_set. It is important to use sess as the argument in the predict method so that the most updated variables (the weight matrices and the bias terms in this cases) in TensorFlow in the training stage can be applied to the evaluation set.</p>
-<pre><code>from utils.model import Model #want to use its predict_on_batch method
-
-class ModelWrapper(object):
-    def __init__(self, sess, preprocessor, dataset, sentence_id_to_idx):
-        self.sess = sess
-        self.preprocessor = preprocessor
-        self.dataset = dataset
-        self.sentence_id_to_idx = sentence_id_to_idx
-
-    def predict(self, model, partial_parses): #model and partial_parses are imported and defined above.
-        mb_x = [self.preprocessor.extract_features(p.stack, p.buffer, p.dependencies,
-                                                   self.dataset[self.sentence_id_to_idx[id(p.sentence)]]) #get context features, pos, label in ID FORM for each sentence in partial_parses, since dev_set&#39;s word are expressed in id form, rather than character like in train_set, mb_x can be type of &#39;int32&#39;
-                for p in partial_parses] #partial parses are initialized in parse() method below 
-        mb_x = np.array(mb_x).astype(&#39;int32&#39;) #inputs_batch, which is from dev_set
-        mb_l = [self.preprocessor.legal_labels(p.stack, p.buffer) for p in partial_parses]
-        
-        pred = model.predict_on_batch(self.sess, mb_x)
-        pred = np.argmax(pred + 10000 * np.array(mb_l).astype(&#39;float32&#39;), 1)
-        pred = [&quot;S&quot; if p == 2 else (&quot;LA&quot; if p == 0 else &quot;RA&quot;) for p in pred]
-        return pred
-
-def parse(sess, model, preprocessor, dataset, eval_batch_size=5000): #here dataset is dev_set
-    sentences = []
-    sentence_id_to_idx = {}
-    for i, example in enumerate(dataset):
-        n_words = len(example[&#39;word&#39;]) - 1
-        sentence = [j + 1 for j in range(n_words)]
-        #sentence = [j for j in example[&#39;word&#39;]]
-        sentences.append(sentence)
-        sentence_id_to_idx[id(sentence)] = i
-    
-    MW = ModelWrapper(sess, preprocessor, dataset, sentence_id_to_idx)
-    #dependencies = minibatch_parse(sentences, model, eval_batch_size)
-    partial_parses = [PartialParse(s) for s in sentences]
-
-    unfinished_parse = partial_parses
-
-    while len(unfinished_parse) &gt; 0:
-        minibatch = unfinished_parse[0:eval_batch_size]
-        # perform transition and single step parser on the minibatch until it is empty
-        while len(minibatch) &gt; 0:
-            transitions =MW.predict(model, minibatch) #the model remembers the optimized variables for the sess, so it can predict on the minibatch from dev_set, get the predicted transitions, feature extractions are done within predict() method in ModelWrapper
-            for index, action in enumerate(transitions):
-                minibatch[index].parse_step(action) #update the stack and buff for each features (list of context word, pos and labels) in each sentence
-            minibatch = [parse for parse in minibatch if len(parse.stack) &gt; 1 or len(parse.buffer) &gt; 0]
-
-        # move to the next batch
-        unfinished_parse = unfinished_parse[eval_batch_size:]
-
-    dependencies = []
-    for n in range(len(sentences)):
-        dependencies.append(partial_parses[n].dependencies)
-    
-    # get the Unlabeled Accuracy Score (maybe)
-    UAS = all_tokens = 0.0 
-    for i, ex in enumerate(dataset):
-        head = [-1] * len(ex[&#39;word&#39;])
-        for h, t, in dependencies[i]:
-            head[t] = h
-        for pred_h, gold_h, gold_l, pos in zip(head[1:], ex[&#39;head&#39;][1:], ex[&#39;label&#39;][1:], ex[&#39;pos&#39;][1:]):
-            assert preprocessor.id2tok[pos].startswith(P_PREFIX)
-            pos_str = preprocessor.id2tok[pos][len(P_PREFIX):]
-            if (preprocessor.with_punct) or (not punct(preprocessor.language, pos_str)):
-                UAS += 1 if pred_h == gold_h else 0
-                all_tokens += 1
-    UAS /= all_tokens
-    return UAS, dependencies </code></pre>
-<p>Now, the deep neural network can be built in TensorFlow framework</p>
-<pre><code>import os
-import time
-import tensorflow as tf
-import pickle
-
-class Config(object):
-    &quot;&quot;&quot;Holds model hyperparams and data information.
-    The config class is used to store various hyperparameters and dataset
-    information parameters. Model objects are passed a Config() object at
-    instantiation.
-    &quot;&quot;&quot;
-    n_features = 36
-    n_classes = 3
-    dropout = 0.5
-    embed_size = 50
-    hidden_size = 200
-    batch_size = 2048
-    n_epochs = 10
-    lr = 0.001
-    language = &#39;english&#39;
-    with_punct = True
-    unlabeled = True
-    lowercase = True
-    use_pos = True
-    use_dep = True
-    use_dep = use_dep and (not unlabeled)
-    data_path = &#39;./data&#39;
-    train_file = &#39;train.conll&#39;
-    dev_file = &#39;dev.conll&#39;
-    test_file = &#39;test.conll&#39;
-    embedding_file = &#39;./data/en-cw.txt&#39;
-    
-class ParserModel(Model):
-    &quot;&quot;&quot;
-    Implements a feedforward neural network with an embedding layer and single hidden layer.
-    This network will predict which transition should be applied to a given partial parse
-    configuration.
-    &quot;&quot;&quot;
-
-    def add_placeholders(self):
- 
-        ### YOUR CODE HERE
-        self.input_placeholder = tf.placeholder(tf.int32, [None, self.config.n_features])
-        self.labels_placeholder = tf.placeholder(tf.float32, [None, self.config.n_classes])
-        self.dropout_placeholder = tf.placeholder(tf.float32)
-        self.beta_regul = tf.placeholder(tf.float32)
-        ### END YOUR CODE
-
-    def create_feed_dict(self, inputs_batch, labels_batch=None, dropout=1, beta_regul=10e-7):
-  
-        ### YOUR CODE HERE
-        feed_dict = {self.input_placeholder: inputs_batch, \
-                     self.dropout_placeholder: dropout, \
-                     self.beta_regul: beta_regul
-                     }
-        if labels_batch is not None:
-            feed_dict[self.labels_placeholder] = labels_batch
-        ### END YOUR CODE
-        return feed_dict
-
-    def add_embedding(self):
-
-        ### YOUR CODE HERE
-        embedded = tf.Variable(self.pretrained_embeddings)
-        embeddings = tf.nn.embedding_lookup(embedded,self.input_placeholder)
-        embeddings = tf.reshape(embeddings, [-1, self.config.n_features * self.config.embed_size])
-        ### END YOUR CODE
-        return embeddings
-
-    def add_prediction_op(self):
-
-        x = self.add_embedding()
-        ### YOUR CODE HERE
-        xavier = xavier_weight_init()
-        with tf.variable_scope(&quot;transformation&quot;):
-            b1 = tf.Variable(tf.random_uniform([self.config.hidden_size,]))
-            b2 = tf.Variable(tf.random_uniform([self.config.n_classes]))
-
-            self.W = W = xavier([self.config.n_features * self.config.embed_size, self.config.hidden_size])
-            U = xavier([self.config.hidden_size, self.config.n_classes])
-
-            z1 = tf.matmul(x,W) + b1
-            h = tf.nn.relu(z1)
-            h_drop = tf.nn.dropout(h,self.dropout_placeholder)
-            pred = tf.matmul(h_drop, U) + b2
-        ### END YOUR CODE
-        return pred
-
-    def add_loss_op(self, pred):
- 
-        ### YOUR CODE HERE
-        loss = tf.nn.softmax_cross_entropy_with_logits_v2(logits=pred, labels=self.labels_placeholder)
-        loss += self.beta_regul * tf.nn.l2_loss(self.W)
-        loss = tf.reduce_mean(loss)
-        ### END YOUR CODE
-        return loss
-
-    def add_training_op(self, loss):
-
-        ### YOUR CODE HERE
-        adam_optim = tf.train.AdamOptimizer(self.config.lr)
-        train_op = adam_optim.minimize(loss)
-        ### END YOUR CODE
-        return train_op
-
-    def train_on_batch(self, sess, inputs_batch, labels_batch):
-        feed = self.create_feed_dict(inputs_batch, labels_batch=labels_batch,
-                                     dropout=self.config.dropout)
-        _, loss = sess.run([self.train_op, self.loss], feed_dict=feed)
-        return loss
-
-    def run_epoch(self, sess, model, preprocessor,train_examples, dev_set):
-        prog = tf.keras.utils.Progbar(target=1 + len(train_examples) / self.config.batch_size)
-        for i, (train_x, train_y) in enumerate(minibatches(train_examples, self.config.batch_size)):
-            loss = self.train_on_batch(sess, train_x, train_y)
-            prog.update(i + 1, [(&quot;train loss&quot;, loss)])
-
-        print(&quot;Evaluating on dev set&quot;),
-        dev_UAS, _ = parse(sess, model, preprocessor, dev_set)
-        print(&quot;- dev UAS: {:.2f}&quot;.format(dev_UAS * 100.0))
-        return dev_UAS
-
-    def fit(self, sess, model, saver, preprocessor,train_examples, dev_set):
-        best_dev_UAS = 0
-        for epoch in range(self.config.n_epochs):
-            print(&quot;Epoch {:} out of {:}&quot;.format(epoch + 1, self.config.n_epochs))
-            dev_UAS = self.run_epoch(sess, model, preprocessor,train_examples, dev_set)
-            if dev_UAS &gt; best_dev_UAS:
-                best_dev_UAS = dev_UAS
-                if saver:
-                    print(&quot;New best dev UAS! Saving model in ./data/weights/parser.weights&quot;)
-                    saver.save(sess, &#39;./data/weights/parser.weights&#39;)
-            print
-
-    def __init__(self, config, pretrained_embeddings):
-        self.pretrained_embeddings = pretrained_embeddings
-        self.config = config
-        self.build()</code></pre>
-<p>Before combining everything together, define the follow methods. minibatches() are used to extract the input batch and lable batch for the feeder in tensorflow; xavier_weight_init() used to randomly generate W and U matrices in the prediction functions.</p>
-<pre><code>from utils.general_utils import get_minibatches
-
-def minibatches(data, batch_size):
-    x = np.array([d[0] for d in data])
-    y = np.array([d[2] for d in data])
-    one_hot = np.zeros((y.size, 3))
-    one_hot[np.arange(y.size), y] = 1
-    return get_minibatches([x, one_hot], batch_size)
-
-def xavier_weight_init():
-    &quot;&quot;&quot;Returns function that creates random tensor.
-    The specified function will take in a shape (tuple or 1-d array) and
-    returns a random tensor of the specified shape drawn from the
-    Xavier initialization distribution.
-    Hint: You might find tf.random_uniform useful.
-    &quot;&quot;&quot;
-    def _xavier_initializer(shape, **kwargs):
-        &quot;&quot;&quot;Defines an initializer for the Xavier distribution.
-        Specifically, the output should be sampled uniformly from [-epsilon, epsilon] where
-            epsilon = sqrt(6) / &lt;sum of the sizes of shape&#39;s dimensions&gt;
-        e.g., if shape = (2, 3), epsilon = sqrt(6 / (2 + 3))
-        This function will be used as a variable initializer.
-        Args:
-            shape: Tuple or 1-d array that species the dimensions of the requested tensor.
-        Returns:
-            out: tf.Tensor of specified shape sampled from the Xavier distribution.
-        &quot;&quot;&quot;
-        ### YOUR CODE HERE
-        epsilon = np.sqrt(6 / np.sum(shape))
-        out = tf.Variable(tf.random_uniform(shape=shape, minval=-epsilon, maxval=epsilon))
-        ### END YOUR CODE
-        return out
-    # Returns defined initializer function.
-    return _xavier_initializer</code></pre>
-<p>Combining everything to the main() function:</p>
-<pre><code>def main(debug=True):
-    print(80 * &quot;=&quot;)
-    print(&quot;INITIALIZING&quot;)
-    print(80 * &quot;=&quot;)
-    config = Config()
-    preprocessor, embeddings, train_examples, dev_set, test_set = load_and_preprocess_data(debug)
-    if not os.path.exists(&#39;./data/weights/&#39;):
-        os.makedirs(&#39;./data/weights/&#39;)
-
-    with tf.Graph().as_default():
-        print(&quot;Building model...&quot;),
-        start = time.time()
-        model = ParserModel(config, embeddings)
-        #parser.model = model
-        print(&quot;took {:.2f} seconds\n&quot;.format(time.time() - start))
-
-        init = tf.global_variables_initializer()
-        # If you are using an old version of TensorFlow, you may have to use
-        # this initializer instead.
-        # init = tf.initialize_all_variables()
-        saver = None if debug else tf.train.Saver()
-
-        with tf.Session() as sess:
-            #parser.session = sess
-            sess.run(init)
-
-            print(80 * &quot;=&quot;)
-            print(&quot;TRAINING&quot;)
-            print(80 * &quot;=&quot;)
-            model.fit(sess, model, saver, preprocessor,train_examples, dev_set) #train_examples provide the input_batch and label batch by minibatches() method defined above 
-
-            if not debug:
-                print(80 * &quot;=&quot;)
-                print(&quot;TESTING&quot;)
-                print(80 * &quot;=&quot;)
-                print(&quot;Restoring the best model weights found on the dev set&quot;)
-                saver.restore(sess, &#39;./data/weights/parser.weights&#39;)
-                print(&quot;Final evaluation on test set&quot;,)
-                UAS, dependencies = parse(sess, model, preprocessor, test_set)
-                print(&quot;- test UAS: {:.2f}&quot;.format(UAS * 100.0))
-                print(&quot;Writing predictions&quot;)
-                with open(&#39;q2_test.predicted.pkl&#39;, &#39;wb&#39;) as f:
-                    pickle.dump(dependencies, f, -1)
-                print(&quot;Done!&quot;)</code></pre>
-<p>Finally, run the main function with debug mode:</p>
-<pre><code>main(True)</code></pre>
-<p>The results under debug mode. After 10 epoch of training, UAS is 68.56.</p>
-<pre><code>================================================================================
-INITIALIZING
-================================================================================
-Loading data...
-took 11.97 seconds
-Building parser...
-took 0.09 seconds
-Loading pretrained embeddings...
-took 6.36 seconds
-Vectorizing data...
-took 0.17 seconds
-Preprocessing training data...
-took 3.79 seconds
-Building model...
-took 0.52 seconds
-
-================================================================================
-TRAINING
-================================================================================
-Epoch 1 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 1.0069Evaluating on dev set
-- dev UAS: 45.86
-Epoch 2 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.4400Evaluating on dev set
-- dev UAS: 53.38
-Epoch 3 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.3473Evaluating on dev set
-- dev UAS: 58.92
-Epoch 4 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.3010Evaluating on dev set
-- dev UAS: 61.86
-Epoch 5 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.2675Evaluating on dev set
-- dev UAS: 62.74
-Epoch 6 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.2419Evaluating on dev set
-- dev UAS: 64.17
-Epoch 7 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.2214Evaluating on dev set
-- dev UAS: 65.05
-Epoch 8 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.2016Evaluating on dev set
-- dev UAS: 67.05
-Epoch 9 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.1881Evaluating on dev set
-- dev UAS: 67.45
-Epoch 10 out of 10
-24/24 [============================&gt;.] - ETA: 0s - train loss: 0.1733Evaluating on dev set
-- dev UAS: 68.56</code></pre>
-<p>Training on the full data, the final UAS is 88.91.</p>
-<pre><code>================================================================================
-INITIALIZING
-================================================================================
-Loading data...
-took 5.62 seconds
-Building parser...
-took 4.05 seconds
-Loading pretrained embeddings...
-took 6.82 seconds
-Vectorizing data...
-took 4.56 seconds
-Preprocessing training data...
-took 144.24 seconds
-Building model...
-took 0.65 seconds
-
-================================================================================
-TRAINING
-================================================================================
-Epoch 1 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.2253Evaluating on dev set
-- dev UAS: 82.99
-New best dev UAS! Saving model in ./data/weights/parser.weights
-Epoch 2 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.1231Evaluating on dev set
-- dev UAS: 85.37
-New best dev UAS! Saving model in ./data/weights/parser.weights
-Epoch 3 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.1069Evaluating on dev set
-- dev UAS: 86.63
-New best dev UAS! Saving model in ./data/weights/parser.weights
-Epoch 4 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.0969Evaluating on dev set
-- dev UAS: 87.34
-New best dev UAS! Saving model in ./data/weights/parser.weights
-Epoch 5 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.0902Evaluating on dev set
-- dev UAS: 87.09
-Epoch 6 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.0839Evaluating on dev set
-- dev UAS: 87.84
-New best dev UAS! Saving model in ./data/weights/parser.weights
-Epoch 7 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.0792Evaluating on dev set
-- dev UAS: 88.21
-New best dev UAS! Saving model in ./data/weights/parser.weights
-Epoch 8 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.0747Evaluating on dev set
-- dev UAS: 88.08
-Epoch 9 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.0711Evaluating on dev set
-- dev UAS: 88.26
-New best dev UAS! Saving model in ./data/weights/parser.weights
-Epoch 10 out of 10
-928/928 [============================&gt;.] - ETA: 0s - train loss: 0.0675Evaluating on dev set
-- dev UAS: 88.52
-New best dev UAS! Saving model in ./data/weights/parser.weights
-================================================================================
-TESTING
-================================================================================
-Restoring the best model weights found on the dev set
-INFO:tensorflow:Restoring parameters from ./data/weights/parser.weights
-Final evaluation on test set
-- test UAS: 88.91
-Writing predictions
-Done!</code></pre>
-<p>The final dependencies for each transition is in id form and will look like this:</p>
-<pre><code>[(7, 6), (7, 5), (7, 4), (7, 3), (7, 2), (7, 1), (7, 8), (0, 7)], [],...]</code></pre>
-
-  
-<footer>
-  <ul class="Tags">
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/nlp/" rel="tag">NLP</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/deep-learning/" rel="tag">Deep Learning</a>
-    </li>
-    
-    
-    
-    
-    <li class="Tags-item u-background">
-      <a class="Tags-link u-clickable" href="/tags/tensorflow/" rel="tag">TensorFlow</a>
-    </li>
-    
-    
-  </ul>
-</footer>
-
-</article>
-
-
-
 
       </div>
-    </div>
-  </main>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
   
-<footer class="Footer">
-  <div class="u-wrapper">
-    <div class="u-padding">
-      © 2019 Luyao Peng
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">olOwOlo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
     </div>
   </div>
-</footer>
-
-
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "pengluyaoyao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
   
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
 </body>
 </html>
