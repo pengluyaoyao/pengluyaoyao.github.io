@@ -12,16 +12,6 @@
     
     
     <item>
-      <title>Research: Dissertation</title>
-      <link>/post/dissertation/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/dissertation/</guid>
-      <description>Abstract
-The closed form expressions of all unbiased estimators of variance components in linear mixed effects models are presented. The method of moment (MOM) estimators are chosen as benchmarks for finding the unbiased estimators having smaller estimated variances than the corresponding MOM estimators. Examples are presented from small area estimation.</description>
-    </item>
-    
-    <item>
       <title>Research: Using linear mixed-effects model to detect fraudulent erasures at an aggregate level</title>
       <link>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>

@@ -1,21 +1,19 @@
 ---
-title: 'Project: NLP with Deep Learning-dependancy parser'
-author: ''
-date: '2019-03-04'
-slug: automated-essay-scoring2
-categories:
-  - NLP
-  - Python
-tags:
-  - NLP
-  - Deep Learning
-  - TensorFlow
+title: "Syntax Highlighting"
+date: 2011-08-30T16:01:23+08:00
+lastmod: 2018-11-05T16:01:23+08:00
+draft: false
+tags: ["preview", "Syntax Highlighting", "tag-5"]
+categories: ["Syntax Highlighting"]
+
+toc: false
+
 ---
 
 This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The [orignal code](https://github.com/hankcs/CS224n/tree/master/assignment2) contributed by [hankcs](https://github.com/hankcs) is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has 'word', 'POS', 'head' and 'label', where the 'head' is the correct dependency relation. 
 
 First, import necessary modules and set up the configurations for the parser:
-```
+```python
 import time
 import os
 import logging

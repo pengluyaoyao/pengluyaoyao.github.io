@@ -22,14 +22,5 @@ Link to the MMeM github
 (The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results.</description>
     </item>
     
-    <item>
-      <title>Project: NLP with Deep Learning-dependancy parser</title>
-      <link>/post/automated-essay-scoring2/</link>
-      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/automated-essay-scoring2/</guid>
-      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has ‘word</description>
-    </item>
-    
   </channel>
 </rss>

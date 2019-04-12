@@ -61,16 +61,6 @@ devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  E
     </item>
     
     <item>
-      <title>Research: Dissertation</title>
-      <link>/post/dissertation/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/dissertation/</guid>
-      <description>Abstract
-The closed form expressions of all unbiased estimators of variance components in linear mixed effects models are presented. The method of moment (MOM) estimators are chosen as benchmarks for finding the unbiased estimators having smaller estimated variances than the corresponding MOM estimators. Examples are presented from small area estimation.</description>
-    </item>
-    
-    <item>
       <title>Research: Using linear mixed-effects model to detect fraudulent erasures at an aggregate level</title>
       <link>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
@@ -111,15 +101,6 @@ It is available on CRAN and my github page:
 Link to the MMeM github
 Link to the MMeM CRAN
 The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
-    </item>
-    
-    <item>
-      <title>Project: NLP with Deep Learning-dependancy parser</title>
-      <link>/post/automated-essay-scoring2/</link>
-      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/automated-essay-scoring2/</guid>
-      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has ‘word</description>
     </item>
     
     <item>
@@ -293,12 +274,21 @@ Andrew-&amp;gt;&amp;gt;China: I am good thanks!&lt;/code&gt;&lt;/pre&gt;&lt;/td&
     </item>
     
     <item>
-      <title>Syntax Highlighting</title>
-      <link>/post/syntax-highlighting/</link>
+      <title>Dependency Parsing Using Deep Learning NN Model</title>
+      <link>/post/dependency-parsing/</link>
       <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
       
-      <guid>/post/syntax-highlighting/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33  import time import os import logging from collections import Counter import numpy as np P_PREFIX = &amp;#39;&amp;lt;p&amp;gt;:&amp;#39; L_PREFIX = &amp;#39;&amp;lt;l&amp;gt;:&amp;#39; UNK = &amp;#39;&amp;lt;UNK&amp;gt;&amp;#39; NULL = &amp;#39;&amp;lt;NULL&amp;gt;&amp;#39; ROOT = &amp;#39;&amp;lt;ROOT&amp;gt;&amp;#39; class Config(object): language = &amp;#39;english&amp;#39; with_punct = True unlabeled = True lowercase = True use_pos = True # use part of speech as input features use_dep = True #?</description>
+      <guid>/post/dependency-parsing/</guid>
+      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has &amp;lsquo;word&amp;rsquo;, &amp;lsquo;POS&amp;rsquo;, &amp;lsquo;head&amp;rsquo; and &amp;lsquo;label&amp;rsquo;,</description>
+    </item>
+    
+    <item>
+      <title>Syntax Highlighting</title>
+      <link>/post/2019-03-04-assignment2/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      
+      <guid>/post/2019-03-04-assignment2/</guid>
+      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has ‘word</description>
     </item>
     
   </channel>
