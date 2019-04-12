@@ -1,267 +1,38 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
-
-
-<?xml-stylesheet type="text/xsl" href="#stylesheet" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <xsl:stylesheet id="stylesheet" version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="xsl">
-    <xsl:output method="html" doctype-system="about:legacy-compat" />
-    <xsl:template match="/rss">
-      <html lang="en-us">
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Machine Learning RSS | Luyao Peng&#39;s Blog</title>
-          <style>body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-main {
-  flex-grow: 1;
-}
-
-img {
-  max-width: 100%;
-  border-radius: 0.2rem;
-}
-
-pre {
-  overflow-x: auto;
-  border: 0.1rem solid lightgray;
-  padding: 1rem;
-}
-
-code {
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
-}
-
-.Banner {
-  list-style: none;
-  display: flex;
-  flex-flow: row-reverse wrap-reverse;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-
-.Banner-item:nth-child(1) {
-  order: 5;
-}
-
-
-
-.Banner-item:nth-child(2) {
-  order: 4;
-}
-
-
-
-.Banner-item:nth-child(3) {
-  order: 3;
-}
-
-
-
-.Banner-item:nth-child(4) {
-  order: 2;
-}
-
-
-
-.Banner-item:nth-child(5) {
-  order: 1;
-}
-
-
-
-.Banner-item--title {
-  flex-grow: 1;
-}
-
-.Banner-link {
-  font-size: 1.25rem;
-  color: white;
-  padding: 0.5rem 1rem;
-}
-
-.Heading {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.Heading-title {
-  margin: 1.5rem 0.5rem 0 0;
-}
-
-.Heading-link {
-  color: inherit;
-}
-
-.Tags {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 1.5rem 0;
-  padding: 0;
-}
-
-.Tags-item {
-  border-radius: 0.2rem;
-  margin: 0.2rem;
-  padding: 0 0.3rem;
-}
-
-.Tags-link {
-  color: white;
-}
-
-.Pagination {
-  font-size: 1.25rem;
-  color: inherit;
-}
-
-.Pagination--right {
-  float: right;
-}
-
-.Footer {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-.u-wrapper {
-  max-width: 42rem;
-  margin: auto;
-}
-
-.u-padding {
-  padding: 0 1rem;
-}
-
-.u-background {
-  background: teal;
-}
-
-.u-clickable {
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-}</style>
-        </head>
-        <body>
-          <nav class="u-background">
-  <div class="u-wrapper">
-    <ul class="Banner">
-      <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/about/">About</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/post/">Posts</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/tags/">Tags</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/categories/">Categories</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/index.xml">RSS</a>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
-          <main>
-            <div class="u-wrapper">
-              <div class="u-padding">
-                <h2 class="Heading-title">
-                  
-                  <a class="Heading-link u-clickable" href="/tags/machine-learning/index.xml" rel="bookmark">Machine Learning RSS</a>
-                  
-                </h2>
-                
-                <p>
-                  To subscribe to this RSS feed, copy its address and paste it into your favorite feed reader.
-                </p>
-                
-              </div>
-            </div>
-          </main>
-          
-<footer class="Footer">
-  <div class="u-wrapper">
-    <div class="u-padding">
-      © 2019 Luyao Peng
-    </div>
-  </div>
-</footer>
-
-
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "pengluyaoyao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        </body>
-      </html>
-    </xsl:template>
-  </xsl:stylesheet>
   <channel>
     <title>Machine Learning on Luyao Peng&#39;s Blog</title>
     <link>/tags/machine-learning/</link>
     <description>Recent content in Machine Learning on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Machine Learning STAT209 Review</title>
+      <link>/post/stat209/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/stat209/</guid>
+      <description>1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) + \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} &amp;lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &amp;gt; \frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\\ 0, ow\end{cases}\)</description>
+    </item>
+    
     <item>
       <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
       <link>/post/kpca-for-one-class-classification/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/kpca-for-one-class-classification/</guid>
-      <description>
-
-
-&lt;p&gt;One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.&lt;/p&gt;
-&lt;p&gt;The challenge of one-class classification problem is that people only have the data for normal class to train and to decide whether a new observation is alike or not. In this project, we used Kernel Principal Component Analysis (KPCA) and Support Vector Machine (SVM) to detect cheating behavior in automated essay scoring and forensic analysis when only the data for normal essays are available.&lt;/p&gt;
-&lt;p&gt;In automated essay scoring, an abnormal essay can be gibberish, copying, writing in foreign language etc. We train the KPCA and SVM models using normal essay data for argumentative essays to identify whether a new essay is similar to normal essay or not, if a new essay is not similar to the normal essay in terms of KPCA score, we consider it as an abnormal essay.&lt;/p&gt;
-&lt;p&gt;Similarly, in erasure analysis, we extraced the features of the pattern of pencil bubbles for each student, which are the training data of normal bubbles, then we randomly sample the pencil bubbles from another student as the new observations and compare the features of the new pencil bubbles with that of the normal bubbles to see how many new pencil bubbles can be classified as abnormal bubbles using KPCA and SVM models.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca1.jpg&#34; /&gt; &lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca2.jpg&#34; /&gt; &lt;a href=&#34;https://kpca-outlier-detection.shinyapps.io/Shiny/&#34;&gt;Link to the KPCA app&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</description>
     </item>
+    
   </channel>
 </rss>

@@ -1,278 +1,35 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
-
-
-<?xml-stylesheet type="text/xsl" href="#stylesheet" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <xsl:stylesheet id="stylesheet" version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="xsl">
-    <xsl:output method="html" doctype-system="about:legacy-compat" />
-    <xsl:template match="/rss">
-      <html lang="en-us">
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Mixed Effects Model RSS | Luyao Peng&#39;s Blog</title>
-          <style>body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-main {
-  flex-grow: 1;
-}
-
-img {
-  max-width: 100%;
-  border-radius: 0.2rem;
-}
-
-pre {
-  overflow-x: auto;
-  border: 0.1rem solid lightgray;
-  padding: 1rem;
-}
-
-code {
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
-}
-
-.Banner {
-  list-style: none;
-  display: flex;
-  flex-flow: row-reverse wrap-reverse;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-
-.Banner-item:nth-child(1) {
-  order: 5;
-}
-
-
-
-.Banner-item:nth-child(2) {
-  order: 4;
-}
-
-
-
-.Banner-item:nth-child(3) {
-  order: 3;
-}
-
-
-
-.Banner-item:nth-child(4) {
-  order: 2;
-}
-
-
-
-.Banner-item:nth-child(5) {
-  order: 1;
-}
-
-
-
-.Banner-item--title {
-  flex-grow: 1;
-}
-
-.Banner-link {
-  font-size: 1.25rem;
-  color: white;
-  padding: 0.5rem 1rem;
-}
-
-.Heading {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.Heading-title {
-  margin: 1.5rem 0.5rem 0 0;
-}
-
-.Heading-link {
-  color: inherit;
-}
-
-.Tags {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 1.5rem 0;
-  padding: 0;
-}
-
-.Tags-item {
-  border-radius: 0.2rem;
-  margin: 0.2rem;
-  padding: 0 0.3rem;
-}
-
-.Tags-link {
-  color: white;
-}
-
-.Pagination {
-  font-size: 1.25rem;
-  color: inherit;
-}
-
-.Pagination--right {
-  float: right;
-}
-
-.Footer {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-.u-wrapper {
-  max-width: 42rem;
-  margin: auto;
-}
-
-.u-padding {
-  padding: 0 1rem;
-}
-
-.u-background {
-  background: teal;
-}
-
-.u-clickable {
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-}</style>
-        </head>
-        <body>
-          <nav class="u-background">
-  <div class="u-wrapper">
-    <ul class="Banner">
-      <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/about/">About</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/post/">Posts</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/tags/">Tags</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/categories/">Categories</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/index.xml">RSS</a>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
-          <main>
-            <div class="u-wrapper">
-              <div class="u-padding">
-                <h2 class="Heading-title">
-                  
-                  <a class="Heading-link u-clickable" href="/tags/mixed-effects-model/index.xml" rel="bookmark">Mixed Effects Model RSS</a>
-                  
-                </h2>
-                
-                <p>
-                  To subscribe to this RSS feed, copy its address and paste it into your favorite feed reader.
-                </p>
-                
-              </div>
-            </div>
-          </main>
-          
-<footer class="Footer">
-  <div class="u-wrapper">
-    <div class="u-padding">
-      © 2019 Luyao Peng
-    </div>
-  </div>
-</footer>
-
-
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "pengluyaoyao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        </body>
-      </html>
-    </xsl:template>
-  </xsl:stylesheet>
   <channel>
-    <title>Mixed Effects Model on Luyao Peng&#39;s Blog</title>
+    <title>Mixed-effects Model on Luyao Peng&#39;s Blog</title>
     <link>/tags/mixed-effects-model/</link>
-    <description>Recent content in Mixed Effects Model on Luyao Peng&#39;s Blog</description>
+    <description>Recent content in Mixed-effects Model on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/mixed-effects-model/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="/tags/mixed-effects-model/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Research: Dissertation</title>
       <link>/post/dissertation/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/dissertation/</guid>
-      <description>&lt;p&gt;Abstract&lt;/p&gt;
-
-&lt;p&gt;The closed form expressions of all unbiased estimators of variance components in
-linear mixed effects models are presented. The method of moment (MOM) estimators
-are chosen as benchmarks for finding the unbiased estimators having smaller estimated
-variances than the corresponding MOM estimators. Examples are presented from small
-area estimation.&lt;/p&gt;
-</description>
+      <description>Abstract
+The closed form expressions of all unbiased estimators of variance components in linear mixed effects models are presented. The method of moment (MOM) estimators are chosen as benchmarks for finding the unbiased estimators having smaller estimated variances than the corresponding MOM estimators. Examples are presented from small area estimation.</description>
     </item>
+    
     <item>
       <title>Research: Using linear mixed-effects model to detect fraudulent erasures at an aggregate level</title>
       <link>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</guid>
-      <description>
-
-
-&lt;p&gt;Abstract&lt;/p&gt;
-&lt;p&gt;Wollack and Eckerly (2017) extended the ‘erasure detection index’ (EDI) to detect fraudulent erasures at the group level. Sinharay (2018) suggested two modifications of the EDI at the group level. Those EDIs were not developed specifically for the fraudulent schools with small number of examinees with erasures. This paper suggested a new modification of the group-level EDI in Wollack and Eckerly (2017) by incorporating the ‘empirical best linear unbiased predictor’ (EBLUP) from the linear mixed-effects model. Simulation study shows that the suggested EDI has higher power than the indices of Wollack and Eckerly (2017) and Sinharay (2018), especially in schools with small number of examinees with erasures. It also has satisfactory Type I error rates. A real data example is also included.&lt;/p&gt;
-</description>
+      <description>Abstract
+Wollack and Eckerly (2017) extended the ‘erasure detection index’ (EDI) to detect fraudulent erasures at the group level. Sinharay (2018) suggested two modifications of the EDI at the group level. Those EDIs were not developed specifically for the fraudulent schools with small number of examinees with erasures. This paper suggested a new modification of the group-level EDI in Wollack and Eckerly (2017) by incorporating the ‘empirical best linear unbiased predictor’ (EBLUP) from the linear mixed-effects model.</description>
     </item>
+    
   </channel>
 </rss>

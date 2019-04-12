@@ -1,331 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-
-
-
-<?xml-stylesheet type="text/xsl" href="#stylesheet" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <xsl:stylesheet id="stylesheet" version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="xsl">
-    <xsl:output method="html" doctype-system="about:legacy-compat" />
-    <xsl:template match="/rss">
-      <html lang="en-us">
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>My Projects RSS | Luyao Peng&#39;s Blog</title>
-          <style>body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-main {
-  flex-grow: 1;
-}
-
-img {
-  max-width: 100%;
-  border-radius: 0.2rem;
-}
-
-pre {
-  overflow-x: auto;
-  border: 0.1rem solid lightgray;
-  padding: 1rem;
-}
-
-code {
-  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
-}
-
-.Banner {
-  list-style: none;
-  display: flex;
-  flex-flow: row-reverse wrap-reverse;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-
-.Banner-item:nth-child(1) {
-  order: 5;
-}
-
-
-
-.Banner-item:nth-child(2) {
-  order: 4;
-}
-
-
-
-.Banner-item:nth-child(3) {
-  order: 3;
-}
-
-
-
-.Banner-item:nth-child(4) {
-  order: 2;
-}
-
-
-
-.Banner-item:nth-child(5) {
-  order: 1;
-}
-
-
-
-.Banner-item--title {
-  flex-grow: 1;
-}
-
-.Banner-link {
-  font-size: 1.25rem;
-  color: white;
-  padding: 0.5rem 1rem;
-}
-
-.Heading {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.Heading-title {
-  margin: 1.5rem 0.5rem 0 0;
-}
-
-.Heading-link {
-  color: inherit;
-}
-
-.Tags {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 1.5rem 0;
-  padding: 0;
-}
-
-.Tags-item {
-  border-radius: 0.2rem;
-  margin: 0.2rem;
-  padding: 0 0.3rem;
-}
-
-.Tags-link {
-  color: white;
-}
-
-.Pagination {
-  font-size: 1.25rem;
-  color: inherit;
-}
-
-.Pagination--right {
-  float: right;
-}
-
-.Footer {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-.u-wrapper {
-  max-width: 42rem;
-  margin: auto;
-}
-
-.u-padding {
-  padding: 0 1rem;
-}
-
-.u-background {
-  background: teal;
-}
-
-.u-clickable {
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-}</style>
-        </head>
-        <body>
-          <nav class="u-background">
-  <div class="u-wrapper">
-    <ul class="Banner">
-      <li class="Banner-item Banner-item--title">
-        <a class="Banner-link u-clickable" href="/">Luyao Peng&#39;s Blog</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/about/">About</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/post/">Posts</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/tags/">Tags</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/categories/">Categories</a>
-      </li>
-      
-      <li class="Banner-item">
-        <a class="Banner-link u-clickable" href="/index.xml">RSS</a>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
-          <main>
-            <div class="u-wrapper">
-              <div class="u-padding">
-                <h2 class="Heading-title">
-                  
-                  <a class="Heading-link u-clickable" href="/categories/my-projects/index.xml" rel="bookmark">My Projects RSS</a>
-                  
-                </h2>
-                
-                <p>
-                  To subscribe to this RSS feed, copy its address and paste it into your favorite feed reader.
-                </p>
-                
-              </div>
-            </div>
-          </main>
-          
-<footer class="Footer">
-  <div class="u-wrapper">
-    <div class="u-padding">
-      © 2019 Luyao Peng
-    </div>
-  </div>
-</footer>
-
-
-<div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "pengluyaoyao" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        </body>
-      </html>
-    </xsl:template>
-  </xsl:stylesheet>
   <channel>
     <title>My Projects on Luyao Peng&#39;s Blog</title>
     <link>/categories/my-projects/</link>
     <description>Recent content in My Projects on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/categories/my-projects/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="/categories/my-projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
       <link>/post/kpca-for-one-class-classification/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/kpca-for-one-class-classification/</guid>
-      <description>
-
-
-&lt;p&gt;One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.&lt;/p&gt;
-&lt;p&gt;The challenge of one-class classification problem is that people only have the data for normal class to train and to decide whether a new observation is alike or not. In this project, we used Kernel Principal Component Analysis (KPCA) and Support Vector Machine (SVM) to detect cheating behavior in automated essay scoring and forensic analysis when only the data for normal essays are available.&lt;/p&gt;
-&lt;p&gt;In automated essay scoring, an abnormal essay can be gibberish, copying, writing in foreign language etc. We train the KPCA and SVM models using normal essay data for argumentative essays to identify whether a new essay is similar to normal essay or not, if a new essay is not similar to the normal essay in terms of KPCA score, we consider it as an abnormal essay.&lt;/p&gt;
-&lt;p&gt;Similarly, in erasure analysis, we extraced the features of the pattern of pencil bubbles for each student, which are the training data of normal bubbles, then we randomly sample the pencil bubbles from another student as the new observations and compare the features of the new pencil bubbles with that of the normal bubbles to see how many new pencil bubbles can be classified as abnormal bubbles using KPCA and SVM models.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca1.jpg&#34; /&gt; &lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/kpca2.jpg&#34; /&gt; &lt;a href=&#34;https://kpca-outlier-detection.shinyapps.io/Shiny/&#34;&gt;Link to the KPCA app&lt;/a&gt;&lt;/p&gt;
-</description>
+      <description>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</description>
     </item>
+    
     <item>
       <title>Project: NLP in Automated Essay Scoring</title>
       <link>/post/nlp-in-automated-essay-scoring/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/nlp-in-automated-essay-scoring/</guid>
-      <description>
-
-
-&lt;p&gt;In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://easygrader.herokuapp.com/&#34;&gt;Link to the MMeM github&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results. This is what I need to improve to add some ‘backend worker’ in Python to avoid the situation)&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;About this project&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Essay are crucial testing tools for assessing academic achievement, integration of ideas and ability, but are expensive and time consuming to grade manually. Automated Essay Scoring (AES) saves the efforts of human graders and hence significantly reduces costs and time.&lt;/p&gt;
-&lt;p&gt;The essay data are from Kaggle.com, by the William and Flora Hewlett Foundation, containing 8 essay categories. For each essay, there are two human graders to grade the essay. The goal is to train the models to grade the essays as close as to the human graders.&lt;/p&gt;
-&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Features&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;This is traditional NLP method, so input features were extraced manually, they are: + Bag of Words (BOW) + Number of words + Number of sentences + Variation of sentences + Average word length + Number of lemms + Number of spelling errors + Number of nouns, adjectives, verbs and adverbs&lt;/p&gt;
-&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Model and results&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Four regression models are compared: + random forest + ridge regression + lasson regression + gradient boosting regressor Gradient boosting regressor performed better in terms of Variance Explained metric, so gradi- ent boosting was used to make prediction on the validate essay set for set1 and set 5, respectively.&lt;/p&gt;
-&lt;p&gt;After applying the early stopping, the results of gradient boosting regressor of the 3-fold cross validation results for essay set1 and essay set5 are (the &lt;span class=&#34;math inline&#34;&gt;\(R^2\)&lt;/span&gt; for other categories are 0.5-0.6, which is relatively low):&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/results_AES_TDI.jpg&#34; /&gt;
-
-&lt;/div&gt;
-&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Problems&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;The model has overfitting problem, need to tune the parameters further; change the website waiting mode when requesting.&lt;/p&gt;
-</description>
+      <description>In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.
+Link to the MMeM github
+(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results.</description>
     </item>
+    
     <item>
       <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
       <link>/post/multivariate-mixed-effects-model-r-package/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
       <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
-      <description>
-
-
-&lt;p&gt;This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) &lt;a href=&#34;doi:10.2307/2530651&#34; class=&#34;uri&#34;&gt;doi:10.2307/2530651&lt;/a&gt; and Wesolowska Janczarek (1984) &lt;a href=&#34;doi:10.1002/bimj.4710260613&#34; class=&#34;uri&#34;&gt;doi:10.1002/bimj.4710260613&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;It is available on CRAN and my github page:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/pengluyaoyao/MMeM&#34;&gt;Link to the MMeM github&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://cran.r-project.org/web/packages/MMeM/index.html&#34;&gt;Link to the MMeM CRAN&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = (\mathbf{I} \otimes \mathbf{X})\mathbf{b} + (\mathbf{I} \otimes \mathbf{Z} )\mathbf{u} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;with&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \left\{\mathbf{y}_i\right\}_c, \mathbf{b} = \left\{\mathbf{b}_i\right\}_c, \mathbf{u} = \left\{\mathbf{u}_i\right\}_c, \mathbf{e} = \left\{\mathbf{e}_i\right\}_c, i =1, \dots, q\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n&lt;em&gt;q by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; is n by p design matrix for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p&lt;/em&gt;q by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; is n by s design matrix for the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s&lt;em&gt;q by 1 vector of the random effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n&lt;/em&gt;q by 1 vector of random errors.&lt;/p&gt;
-&lt;p&gt;It is assumed that&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(cov(\mathbf{u}_i, \mathbf{u}_j&amp;#39;) = \mathbf{G}_{ij}, cov(\mathbf{e}_i, \mathbf{e}_j&amp;#39;) = \mathbf{R}_{ij}, cov(\mathbf{u}_i, \mathbf{e}_j&amp;#39;) = \mathbf{0}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;or&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(var(\mathbf{u}) = \mathbf{G} = \mathbf{T}\otimes \mathbf{I}_s, var(\mathbf{e}) = \mathbf{R} = \mathbf{E} \otimes \mathbf{I}_n, var(\mathbf{y}) = \mathbf{V} = \mathbf{T}\otimes \mathbf{ZZ}&amp;#39; + \mathbf{E} \otimes \mathbf{I}_n\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;The goal is to estimate the variance-covariance matrix of random effects &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt; response variates, i.e. &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{E}\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;The model also supports the variance component estimations using univariate mixed-effects model regression, which is equivalent to R package lme4:&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;where &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{y}\)&lt;/span&gt; is n by 1 response vector; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Z}\)&lt;/span&gt; are n by p and n by s known design matrix; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{b}\)&lt;/span&gt; is p by 1 coefficients vector for the fixed effects; &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u}\)&lt;/span&gt; is s by 1 matrix for the random effects, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{e}\)&lt;/span&gt; is n by 1 vector of random errors. }&lt;/p&gt;
-&lt;p&gt;The goal is to estimate &lt;span class=&#34;math inline&#34;&gt;\(\sigma_u^2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\sigma_e^2\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{u} \sim N(\mathbf{0}, \sigma_u^2\mathbf{I}), \mathbf{e} \sim N(\mathbf{0}, \sigma_e^2\mathbf{I})\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Currently this package supports multivariate mixed effects model with two response variables, one fixed effects and one random effects, the package only estimates the variance covariance components under multivariate mixed effects model, it doesn’t provide the estimation and hypothesis testing for the fixed effects parameters, which will be incorporated in the future. Users can compute the estimated fixed effects parameters by using the generalized least square formula for the fixed effect parameters after estimating the variance covariance components using this package.&lt;/p&gt;
-</description>
+      <description>This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) doi:10.2307/2530651 and Wesolowska Janczarek (1984) doi:10.1002/bimj.4710260613.
+It is available on CRAN and my github page:
+Link to the MMeM github
+Link to the MMeM CRAN
+The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
     </item>
+    
   </channel>
 </rss>

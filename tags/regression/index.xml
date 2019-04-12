@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>regression on Even - A super concise theme for Hugo</title>
+    <title>regression on Luyao Peng&#39;s Blog</title>
     <link>/tags/regression/</link>
-    <description>Recent content in regression on Even - A super concise theme for Hugo</description>
+    <description>Recent content in regression on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 10 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R Package “regrrr”: Compiling and Visualizing Regression Results</title>
+      <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</guid>
+      <description>This is an R package “regrrr” on Cran I coauthored with Rui Yang.
+In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.
+Here is the quickstart guide.
+ 
+Installation To install from CRAN:
+install.packages(&amp;quot;regrrr&amp;quot;) library(regrrr) You can also use devtools to install the latest development version:
+devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  Examples compile the correlation table library(regrrr) ## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.</description>
+    </item>
     
     <item>
       <title>Hello R Markdown</title>

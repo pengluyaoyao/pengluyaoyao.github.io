@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Even - A super concise theme for Hugo</title>
+    <title>Categories on Luyao Peng&#39;s Blog</title>
     <link>/categories/</link>
-    <description>Recent content in Categories on Even - A super concise theme for Hugo</description>
+    <description>Recent content in Categories on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
@@ -11,11 +11,56 @@
     
     
     <item>
+      <title>Course</title>
+      <link>/categories/course/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/course/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>English</title>
       <link>/categories/english/</link>
       <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
       
       <guid>/categories/english/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My Projects</title>
+      <link>/categories/my-projects/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/my-projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My Research</title>
+      <link>/categories/my-research/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/my-research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NLP</title>
+      <link>/categories/nlp/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/nlp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/categories/python/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/python/</guid>
       <description></description>
     </item>
     
@@ -43,6 +88,15 @@
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
       
       <guid>/categories/theme-preview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualization</title>
+      <link>/categories/visualization/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/visualization/</guid>
       <description></description>
     </item>
     

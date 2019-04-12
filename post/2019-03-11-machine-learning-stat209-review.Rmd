@@ -1,0 +1,73 @@
+---
+title: Machine Learning STAT209 Review
+author: ''
+date: '2019-03-11'
+slug: STAT209
+categories:
+  - Course
+tags:
+  - Machine Learning
+header-includes: \usepackage{amsmath} \usepackage{bm} 
+---
+
+# 1. Bayes Classification Rule
+
+## 1.1 Decision Rule
+
+Let $\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}$ be the classification rule for class 0 or 1. The expected cost is
+
+$R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) + \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)$
+
+To minimize $R(\delta)$, the decision rule is
+
+$\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} < \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} \\ 0, ow\end{cases}$
+
+equivalently, 
+
+$\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) > \frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\\ 0, ow\end{cases}$
+
+Notice
+
+
+- $\frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} = \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{f(\mathbf{x})}$ and $\frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} = \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{f(\mathbf{x})}$ are the posterior predictions on the probability of being class 0 and class 1, respectively, if the posterior of class 0 is less than that of class 1, classify that observation into class 1. 
+- in $\frac{Cost(1|0)}{C(1|0)+Cost(0|1)}$, if $Cost(0|1)$ is high, the fraction becomes small, more likely to be classified into class 1 to avoid high cost on misclassification from 1 to 0.
+
+In multivariate form, the Bayes decision rule has the following form:
+
+$p(c = 1|\mathbf{x} = x) > \frac{R}{R+1}, R = \frac{Cost(1|0)}{Cost(0|1)}$ iff 
+
+$\frac{f_1(\mathbf{x})}{f_0(\mathbf{x})} > \frac{\pi_0}{\pi_1}R \rightarrow log\left(\frac{f_1(\mathbf{x})}{f_0(\mathbf{x})}\right) > log\left(\frac{\pi_0}{\pi_1}R\right)$ 
+
+- With homogeneousmultivariate gausian density function: $\mathbf{x} |c=0 \sim MVN(\mathbf{\mu}_0, \Sigma), \mathbf{x} |c=1 \sim MVN(\mathbf{\mu}_1, \Sigma)$,  the decision boundary is
+
+$\delta(\mathbf{x}) = \begin{cases}1, (\mu_1-\mu_0)'\Sigma^{-1}\mathbf{x}> log(\frac{\pi_0}{\pi_1}R)+\frac{1}{2}(\mu_0+\mu_1)'\Sigma^{-1}(\mu_1-\mu_0)\\ 0, ow\end{cases}$
+
+- With heterogeneousmultivariate gausian density function: $\mathbf{x} |c=0 \sim MVN(\mathbf{\mu}_0, \Sigma_1), \mathbf{x} |c=1 \sim MVN(\mathbf{\mu}_1, \Sigma_2)$,  the decision boundary is
+
+$\delta(\mathbf{x}) = \begin{cases}1, -\frac{1}{2}\mathbf{x}'(\Sigma_1^{-1}-\Sigma_0^{-1})\mathbf{x} + (\mu_1'\Sigma_1^{-1}- \mu_0'\Sigma_0^{-1})\mathbf{x}+k > log\left(\frac{\pi_0}{\pi_1}R\right)\\ 0, ow\end{cases}$, where $k =  -\frac{1}{2}\mathbf{\mu}_1'(\Sigma_1^{-1})\mathbf{\mu}_1 + \frac{1}{2}\mathbf{\mu}_0'\Sigma_0^{-1})\mathbf{\mu}_0 +\frac{1}{2} log\left(\frac{\Sigma_0}{\Sigma_1}\right)$
+
+## 1.2 Overall Error Rate
+
+
+$p(\delta(\mathbf{x}) = 1| c=0) = p[(\mu_1-\mu_0)'\Sigma^{-1}\mathbf{x}> log(\frac{\pi_0}{\pi_1}R)+\frac{1}{2}(\mu_0+\mu_1)'\Sigma^{-1}(\mu_1-\mu_0)]$
+
+
+since
+
+$(\mu_1-\mu_0)'\Sigma^{-1}\mathbf{x} \sim MVN ((\mu_1-\mu_0)'\Sigma^{-1}\mu_0, (\mu_1-\mu_0)'\Sigma^{-1}(\mu_1-\mu_0))$,
+
+$p(\delta(\mathbf{x}) = 1| c=0) = p(z> \frac{log(\frac{\pi_0}{\pi_1})+0.5\Delta^2}{\Delta})$ by standardizing both sides;
+
+Similarly,
+
+$p(\delta(\mathbf{x}) = 0| c=1) = p(z< \frac{log(\frac{\pi_0}{\pi_1})+0.5\Delta^2}{\Delta})$,
+
+The overall error rate becomes
+
+$p(\delta(\mathbf{x}\neq c_{true})) = p(\delta(\mathbf{x}) = 1| c=0)p(c=0) + p(\delta(\mathbf{x}) = 0| c=1)p(c=1)$
+
+Using data, can use N-fold/ LOOAAT cross-validation to check error rate.
+
+# 2. LDA/ QDA
+
+
