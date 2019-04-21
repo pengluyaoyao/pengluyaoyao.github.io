@@ -130,7 +130,7 @@ MathJax.Hub.Config({
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/stat209/">Back Propogation in LSTM</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/basics-of-rnn-and-lstm/">Basics of RNN and LSTM</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-04-20 </span>
       <div class="post-category">
@@ -141,11 +141,12 @@ MathJax.Hub.Config({
   
   <div class="post-content">
     <div class="post-summary">
-      R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+      RNN The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_t)\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+\[ P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \]
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.
     </div>
     <div class="read-more">
-      <a href="/post/stat209/" class="read-more-link">Read more..</a>
+      <a href="/post/basics-of-rnn-and-lstm/" class="read-more-link">Read more..</a>
     </div>
   </div>
 </article>

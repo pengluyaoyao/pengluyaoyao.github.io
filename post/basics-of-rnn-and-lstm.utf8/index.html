@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Basics of RNN and LSTM - Luyao Peng&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Luyao Peng" /><meta name="description" content="RNN The language model computes the probability of a sequence of previous words, $P(word_1, word_2, \dots, word_t)$. The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+$$ P(word_1, word2, \dots, word{t}) = \prod_{i = 1}^{t} P(word_i|word1, \dots, word{i-1}). $$
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="/post/basics-of-rnn-and-lstm.utf8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Basics of RNN and LSTM" />
+<meta property="og:description" content="RNN The language model computes the probability of a sequence of previous words, $P(word_1, word_2, \dots, word_t)$. The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+$$ P(word_1, word2, \dots, word{t}) = \prod_{i = 1}^{t} P(word_i|word1, \dots, word{i-1}). $$
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/basics-of-rnn-and-lstm.utf8/" />
+<meta property="article:published_time" content="2019-04-20T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-04-20T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="Basics of RNN and LSTM">
+<meta itemprop="description" content="RNN The language model computes the probability of a sequence of previous words, $P(word_1, word_2, \dots, word_t)$. The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+$$ P(word_1, word2, \dots, word{t}) = \prod_{i = 1}^{t} P(word_i|word1, \dots, word{i-1}). $$
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.">
+
+
+<meta itemprop="datePublished" content="2019-04-20T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-04-20T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="797">
+
+
+
+<meta itemprop="keywords" content="Machine Learning," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Basics of RNN and LSTM"/>
+<meta name="twitter:description" content="RNN The language model computes the probability of a sequence of previous words, $P(word_1, word_2, \dots, word_t)$. The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+$$ P(word_1, word2, \dots, word{t}) = \prod_{i = 1}^{t} P(word_i|word1, \dots, word{i-1}). $$
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">LP&#39;s NLP Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">LP&#39;s NLP Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Basics of RNN and LSTM</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-04-20 </span>
+        <div class="post-category">
+            <a href="/categories/deep-learning/"> Deep Learning </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#rnn">RNN</a>
+<ul>
+<li><a href="#the-model">The Model</a></li>
+<li><a href="#the-loss-error-fucntion-of-rnn">The Loss (Error) Fucntion of RNN</a></li>
+<li><a href="#back-propagation-of-rnn">Back Propagation of RNN</a></li>
+<li><a href="#the-vanishing-gradient-problem">The Vanishing Gradient Problem</a></li>
+<li><a href="#lstm">LSTM</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="rnn">RNN</h1>
+
+<p>The language model computes the probability of a sequence of previous words, $P(word_1, word_2, \dots, word_t)$. The traditional language model is based on naive bayes model, the probability of a sequence of words is:</p>
+
+<p>$$ P(word_1, word<em>2, \dots, word</em>{t}) = \prod_{i = 1}^{t} P(word_i|word<em>1, \dots, word</em>{i-1}). $$</p>
+
+<p>The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word. One solution is to apply RNNs, which does not consider each input word independently, instead, RNNs can capture the information in previous sequence of words and evaluate their effects on the prediction on the current word (recurrent part).</p>
+
+<h2 id="the-model">The Model</h2>
+
+<figure>
+  <img src="/post/2019-04-20-RNN_files/figure-html/rnn.jpg" alt="RNN" width=58% height=60%/>
+  <figcaption>RNNs, source: Nature</figcaption>
+</figure>
+
+<p>Define</p>
+
+<p>$$\mathbf{x}_t \in \mathbb{R}^{d}, \mathbf{s}_t \in \mathbb{R}^{D_s}, \mathbf{W} \in \mathbb{R}^{D_s \times D_s}, \mathbf{U} \in \mathbb{R}^{D_s \times d}, \mathbf{V} \in \mathbb{R}^{Voc \times D_s}, \mathbf{\hat{y}} \in \mathbb{R}^{Voc},$$</p>
+
+<p>Converting the figure above into math expressions:
+$$
+\begin{array}{rcl}
+\mathbf{s}<em>t &amp;=&amp; f\left(\mathbf{W}\mathbf{s}</em>{t-1} + \mathbf{U}\mathbf{x}_{t}\right)<br />
+\mathbf{\hat{y}}_t &amp;=&amp; softmax\left(\mathbf{V}\mathbf{s<em>t}\right),  t = 1,2,\dots, T<br />
+\hat{p}(w</em>{t+1}&amp;=&amp; v_j|w_t, \dots,w<em>1) = \hat{y}</em>{t,j}, j = 1, 2, \dots, Voc
+\end{array}
+$$</p>
+
+<p>where</p>
+
+<ul>
+<li>$\mathbf{s}<em>t$ is the hidden state at the time $t$, it is a function ($f$ can be tanh, sigmoid, ReLU) of the previous hidden state $\mathbf{s}</em>{t-1}$ and word vector of the current input word $\mathbf{x}_t$</li>
+<li>$\hat{\mathbf{y}}_t$ is the predicted outcome (a vector of probabilities over all vocabulary) at time $t$</li>
+<li>$\hat{p}$ is the probability of the predicted word $w_{t+1}$ (at time $t+1$) is equal to the $j$th word in the vocabulary $v<em>j$ given a sequence of all previous input words, and $\hat{p}(w</em>{t+1}= v_j|w_t, \dots,w_1)$ is equal to the $j$th element in $\hat{\mathbf{y}}_t$.</li>
+</ul>
+
+<p>At each time point, the $\mathbf{s}<em>{t}$ is a function of $\mathbf{s}</em>{t-1}$ and $\mathbf{s}<em>{t-1}$ is also a function of $\mathbf{s}</em>{t-2}$ etc., so the effects of all the previous input words will be taken into account when predicting the word at $t+1$, this is the recurrent part in RNN.</p>
+
+<h2 id="the-loss-error-fucntion-of-rnn">The Loss (Error) Fucntion of RNN</h2>
+
+<p>The loss function at time $t$ for the RNN model above is</p>
+
+<p>$$E<em>{t}(\hat{y}</em>{t}, y<em>{t}) = -\sum</em>{j=1}^{Voc}y<em>{t,j}log(\hat{y}</em>{t,j}), j = 1, 2, \dots, Voc,$$</p>
+
+<p>$$E(\hat{y}, y)= -\frac{1}{T}\sum<em>{t=1}^{T}E</em>{t}(\theta),$$</p>
+
+<p>where $y_{t,j}$ is the correct word at time $t$ located at the $j$th element in $\hat{\mathbf{y}}<em>t$, the loss function $J$ tries to minimize the difference between $y</em>{t,j}$ and $\hat{y}_{t,j}$ over all word $j$ and time $t$.</p>
+
+<h2 id="back-propagation-of-rnn">Back Propagation of RNN</h2>
+
+<p>Our goal is to compute the gradient of $E(\hat{y}, y)$ wrt $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$. Notice $E(\hat{y}, y)$ is the sum of $E<em>{t}(\hat{y}</em>{t}, y_{t})$, each of which involves $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$, so we have</p>
+
+<p>$$\frac{\partial{E}}{\partial{\mathbf{W}}} = \sum<em>{t=1}^{T}\frac{\partial{E}</em>{t}}{\partial{\mathbf{\mathbf{W}}}}, \frac{\partial{E}}{\partial{\mathbf{U}}} = \sum<em>{t=1}^{T}\frac{\partial{E}</em>{t}}{\partial{\mathbf{\mathbf{U}}}}, \frac{\partial{E}}{\partial{\mathbf{V}}} = \sum<em>{t=1}^{T}\frac{\partial{E}</em>{t}}{\partial{\mathbf{\mathbf{V}}}}$$
+Define $\mathbf{z}_t = \mathbf{Vs}_t$,  $\mathbf{z}_t \in \mathbb{R}^{Voc}$, recall $\frac{\partial{E}_t}{\partial{\mathbf{z}_t}} = \hat{\mathbf{y}_t}-\mathbf{y}<em>t = \mathbf{\delta}</em>{1t}$, then</p>
+
+<p>$$\frac{\partial{E}<em>{t}}{\partial{\mathbf{\mathbf{V}}}} = \mathbf{\delta}</em>{1t} \mathbf{s}<em>t&rsquo;, \mathbf{\delta}</em>{1t} \in \mathbb{R}^{Voc}, \mathbf{s}_t \in \mathbb{R}^{Ds}, \mathbf{V} \in \mathbb{R}^{Voc\times D_s}$$, the gradient wrt $\mathbf{V}$ at time $t$ is only dependent on the values at the current time point, $\hat{\mathbf{y}}_t, \mathbf{y}_t, \mathbf{s}_t$.</p>
+
+<p>Assuming the $f$ function is tanh function,
+$$\begin{array}{rcl}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}} &amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{h}_t}}\frac{\partial{\mathbf{h}}_t}{\partial{\mathbf{W}}}<br />
+&amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} f&rsquo;(\mathbf{h}<em>t)\left[\mathbf{s}</em>{t-1}+\mathbf{W}\frac{\partial{\mathbf{h}_t}}{\partial{\mathbf{W}}}\right]<br />
+&amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}<em>t}} \left[f&rsquo;\mathbf{s}</em>{t-1}+f&rsquo;\mathbf{W} \frac{\partial{\mathbf{h}_t}}{\partial{\mathbf{W}}}\right]<br />
+&amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}_t}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}<em>t}{\partial{s}</em>{t-1}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}}\end{array},$$
+where $\mathbf{h}<em>t = \mathbf{W}\mathbf{s}</em>{t-1} +\mathbf{U}\mathbf{x}_t$.</p>
+
+<p>Since $\frac{\partial{s}<em>{t-1}}{\partial{\mathbf{W}}} =  \frac{\partial{\mathbf{s}</em>{t-1}}}{\partial{\mathbf{W}}} + \frac{\partial{s}<em>{t-1}}{\partial{s}</em>{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}}$, plug it into above equation, we have</p>
+
+<p>$$\begin{array}{rcl} \frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}} &amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}_t}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}<em>t}{\partial{s}</em>{t-1}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}<em>t}{\partial{s}</em>{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}} + \dots + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}<em>t}{\partial{s}</em>{1}}\frac{\partial{s}<em>{1}}{\partial{\mathbf{W}}}<br />
+&amp;=&amp; \sum</em>{k=1}^{t}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}<em>t}{\partial{s}</em>{k}}\frac{\partial{s}_{k}}{\partial{\mathbf{W}}}\end{array}, \mathbf{W} \in \mathbb{R}^{D_s\times D_s}$$.</p>
+
+<p>Similarly, the gradient of $E_t$ wrt $\mathbf{U}$ is</p>
+
+<p>$$
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} = \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{\mathbf{U}}} +  \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}<em>t}{\partial{\mathbf{s}</em>{t-1}}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{U}}} + \dots + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}<em>t}{\partial{\mathbf{s}</em>{1}}}\frac{\partial{s}_{1}}{\partial{\mathbf{U}}}??
+$$</p>
+
+<p>Notice that the gradient wrt $\mathbf{W}$ and $\mathbf{U}$ at time $t$ is dependent on both current and all previous values.</p>
+
+<h2 id="the-vanishing-gradient-problem">The Vanishing Gradient Problem</h2>
+
+<p>If we look deeper at the $\frac{\partial{s}<em>t}{\partial{s}</em>{k}}$ part in $\frac{\partial{E}<em>{t}}{\partial{\mathbf{\mathbf{W}}}}  = \sum</em>{k=1}^{t}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}<em>t}{\partial{s}</em>{k}}\frac{\partial{s}_{k}}{\partial{\mathbf{W}}}$, $\frac{\partial{\mathbf{s}}<em>t}{\partial{\mathbf{s}}</em>{k}} = \frac{\partial{\mathbf{s}}<em>t}{\partial{\mathbf{s}}</em>{t-1}}\frac{\partial{\mathbf{s}}<em>{t-1}}{\partial{\mathbf{s}}</em>{t-2}}\dots\frac{\partial{\mathbf{s}}<em>{t-k+1}}{\partial{\mathbf{s}}</em>{t-k}}$, each partial derivative is a $D_s \times D_s$ Jacobian matrix, for example,</p>
+
+<p>$$\frac{\partial{\mathbf{s}}<em>t}{\partial{\mathbf{s}}</em>{t-1}} = \begin{bmatrix}\frac{\partial{s}_{t<em>1}}{\partial{s}</em>{t-1<em>1}} &amp; \dots &amp; \frac{\partial{s}</em>{t_{D<em>s}}}{\partial{s}</em>{t-1<em>1}} \ \vdots &amp; \ddots &amp; \vdots\ \frac{\partial{s}</em>{t<em>1}}{\partial{s}</em>{t-1_{D<em>s}}} &amp; \dots &amp; \frac{\partial{s}</em>{t_{D<em>s}}}{\partial{s}</em>{t-1_{D_s}}}\end{bmatrix}$$
+if the function $f$ is a sigmoid or tanh function, the gradient at the end sides are almost 0, so the elements in $\frac{\partial{\mathbf{s}}<em>t}{\partial{\mathbf{s}}</em>{t-1}}$ will become small (saturated neurons) if the corresponding values in the input word vector have either high or low values, also the gradient matrix will multiply with each other $k$ times, the gradient contribution of the saturated neurons becomes smaller and smaller and eventually vanishes. On the other hand, if the function $f$ is ReLU function and the gradient is greater than 1 if the input values of the word vector are positive, then the contribution of the gradient will be explode after k times multiplications. Clipping tricks work for exploding problems, but not vanishing problems, because we are artificially inflating the influence of an input word &lsquo;far away&rsquo; from time $t$ to prevent it from vanishing, which is not realistic (&lsquo;far away&rsquo; word hardly has influence in predicting the current word).</p>
+
+<h2 id="lstm">LSTM</h2>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Luyao Peng</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-04-20
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/machine-learning/">Machine Learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/basics-of-rnn-and-lstm.knit/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Basics of RNN and LSTM</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/stat209/">
+            <span class="next-text nav-default">Machine Learning STAT209 Review</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <div id="disqus_thread"></div>
+  <script>
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://luyao-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+  
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Luyao Peng</span>
+  </span>
+</div>
+
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script><script>window.flowchartDiagramsOptions = { 'x': 0, 'y': 0, 'line-width': 3, 'line-length': 50, 'text-margin': 10, 'font-size': 14, 'font-color': 'black', 'line-color': 'black', 'element-color': 'black', 'fill': 'white', 'yes-text': 'yes', 'no-text': 'no', 'arrow-end': 'block', 'scale': 1, 'i-am-a-comment-1': 'Do not use //!', 'i-am-a-comment-2': 'style symbol types', 'symbols': { 'start': { 'font-color': 'red', 'element-color': 'green', 'fill': 'yellow' }, 'end': { 'class': 'end-element' } }, 'i-am-a-comment-3': 'even flowstate support ;-)', 'flowstate': { 'request': {'fill': 'blue'} } };</script><script src="https://cdn.jsdelivr.net/npm/raphael@2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script> <script src="https://cdn.jsdelivr.net/npm/flowchart.js@1.8.0/release/flowchart.min.js" integrity="sha256-zNGWjubXoY6rb5MnmpBNefO0RgoVYfle9p0tvOQM+6k=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

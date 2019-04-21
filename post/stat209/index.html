@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Back Propogation in LSTM - Luyao Peng&#39;s Blog</title>
+  <title>Machine Learning STAT209 Review - Luyao Peng&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,8 +16,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Luyao Peng" /><meta name="description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Luyao Peng" /><meta name="description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &amp;lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &amp;gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,30 +43,42 @@ When you click the Knit button a document will be generated that includes both c
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Back Propogation in LSTM" />
-<meta property="og:description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:" />
+<meta property="og:title" content="Machine Learning STAT209 Review" />
+<meta property="og:description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/stat209/" />
-<meta property="article:published_time" content="2019-04-20T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-04-20T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2019-03-11T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-11T00:00:00&#43;00:00"/>
 
-<meta itemprop="name" content="Back Propogation in LSTM">
-<meta itemprop="description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:">
+<meta itemprop="name" content="Machine Learning STAT209 Review">
+<meta itemprop="description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)">
 
 
-<meta itemprop="datePublished" content="2019-04-20T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-04-20T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="142">
+<meta itemprop="datePublished" content="2019-03-11T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-03-11T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="310">
 
 
 
 <meta itemprop="keywords" content="Machine Learning," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Back Propogation in LSTM"/>
-<meta name="twitter:description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:"/>
+<meta name="twitter:title" content="Machine Learning STAT209 Review"/>
+<meta name="twitter:description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -140,12 +156,12 @@ MathJax.Hub.Config({
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Back Propogation in LSTM</h1>
+      <h1 class="post-title">Machine Learning STAT209 Review</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2019-04-20 </span>
+        <span class="post-time"> 2019-03-11 </span>
         <div class="post-category">
-            <a href="/categories/deep-learning/"> Deep Learning </a>
+            <a href="/categories/course/"> Course </a>
             </div>
         
       </div>
@@ -161,145 +177,43 @@ MathJax.Hub.Config({
       
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<div id="bayes-classification-rule" class="section level1">
+<h1>1. Bayes Classification Rule</h1>
+<div id="decision-rule" class="section level2">
+<h2>1.1 Decision Rule</h2>
+<p>Let <span class="math inline">\(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\)</span> be the classification rule for class 0 or 1. The expected cost is</p>
+<p><span class="math inline">\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) + \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)</span></p>
+<p>To minimize <span class="math inline">\(R(\delta)\)</span>, the decision rule is</p>
+<p><span class="math inline">\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} \\ 0, ow\end{cases}\)</span></p>
+<p>equivalently,</p>
+<p><span class="math inline">\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\\ 0, ow\end{cases}\)</span></p>
+<p>Notice</p>
+<ul>
+<li><span class="math inline">\(\frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} = \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{f(\mathbf{x})}\)</span> and <span class="math inline">\(\frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} = \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{f(\mathbf{x})}\)</span> are the posterior predictions on the probability of being class 0 and class 1, respectively, if the posterior of class 0 is less than that of class 1, classify that observation into class 1.</li>
+<li>in <span class="math inline">\(\frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\)</span>, if <span class="math inline">\(Cost(0|1)\)</span> is high, the fraction becomes small, more likely to be classified into class 1 to avoid high cost on misclassification from 1 to 0.</li>
+</ul>
+<p>In multivariate form, the Bayes decision rule has the following form:</p>
+<p><span class="math inline">\(p(c = 1|\mathbf{x} = x) &gt; \frac{R}{R+1}, R = \frac{Cost(1|0)}{Cost(0|1)}\)</span> iff</p>
+<p><span class="math inline">\(\frac{f_1(\mathbf{x})}{f_0(\mathbf{x})} &gt; \frac{\pi_0}{\pi_1}R \rightarrow log\left(\frac{f_1(\mathbf{x})}{f_0(\mathbf{x})}\right) &gt; log\left(\frac{\pi_0}{\pi_1}R\right)\)</span></p>
+<ul>
+<li>With homogeneousmultivariate gausian density function: <span class="math inline">\(\mathbf{x} |c=0 \sim MVN(\mathbf{\mu}_0, \Sigma), \mathbf{x} |c=1 \sim MVN(\mathbf{\mu}_1, \Sigma)\)</span>, the decision boundary is</li>
+</ul>
+<p><span class="math inline">\(\delta(\mathbf{x}) = \begin{cases}1, (\mu_1-\mu_0)&#39;\Sigma^{-1}\mathbf{x}&gt; log(\frac{\pi_0}{\pi_1}R)+\frac{1}{2}(\mu_0+\mu_1)&#39;\Sigma^{-1}(\mu_1-\mu_0)\\ 0, ow\end{cases}\)</span></p>
+<ul>
+<li>With heterogeneousmultivariate gausian density function: <span class="math inline">\(\mathbf{x} |c=0 \sim MVN(\mathbf{\mu}_0, \Sigma_1), \mathbf{x} |c=1 \sim MVN(\mathbf{\mu}_1, \Sigma_2)\)</span>, the decision boundary is</li>
+</ul>
+<p><span class="math inline">\(\delta(\mathbf{x}) = \begin{cases}1, -\frac{1}{2}\mathbf{x}&#39;(\Sigma_1^{-1}-\Sigma_0^{-1})\mathbf{x} + (\mu_1&#39;\Sigma_1^{-1}- \mu_0&#39;\Sigma_0^{-1})\mathbf{x}+k &gt; log\left(\frac{\pi_0}{\pi_1}R\right)\\ 0, ow\end{cases}\)</span>, where <span class="math inline">\(k = -\frac{1}{2}\mathbf{\mu}_1&#39;(\Sigma_1^{-1})\mathbf{\mu}_1 + \frac{1}{2}\mathbf{\mu}_0&#39;\Sigma_0^{-1})\mathbf{\mu}_0 +\frac{1}{2} log\left(\frac{\Sigma_0}{\Sigma_1}\right)\)</span></p>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="/post/2019-04-20-Back-Propogations_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
-</div>
-
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">Author</span>
-    <span class="item-content">Luyao Peng</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">LastMod</span>
-    <span class="item-content">
-        2019-04-20
-        
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/machine-learning/">Machine Learning</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/even-preview/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Theme preview</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/stat209/">
-            <span class="next-text nav-default">Machine Learning STAT209 Review</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  <div id="disqus_thread"></div>
-  <script>
-  (function() {
-  var d = document, s = d.createElement('script');
-  s.src = 'https://luyao-1.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', +new Date());
-  (d.head || d.body).appendChild(s);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
-      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
-      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
-      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
-      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
-      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
-      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
-      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
-      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
-      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
-  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-  
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2019
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">Luyao Peng</span>
-  </span>
-</div>
-
-
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
-
-
-
-
-
-
-
-
-</body>
-</html>
-ta(\mathbf{x}) = 1| c=0)p(c=0) + p(\delta(\mathbf{x}) = 0| c=1)p(c=1)\)</span></p>
+<div id="overall-error-rate" class="section level2">
+<h2>1.2 Overall Error Rate</h2>
+<p><span class="math inline">\(p(\delta(\mathbf{x}) = 1| c=0) = p[(\mu_1-\mu_0)&#39;\Sigma^{-1}\mathbf{x}&gt; log(\frac{\pi_0}{\pi_1}R)+\frac{1}{2}(\mu_0+\mu_1)&#39;\Sigma^{-1}(\mu_1-\mu_0)]\)</span></p>
+<p>since</p>
+<p><span class="math inline">\((\mu_1-\mu_0)&#39;\Sigma^{-1}\mathbf{x} \sim MVN ((\mu_1-\mu_0)&#39;\Sigma^{-1}\mu_0, (\mu_1-\mu_0)&#39;\Sigma^{-1}(\mu_1-\mu_0))\)</span>,</p>
+<p><span class="math inline">\(p(\delta(\mathbf{x}) = 1| c=0) = p(z&gt; \frac{log(\frac{\pi_0}{\pi_1})+0.5\Delta^2}{\Delta})\)</span> by standardizing both sides;</p>
+<p>Similarly,</p>
+<p><span class="math inline">\(p(\delta(\mathbf{x}) = 0| c=1) = p(z&lt; \frac{log(\frac{\pi_0}{\pi_1})+0.5\Delta^2}{\Delta})\)</span>,</p>
+<p>The overall error rate becomes</p>
+<p><span class="math inline">\(p(\delta(\mathbf{x}\neq c_{true})) = p(\delta(\mathbf{x}) = 1| c=0)p(c=0) + p(\delta(\mathbf{x}) = 0| c=1)p(c=1)\)</span></p>
 <p>Using data, can use N-fold/ LOOAAT cross-validation to check error rate.</p>
 </div>
 </div>
@@ -329,9 +243,9 @@ ta(\mathbf{x}) = 1| c=0)p(c=0) + p(\delta(\mathbf{x}) = 0| c=1)p(c=1)\)</span></
           <a href="/tags/machine-learning/">Machine Learning</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/stat209/">
+        <a class="prev" href="/post/basics-of-rnn-and-lstm/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Back Propogation in LSTM</span>
+            <span class="prev-text nav-default">Basics of RNN and LSTM</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/post/project/">

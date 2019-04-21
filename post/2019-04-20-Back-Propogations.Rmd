@@ -1,8 +1,8 @@
 ---
-title: Back Propogation in LSTM
+title: Recurrent Neural Networks (RNNs)
 author: ''
 date: '2019-04-20'
-slug: STAT209
+slug: 
 categories:
   - Deep Learning
 tags:
@@ -10,26 +10,16 @@ tags:
 header-includes: \usepackage{amsmath} \usepackage{bm} 
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-## R Markdown
+The language model computes the probability of a sequence of previous words, $P(word_1, word_2, \dots, word_{t})$. The traditional language model is based on naive bayes model, the probability of a sequence of words is:
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+\begin{equation}
+P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}).
+\end{equation}
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word. One solution is to apply RNNs, which does not consider each input word independently, instead, RNNs can capture the information in previous sequence of words and evaluate their effects on the prediction on the current word (recurrent part). 
 
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+<figure>
+  <img src="/post/2019-04-20-RNN_files/figure-html/rnn.jpg" alt="RNN" width=58% height=60%/>
+  <figcaption>RNNs, source: Nature</figcaption>
+</figure>

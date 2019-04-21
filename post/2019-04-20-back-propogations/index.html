@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Back Propogation LSTM - Luyao Peng&#39;s Blog</title>
+  <title>Recurrent Neural Networks (RNNs) - Luyao Peng&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,8 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Luyao Peng" /><meta name="description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Luyao Peng" /><meta name="description" content="The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_{t})\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+\[\begin{equation} P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \end{equation}\] The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word." /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -39,28 +39,30 @@ When you click the Knit button a document will be generated that includes both c
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Back Propogation LSTM" />
-<meta property="og:description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:" />
+<meta property="og:title" content="Recurrent Neural Networks (RNNs)" />
+<meta property="og:description" content="The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_{t})\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+\[\begin{equation} P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \end{equation}\] The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/2019-04-20-back-propogations/" />
+<meta property="article:published_time" content="2019-04-20T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-04-20T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="Recurrent Neural Networks (RNNs)">
+<meta itemprop="description" content="The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_{t})\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+\[\begin{equation} P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \end{equation}\] The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.">
 
 
-<meta itemprop="name" content="Back Propogation LSTM">
-<meta itemprop="description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:">
+<meta itemprop="datePublished" content="2019-04-20T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-04-20T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="124">
 
 
 
-<meta itemprop="wordCount" content="142">
-
-
-
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="Machine Learning," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Back Propogation LSTM"/>
-<meta name="twitter:description" content="R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-When you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:"/>
+<meta name="twitter:title" content="Recurrent Neural Networks (RNNs)"/>
+<meta name="twitter:description" content="The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_{t})\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+\[\begin{equation} P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \end{equation}\] The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -138,11 +140,13 @@ MathJax.Hub.Config({
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Back Propogation LSTM</h1>
+      <h1 class="post-title">Recurrent Neural Networks (RNNs)</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 0001-01-01 </span>
-        
+        <span class="post-time"> 2019-04-20 </span>
+        <div class="post-category">
+            <a href="/categories/deep-learning/"> Deep Learning </a>
+            </div>
         
       </div>
     </header>
@@ -157,25 +161,17 @@ MathJax.Hub.Config({
       
 
 
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
-</div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="/post/2019-04-20-Back-Propogations_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
-</div>
+<p>The language model computes the probability of a sequence of previous words, <span class="math inline">\(P(word_1, word_2, \dots, word_{t})\)</span>. The traditional language model is based on naive bayes model, the probability of a sequence of words is:</p>
+<span class="math display">\[\begin{equation}
+P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}).
+\end{equation}\]</span>
+<p>The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word. One solution is to apply RNNs, which does not consider each input word independently, instead, RNNs can capture the information in previous sequence of words and evaluate their effects on the prediction on the current word (recurrent part).</p>
+<figure>
+<img src="/post/2019-04-20-RNN_files/figure-html/rnn.jpg" alt="RNN" width=58% height=60%/>
+<figcaption>
+RNNs, source: Nature
+</figcaption>
+</figure>
 
     </div>
 
@@ -187,7 +183,7 @@ MathJax.Hub.Config({
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        0001-01-01
+        2019-04-20
         
     </span>
   </p>
@@ -195,15 +191,17 @@ MathJax.Hub.Config({
   
 </div>
 <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/machine-learning/">Machine Learning</a>
+          </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/2019-03-04-assignment2/">
+        <a class="prev" href="/post/even-preview/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Syntax Highlighting</span>
+            <span class="prev-text nav-default">Theme preview</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/back-propogations/">
-            <span class="next-text nav-default">Back Propogation LSTM</span>
+        <a class="next" href="/post/stat209/">
+            <span class="next-text nav-default">Machine Learning STAT209 Review</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>
