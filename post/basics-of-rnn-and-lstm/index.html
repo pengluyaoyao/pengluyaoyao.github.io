@@ -46,8 +46,8 @@ The cons of traditional language models assumes independence among words (this i
 The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/basics-of-rnn-and-lstm/" />
-<meta property="article:published_time" content="2019-04-20T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-04-20T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2019-04-24T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-04-24T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Basics of RNN and LSTM">
 <meta itemprop="description" content="RNN The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_t)\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
@@ -55,9 +55,9 @@ The cons of traditional language models assumes independence among words (this i
 The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.">
 
 
-<meta itemprop="datePublished" content="2019-04-20T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-04-20T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="797">
+<meta itemprop="datePublished" content="2019-04-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-04-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1210">
 
 
 
@@ -147,7 +147,7 @@ MathJax.Hub.Config({
       <h1 class="post-title">Basics of RNN and LSTM</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2019-04-20 </span>
+        <span class="post-time"> 2019-04-24 </span>
         <div class="post-category">
             <a href="/categories/deep-learning/"> Deep Learning </a>
             </div>
@@ -163,6 +163,10 @@ MathJax.Hub.Config({
 </div>
     <div class="post-content">
       
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/viz/viz.js"></script>
+<link href="/rmarkdown-libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/grViz-binding/grViz.js"></script>
 
 
 <div id="rnn" class="section level1">
@@ -195,8 +199,8 @@ RNNs, source: Nature
 </ul>
 <p>At each time point, the <span class="math inline">\(\mathbf{s}_{t}\)</span> is a function of <span class="math inline">\(\mathbf{s}_{t-1}\)</span> and <span class="math inline">\(\mathbf{s}_{t-1}\)</span> is also a function of <span class="math inline">\(\mathbf{s}_{t-2}\)</span> etc., so the effects of all the previous input words will be taken into account when predicting the word at <span class="math inline">\(t+1\)</span>, this is the recurrent part in RNN.</p>
 </div>
-<div id="the-loss-error-fucntion-of-rnn" class="section level2">
-<h2>The Loss (Error) Fucntion of RNN</h2>
+<div id="the-cost-fucntion-of-rnn" class="section level2">
+<h2>The Cost Fucntion of RNN</h2>
 <p>The loss function at time <span class="math inline">\(t\)</span> for the RNN model above is</p>
 <p><span class="math display">\[E_{t}(\hat{y}_{t}, y_{t}) = -\sum_{j=1}^{Voc}y_{t,j}log(\hat{y}_{t,j}), j = 1, 2, \dots, Voc,\]</span></p>
 <p><span class="math display">\[E(\hat{y}, y)= -\frac{1}{T}\sum_{t=1}^{T}E_{t}(\theta),\]</span></p>
@@ -204,7 +208,10 @@ RNNs, source: Nature
 </div>
 <div id="back-propagation-of-rnn" class="section level2">
 <h2>Back Propagation of RNN</h2>
-<p>Our goal is to compute the gradient of <span class="math inline">\(E(\hat{y}, y)\)</span> wrt <span class="math inline">\(\mathbf{W}, \mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span>. Notice <span class="math inline">\(E(\hat{y}, y)\)</span> is the sum of <span class="math inline">\(E_{t}(\hat{y}_{t}, y_{t})\)</span>, each of which involves <span class="math inline">\(\mathbf{W}, \mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span>, so we have</p>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"diagram":"\ndigraph a_nice_graph {\n\ngraph [rankdir=TB; splines=\"line\"; esep = 1; forcelabels=true;]\n\n\nsubgraph output{\nrank = same; z1 [label = <y&#770;<FONT POINT-SIZE=\"8\"><SUB>t-1<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\nz2 [label = <y&#770;<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\nz3 [label = <y&#770;<FONT POINT-SIZE=\"8\"><SUB>t+1<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\n}\n\nsubgraph hidden{\nrank = same; h0 [style = invis];h1 [label = <h&#770;<FONT POINT-SIZE=\"8\"><SUB>t-1<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\nh2 [label = <h&#770;<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\nh3 [label = <h&#770;<FONT POINT-SIZE=\"8\"><SUB>t+1<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\nh4 [style= invis];\n}\n\n\nsubgraph input{\nrank = same; x1 [label = <x&#770;<FONT POINT-SIZE=\"8\"><SUB>t-1<\/SUB><\/FONT>>, shape = plaintext, fixedsize=true];\nx2 [label = <x&#770;<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = plaintext, fixedsize=true];\nx3 [label = <x&#770;<FONT POINT-SIZE=\"8\"><SUB>t+1<\/SUB><\/FONT>>, shape = plaintext, fixedsize=true];\n\n}\n\n{\nrank = same;  edge [ style = invis ]; z1->z2->z3\n}\n{\nrank = same;  edge [ style = invis ]; h0->h1->h2->h3->h4 \n}\n{\nrank = same;  edge [ style = invis ]; x1->x2->x3\n}\nedge [ color=\"black\" ]; h0-> h1 [xlabel = \"W\" ] ; h3->h4;  h1 -> h2 [xlabel = \"W\" ]; h1-> z1 [xlabel = \"V\" ]; h2-> h3[xlabel = \"W\" ] ; h2-> z2 [xlabel = \"V\" ]; h3 -> z3 [xlabel = \"V\" ]; x1->h1 [xlabel = \"U\" ]; x2->h2[xlabel = \"U\" ] ; x3->h3 [xlabel = \"U\" ]; edge [ color=\"red\" ]; h1->{h0 x1}; z1-> h1; z2->h2; z3->h3; h2 -> {h1 x2}; h3-> {h2 x3}; h4-> h3; edge [ style = invis ]; z1-> {h0 h1 h2 h3 h4};  h1 -> {x1 x2 x3};\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>Our goal is to compute the gradient of total cost (the cost function is the loss <span class="math inline">\(E\)</span> across all t, loss function is the <span class="math inline">\(E_t\)</span> at time t) <span class="math inline">\(E(\hat{y}, y)\)</span> wrt <span class="math inline">\(\mathbf{W}, \mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span>. From the figure above, the gradient wrt <span class="math inline">\(\mathbf{V}\)</span> only involves the values at current time <span class="math inline">\(t\)</span>, while the gradients wrt <span class="math inline">\(\mathbf{W}\)</span> and <span class="math inline">\(\mathbf{U}\)</span> involves the values at the current time <span class="math inline">\(t\)</span> and at all the previous time.</p>
+<p>Notice <span class="math inline">\(E(\hat{y}, y)\)</span> is the sum of <span class="math inline">\(E_{t}(\hat{y}_{t}, y_{t})\)</span>, each of which involves <span class="math inline">\(\mathbf{W}, \mathbf{U}\)</span> and <span class="math inline">\(\mathbf{V}\)</span>, so we have</p>
 <p><span class="math display">\[\frac{\partial{E}}{\partial{\mathbf{W}}} = \sum_{t=1}^{T}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}}, \frac{\partial{E}}{\partial{\mathbf{U}}} = \sum_{t=1}^{T}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}}, \frac{\partial{E}}{\partial{\mathbf{V}}} = \sum_{t=1}^{T}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{V}}}}\]</span> Define <span class="math inline">\(\mathbf{z}_t = \mathbf{Vs}_t\)</span>, <span class="math inline">\(\mathbf{z}_t \in \mathbb{R}^{Voc}\)</span>, recall <span class="math inline">\(\frac{\partial{E}_t}{\partial{\mathbf{z}_t}} = \hat{\mathbf{y}_t}-\mathbf{y}_t = \mathbf{\delta}_{1t}\)</span>, then</p>
 <p><span class="math display">\[\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{V}}}} = \mathbf{\delta}_{1t} \mathbf{s}_t&#39;, \mathbf{\delta}_{1t} \in \mathbb{R}^{Voc}, \mathbf{s}_t \in \mathbb{R}^{Ds}, \mathbf{V} \in \mathbb{R}^{Voc\times D_s}\]</span>, the gradient wrt <span class="math inline">\(\mathbf{V}\)</span> at time <span class="math inline">\(t\)</span> is only dependent on the values at the current time point, <span class="math inline">\(\hat{\mathbf{y}}_t, \mathbf{y}_t, \mathbf{s}_t\)</span>.</p>
 <p>Assuming the <span class="math inline">\(f\)</span> function is tanh function, <span class="math display">\[\begin{array}{rcl}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}} &amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{h}_t}}\frac{\partial{\mathbf{h}}_t}{\partial{\mathbf{W}}}\\
@@ -213,17 +220,30 @@ RNNs, source: Nature
 &amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}_t}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{t-1}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}}\end{array},\]</span> where <span class="math inline">\(\mathbf{h}_t = \mathbf{W}\mathbf{s}_{t-1} +\mathbf{U}\mathbf{x}_t\)</span>.</p>
 <p>Since <span class="math inline">\(\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}} = \frac{\partial{\mathbf{s}_{t-1}}}{\partial{\mathbf{W}}} + \frac{\partial{s}_{t-1}}{\partial{s}_{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}}\)</span>, plug it into above equation, we have</p>
 <p><span class="math display">\[\begin{array}{rcl} \frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}} &amp;=&amp; \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}_t}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{t-1}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}} + \dots + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{1}}\frac{\partial{s}_{1}}{\partial{\mathbf{W}}}\\
-&amp;=&amp; \sum_{k=1}^{t}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{s}_{k}}\frac{\partial{s}_{k}}{\partial{\mathbf{W}}}\end{array}, \mathbf{W} \in \mathbb{R}^{D_s\times D_s}\]</span>.</p>
+&amp;=&amp; \sum_{t=2}^{T}\sum_{k=1}^{t-1}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{s}_{t-k}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{W}}}\end{array}, \mathbf{W} \in \mathbb{R}^{D_s\times D_s}\]</span>.</p>
 <p>Similarly, the gradient of <span class="math inline">\(E_t\)</span> wrt <span class="math inline">\(\mathbf{U}\)</span> is</p>
 <p><span class="math display">\[
-\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} = \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{\mathbf{U}}} +  \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{\mathbf{s}_{t-1}}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{U}}} + \dots + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{\mathbf{s}_{1}}}\frac{\partial{s}_{1}}{\partial{\mathbf{U}}}??
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} = \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{U}}}
+\]</span> In <span class="math inline">\(\mathbf{s}_t\)</span>, <span class="math inline">\(\mathbf{U}\)</span> is involved in <span class="math inline">\(\mathbf{s}_{t-1}\)</span> and <span class="math inline">\(\mathbf{Ux}_t\)</span>, so</p>
+<p><span class="math display">\[
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\left(\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-1}}} \frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}}\right)
+\]</span> since <span class="math inline">\(\frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}} = \left(\frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{s}_{t-2}}} \frac{\partial{\mathbf{s}}_{t-2}}{\partial{\mathbf{U}}}\right)\)</span>, plug it into the above equation, we have</p>
+<p><span class="math display">\[
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\left(\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-1}}} \left(\frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{s}_{t-2}}} \frac{\partial{\mathbf{s}}_{t-2}}{\partial{\mathbf{U}}}\right)\right)
 \]</span></p>
-<p>Notice that the gradient wrt <span class="math inline">\(\mathbf{W}\)</span> and <span class="math inline">\(\mathbf{U}\)</span> at time <span class="math inline">\(t\)</span> is dependent on both current and all previous values.</p>
+<p>continue this plug-in procedure until 0 time point, finally we have</p>
+<p><span class="math display">\[
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \sum_{t=2}^{T}\sum_{k=1}^{t-1}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-k}}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{U}}}
+\]</span> Notice that the gradient wrt <span class="math inline">\(\mathbf{W}\)</span> and <span class="math inline">\(\mathbf{U}\)</span> at time <span class="math inline">\(t\)</span> is dependent on both current and all previous values.</p>
+<blockquote>
+<p> Based on a sketch of network at a single timestep: <div id="htmlwidget-2" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"diagram":"\ndigraph a_nice_graph {\ngraph [rankdir=BT; splines=\"line\"; esep = 1; forcelabels=true;]\nsubgraph output{\nz [label = <y&#770;<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\n}\nsubgraph hidden{\nrank = same; h1 [label = <h&#770;<FONT POINT-SIZE=\"8\"><SUB>t-1<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\nh2 [label = <h&#770;<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\nh3 [label = <h&#770;<FONT POINT-SIZE=\"8\"><SUB>t+1<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\n}\nsubgraph input{\nx2 [label = <x&#770;<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle, fixedsize=true];\n}\n{\nrank = same; h1->h2->h3\n}\nedge [ color=\"black\" ]; h2->z; x2->h2\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script> Consider feed-forward $$ Draw the ‘unrolled’ network for the previous 3 timesteps (t-1, t-2, t-3) and compute <span class="math inline">\(\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}}\bigg\rvert_{t-1}=\)</span>, <span class="math inline">\(\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}}\bigg\rvert_{t-1}=\)</span>, <span class="math inline">\(\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{V}}}}=\)</span>, <span class="math inline">\(\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{x}_t}}}=\)</span></p>
+</blockquote>
 </div>
 <div id="the-vanishing-gradient-problem" class="section level2">
 <h2>The Vanishing Gradient Problem</h2>
 <p>If we look deeper at the <span class="math inline">\(\frac{\partial{s}_t}{\partial{s}_{k}}\)</span> part in <span class="math inline">\(\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}} = \sum_{k=1}^{t}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{s}_{k}}\frac{\partial{s}_{k}}{\partial{\mathbf{W}}}\)</span>, <span class="math inline">\(\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{k}} = \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}}\frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{s}}_{t-2}}\dots\frac{\partial{\mathbf{s}}_{t-k+1}}{\partial{\mathbf{s}}_{t-k}}\)</span>, each partial derivative is a <span class="math inline">\(D_s \times D_s\)</span> Jacobian matrix, for example,</p>
-<p><span class="math display">\[\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}} = \begin{bmatrix}\frac{\partial{s}_{t_1}}{\partial{s}_{t-1_1}} &amp; \dots &amp; \frac{\partial{s}_{t_{D_s}}}{\partial{s}_{t-1_1}} \\ \vdots &amp; \ddots &amp; \vdots\\ \frac{\partial{s}_{t_1}}{\partial{s}_{t-1_{D_s}}} &amp; \dots &amp; \frac{\partial{s}_{t_{D_s}}}{\partial{s}_{t-1_{D_s}}}\end{bmatrix}\]</span> if the function <span class="math inline">\(f\)</span> is a sigmoid or tanh function, the gradient at the end sides are almost 0, so the elements in <span class="math inline">\(\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}}\)</span> will become small (saturated neurons) if the corresponding values in the input word vector have either high or low values, also the gradient matrix will multiply with each other <span class="math inline">\(k\)</span> times, the gradient contribution of the saturated neurons becomes smaller and smaller and eventually vanishes. On the other hand, if the function <span class="math inline">\(f\)</span> is ReLU function and the gradient is greater than 1 if the input values of the word vector are positive, then the contribution of the gradient will be explode after k times multiplications. Clipping tricks work for exploding problems, but not vanishing problems, because we are artificially inflating the influence of an input word ‘far away’ from time <span class="math inline">\(t\)</span> to prevent it from vanishing, which is not realistic (‘far away’ word hardly has influence in predicting the current word).</p>
+<p><span class="math display">\[\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}} = \begin{bmatrix}\frac{\partial{s}_{t_1}}{\partial{s}_{t-1_1}} &amp; \dots &amp; \frac{\partial{s}_{t_{D_s}}}{\partial{s}_{t-1_1}} \\ \vdots &amp; \ddots &amp; \vdots\\ \frac{\partial{s}_{t_1}}{\partial{s}_{t-1_{D_s}}} &amp; \dots &amp; \frac{\partial{s}_{t_{D_s}}}{\partial{s}_{t-1_{D_s}}}\end{bmatrix}\]</span> if the function <span class="math inline">\(f\)</span> is a sigmoid or tanh function, the gradient at the end sides are almost 0, so the elements in <span class="math inline">\(\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}}\)</span> will become small (saturated neurons) if the corresponding values in the input word vector have either high positive or low negative values, also the gradient matrix will multiply with each other <span class="math inline">\(k\)</span> times, the gradient contribution of the saturated neurons becomes smaller and smaller and eventually vanishes. On the other hand, if the function <span class="math inline">\(f\)</span> is ReLU function and the gradient is greater than 1 if the input values of the word vector are positive, then the contribution of the gradient will be explode after k times multiplications. Clipping tricks work for exploding problems, but not vanishing problems, because we are artificially inflating the influence of an input word ‘far away’ from time <span class="math inline">\(t\)</span> to prevent it from vanishing, which is not realistic (‘far away’ word hardly has influence in predicting the current word).</p>
 </div>
 <div id="lstm" class="section level2">
 <h2>LSTM</h2>
@@ -240,7 +260,7 @@ RNNs, source: Nature
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2019-04-20
+        2019-04-24
         
     </span>
   </p>

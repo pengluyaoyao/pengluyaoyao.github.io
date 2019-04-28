@@ -2,7 +2,7 @@
 autoCollapseToc: true
 title: Basics of RNN and LSTM
 author: ''
-date: '2019-04-20'
+date: '2019-04-24'
 categories:
   - Deep Learning
 tags:
@@ -58,7 +58,7 @@ where
 
 At each time point, the $\mathbf{s}_{t}$ is a function of $\mathbf{s}_{t-1}$ and $\mathbf{s}_{t-1}$ is also a function of $\mathbf{s}_{t-2}$ etc., so the effects of all the previous input words will be taken into account when predicting the word at $t+1$, this is the recurrent part in RNN.
 
-## The Loss (Error) Fucntion of RNN
+## The Cost Fucntion of RNN
 
 The loss function at time $t$ for the RNN model above is
 
@@ -70,7 +70,51 @@ where $y_{t,j}$ is the correct word at time $t$ located at the $j$th element in 
 
 
 ## Back Propagation of RNN
-Our goal is to compute the gradient of $E(\hat{y}, y)$ wrt $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$. Notice $E(\hat{y}, y)$ is the sum of $E_{t}(\hat{y}_{t}, y_{t})$, each of which involves $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$, so we have
+
+```{R, echo=FALSE}
+DiagrammeR::grViz("
+digraph a_nice_graph {
+
+graph [rankdir=TB; splines='line'; esep = 1; forcelabels=true;]
+
+
+subgraph output{
+rank = same; z1 [label = 'y&#770;@_{t-1}', shape = circle, fixedsize=true];
+z2 [label = 'y&#770;@_{t}', shape = circle, fixedsize=true];
+z3 [label = 'y&#770;@_{t+1}', shape = circle, fixedsize=true];
+}
+
+subgraph hidden{
+rank = same; h0 [style = invis];h1 [label = 'h&#770;@_{t-1}', shape = circle, fixedsize=true];
+h2 [label = 'h&#770;@_{t}', shape = circle, fixedsize=true];
+h3 [label = 'h&#770;@_{t+1}', shape = circle, fixedsize=true];
+h4 [style= invis];
+}
+
+
+subgraph input{
+rank = same; x1 [label = 'x&#770;@_{t-1}', shape = plaintext, fixedsize=true];
+x2 [label = 'x&#770;@_{t}', shape = plaintext, fixedsize=true];
+x3 [label = 'x&#770;@_{t+1}', shape = plaintext, fixedsize=true];
+
+}
+
+{
+rank = same;  edge [ style = invis ]; z1->z2->z3
+}
+{
+rank = same;  edge [ style = invis ]; h0->h1->h2->h3->h4 
+}
+{
+rank = same;  edge [ style = invis ]; x1->x2->x3
+}
+edge [ color='black' ]; h0-> h1 [xlabel = 'W' ] ; h3->h4;  h1 -> h2 [xlabel = 'W' ]; h1-> z1 [xlabel = 'V' ]; h2-> h3[xlabel = 'W' ] ; h2-> z2 [xlabel = 'V' ]; h3 -> z3 [xlabel = 'V' ]; x1->h1 [xlabel = 'U' ]; x2->h2[xlabel = 'U' ] ; x3->h3 [xlabel = 'U' ]; edge [ color='red' ]; h1->{h0 x1}; z1-> h1; z2->h2; z3->h3; h2 -> {h1 x2}; h3-> {h2 x3}; h4-> h3; edge [ style = invis ]; z1-> {h0 h1 h2 h3 h4};  h1 -> {x1 x2 x3};
+}")
+```
+
+Our goal is to compute the gradient of total cost (the cost function is the loss $E$ across all t, loss function is the $E_t$ at time t) $E(\hat{y}, y)$ wrt $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$. From the figure above, the gradient wrt $\mathbf{V}$ only involves the values at current time $t$, while the gradients wrt $\mathbf{W}$ and $\mathbf{U}$ involves the values at the current time $t$ and at all the previous time. 
+
+Notice $E(\hat{y}, y)$ is the sum of $E_{t}(\hat{y}_{t}, y_{t})$, each of which involves $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$, so we have
 
 $$\frac{\partial{E}}{\partial{\mathbf{W}}} = \sum_{t=1}^{T}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}}, \frac{\partial{E}}{\partial{\mathbf{U}}} = \sum_{t=1}^{T}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}}, \frac{\partial{E}}{\partial{\mathbf{V}}} = \sum_{t=1}^{T}\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{V}}}}$$
 Define $\mathbf{z}_t = \mathbf{Vs}_t$,  $\mathbf{z}_t \in \mathbb{R}^{Voc}$, recall $\frac{\partial{E}_t}{\partial{\mathbf{z}_t}} = \hat{\mathbf{y}_t}-\mathbf{y}_t = \mathbf{\delta}_{1t}$, then 
@@ -87,16 +131,58 @@ where $\mathbf{h}_t = \mathbf{W}\mathbf{s}_{t-1} +\mathbf{U}\mathbf{x}_t$.
 Since $\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}} =  \frac{\partial{\mathbf{s}_{t-1}}}{\partial{\mathbf{W}}} + \frac{\partial{s}_{t-1}}{\partial{s}_{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}}$, plug it into above equation, we have
 
 $$\begin{array}{rcl} \frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}} &=& \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}_t}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{t-1}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}} + \dots + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{1}}\frac{\partial{s}_{1}}{\partial{\mathbf{W}}}\\
-&=& \sum_{k=1}^{t}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{s}_{k}}\frac{\partial{s}_{k}}{\partial{\mathbf{W}}}\end{array}, \mathbf{W} \in \mathbb{R}^{D_s\times D_s}$$.
+&=& \sum_{t=2}^{T}\sum_{k=1}^{t-1}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{s}_{t-k}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{W}}}\end{array}, \mathbf{W} \in \mathbb{R}^{D_s\times D_s}$$.
 
 
 Similarly, the gradient of $E_t$ wrt $\mathbf{U}$ is
 
 $$
-\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} = \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{\mathbf{U}}} +  \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{\mathbf{s}_{t-1}}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{U}}} + \dots + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{\mathbf{s}_{1}}}\frac{\partial{s}_{1}}{\partial{\mathbf{U}}}??
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} = \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{U}}}
+$$
+In $\mathbf{s}_t$, $\mathbf{U}$ is involved in $\mathbf{s}_{t-1}$ and $\mathbf{Ux}_t$, so
+
+$$
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\left(\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-1}}} \frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}}\right)
+$$
+since $\frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}} = \left(\frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{s}_{t-2}}} \frac{\partial{\mathbf{s}}_{t-2}}{\partial{\mathbf{U}}}\right)$, plug it into the above equation, we have
+
+$$
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\left(\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-1}}} \left(\frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{U}}} + \frac{\partial{\mathbf{s}}_{t-1}}{\partial{\mathbf{s}_{t-2}}} \frac{\partial{\mathbf{s}}_{t-2}}{\partial{\mathbf{U}}}\right)\right)
 $$
 
+continue this plug-in procedure until 0 time point, finally we have
+
+$$
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \sum_{t=2}^{T}\sum_{k=1}^{t-1}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-k}}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{U}}}
+$$
 Notice that the gradient wrt $\mathbf{W}$ and $\mathbf{U}$ at time $t$ is dependent on both current and all previous values.
+
+> \textbf{Practice}
+Based on a sketch of network at a single timestep:
+```{R, echo=FALSE}
+DiagrammeR::grViz("
+digraph a_nice_graph {
+graph [rankdir=BT; splines='line'; esep = 1; forcelabels=true;]
+subgraph output{
+z [label = 'y&#770;@_{t}', shape = circle, fixedsize=true];
+}
+subgraph hidden{
+rank = same; h1 [label = 'h&#770;@_{t-1}', shape = circle, fixedsize=true];
+h2 [label = 'h&#770;@_{t}', shape = circle, fixedsize=true];
+h3 [label = 'h&#770;@_{t+1}', shape = circle, fixedsize=true];
+}
+subgraph input{
+x2 [label = 'x&#770;@_{t}', shape = circle, fixedsize=true];
+}
+{
+rank = same; h1->h2->h3
+}
+edge [ color='black' ]; h2->z; x2->h2
+}")
+```
+Consider feed-forward $$
+Draw the 'unrolled' network for the previous 3 timesteps (t-1, t-2, t-3) and compute $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}}\bigg\rvert_{t-1}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}}\bigg\rvert_{t-1}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{V}}}}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{x}_t}}}=$
+
 
 
 ## The Vanishing Gradient Problem
@@ -105,7 +191,7 @@ If we look deeper at the $\frac{\partial{s}_t}{\partial{s}_{k}}$ part in $\frac{
 
 
 $$\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}} = \begin{bmatrix}\frac{\partial{s}_{t_1}}{\partial{s}_{t-1_1}} & \dots & \frac{\partial{s}_{t_{D_s}}}{\partial{s}_{t-1_1}} \\ \vdots & \ddots & \vdots\\ \frac{\partial{s}_{t_1}}{\partial{s}_{t-1_{D_s}}} & \dots & \frac{\partial{s}_{t_{D_s}}}{\partial{s}_{t-1_{D_s}}}\end{bmatrix}$$
-if the function $f$ is a sigmoid or tanh function, the gradient at the end sides are almost 0, so the elements in $\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}}$ will become small (saturated neurons) if the corresponding values in the input word vector have either high or low values, also the gradient matrix will multiply with each other $k$ times, the gradient contribution of the saturated neurons becomes smaller and smaller and eventually vanishes. On the other hand, if the function $f$ is ReLU function and the gradient is greater than 1 if the input values of the word vector are positive, then the contribution of the gradient will be explode after k times multiplications. Clipping tricks work for exploding problems, but not vanishing problems, because we are artificially inflating the influence of an input word 'far away' from time $t$ to prevent it from vanishing, which is not realistic ('far away' word hardly has influence in predicting the current word). 
+if the function $f$ is a sigmoid or tanh function, the gradient at the end sides are almost 0, so the elements in $\frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}}_{t-1}}$ will become small (saturated neurons) if the corresponding values in the input word vector have either high positive or low negative values, also the gradient matrix will multiply with each other $k$ times, the gradient contribution of the saturated neurons becomes smaller and smaller and eventually vanishes. On the other hand, if the function $f$ is ReLU function and the gradient is greater than 1 if the input values of the word vector are positive, then the contribution of the gradient will be explode after k times multiplications. Clipping tricks work for exploding problems, but not vanishing problems, because we are artificially inflating the influence of an input word 'far away' from time $t$ to prevent it from vanishing, which is not realistic ('far away' word hardly has influence in predicting the current word). 
 
 
 ## LSTM
