@@ -31,45 +31,10 @@ The cons of traditional language models assumes independence among words (this i
 
 ## The Model
 
-<figure>
-  <img src="/post/2019-04-20-RNN_files/figure-html/rnn.jpg" alt="RNN" width=58% height=60%/>
-  <figcaption>RNNs, source: Nature</figcaption>
-</figure>
-
-Define 
-
-$$\mathbf{x}_t \in \mathbb{R}^{d}, \mathbf{s}_t \in \mathbb{R}^{D_s}, \mathbf{W} \in \mathbb{R}^{D_s \times D_s}, \mathbf{U} \in \mathbb{R}^{D_s \times d}, \mathbf{V} \in \mathbb{R}^{Voc \times D_s}, \mathbf{\hat{y}} \in \mathbb{R}^{Voc},$$
-
-Converting the figure above into math expressions:
-$$
-\begin{array}{rcl}
-\mathbf{s}_t &=& f\left(\mathbf{W}\mathbf{s}_{t-1} + \mathbf{U}\mathbf{x}_{t}\right)\\
-\mathbf{\hat{y}}_t &=& softmax\left(\mathbf{V}\mathbf{s_t}\right),  t = 1,2,\dots, T\\
-\hat{p}(w_{t+1}&=& v_j|w_t, \dots,w_1) = \hat{y}_{t,j}, j = 1, 2, \dots, Voc
-\end{array}
-$$
-
-where
-
-- $\mathbf{s}_t$ is the hidden state at the time $t$, it is a function ($f$ can be tanh, sigmoid, ReLU) of the previous hidden state $\mathbf{s}_{t-1}$ and word vector of the current input word $\mathbf{x}_t$
-- $\hat{\mathbf{y}}_t$ is the predicted outcome (a vector of probabilities over all vocabulary) at time $t$
-- $\hat{p}$ is the probability of the predicted word $w_{t+1}$ (at time $t+1$) is equal to the $j$th word in the vocabulary $v_j$ given a sequence of all previous input words, and $\hat{p}(w_{t+1}= v_j|w_t, \dots,w_1)$ is equal to the $j$th element in $\hat{\mathbf{y}}_t$.
-
-
-At each time point, the $\mathbf{s}_{t}$ is a function of $\mathbf{s}_{t-1}$ and $\mathbf{s}_{t-1}$ is also a function of $\mathbf{s}_{t-2}$ etc., so the effects of all the previous input words will be taken into account when predicting the word at $t+1$, this is the recurrent part in RNN.
-
-## The Cost Fucntion of RNN
-
-The loss function at time $t$ for the RNN model above is
-
-$$E_{t}(\hat{y}_{t}, y_{t}) = -\sum_{j=1}^{Voc}y_{t,j}log(\hat{y}_{t,j}), j = 1, 2, \dots, Voc,$$
-
-$$E(\hat{y}, y)= -\frac{1}{T}\sum_{t=1}^{T}E_{t}(\theta),$$
-
-where $y_{t,j}$ is the correct word at time $t$ located at the $j$th element in $\hat{\mathbf{y}}_t$, the loss function $J$ tries to minimize the difference between $y_{t,j}$ and $\hat{y}_{t,j}$ over all word $j$ and time $t$.
-
-
-## Back Propagation of RNN
+<!-- <figure> -->
+<!--   <img src="/post/2019-04-20-RNN_files/figure-html/rnn.jpg" alt="RNN" width=58% height=60%/> -->
+<!--   <figcaption>RNNs, source: Nature</figcaption> -->
+<!-- </figure> -->
 
 ```{R, echo=FALSE}
 DiagrammeR::grViz("
@@ -112,6 +77,43 @@ edge [ color='black' ]; h0-> h1 [xlabel = 'W' ] ; h3->h4;  h1 -> h2 [xlabel = 'W
 }")
 ```
 
+Define 
+
+$$\mathbf{x}_t \in \mathbb{R}^{d}, \mathbf{s}_t \in \mathbb{R}^{D_s}, \mathbf{W} \in \mathbb{R}^{D_s \times D_s}, \mathbf{U} \in \mathbb{R}^{D_s \times d}, \mathbf{V} \in \mathbb{R}^{Voc \times D_s}, \mathbf{\hat{y}} \in \mathbb{R}^{Voc},$$
+
+Converting the figure above into math expressions:
+$$
+\begin{array}{rcl}
+\mathbf{s}_t &=& f\left(\mathbf{W}\mathbf{s}_{t-1} + \mathbf{U}\mathbf{x}_{t}\right)\\
+\mathbf{\hat{y}}_t &=& softmax\left(\mathbf{V}\mathbf{s_t}\right),  t = 1,2,\dots, T\\
+\hat{p}(w_{t+1}&=& v_j|w_t, \dots,w_1) = \hat{y}_{t,j}, j = 1, 2, \dots, Voc
+\end{array}
+$$
+
+where
+
+- $\mathbf{s}_t$ is the hidden state at the time $t$, it is a function ($f$ can be tanh, sigmoid, ReLU) of the previous hidden state $\mathbf{s}_{t-1}$ and word vector of the current input word $\mathbf{x}_t$
+- $\hat{\mathbf{y}}_t$ is the predicted outcome (a vector of probabilities over all vocabulary) at time $t$
+- $\hat{p}$ is the probability of the predicted word $w_{t+1}$ (at time $t+1$) is equal to the $j$th word in the vocabulary $v_j$ given a sequence of all previous input words, and $\hat{p}(w_{t+1}= v_j|w_t, \dots,w_1)$ is equal to the $j$th element in $\hat{\mathbf{y}}_t$.
+
+
+At each time point, the $\mathbf{s}_{t}$ is a function of $\mathbf{s}_{t-1}$ and $\mathbf{s}_{t-1}$ is also a function of $\mathbf{s}_{t-2}$ etc., so the effects of all the previous input words will be taken into account when predicting the word at $t+1$, this is the recurrent part in RNN.
+
+## The Cost Fucntion of RNN
+
+The loss function at time $t$ for the RNN model above is
+
+$$E_{t}(\hat{y}_{t}, y_{t}) = -\sum_{j=1}^{Voc}y_{t,j}log(\hat{y}_{t,j}), j = 1, 2, \dots, Voc,$$
+
+$$E(\hat{y}, y)= -\frac{1}{T}\sum_{t=1}^{T}E_{t}(\theta),$$
+
+where $y_{t,j}$ is the correct word at time $t$ located at the $j$th element in $\hat{\mathbf{y}}_t$, the loss function $J$ tries to minimize the difference between $y_{t,j}$ and $\hat{y}_{t,j}$ over all word $j$ and time $t$.
+
+
+## Back Propagation of RNN
+
+
+
 Our goal is to compute the gradient of total cost (the cost function is the loss $E$ across all t, loss function is the $E_t$ at time t) $E(\hat{y}, y)$ wrt $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$. From the figure above, the gradient wrt $\mathbf{V}$ only involves the values at current time $t$, while the gradients wrt $\mathbf{W}$ and $\mathbf{U}$ involves the values at the current time $t$ and at all the previous time. 
 
 Notice $E(\hat{y}, y)$ is the sum of $E_{t}(\hat{y}_{t}, y_{t})$, each of which involves $\mathbf{W}, \mathbf{U}$ and $\mathbf{V}$, so we have
@@ -131,7 +133,7 @@ where $\mathbf{h}_t = \mathbf{W}\mathbf{s}_{t-1} +\mathbf{U}\mathbf{x}_t$.
 Since $\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}} =  \frac{\partial{\mathbf{s}_{t-1}}}{\partial{\mathbf{W}}} + \frac{\partial{s}_{t-1}}{\partial{s}_{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}}$, plug it into above equation, we have
 
 $$\begin{array}{rcl} \frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}} &=& \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}_t}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{t-1}}\frac{\partial{s}_{t-1}}{\partial{\mathbf{W}}} + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{t-2}}\frac{\partial{s}_{t-2}}{\partial{\mathbf{W}}} + \dots + \frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{s}_t}{\partial{s}_{1}}\frac{\partial{s}_{1}}{\partial{\mathbf{W}}}\\
-&=& \sum_{t=2}^{T}\sum_{k=1}^{t-1}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{s}_{t-k}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{W}}}\end{array}, \mathbf{W} \in \mathbb{R}^{D_s\times D_s}$$.
+&=& \sum_{t=1}^{T}\sum_{k=1}^{t}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}}\frac{\partial{s}_t}{\partial{s}_{t-k}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{W}}}\end{array}, \mathbf{W} \in \mathbb{R}^{D_s\times D_s}$$.
 
 
 Similarly, the gradient of $E_t$ wrt $\mathbf{U}$ is
@@ -153,11 +155,11 @@ $$
 continue this plug-in procedure until 0 time point, finally we have
 
 $$
-\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \sum_{t=2}^{T}\sum_{k=1}^{t-1}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-k}}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{U}}}
+\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}} =  \sum_{t=1}^{T}\sum_{k=1}^{t}\frac{\partial{E}_t}{\partial{\mathbf{s}_t}} \frac{\partial{\mathbf{s}}_t}{\partial{\mathbf{s}_{t-k}}}\frac{\partial{s}_{t-k}}{\partial{\mathbf{U}}}
 $$
 Notice that the gradient wrt $\mathbf{W}$ and $\mathbf{U}$ at time $t$ is dependent on both current and all previous values.
 
-> \textbf{Practice}
+> PRACTICE: 
 Based on a sketch of network at a single timestep:
 ```{R, echo=FALSE}
 DiagrammeR::grViz("
@@ -181,8 +183,7 @@ edge [ color='black' ]; h2->z; x2->h2
 }")
 ```
 Consider feed-forward $$
-Draw the 'unrolled' network for the previous 3 timesteps (t-1, t-2, t-3) and compute $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}}\bigg\rvert_{t-1}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}}\bigg\rvert_{t-1}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{V}}}}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{x}_t}}}=$
-
+Draw the 'unrolled' network for the previous 3 timesteps (t-1, t-2, t-3) and compute $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{U}}}}\bigg\rvert_{t-1}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{W}}}}\bigg\rvert_{t-1}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{V}}}}=$, $\frac{\partial{E}_{t}}{\partial{\mathbf{\mathbf{x}_t}}}=$, the complexity of back propagation wrt the model parameters across the entire T timesteps, $\sum_{t=1}^T J^{(t)}$, is $O\left[T(VD_h + dD_h + t(D_h^2 + dD_h))\right]$, the costy term is $VD_h$, the dimension of the whole vocabulary, since $V>>D_h$,  
 
 
 ## The Vanishing Gradient Problem
