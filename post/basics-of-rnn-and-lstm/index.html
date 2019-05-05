@@ -57,7 +57,7 @@ The cons of traditional language models assumes independence among words (this i
 
 <meta itemprop="datePublished" content="2019-04-24T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-04-24T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1252">
+<meta itemprop="wordCount" content="1973">
 
 
 
@@ -245,6 +245,40 @@ MathJax.Hub.Config({
 </div>
 <div id="lstm" class="section level2">
 <h2>LSTM</h2>
+<div id="the-model-1" class="section level3">
+<h3>The Model</h3>
+<p>LSTM is one of the solutions to the vanishing gradient problems in RNN. LSTM operations are, at time <span class="math inline">\(t\)</span>,</p>
+<div id="htmlwidget-3" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"diagram":"\ndigraph a_nice_graph {\nrankdir=BT;\n\nsubgraph {\nrank = same\nx1 [label = <x<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape=circle,fixedsize=true]\nx2 [style = invis]\nx3 [label = <x<FONT POINT-SIZE=\"8\"><SUB>t+1<\/SUB><\/FONT>>, shape = circle, fixedsize = true]\nx1->x2 [style = invis, minlen = 14]; x2->x3 [style = invis, minlen =2]\n}\n\nsubgraph {\nrank = same\na1 [label = <out<FONT POINT-SIZE=\"8\"><SUB>t-1<\/SUB><\/FONT>>, shape=circle,fixedsize=true]\na2 [ shape=point,fixedsize=true]\na3 [ shape=point,fixedsize=true]\na4 [ shape=point,fixedsize=true]\na5 [ shape=point,fixedsize=true]\na6 [ shape=point,fixedsize=true]\n#a7 [style = invis]\na8 [label = <out<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape=circle,fixedsize=true]\na9 [style = invis]\na1->a2 [minlen=0.5]; a2->a3 [arrowhead=none, minlen = 1]; a3->a4 [arrowhead=none, minlen=4]; a4->a5->a6 [arrowhead=none]; edge [style = invis] a6->a8; edge [style = dotted, minlen = 2] a8->a9; a9->a8 [color = \"red\"]\n}\n\nsubgraph {\nrank = same\nb1 [label = <&sigma;>, shape = box]\nb2 [label = \"tanh\", shape = box]\nb3 [label = <&sigma;>, shape = box]\nb4 [label = <&sigma;>, shape = box]\nedge [style = invis] b1->b2->b3->b4\n}\n\nsubgraph {\nrank = same\nc0 [label = \"x\", shape = box, fixedsize = true]\nc1 [label = <f<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle,fixedsize=true]\nc2 [label = <a<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle,fixedsize=true]\nc3 [label = <i<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle,fixedsize=true]\nc4 [label = <o<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle,fixedsize=true]\nc5 [label = \"x\", shape = box,fixedsize=true]\nc4->c5 [minlen=1]; edge [style = invis]c0->c1->c2->c3->c4\n}\n\nsubgraph{\nrank = same\nd0 [label=\"tanh\", shape = box]\nd1 [label = \"x\", shape = box]\nd3 [style = invis]\nd2 [label = \"tanh\", shape = box]\nedge [style = invis] d0->d1->d3->d2\n}\n\nsubgraph{\nrank = same\ne1 [label = <state<FONT POINT-SIZE=\"8\"><SUB>t-1<\/SUB><\/FONT>>, shape = circle, fixedsize= true]\ne2 [label = \"x\", shape = box, fixedsize= true]\ne3 [label = \"+\", shape = box, fixedsize= true]\ne4 [label = <state<FONT POINT-SIZE=\"8\"><SUB>t<\/SUB><\/FONT>>, shape = circle, fixedsize= true]\ne5 [style = invis]\ne1->e2 [minlen = 1]; e2->e3 [minlen = 4]; e3->e4 [minlen=5.2]; e4->e5 [style = dotted, minlen = 2]; e5->e4 [style = dotted, minlen = 2, color = \"blue\"]\n}\nx1->a2; a3->b1; a4->b2; a5->b3; a6->b4; b1->c1; b2->c2; b3->c3; b4->c4; c2->d1; c3->d1; d2->c5;d0->c0; c0->a1;  x3->a9 [style = dotted]; x2->a8 [color = red];  c5->a8; c5->d2 [color =\"blue\"]; a8->c5 [color =\"blue\"]; c1->e2; d1->e3;  edge [ dir = none, color= \"blue\"] d2->e4; edge [ dir = none, color = \"black\" ] d2->e4; d0->e1 [arrowhead = none];\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li>activation: the new memory cell, controlling whether current input <span class="math inline">\(\mathbf{x}_t\)</span> matters or not, <span class="math display">\[\mathbf{a}_t = tanh(\mathbf{W}_a\mathbf{x}_t+\mathbf{U}_a\mathbf{out}_{t-1}+\mathbf{b}_a)\]</span></li>
+<li>input gate: controlling whether <span class="math inline">\(\mathbf{a}_t\)</span> matters in <span class="math inline">\(\mathbf{state}_t\)</span> or not. If <span class="math inline">\(\mathbf{i}_t\)</span> is 1, <span class="math inline">\(\mathbf{a}_{t-1}\)</span> will be dirrectly copied at time <span class="math inline">\(t\)</span>, if <span class="math inline">\(\mathbf{i}_t\)</span> is 0, <span class="math inline">\(\mathbf{a}_{t-1}\)</span> will be completely ignored at time <span class="math inline">\(t\)</span>. <span class="math display">\[\mathbf{i}_t = \sigma(\mathbf{W}_i\mathbf{x}_t + \mathbf{U}_i \mathbf{out}_{t-1} + \mathbf{b}_i)\]</span></li>
+<li>forget gate: controlling how much <span class="math inline">\(state_{t-1}\)</span> influence <span class="math inline">\(state_t\)</span> (how much past state should matter now), if <span class="math inline">\(\mathbf{f}_t\)</span> is 1, <span class="math inline">\(state_{t=1}\)</span> will be dirrectly copied at time <span class="math inline">\(t\)</span>, if <span class="math inline">\(\mathbf{f}_t\)</span> is 0, <span class="math inline">\(state_{t_1}\)</span> will be completely ignored at time <span class="math inline">\(t\)</span>,</li>
+</ul>
+<p><span class="math display">\[\mathbf{f}_t = \sigma(\mathbf{W}_f\mathbf{x}_t + \mathbf{U}_f \mathbf{out}_{t-1} + \mathbf{b}_f)\]</span></p>
+<ul>
+<li>output gate: controlling how much <span class="math inline">\(\mathbf{state}_t\)</span> is exposed in <span class="math inline">\(\mathbf{out}_t\)</span>,</li>
+</ul>
+<p><span class="math display">\[\mathbf{o}_t = \sigma(\mathbf{W}_o\mathbf{x}_t + \mathbf{U}_o \mathbf{out}_{t-1} + \mathbf{b}_o)\]</span> leading to:</p>
+<ul>
+<li>internal state:</li>
+</ul>
+<p><span class="math display">\[\mathbf{state}_t = \mathbf{a}_t \odot \mathbf{i}_t + \mathbf{f}_t\odot \mathbf{state}_{t-1}\]</span></p>
+<ul>
+<li>output at time <span class="math inline">\(t\)</span>:</li>
+</ul>
+<p><span class="math display">\[\mathbf{out}_t = tanh(\mathbf{state}_{t})\odot \mathbf{o}_t\]</span></p>
+<p>Due to the elementwise product <span class="math inline">\(\odot\)</span> in <span class="math inline">\([\mathbf{f}_t\odot \mathbf{state}_{t-1}, \mathbf{a}_t \odot \mathbf{i}_t, tanh(\mathbf{state}_{t})\odot \mathbf{o}_t]\)</span>, in the back propagations wrt parameters (<span class="math inline">\(\mathbf{W}, \mathbf{U}, \mathbf{b}, \mathbf{x}\)</span> in activation, forget, input and output gate), <span class="math inline">\(\mathbf{state}_{t-1}, \mathbf{f}_t, \mathbf{a}_t, \mathbf{i}_t, \mathbf{o}_t, \mathbf{state}_{t}\)</span> will be directly copied (completely or partially depenending on the gates) to current time step rather than being involved in matrix multiplication , thus the vanishing gradient problems in RNN can be solved.</p>
+</div>
+<div id="the-back-propagation-of-lstm" class="section level3">
+<h3>The Back Propagation of LSTM</h3>
+<p>Let <span class="math inline">\(\mathbf{z}_o, \mathbf{z}_i, \mathbf{z}_f, \mathbf{z}_a\)</span> represents the <span class="math inline">\(\mathbf{W}\mathbf{x}_t + \mathbf{U} \mathbf{out}_{t-1} + \mathbf{b}\)</span> in <span class="math inline">\(\mathbf{a}_t, \mathbf{f}_t,\mathbf{i}_t, \mathbf{o}_t\)</span>, respectively, and let <span class="math inline">\(\frac{\partial{E}}{\partial{\mathbf{out}_t}}=(\mathbf{out}_t-\mathbf{y}_t) + (\mathbf{out}_{t+1}-\mathbf{y}_{t+1})\frac{\partial{\mathbf{out}_{t+1}}}{\partial{\mathbf{out}_t}} = \mathbf{\delta}_t + \mathbf{\delta}_{t+1}\frac{\partial{\mathbf{out}_{t+1}}}{\partial{\mathbf{out}_t}}\)</span> (the first term corresponds to the red solid line, the second term, the gradient at future time steps, corresponding to the red dotted line), then following the blue line in the flowchart,</p>
+<p><span class="math display">\[\frac{\partial{E}}{\partial{\mathbf{s}_t}}  =\frac{\partial{E}}{\partial{\mathbf{out}_t}}\odot \mathbf{o}_t\odot[1-tanh^2(\mathbf{s}_t)] + \frac{\partial{E}}{\partial{\mathbf{s}_{t+1}}}\odot\mathbf{f}_{t+1},\]</span> where the first term corresponding to the blue solid back propagation line, the second term comes from the blue dotted line.</p>
+<p>The gradient of <span class="math inline">\(\mathbf{s}_t\)</span> involves the gradient of future state <span class="math inline">\(\mathbf{s}_{t+1}\)</span>, when <span class="math inline">\(t\)</span> is the last time step, the second term in <span class="math inline">\(\frac{\partial{E}}{\partial{\mathbf{s}_t}}\)</span> will be <span class="math inline">\(\mathbf{0}\)</span>.</p>
+<p>Next,</p>
+<p><span class="math display">\[\frac{\partial{E}}{\partial{\mathbf{z}_{a_t}}} = \frac{\partial{E}}{\partial{\mathbf{s}_t}}\odot\mathbf{i}_t \odot[1-tanh^2(\mathbf{z}_{a_t})],\]</span> <span class="math display">\[\frac{\partial{E}}{\partial{\mathbf{z}_{o_t}}}=\frac{\partial{E}}{\partial{\mathbf{out}_t}}\odot tanh(\mathbf{s}_t)\odot \sigma_o\odot(1-\sigma_o),\]</span> <span class="math display">\[\frac{\partial{E}}{\partial{\mathbf{z}_{f_t}}} =  \frac{\partial{E}}{\partial{\mathbf{s}_t}}\odot\mathbf{s}_{t-1}\odot \sigma_f\odot(1-\sigma_f),\]</span> <span class="math display">\[\frac{\partial{E}}{\partial{\mathbf{z}_{i_t}}} = \frac{\partial{E}}{\partial{\mathbf{s}_t}}\odot\mathbf{a}_t \odot \sigma_i\odot(1-\sigma)_i.\]</span></p>
+<p>Notice, <span class="math inline">\(\frac{\partial{E}}{\partial{\mathbf{out}_t}}\)</span> involves <span class="math inline">\(\mathbf{\delta}\)</span> at time <span class="math inline">\(t\)</span> and gradient from future time steps, <span class="math inline">\(\frac{\partial{E}}{\partial{\mathbf{s}_t}}\)</span> also involves gradient wrt <span class="math inline">\(\mathbf{s}\)</span> at time <span class="math inline">\(t\)</span> and gradient at future time steps, because from the flowchart of LSTM, each gates at time <span class="math inline">\(t\)</span> will be involved in all the future time steps.</p>
+</div>
 </div>
 </div>
 

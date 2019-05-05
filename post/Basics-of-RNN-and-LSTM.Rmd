@@ -196,3 +196,116 @@ if the function $f$ is a sigmoid or tanh function, the gradient at the end sides
 
 
 ## LSTM
+
+### The Model
+LSTM is one of the solutions to the vanishing gradient problems in RNN. LSTM operations are, at time $t$,
+
+```{R, echo=FALSE}
+DiagrammeR::grViz("
+digraph a_nice_graph {
+rankdir=BT;
+
+subgraph {
+rank = same
+x1 [label = 'x@_{t}', shape=circle,fixedsize=true]
+x2 [style = invis]
+x3 [label = 'x@_{t+1}', shape = circle, fixedsize = true]
+x1->x2 [style = invis, minlen = 14]; x2->x3 [style = invis, minlen =2]
+}
+
+subgraph {
+rank = same
+a1 [label = 'out@_{t-1}', shape=circle,fixedsize=true]
+a2 [ shape=point,fixedsize=true]
+a3 [ shape=point,fixedsize=true]
+a4 [ shape=point,fixedsize=true]
+a5 [ shape=point,fixedsize=true]
+a6 [ shape=point,fixedsize=true]
+#a7 [style = invis]
+a8 [label = 'out@_{t}', shape=circle,fixedsize=true]
+a9 [style = invis]
+a1->a2 [minlen=0.5]; a2->a3 [arrowhead=none, minlen = 1]; a3->a4 [arrowhead=none, minlen=4]; a4->a5->a6 [arrowhead=none]; edge [style = invis] a6->a8; edge [style = dotted, minlen = 2] a8->a9; a9->a8 [color = 'red']
+}
+
+subgraph {
+rank = same
+b1 [label = <&sigma;>, shape = box]
+b2 [label = 'tanh', shape = box]
+b3 [label = <&sigma;>, shape = box]
+b4 [label = <&sigma;>, shape = box]
+edge [style = invis] b1->b2->b3->b4
+}
+
+subgraph {
+rank = same
+c0 [label = 'x', shape = box, fixedsize = true]
+c1 [label = 'f@_{t}', shape = circle,fixedsize=true]
+c2 [label = 'a@_{t}', shape = circle,fixedsize=true]
+c3 [label = 'i@_{t}', shape = circle,fixedsize=true]
+c4 [label = 'o@_{t}', shape = circle,fixedsize=true]
+c5 [label = 'x', shape = box,fixedsize=true]
+c4->c5 [minlen=1]; edge [style = invis]c0->c1->c2->c3->c4
+}
+
+subgraph{
+rank = same
+d0 [label='tanh', shape = box]
+d1 [label = 'x', shape = box]
+d3 [style = invis]
+d2 [label = 'tanh', shape = box]
+edge [style = invis] d0->d1->d3->d2
+}
+
+subgraph{
+rank = same
+e1 [label = 'state@_{t-1}', shape = circle, fixedsize= true]
+e2 [label = 'x', shape = box, fixedsize= true]
+e3 [label = '+', shape = box, fixedsize= true]
+e4 [label = 'state@_{t}', shape = circle, fixedsize= true]
+e5 [style = invis]
+e1->e2 [minlen = 1]; e2->e3 [minlen = 4]; e3->e4 [minlen=5.2]; e4->e5 [style = dotted, minlen = 2]; e5->e4 [style = dotted, minlen = 2, color = 'blue']
+}
+x1->a2; a3->b1; a4->b2; a5->b3; a6->b4; b1->c1; b2->c2; b3->c3; b4->c4; c2->d1; c3->d1; d2->c5;d0->c0; c0->a1;  x3->a9 [style = dotted]; x2->a8 [color = red];  c5->a8; c5->d2 [color ='blue']; a8->c5 [color ='blue']; c1->e2; d1->e3;  edge [ dir = none, color= 'blue'] d2->e4; edge [ dir = none, color = 'black' ] d2->e4; d0->e1 [arrowhead = none];
+}")
+```
+
+- activation: the new memory cell, controlling whether current input $\mathbf{x}_t$ matters or not,
+$$\mathbf{a}_t = tanh(\mathbf{W}_a\mathbf{x}_t+\mathbf{U}_a\mathbf{out}_{t-1}+\mathbf{b}_a)$$
+- input gate: controlling whether $\mathbf{a}_t$ matters in $\mathbf{state}_t$ or not. If $\mathbf{i}_t$ is 1, $\mathbf{a}_{t-1}$ will be dirrectly copied at time $t$, if $\mathbf{i}_t$ is 0, $\mathbf{a}_{t-1}$ will be completely ignored at time $t$.
+$$\mathbf{i}_t = \sigma(\mathbf{W}_i\mathbf{x}_t + \mathbf{U}_i \mathbf{out}_{t-1} + \mathbf{b}_i)$$
+- forget gate: controlling how much $state_{t-1}$ influence $state_t$ (how much past state should matter now), if $\mathbf{f}_t$ is 1, $state_{t=1}$ will be dirrectly copied at time $t$, if $\mathbf{f}_t$ is 0, $state_{t_1}$ will be completely ignored at time $t$,
+
+$$\mathbf{f}_t = \sigma(\mathbf{W}_f\mathbf{x}_t + \mathbf{U}_f \mathbf{out}_{t-1} + \mathbf{b}_f)$$
+
+- output gate: controlling how much $\mathbf{state}_t$ is exposed in $\mathbf{out}_t$,
+
+$$\mathbf{o}_t = \sigma(\mathbf{W}_o\mathbf{x}_t + \mathbf{U}_o \mathbf{out}_{t-1} + \mathbf{b}_o)$$
+leading to:
+
+- internal state:
+
+$$\mathbf{state}_t = \mathbf{a}_t \odot \mathbf{i}_t + \mathbf{f}_t\odot \mathbf{state}_{t-1}$$
+
+- output at time $t$:
+
+$$\mathbf{out}_t = tanh(\mathbf{state}_{t})\odot \mathbf{o}_t$$
+
+Due to the elementwise product $\odot$ in $[\mathbf{f}_t\odot \mathbf{state}_{t-1}, \mathbf{a}_t \odot \mathbf{i}_t, tanh(\mathbf{state}_{t})\odot \mathbf{o}_t]$, in the back propagations wrt parameters ($\mathbf{W}, \mathbf{U}, \mathbf{b}, \mathbf{x}$ in activation, forget, input and output gate), $\mathbf{state}_{t-1}, \mathbf{f}_t,  \mathbf{a}_t, \mathbf{i}_t, \mathbf{o}_t, \mathbf{state}_{t}$ will be directly copied (completely or partially depenending on the gates) to current time step rather than being involved in matrix multiplication , thus the vanishing gradient problems in RNN can be solved.
+
+### The Back Propagation of LSTM
+Let $\mathbf{z}_o, \mathbf{z}_i, \mathbf{z}_f, \mathbf{z}_a$ represents the $\mathbf{W}\mathbf{x}_t + \mathbf{U} \mathbf{out}_{t-1} + \mathbf{b}$ in $\mathbf{a}_t, \mathbf{f}_t,\mathbf{i}_t, \mathbf{o}_t$, respectively, and
+let $\frac{\partial{E}}{\partial{\mathbf{out}_t}}=(\mathbf{out}_t-\mathbf{y}_t) + (\mathbf{out}_{t+1}-\mathbf{y}_{t+1})\frac{\partial{\mathbf{out}_{t+1}}}{\partial{\mathbf{out}_t}} = \mathbf{\delta}_t + \mathbf{\delta}_{t+1}\frac{\partial{\mathbf{out}_{t+1}}}{\partial{\mathbf{out}_t}}$ (the first term corresponds to the red solid line, the second term, the gradient at future time steps, corresponding to the red dotted line), then following the blue line in the flowchart, 
+
+$$\frac{\partial{E}}{\partial{\mathbf{s}_t}}  =\frac{\partial{E}}{\partial{\mathbf{out}_t}}\odot \mathbf{o}_t\odot[1-tanh^2(\mathbf{s}_t)] + \frac{\partial{E}}{\partial{\mathbf{s}_{t+1}}}\odot\mathbf{f}_{t+1},$$
+where the first term corresponding to the blue solid back propagation line, the second term comes from the blue dotted line.
+
+The gradient of $\mathbf{s}_t$ involves the gradient of future state $\mathbf{s}_{t+1}$, when $t$ is the last time step, the second term in $\frac{\partial{E}}{\partial{\mathbf{s}_t}}$ will be $\mathbf{0}$. 
+
+Next, 
+
+$$\frac{\partial{E}}{\partial{\mathbf{z}_{a_t}}} = \frac{\partial{E}}{\partial{\mathbf{s}_t}}\odot\mathbf{i}_t \odot[1-tanh^2(\mathbf{z}_{a_t})],$$ 
+$$\frac{\partial{E}}{\partial{\mathbf{z}_{o_t}}}=\frac{\partial{E}}{\partial{\mathbf{out}_t}}\odot tanh(\mathbf{s}_t)\odot \sigma_o\odot(1-\sigma_o),$$ 
+$$\frac{\partial{E}}{\partial{\mathbf{z}_{f_t}}} =  \frac{\partial{E}}{\partial{\mathbf{s}_t}}\odot\mathbf{s}_{t-1}\odot \sigma_f\odot(1-\sigma_f),$$ 
+$$\frac{\partial{E}}{\partial{\mathbf{z}_{i_t}}} = \frac{\partial{E}}{\partial{\mathbf{s}_t}}\odot\mathbf{a}_t \odot \sigma_i\odot(1-\sigma)_i.$$ 
+
+Notice, $\frac{\partial{E}}{\partial{\mathbf{out}_t}}$ involves $\mathbf{\delta}$ at time $t$ and gradient from future time steps, $\frac{\partial{E}}{\partial{\mathbf{s}_t}}$ also involves gradient wrt $\mathbf{s}$ at time $t$ and gradient at future time steps, because from the flowchart of LSTM, each gates at time $t$ will be involved in all the future time steps. 
