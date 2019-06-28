@@ -6,10 +6,20 @@
     <description>Recent content in NLP on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 07 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/nlp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Window-based Name Entity Recognition</title>
+      <link>/post/window_based_name_entity_recognition/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/window_based_name_entity_recognition/</guid>
+      <description>This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+ Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O].</description>
+    </item>
     
     <item>
       <title>Project: NLP in Automated Essay Scoring</title>

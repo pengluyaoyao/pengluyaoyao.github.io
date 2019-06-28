@@ -1,0 +1,144 @@
+---
+autoCollapseToc: true
+title: "Window-based Name Entity Recognition"
+author: "Luyao Peng"
+date: '2019-05-06'
+categories:
+  - Stanford NLP and Deep Learning
+tags:
+  - Deep Learning
+  - NLP
+  - Name Entity Recognition
+draft: false
+header-includes: \usepackage{amsmath} \usepackage{bm} 
+---
+
+This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+
+- Person (PER):
+- Organization (ORG):
+- Location (LOC):
+- Miscellaneous (MISC):
+- Null (O): the word do not represent a named entity and most of the words fall into this categroy.
+
+This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]. Example as follow:
+
+<img src="/post/Window_based_Name_Entity_Recognition_files/figure-html/fig1.png" alt="Luyao Peng" width=90% height=80%/>
+
+
+# Window-based Model of NER (Baseline Model)
+
+Let $\mathbf{x} = [\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_T]$ be a sentence of length $T$, where $\mathbf{x}_t, t=1, 2, \dots,T$ is a one-hot vector of size of the vocabulary, representing the index of the word at position $t$. To construct the windowed input on the raw input sentence $\mathbf{x}$, given the window size $w$, the windowed-input for the $t$th word in $\mathbf{x}$ is $\mathbf{x}^{t} = [\mathbf{x}_{t-w}, \dots, \mathbf{x}_{t}, \dots, \mathbf{x}_{t+w}]$. For the first word in $\mathbf{x}$, the windowed-input is   $\mathbf{x}^{1} = [<start>,\dots, <start>, \mathbf{x}_{1}, \dots, \mathbf{x}_{1+w}]$, where the number of $<start>$ is $w$. Similarly, the the last word in $\mathbf{x}$, the windowed-input is   $\mathbf{x}^{T} = [\mathbf{x}_{T-w},\dots, \mathbf{x}_{T}, <end>, \dots. <end>]$,  where the number of $<end>$ is $w$. Each $\mathbf{x}$ corresponds to the lables $\mathbf{y} = [\mathbf{y}^1, \mathbf{y}^2, \dots, \mathbf{y}^T]$ of the same length $T$, each $\mathbf{y}^t$ is also a one-hot vector. When constructing the windowed input from $\mathbf{x}$ for the word at $t$, its corresponding label vector will be just  $\mathbf{y}^t$ and the label of the word is at index $i$ in $\mathbf{y}^t$, denoted by $y_i^t$.
+
+- Example:
+$\mathbf{x} = [\mbox{Jim}_1 \mbox{ bought}_2 \mbox{ 300}_3 \mbox{ shares}_3 \mbox{ of}_4 \mbox{ Acme}_5 \mbox{ Corp}_5 \mbox{ in}_6 \mbox{ 2006}_7.]$, where $T = 7$. Let $w= 1$, then 
+
+$$\mathbf{x}^{1} = [<start>, \mbox{ Jim}, \mbox{ bought}], \mathbf{y}^1 = [1,0,0,0,0] \rightarrow{PER, \mbox{label of 'Jim'}}$$
+$$\dots$$
+$$\mathbf{x}^{7} = [\mbox{in}, \mbox{ 2006}, <end>], \mathbf{y}^7 = [0,0,0,0,1] \rightarrow{O, \mbox{label of '2006'}}$$
+
+- Model:
+Using the windowed input $\mathbf{x}^t$, want to predict the label, $\mathbf{y}^t$, for the central word in $\mathbf{x}^t$, i.e. the $t$th word in the raw input $\mathbf{x}$.
+
+Define $\mathbf{E} \in \mathbb{R}^{V\times D}, \mathbf{W} \in \mathbb{R}^{D \times H}, \mathbf{U} \in \mathbb{R}^{H\times 5}, \mathbf{b}_1 \in \mathbb{R}^{1\times H}, \mathbf{b}_2 \in \mathbb{R}^{1\times 5}$, for the $t$th word in the raw input $\mathbf{x}$, its windowed input is $\mathbf{x}^t = [\mathbf{x}^{t-w}, \dots, \mathbf{x}^t, \dots, \mathbf{x}^{t+w}],$ the model for this $\mathbf{x}^t$ and a window size $w$ is
+
+$$\begin{array}{rcl} \mathbf{e}^t &=& [\mathbf{x}^{t-w}\mathbf{E}, \dots, \mathbf{x}^t\mathbf{E}, \dots, \mathbf{x}^{t+w}\mathbf{E}]\\
+\mathbf{h}^t &=& ReLU(\mathbf{e}^t\mathbf{W} + \mathbf{b}_1)\\
+\hat{\mathbf{y}}^t &=& softmax(\mathbf{h}^t\mathbf{U}+\mathbf{b}_2)\\
+J &=&  CE(\mathbf{y}^t, \hat{\mathbf{y}^t}) \\
+&=& -\sum_iy_i^t log(\hat{y_i^t})
+\end{array}$$
+
+- Code:
+
+1. Load and preprocess data
+
+The first two (sentence, label) pairs from the data are
+
+```python
+[(['EU', 'rejects', 'German', 'call', 'to', 'boycott', 'British', 'lamb', '.'],
+  ['ORG', 'O', 'MISC', 'O', 'O', 'O', 'MISC', 'O', 'O']),
+ (['Peter', 'Blackburn'], ['PER', 'PER'])]
+```
+
+After loading the data, a dictionary of 'token to id' (tok2id) is built:
+
+```python
+{'eu': 1,
+ 'rejects': 2,
+ 'german': 3,
+ 'call': 4,
+ 'to': 5,
+ 'boycott': 6,
+ 'british': 7,
+ 'lamb': 8,
+ '.': 9,
+ 'peter': 10,
+ 'blackburn': 11,
+ 'CASE:aa': 11,
+ 'CASE:AA': 12,
+ 'CASE:Aa': 13,
+ 'CASE:aA': 14,
+ '<s>': 15,
+ '</s>': 16,
+ 'UUUNKKK': 17}
+```
+
+In the dictionary, in addition to the word in each sentences, the 4 case types of the word ('CASE:') and the start ("$<s>$"), the end ("$</s>$") are also added to the dictionary for later use.
+
+Having the tok2id dictionary, each word is represented by a vector of [id, case type], each sentence is a list of [id, case type], and each sentence and its corresponding labels are in a tuple, in the example we have 2 sentences, so the *train_data* and *dev_data* returned from the **load_and_preprocess_data** is a list of 2 tuples (if the train and dev are the same dataset):
+
+```python
+[([[1, 12],
+   [2, 11],
+   [3, 13],
+   [4, 11],
+   [5, 11],
+   [6, 11],
+   [7, 13],
+   [8, 11],
+   [9, 14]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4]),
+ ([[10, 13], [11, 13]], [0, 0])]
+```
+
+*train* and *dev* returned from the **load_and_preprocess_data** are the raw data as 
+```python
+[(['EU', 'rejects', 'German', 'call', 'to', 'boycott', 'British', 'lamb', '.'],
+  ['ORG', 'O', 'MISC', 'O', 'O', 'O', 'MISC', 'O', 'O']),
+ (['Peter', 'Blackburn'], ['PER', 'PER'])]
+```
+
+*helper* returned from the **load_and_preprocess_data** is a class with two attributes: tok2id, max_length (in our example is 9).
+
+2. Load embeddings
+
+For each word, the word vector is of the order 50, the embedding matrix is of the shape 19*50 (the number of word in tok2dic is 18, in the function the rows in the embeddings +1, with the first vector all 0s),
+
+```python
+embeddings = np.array(np.random.randn(len(helper.tok2id) + 1, EMBED_SIZE), dtype=np.float32)
+embeddings[0] = 0.
+```
+
+Since in data, we have a file of all vocabulary (vocab.txt, containing 100232 words) and a file with all word vectors (wordVector.txt, containing 100232 vectors), we then pair the $i$th word in the vocabulary with the $i$th vector using a function **load_word_vector_mapping()**, the first 10 records in the resulting ordered dictionary (ret) are
+```python
+['UUUNKKK', 'the', ',', '.', 'of', 'and', 'in', '"', 'a', 'to'],
+[array([.....size50]),array([.....size50]),.....,array([.....size50])]
+```
+10 words (keys) matched with 10 arrays (values), and each array has order of 50, the embedding size. 
+
+For our 2-sentence tiny example, the word vectors of the 18 words in tok2id are found from ret, then constituting an embedding matrix for the 18 words
+
+```python
+for word, vec in load_word_vector_mapping(args.vocab, args.vectors).items():
+    word = normalize(word)
+    if word in helper.tok2id:
+        embeddings[helper.tok2id[word]] = vec
+embeddings.shape
+Out[109]: (19, 50)
+```
+
+
+3. Making windowed input and output pair
+
+

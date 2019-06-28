@@ -23,7 +23,7 @@
     <item>
       <title>Deep Learning</title>
       <link>/tags/deep-learning/</link>
-      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/deep-learning/</guid>
       <description></description>
@@ -77,9 +77,18 @@
     <item>
       <title>NLP</title>
       <link>/tags/nlp/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/nlp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Name Entity Recognition</title>
+      <link>/tags/name-entity-recognition/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/name-entity-recognition/</guid>
       <description></description>
     </item>
     

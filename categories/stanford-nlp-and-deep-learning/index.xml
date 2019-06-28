@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Deep Learning on Luyao Peng&#39;s Blog</title>
-    <link>/tags/deep-learning/</link>
-    <description>Recent content in Deep Learning on Luyao Peng&#39;s Blog</description>
+    <title>Stanford NLP and Deep Learning on Luyao Peng&#39;s Blog</title>
+    <link>/categories/stanford-nlp-and-deep-learning/</link>
+    <description>Recent content in Stanford NLP and Deep Learning on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 06 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/stanford-nlp-and-deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       <guid>/post/window_based_name_entity_recognition/</guid>
       <description>This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
  Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O].</description>
-    </item>
-    
-    <item>
-      <title>Project: Dependency Parsing Using Deep Learning NN Model</title>
-      <link>/post/dependency-parsing/</link>
-      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
-      
-      <guid>/post/dependency-parsing/</guid>
-      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parsing model is Penn Treebank, and each sentence has &amp;lsquo;word&amp;rsquo;, &amp;lsquo;POS&amp;rsquo;, &amp;lsquo;head&amp;rsquo; and &amp;lsquo;label&amp;rsquo;,</description>
     </item>
     
   </channel>

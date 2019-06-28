@@ -1,7 +1,7 @@
 ---
 autoCollapseToc: true
 title: Basics of RNN and LSTM
-author: ''
+author: 'Luyao Peng'
 date: '2019-04-24'
 categories:
   - Deep Learning

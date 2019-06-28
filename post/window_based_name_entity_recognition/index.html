@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Window-based Name Entity Recognition - Luyao Peng&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Luyao Peng" /><meta name="description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+ Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="/post/window_based_name_entity_recognition/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Window-based Name Entity Recognition" />
+<meta property="og:description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+ Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/window_based_name_entity_recognition/" />
+<meta property="article:published_time" content="2019-05-06T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-05-06T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="Window-based Name Entity Recognition">
+<meta itemprop="description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+ Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O].">
+
+
+<meta itemprop="datePublished" content="2019-05-06T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-05-06T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="885">
+
+
+
+<meta itemprop="keywords" content="Deep Learning,NLP,Name Entity Recognition," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Window-based Name Entity Recognition"/>
+<meta name="twitter:description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+ Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">LP&#39;s NLP Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">LP&#39;s NLP Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Window-based Name Entity Recognition</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-06 </span>
+        <div class="post-category">
+            <a href="/categories/stanford-nlp-and-deep-learning/"> Stanford NLP and Deep Learning </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    
+  </div>
+</div>
+    <div class="post-content">
+      
+
+
+<p>This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:</p>
+<ul>
+<li>Person (PER):</li>
+<li>Organization (ORG):</li>
+<li>Location (LOC):</li>
+<li>Miscellaneous (MISC):</li>
+<li>Null (O): the word do not represent a named entity and most of the words fall into this categroy.</li>
+</ul>
+<p>This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]. Example as follow:</p>
+<p><img src="/post/Window_based_Name_Entity_Recognition_files/figure-html/fig1.png" alt="Luyao Peng" width=90% height=80%/></p>
+<div id="window-based-model-of-ner-baseline-model" class="section level1">
+<h1>Window-based Model of NER (Baseline Model)</h1>
+<p>Let <span class="math inline">\(\mathbf{x} = [\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_T]\)</span> be a sentence of length <span class="math inline">\(T\)</span>, where <span class="math inline">\(\mathbf{x}_t, t=1, 2, \dots,T\)</span> is a one-hot vector of size of the vocabulary, representing the index of the word at position <span class="math inline">\(t\)</span>. To construct the windowed input on the raw input sentence <span class="math inline">\(\mathbf{x}\)</span>, given the window size <span class="math inline">\(w\)</span>, the windowed-input for the <span class="math inline">\(t\)</span>th word in <span class="math inline">\(\mathbf{x}\)</span> is <span class="math inline">\(\mathbf{x}^{t} = [\mathbf{x}_{t-w}, \dots, \mathbf{x}_{t}, \dots, \mathbf{x}_{t+w}]\)</span>. For the first word in <span class="math inline">\(\mathbf{x}\)</span>, the windowed-input is <span class="math inline">\(\mathbf{x}^{1} = [&lt;start&gt;,\dots, &lt;start&gt;, \mathbf{x}_{1}, \dots, \mathbf{x}_{1+w}]\)</span>, where the number of <span class="math inline">\(&lt;start&gt;\)</span> is <span class="math inline">\(w\)</span>. Similarly, the the last word in <span class="math inline">\(\mathbf{x}\)</span>, the windowed-input is <span class="math inline">\(\mathbf{x}^{T} = [\mathbf{x}_{T-w},\dots, \mathbf{x}_{T}, &lt;end&gt;, \dots. &lt;end&gt;]\)</span>, where the number of <span class="math inline">\(&lt;end&gt;\)</span> is <span class="math inline">\(w\)</span>. Each <span class="math inline">\(\mathbf{x}\)</span> corresponds to the lables <span class="math inline">\(\mathbf{y} = [\mathbf{y}^1, \mathbf{y}^2, \dots, \mathbf{y}^T]\)</span> of the same length <span class="math inline">\(T\)</span>, each <span class="math inline">\(\mathbf{y}^t\)</span> is also a one-hot vector. When constructing the windowed input from <span class="math inline">\(\mathbf{x}\)</span> for the word at <span class="math inline">\(t\)</span>, its corresponding label vector will be just <span class="math inline">\(\mathbf{y}^t\)</span> and the label of the word is at index <span class="math inline">\(i\)</span> in <span class="math inline">\(\mathbf{y}^t\)</span>, denoted by <span class="math inline">\(y_i^t\)</span>.</p>
+<ul>
+<li>Example:
+<span class="math inline">\(\mathbf{x} = [\mbox{Jim}_1 \mbox{ bought}_2 \mbox{ 300}_3 \mbox{ shares}_3 \mbox{ of}_4 \mbox{ Acme}_5 \mbox{ Corp}_5 \mbox{ in}_6 \mbox{ 2006}_7.]\)</span>, where <span class="math inline">\(T = 7\)</span>. Let <span class="math inline">\(w= 1\)</span>, then</li>
+</ul>
+<p><span class="math display">\[\mathbf{x}^{1} = [&lt;start&gt;, \mbox{ Jim}, \mbox{ bought}], \mathbf{y}^1 = [1,0,0,0,0] \rightarrow{PER, \mbox{label of &#39;Jim&#39;}}\]</span>
+<span class="math display">\[\dots\]</span>
+<span class="math display">\[\mathbf{x}^{7} = [\mbox{in}, \mbox{ 2006}, &lt;end&gt;], \mathbf{y}^7 = [0,0,0,0,1] \rightarrow{O, \mbox{label of &#39;2006&#39;}}\]</span></p>
+<ul>
+<li>Model:
+Using the windowed input <span class="math inline">\(\mathbf{x}^t\)</span>, want to predict the label, <span class="math inline">\(\mathbf{y}^t\)</span>, for the central word in <span class="math inline">\(\mathbf{x}^t\)</span>, i.e. the <span class="math inline">\(t\)</span>th word in the raw input <span class="math inline">\(\mathbf{x}\)</span>.</li>
+</ul>
+<p>Define <span class="math inline">\(\mathbf{E} \in \mathbb{R}^{V\times D}, \mathbf{W} \in \mathbb{R}^{D \times H}, \mathbf{U} \in \mathbb{R}^{H\times 5}, \mathbf{b}_1 \in \mathbb{R}^{1\times H}, \mathbf{b}_2 \in \mathbb{R}^{1\times 5}\)</span>, for the <span class="math inline">\(t\)</span>th word in the raw input <span class="math inline">\(\mathbf{x}\)</span>, its windowed input is <span class="math inline">\(\mathbf{x}^t = [\mathbf{x}^{t-w}, \dots, \mathbf{x}^t, \dots, \mathbf{x}^{t+w}],\)</span> the model for this <span class="math inline">\(\mathbf{x}^t\)</span> and a window size <span class="math inline">\(w\)</span> is</p>
+<p><span class="math display">\[\begin{array}{rcl} \mathbf{e}^t &amp;=&amp; [\mathbf{x}^{t-w}\mathbf{E}, \dots, \mathbf{x}^t\mathbf{E}, \dots, \mathbf{x}^{t+w}\mathbf{E}]\\
+\mathbf{h}^t &amp;=&amp; ReLU(\mathbf{e}^t\mathbf{W} + \mathbf{b}_1)\\
+\hat{\mathbf{y}}^t &amp;=&amp; softmax(\mathbf{h}^t\mathbf{U}+\mathbf{b}_2)\\
+J &amp;=&amp;  CE(\mathbf{y}^t, \hat{\mathbf{y}^t}) \\
+&amp;=&amp; -\sum_iy_i^t log(\hat{y_i^t})
+\end{array}\]</span></p>
+<ul>
+<li>Code:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Load and preprocess data</li>
+</ol>
+<p>The first two (sentence, label) pairs from the data are</p>
+<pre class="python"><code>[([&#39;EU&#39;, &#39;rejects&#39;, &#39;German&#39;, &#39;call&#39;, &#39;to&#39;, &#39;boycott&#39;, &#39;British&#39;, &#39;lamb&#39;, &#39;.&#39;],
+  [&#39;ORG&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;]),
+ ([&#39;Peter&#39;, &#39;Blackburn&#39;], [&#39;PER&#39;, &#39;PER&#39;])]</code></pre>
+<p>After loading the data, a dictionary of ‘token to id’ (tok2id) is built:</p>
+<pre class="python"><code>{&#39;eu&#39;: 1,
+ &#39;rejects&#39;: 2,
+ &#39;german&#39;: 3,
+ &#39;call&#39;: 4,
+ &#39;to&#39;: 5,
+ &#39;boycott&#39;: 6,
+ &#39;british&#39;: 7,
+ &#39;lamb&#39;: 8,
+ &#39;.&#39;: 9,
+ &#39;peter&#39;: 10,
+ &#39;blackburn&#39;: 11,
+ &#39;CASE:aa&#39;: 11,
+ &#39;CASE:AA&#39;: 12,
+ &#39;CASE:Aa&#39;: 13,
+ &#39;CASE:aA&#39;: 14,
+ &#39;&lt;s&gt;&#39;: 15,
+ &#39;&lt;/s&gt;&#39;: 16,
+ &#39;UUUNKKK&#39;: 17}</code></pre>
+<p>In the dictionary, in addition to the word in each sentences, the 4 case types of the word (‘CASE:’) and the start (“<span class="math inline">\(&lt;s&gt;\)</span>”), the end (“<span class="math inline">\(&lt;/s&gt;\)</span>”) are also added to the dictionary for later use.</p>
+<p>Having the tok2id dictionary, each word is represented by a vector of [id, case type], each sentence is a list of [id, case type], and each sentence and its corresponding labels are in a tuple, in the example we have 2 sentences, so the <em>train_data</em> and <em>dev_data</em> returned from the <strong>load_and_preprocess_data</strong> is a list of 2 tuples (if the train and dev are the same dataset):</p>
+<pre class="python"><code>[([[1, 12],
+   [2, 11],
+   [3, 13],
+   [4, 11],
+   [5, 11],
+   [6, 11],
+   [7, 13],
+   [8, 11],
+   [9, 14]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4]),
+ ([[10, 13], [11, 13]], [0, 0])]</code></pre>
+<p><em>train</em> and <em>dev</em> returned from the <strong>load_and_preprocess_data</strong> are the raw data as</p>
+<pre class="python"><code>[([&#39;EU&#39;, &#39;rejects&#39;, &#39;German&#39;, &#39;call&#39;, &#39;to&#39;, &#39;boycott&#39;, &#39;British&#39;, &#39;lamb&#39;, &#39;.&#39;],
+  [&#39;ORG&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;]),
+ ([&#39;Peter&#39;, &#39;Blackburn&#39;], [&#39;PER&#39;, &#39;PER&#39;])]</code></pre>
+<p><em>helper</em> returned from the <strong>load_and_preprocess_data</strong> is a class with two attributes: tok2id, max_length (in our example is 9).</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Load embeddings</li>
+</ol>
+<p>For each word, the word vector is of the order 50, the embedding matrix is of the shape 19*50 (the number of word in tok2dic is 18, in the function the rows in the embeddings +1, with the first vector all 0s),</p>
+<pre class="python"><code>embeddings = np.array(np.random.randn(len(helper.tok2id) + 1, EMBED_SIZE), dtype=np.float32)
+embeddings[0] = 0.</code></pre>
+<p>Since in data, we have a file of all vocabulary (vocab.txt, containing 100232 words) and a file with all word vectors (wordVector.txt, containing 100232 vectors), we then pair the <span class="math inline">\(i\)</span>th word in the vocabulary with the <span class="math inline">\(i\)</span>th vector using a function <strong>load_word_vector_mapping()</strong>, the first 10 records in the resulting ordered dictionary (ret) are</p>
+<pre class="python"><code>[&#39;UUUNKKK&#39;, &#39;the&#39;, &#39;,&#39;, &#39;.&#39;, &#39;of&#39;, &#39;and&#39;, &#39;in&#39;, &#39;&quot;&#39;, &#39;a&#39;, &#39;to&#39;],
+[array([.....size50]),array([.....size50]),.....,array([.....size50])]</code></pre>
+<p>10 words (keys) matched with 10 arrays (values), and each array has order of 50, the embedding size.</p>
+<p>For our 2-sentence tiny example, the word vectors of the 18 words in tok2id are found from ret, then constituting an embedding matrix for the 18 words</p>
+<pre class="python"><code>for word, vec in load_word_vector_mapping(args.vocab, args.vectors).items():
+    word = normalize(word)
+    if word in helper.tok2id:
+        embeddings[helper.tok2id[word]] = vec
+embeddings.shape
+Out[109]: (19, 50)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Making windowed input and output pair</li>
+</ol>
+</div>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Luyao Peng</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-05-06
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/deep-learning/">Deep Learning</a>
+          <a href="/tags/nlp/">NLP</a>
+          <a href="/tags/name-entity-recognition/">Name Entity Recognition</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/basics-of-rnn-and-lstm/">
+            <span class="next-text nav-default">Basics of RNN and LSTM</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <div id="disqus_thread"></div>
+  <script>
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://luyao-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+  
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Luyao Peng</span>
+  </span>
+</div>
+
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
