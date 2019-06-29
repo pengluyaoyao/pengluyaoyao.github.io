@@ -54,7 +54,7 @@
 
 <meta itemprop="datePublished" content="2019-05-06T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-05-06T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="885">
+<meta itemprop="wordCount" content="2452">
 
 
 
@@ -151,12 +151,7 @@ MathJax.Hub.Config({
       </div>
     </header>
 
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content">
     
-  </div>
-</div>
     <div class="post-content">
       
 
@@ -222,7 +217,7 @@ J &amp;=&amp;  CE(\mathbf{y}^t, \hat{\mathbf{y}^t}) \\
  &#39;&lt;/s&gt;&#39;: 16,
  &#39;UUUNKKK&#39;: 17}</code></pre>
 <p>In the dictionary, in addition to the word in each sentences, the 4 case types of the word (‘CASE:’) and the start (“<span class="math inline">\(&lt;s&gt;\)</span>”), the end (“<span class="math inline">\(&lt;/s&gt;\)</span>”) are also added to the dictionary for later use.</p>
-<p>Having the tok2id dictionary, each word is represented by a vector of [id, case type], each sentence is a list of [id, case type], and each sentence and its corresponding labels are in a tuple, in the example we have 2 sentences, so the <em>train_data</em> and <em>dev_data</em> returned from the <strong>load_and_preprocess_data</strong> is a list of 2 tuples (if the train and dev are the same dataset):</p>
+<p>Having the tok2id dictionary, each word is represented by a vector of [id, case type], each sentence is a list of [id, case type], and each sentence and its corresponding labels are in a tuple, in the example we have 2 sentences, so the <em>train_data</em> and <em>dev_data</em> returned from the <strong>load_and_preprocess_data</strong> are assigned to <em>train</em> and <em>dev</em>, and is a list of 2 tuples (here the train and dev are the same dataset):</p>
 <pre class="python"><code>[([[1, 12],
    [2, 11],
    [3, 13],
@@ -234,11 +229,13 @@ J &amp;=&amp;  CE(\mathbf{y}^t, \hat{\mathbf{y}^t}) \\
    [9, 14]],
   [1, 4, 3, 4, 4, 4, 3, 4, 4]),
  ([[10, 13], [11, 13]], [0, 0])]</code></pre>
-<p><em>train</em> and <em>dev</em> returned from the <strong>load_and_preprocess_data</strong> are the raw data as</p>
+<p><em>train</em> and <em>dev</em> returned from the <strong>load_and_preprocess_data</strong> are the raw data and assigned to <em>train_raw</em> and <em>dev_raw</em>, respectively, as</p>
 <pre class="python"><code>[([&#39;EU&#39;, &#39;rejects&#39;, &#39;German&#39;, &#39;call&#39;, &#39;to&#39;, &#39;boycott&#39;, &#39;British&#39;, &#39;lamb&#39;, &#39;.&#39;],
   [&#39;ORG&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;]),
  ([&#39;Peter&#39;, &#39;Blackburn&#39;], [&#39;PER&#39;, &#39;PER&#39;])]</code></pre>
 <p><em>helper</em> returned from the <strong>load_and_preprocess_data</strong> is a class with two attributes: tok2id, max_length (in our example is 9).</p>
+<p>The relation is</p>
+<pre class="python"><code>helper, train, dev, train_raw, dev_raw = return helper, train_data, dev_data,  train, dev </code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Load embeddings</li>
 </ol>
@@ -257,8 +254,275 @@ embeddings[0] = 0.</code></pre>
 embeddings.shape
 Out[109]: (19, 50)</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Making windowed input and output pair</li>
+<li>Making windowed input and output pair
+Each word in the two sentences are featurized as a vector in order of 2 [id, case_type]. The train data (also the dev data) is</li>
 </ol>
+<pre class="python"><code>In: train
+
+Out: [([[1, 12],
+   [2, 11],
+   [3, 13],
+   [4, 11],
+   [5, 11],
+   [6, 11],
+   [7, 13],
+   [8, 11],
+   [9, 14]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4]),
+ ([[10, 13], [11, 13]], [0, 0])]</code></pre>
+<p>The start <span class="math inline">\(&lt;s&gt;\)</span> and end <span class="math inline">\(&lt;/s&gt;\)</span> are featurized as</p>
+<pre class="python"><code>helper.START
+[15,11]
+
+helper.END
+[16,11]</code></pre>
+<p>Using the following code to make pair of ([windowed data], label) for each word</p>
+<pre class="python"><code>def make_windowed_data(data= train, start = helper.START, end = helper.END, window_size = 1):
+
+    windowed_data = []
+    for sentence, label in data:
+        l = len(sentence)
+        sentence_extended = [start]*window_size + sentence + [end]*window_size
+        for i in range(window_size, l+window_size):
+            temp = []
+            for j in range(i-window_size, i+window_size+1):
+                temp.extend(sentence_extended[j])
+
+                window_label = (temp, label[i-window_size])
+            windowed_data.append(window_label)
+
+    return windowed_data
+
+make_windowed_data(train_data, helper.START, helper.END)</code></pre>
+<p>The windowed data returned is</p>
+<pre class="python"><code>[([15, 11, 1, 12, 2, 11], 1),
+ ([1, 12, 2, 11, 3, 13], 4),
+ ([2, 11, 3, 13, 4, 11], 3),
+ ([3, 13, 4, 11, 5, 11], 4),
+ ([4, 11, 5, 11, 6, 11], 4),
+ ([5, 11, 6, 11, 7, 13], 4),
+ ([6, 11, 7, 13, 8, 11], 3),
+ ([7, 13, 8, 11, 9, 14], 4),
+ ([8, 11, 9, 14, 16, 11], 4),
+ ([15, 11, 10, 13, 11, 13], 0),
+ ([10, 13, 11, 13, 16, 11], 0)]</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Define the window model</li>
+</ol>
+<p>Build the model using tensorflow:</p>
+<ul>
+<li>add placeholders for input <span class="math inline">\(\mathbf{x}\)</span>, if window size =1, for the <span class="math inline">\(t\)</span>th word, <span class="math inline">\(t=1, \dots, T\)</span>, <span class="math inline">\(\mathbf{x}^t \in \mathbb{R}^{3*D}, D=50\)</span> so <span class="math inline">\(\mathbf{x} \in \mathbb{R}^{T, 3*D}\)</span> , labels <span class="math inline">\(\mathbf{y}\)</span>, which is a vector of correct lables for the <span class="math inline">\(t\)</span>th word, <span class="math inline">\(\mathbf{y} \in \mathbb{R}^{T*1}\)</span>, dropout is a scalar from 0 to 1:</li>
+</ul>
+<pre class="python"><code>def add_placeholders(self):
+    self.input_placeholder = tf.placeholder(tf.int32, [None, self.config.n_window_features])
+    self.labels_placeholder = tf.placeholder(tf.int32, [None,])
+    self.dropout_placeholder = tf.placeholder(tf.float32)</code></pre>
+<ul>
+<li>create feed dictionary for the placeholders</li>
+</ul>
+<pre class="python"><code> def create_feed_dict(self, inputs_batch, labels_batch=None, dropout=1):
+        feed_dict = {self.input_placeholder: inputs_batch, self.dropout_placeholder: dropout}
+        if labels_batch is not None:
+            feed_dict[self.labels_placeholder] = labels_batch 
+        return feed_dict</code></pre>
+<p>The inputs_batch and labels_batch are obtained as follow:</p>
+<p>(i). make window data and assigned the windowed_data pair for both <em>train</em> and <em>dev</em> as <em>train_examples</em> and <em>dev_set</em>:</p>
+<pre class="python"><code>def preprocess_sequence_data(self, examples):
+    return make_windowed_data(examples, start=helper.START, end=helper.END, window_size=config.window_size)
+
+train_examples = self.preprocess_sequence_data(train)
+dev_set = self.preprocess_sequence_data(dev)</code></pre>
+<p>(ii). make minibatch on the <em>train_examples</em>:
+The <em>train_examples</em> (as well as <em>dev_set</em>) is</p>
+<pre class="python"><code>[([15, 11, 1, 12, 2, 11], 1),
+  ([1, 12, 2, 11, 3, 13], 4),
+  ([2, 11, 3, 13, 4, 11], 3),
+  ([3, 13, 4, 11, 5, 11], 4),
+  ([4, 11, 5, 11, 6, 11], 4),
+  ([5, 11, 6, 11, 7, 13], 4),
+  ([6, 11, 7, 13, 8, 11], 3),
+  ([7, 13, 8, 11, 9, 14], 4),
+  ([8, 11, 9, 14, 16, 11], 4),
+  ([15, 11, 10, 13, 11, 13], 0),
+  ([10, 13, 11, 13, 16, 11], 0)],</code></pre>
+<p>consisting 11 windowed inputs. We want to make minibatch of these 11 inputs:</p>
+<p>first, recombine inputs and labels by grouping inputs into one list and labels into another list</p>
+<pre class="python"><code>In: batches = [np.array(col) for col in zip(*train_examples)]
+    batches
+
+Out: [array([[15, 11,  1, 12,  2, 11],
+        [ 1, 12,  2, 11,  3, 13],
+        [ 2, 11,  3, 13,  4, 11],
+        [ 3, 13,  4, 11,  5, 11],
+        [ 4, 11,  5, 11,  6, 11],
+        [ 5, 11,  6, 11,  7, 13],
+        [ 6, 11,  7, 13,  8, 11],
+        [ 7, 13,  8, 11,  9, 14],
+        [ 8, 11,  9, 14, 16, 11],
+        [15, 11, 10, 13, 11, 13],
+        [10, 13, 11, 13, 16, 11]]), array([1, 4, 3, 4, 4, 4, 3, 4, 4, 0, 0])]</code></pre>
+<p>let</p>
+<pre class="python"><code>minibatch_size = 3
+data_size = len(batches[0]) #data_size = 11</code></pre>
+<p>shuffle the indices</p>
+<pre class="python"><code>In: indices = np.arange(data_size)
+    np.random.shuffle(indices)
+    indices
+
+Out: array([ 7, 10,  8,  9,  4,  6,  2,  3,  5,  0,  1]) </code></pre>
+<p>selecting the minibatches of minibatch_size according to the shuffled indices</p>
+<pre class="python"><code>for minibatch_start in np.arange(0, data_size, minibatch_size):
+    minibatch_indices = indices[minibatch_start:minibatch_start + minibatch_size]
+    print([d[minibatch_indices] if type(d) is np.ndarray for d in batches])</code></pre>
+<p>the resulted minibatches from 11 inputs with batch size of 3 are</p>
+<pre class="python"><code>[array([[ 8, 11,  9, 14, 16, 11],
+       [ 6, 11,  7, 13,  8, 11],
+       [15, 11,  1, 12,  2, 11]]), array([4, 3, 1])]
+[array([[ 1, 12,  2, 11,  3, 13],
+       [ 5, 11,  6, 11,  7, 13],
+       [ 4, 11,  5, 11,  6, 11]]), array([4, 4, 4])]
+[array([[ 2, 11,  3, 13,  4, 11],
+       [10, 13, 11, 13, 16, 11],
+       [ 7, 13,  8, 11,  9, 14]]), array([3, 0, 4])]
+[array([[ 3, 13,  4, 11,  5, 11],
+       [15, 11, 10, 13, 11, 13]]), array([4, 0])]</code></pre>
+<p>where for each minibatch contains <em>inputs_batch</em> and <em>labels_batch</em> in <strong>create_feed_dict()</strong>. In the original code, it uses <strong>yield</strong> instead of <strong>print</strong>, so the training start one minibatch after another (train on the first minibatch, prog bar moves one step, then train on the next minibatch, prog bar moves on another step, and so on).</p>
+<ul>
+<li>add embedding matrix</li>
+</ul>
+<p>In Step 2. load embeddings, we have a <span class="math inline">\(19\times50\)</span> embedding matrix <span class="math inline">\(\mathbf{E}\)</span>. Since the <em>inputs_batch</em> are shuffled, so first look up the corresponding word vectors for each window input (<span class="math inline">\(\begin{bmatrix}\mathbf{x}^{t-w}\mathbf{E} \\ \mathbf{x}^{t}\mathbf{E}\\ \mathbf{x}^{t+w}\mathbf{E}\end{bmatrix}\)</span>), then vectorize to be <span class="math inline">\(\mathbf{e}^t = [\mathbf{x}^{t-w}\mathbf{E}, \mathbf{x}^{t}\mathbf{E}, \mathbf{x}^{t+w}\mathbf{E}]\)</span> of size <span class="math inline">\(1\times (3*2*50)\)</span> (3 = # of words in a window, 2 = the number of features for a word [id, case type], D =50) in our example. This corresponds to the first equation in the neural network model defined in the beginning.</p>
+<pre class="python"><code>def add_embedding(self):
+    embedded = tf.Variable(self.pretrained_embeddings)
+    embeddings = tf.nn.embedding_lookup(embedded,self.input_placeholder)
+    embeddings = tf.reshape(embeddings, [-1, self.config.n_window_features * self.config.embed_size])                                                     
+    return embeddings</code></pre>
+<ul>
+<li>add hidden layer and the prediction</li>
+</ul>
+<ol style="list-style-type: lower-roman">
+<li><p>define variables <span class="math inline">\(\mathbf{b}_1, \mathbf{b}_2, \mathbf{W}, \mathbf{U}\)</span></p></li>
+<li><p>define functions</p></li>
+</ol>
+<pre class="python"><code>def add_prediction_op(self):
+    x = self.add_embedding()
+    dropout_rate = self.dropout_placeholder
+    
+    with tf.variable_scope(&quot;transformation&quot;):
+            b1 = tf.get_variable(name=&#39;b1&#39;, shape = [self.config.hidden_size],initializer=tf.contrib.layers.xavier_initializer(seed=1))
+            b2 = tf.get_variable(name=&#39;b2&#39;, shape = [self.config.n_classes],  initializer=tf.contrib.layers.xavier_initializer(seed=2))
+            W = tf.get_variable(name=&#39;W&#39;, shape = [self.config.n_window_features * self.config.embed_size,self.config.hidden_size],initializer=tf.contrib.layers.xavier_initializer(seed=3))
+            U = tf.get_variable(name=&#39;U&#39;, shape = [self.config.hidden_size, self.config.n_classes], initializer=tf.contrib.layers.xavier_initializer(seed=4))
+            
+            z1 = tf.matmul(x,W) + b1
+            h = tf.nn.relu(z1)
+            h_drop = tf.nn.dropout(h, dropout_rate)
+            pred = tf.matmul(h_drop, U) + b2
+
+    return pred</code></pre>
+<ul>
+<li>define loss function and optimization method</li>
+</ul>
+<pre class="python"><code>def add_loss_op(self, pred):
+
+        loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=pred, labels=self.labels_placeholder)
+        loss = tf.reduce_mean(loss)
+
+        return loss
+
+def add_training_op(self, loss):
+
+        adam_optim = tf.train.AdamOptimizer(self.config.lr)
+        train_op = adam_optim.minimize(loss)
+
+        return train_op</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Fit the model</li>
+</ol>
+<ul>
+<li>initialize the window model</li>
+</ul>
+<pre class="python"><code>config = Config()
+helper, train, dev, train_raw, dev_raw = load_and_preprocess_data(args)
+embeddings = load_embeddings(args, helper)
+model = WindowModel(helper, config, embeddings)
+# model.pretrained_embeddings = embeddings</code></pre>
+<p>where the <em>helper</em> and <em>embeddings</em> are introduced in step 1 and 2 above.</p>
+<ul>
+<li>fit the model</li>
+</ul>
+<p>(i). the <em>train_examples</em> and <em>dev_set</em> are obtained above by using the <strong>make_windowed_data()</strong></p>
+<p>(ii). we start run 10 epochs to train the model,</p>
+<pre class="python"><code>def fit(self, sess, saver, train, dev):
+    train_examples = self.preprocess_sequence_data(train)
+    dev_set = self.preprocess_sequence_data(dev)
+    for epoch in range(self.config.n_epochs):
+                #logger.info(&quot;Epoch %d out of %d&quot;, epoch + 1, self.config.n_epochs)
+            score = self.run_epoch(sess, train_examples, dev_set, train, dev)</code></pre>
+<p>for each epochs in <strong>run_epoch()</strong>, first get the minibatches of from <em>train_examples</em> with <em>batch_size</em> is 3 using <strong>minibatches()</strong> above, recall each yielded minibatch is [<em>inputs_batch</em> = array([[,,,,,],[,,,,,],[,,,,,]]), <em>labels_batch</em> = array([,,])].</p>
+<p>Feed <em>inputs_batch</em> and <em>labels_batch</em> into <strong>create_feed_dict()</strong> within <strong>train_on_batch()</strong>. With the <em>model.pretrained_embeddings</em>, we <strong>add_embedding</strong>, <strong>add_prediction_op</strong>, <strong>add_loss_op</strong> and <strong>add_train_op</strong> to obtain the <em>loss</em> and update the parameters <span class="math inline">\(\mathbf{e}^t \in minibatch, \mathbf{W}, \mathbf{U}, \mathbf{b}_1, \mathbf{b}_2\)</span>. After train on the first minibatch, prog bar +1 and train on the secon minibatch and so on.</p>
+<pre class="python"><code>def train_on_batch(self, sess, inputs_batch, labels_batch):
+    feed = self.create_feed_dict(inputs_batch, labels_batch=labels_batch,
+                                       dropout=self.config.dropout)
+    _, loss = sess.run([self.train_op, self.loss], feed_dict=feed)
+    return loss
+       
+def run_epoch(self, sess, train_examples, dev_set, train_examples_raw, dev_set_raw):
+    prog = Progbar(target=1 + int(len(train_examples) / self.config.batch_size))
+    for i, batch in enumerate(minibatches(train_examples, self.config.batch_size)):
+        loss = self.train_on_batch(sess, *batch)
+        prog.update(i + 1, [(&quot;train loss&quot;, loss)])
+        if self.report: self.report.log_train_loss(loss)
+    print(&quot;&quot;)
+
+    logger.info(&quot;Evaluating on development data&quot;)
+    token_cm, entity_scores = self.evaluate(sess, dev_set, dev)
+    logger.debug(&quot;Token-level confusion matrix:\n&quot; + token_cm.as_table())
+    logger.debug(&quot;Token-level scores:\n&quot; + token_cm.summary())
+    logger.info(&quot;Entity level P/R/F1: %.2f/%.2f/%.2f&quot;, *entity_scores)
+
+    f1 = entity_scores[-1]
+    return f1</code></pre>
+<p>To evaluate on the <em>dev</em>, first make window data using <strong>make_windowed_data</strong> within <strong>preprocess_sequence_data</strong></p>
+<pre class="python"><code>dev_set = self.preprocess_sequence_data(self.helper.vectorize(dev))</code></pre>
+<p>get the minibatches from <em>dev_set</em> within <em>shuffle = False</em>, the first minibatch is</p>
+<pre class="python"><code>[array([[15, 11,  1, 12,  2, 11],
+         [ 1, 12,  2, 11,  3, 13],
+         [ 2, 11,  3, 13,  4, 11]]), array([1, 4, 3])]</code></pre>
+<p>get the <em>inputs_batch</em> for <strong>create_feed_dict()</strong> while <em>labels_batch = None</em> from the each minibatch to get the predictions for the each minibatch</p>
+<pre class="python"><code>def predict_on_batch(self, sess, inputs_batch):
+        feed = self.create_feed_dict(inputs_batch)
+        predictions = sess.run(tf.argmax(self.pred, axis=1), feed_dict=feed)
+        return predictions
+        
+for i, batch in enumerate(minibatches(dev_set, self.config.batch_size = 3, shuffle=False)):
+            # Ignore predict
+            batch = batch[:1] + batch[2:] 
+            &quot;&quot;&quot;
+            batch = [array([[15, 11,  1, 12,  2, 11],
+         [ 1, 12,  2, 11,  3, 13],
+         [ 2, 11,  3, 13,  4, 11]])]
+            &quot;&quot;&quot;
+            preds_ = self.predict_on_batch(sess, *batch)
+            preds += list(preds_)
+            prog.update(i + 1, [])
+            consolidate_predictions(dev, inputs=dev_set, preds)</code></pre>
+<p>where <strong>consolidata_predictions</strong> returns [[sentence1, labels, labels_], [sentence2, labels, labels_], …, [sentence11, labels, labels_]], <em>labels_</em> is the predictions for the corresponding sentence (len(predictions) = 9 for the first sentence, len(predictions) = 2 for the second sentence), <em>labels</em> is the true labels for that sentence.</p>
+<p>For each consolidated predictions [sentence, labels, labels_], compute the precison, recall and f1 scores:</p>
+<pre class="python"><code>token_cm = ConfusionMatrix(labels=LBLS)
+
+correct_preds, total_correct, total_preds = 0., 0., 0.
+      for _, labels, labels_  in self.output(sess, examples_raw, examples):
+            for l, l_ in zip(labels, labels_):
+                token_cm.update(l, l_)
+            gold = set(get_chunks(labels))
+            pred = set(get_chunks(labels_))
+            correct_preds += len(gold.intersection(pred))
+            total_preds += len(pred)
+            total_correct += len(gold)
+
+      p = correct_preds / total_preds if correct_preds &gt; 0 else 0
+      r = correct_preds / total_correct if correct_preds &gt; 0 else 0
+      f1 = 2 * p * r / (p + r) if correct_preds &gt; 0 else 0</code></pre>
 </div>
 
     </div>
