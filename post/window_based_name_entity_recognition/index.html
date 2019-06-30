@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Window-based Name Entity Recognition - Luyao Peng&#39;s Blog</title>
+  <title>CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model) - Luyao Peng&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Luyao Peng" /><meta name="description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+<meta name="author" content="Luyao Peng" /><meta name="description" content="Introduction This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
  Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]." /><meta name="keywords" content="Hugo, theme, even" />
 
 
@@ -39,29 +39,29 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Window-based Name Entity Recognition" />
-<meta property="og:description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+<meta property="og:title" content="CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model)" />
+<meta property="og:description" content="Introduction This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
  Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/window_based_name_entity_recognition/" />
 <meta property="article:published_time" content="2019-05-06T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2019-05-06T00:00:00&#43;00:00"/>
 
-<meta itemprop="name" content="Window-based Name Entity Recognition">
-<meta itemprop="description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+<meta itemprop="name" content="CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model)">
+<meta itemprop="description" content="Introduction This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
  Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O].">
 
 
 <meta itemprop="datePublished" content="2019-05-06T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-05-06T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2452">
+<meta itemprop="wordCount" content="2866">
 
 
 
 <meta itemprop="keywords" content="Deep Learning,NLP,Name Entity Recognition," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Window-based Name Entity Recognition"/>
-<meta name="twitter:description" content="This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+<meta name="twitter:title" content="CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model)"/>
+<meta name="twitter:description" content="Introduction This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
  Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]."/>
 
 <!--[if lte IE 9]>
@@ -140,7 +140,7 @@ MathJax.Hub.Config({
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Window-based Name Entity Recognition</h1>
+      <h1 class="post-title">CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model)</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-05-06 </span>
@@ -156,6 +156,8 @@ MathJax.Hub.Config({
       
 
 
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
 <p>This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:</p>
 <ul>
 <li>Person (PER):</li>
@@ -166,6 +168,7 @@ MathJax.Hub.Config({
 </ul>
 <p>This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O]. Example as follow:</p>
 <p><img src="/post/Window_based_Name_Entity_Recognition_files/figure-html/fig1.png" alt="Luyao Peng" width=90% height=80%/></p>
+</div>
 <div id="window-based-model-of-ner-baseline-model" class="section level1">
 <h1>Window-based Model of NER (Baseline Model)</h1>
 <p>Let <span class="math inline">\(\mathbf{x} = [\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_T]\)</span> be a sentence of length <span class="math inline">\(T\)</span>, where <span class="math inline">\(\mathbf{x}_t, t=1, 2, \dots,T\)</span> is a one-hot vector of size of the vocabulary, representing the index of the word at position <span class="math inline">\(t\)</span>. To construct the windowed input on the raw input sentence <span class="math inline">\(\mathbf{x}\)</span>, given the window size <span class="math inline">\(w\)</span>, the windowed-input for the <span class="math inline">\(t\)</span>th word in <span class="math inline">\(\mathbf{x}\)</span> is <span class="math inline">\(\mathbf{x}^{t} = [\mathbf{x}_{t-w}, \dots, \mathbf{x}_{t}, \dots, \mathbf{x}_{t+w}]\)</span>. For the first word in <span class="math inline">\(\mathbf{x}\)</span>, the windowed-input is <span class="math inline">\(\mathbf{x}^{1} = [&lt;start&gt;,\dots, &lt;start&gt;, \mathbf{x}_{1}, \dots, \mathbf{x}_{1+w}]\)</span>, where the number of <span class="math inline">\(&lt;start&gt;\)</span> is <span class="math inline">\(w\)</span>. Similarly, the the last word in <span class="math inline">\(\mathbf{x}\)</span>, the windowed-input is <span class="math inline">\(\mathbf{x}^{T} = [\mathbf{x}_{T-w},\dots, \mathbf{x}_{T}, &lt;end&gt;, \dots. &lt;end&gt;]\)</span>, where the number of <span class="math inline">\(&lt;end&gt;\)</span> is <span class="math inline">\(w\)</span>. Each <span class="math inline">\(\mathbf{x}\)</span> corresponds to the lables <span class="math inline">\(\mathbf{y} = [\mathbf{y}^1, \mathbf{y}^2, \dots, \mathbf{y}^T]\)</span> of the same length <span class="math inline">\(T\)</span>, each <span class="math inline">\(\mathbf{y}^t\)</span> is also a one-hot vector. When constructing the windowed input from <span class="math inline">\(\mathbf{x}\)</span> for the word at <span class="math inline">\(t\)</span>, its corresponding label vector will be just <span class="math inline">\(\mathbf{y}^t\)</span> and the label of the word is at index <span class="math inline">\(i\)</span> in <span class="math inline">\(\mathbf{y}^t\)</span>, denoted by <span class="math inline">\(y_i^t\)</span>.</p>
@@ -523,6 +526,112 @@ correct_preds, total_correct, total_preds = 0., 0., 0.
       p = correct_preds / total_preds if correct_preds &gt; 0 else 0
       r = correct_preds / total_correct if correct_preds &gt; 0 else 0
       f1 = 2 * p * r / (p + r) if correct_preds &gt; 0 else 0</code></pre>
+</div>
+<div id="results-and-predictions" class="section level1">
+<h1>Results and Predictions</h1>
+<p>Train with “data/tiny.conll” as <em>dev_raw</em> and <em>train_raw</em>, which contains 721 sentences (the first 2 sentences are illustrated above).</p>
+<pre class="python"><code>def do_test2():
+    logger.info(&quot;Testing implementation of WindowModel&quot;)
+    config = Config()
+    #helper, train, dev, train_raw, dev_raw = load_and_preprocess_data(args)
+    #embeddings = load_embeddings(args, helper)
+    #config.embed_size = embeddings.shape[1]
+
+    with tf.Graph().as_default():
+        logger.info(&quot;Building model...&quot;,)
+        start = time.time()
+        model = WindowModel(helper, embeddings)
+        logger.info(&quot;took %.2f seconds&quot;, time.time() - start)
+
+        init = tf.global_variables_initializer()
+        saver = None
+
+        with tf.Session() as session:
+            session.run(init)
+            #[[IMPORTANT MAP]]: train_raw, dev_raw ---load_preprocess()--&gt; train, dev--precess_sequence_data()--&gt;train_examples, dev_set
+            model.fit(session, saver, train_examples, dev_set, train, dev) 
+            output = model.output(session, dev_raw, dev_set) #list of list: [[sentence, labels, labels_]]
+            sentences, labels, predictions = zip(*output)
+            predictions = [[LBLS[l] for l in preds] for preds in predictions]
+            output = zip(sentences, labels, predictions)
+            print(sentences[0], labels[0], predictions[0])
+            with open(&quot;results/window/window_predictions.conll&quot;, &#39;w&#39;) as f:
+                write_conll(f, output)
+    
+    logger.info(&quot;Model did not crash!&quot;)
+    logger.info(&quot;Passed!&quot;)</code></pre>
+<pre class="python"><code>#FIRST EPOCH
+INFO:Epoch 1 out of 10
+5/5 [==============================] - 0s - train loss: 1.4808     
+INFO:Evaluating on development data
+
+
+5/5 [==============================] - 0s     
+DEBUG:Token-level confusion matrix:
+go\gu   PER     ORG     LOC     MISC    O      
+PER     134.00  57.00   84.00   6.00    543.00 
+ORG     52.00   29.00   25.00   5.00    280.00 
+LOC     47.00   36.00   70.00   4.00    420.00 
+MISC    28.00   10.00   27.00   5.00    188.00 
+O       167.00  93.00   81.00   14.00   6761.00
+
+DEBUG:Token-level scores:
+label   acc     prec    rec     f1   
+PER     0.89    0.31    0.16    0.21 
+ORG     0.94    0.13    0.07    0.09 
+LOC     0.92    0.24    0.12    0.16 
+MISC    0.97    0.15    0.02    0.03 
+O       0.81    0.83    0.95    0.88 
+micro   0.91    0.76    0.76    0.76 
+macro   0.91    0.33    0.27    0.28 
+not-O   0.93    0.24    0.12    0.16 
+
+INFO:Entity level P/R/F1: 0.09/0.06/0.07
+
+...
+
+#LAST EPOCH
+INFO:Epoch 10 out of 10
+
+
+5/5 [==============================] - 0s - train loss: 0.3210     
+INFO:Evaluating on development data
+
+
+5/5 [==============================] - 0s     
+DEBUG:Token-level confusion matrix:
+go\gu   PER     ORG     LOC     MISC    O      
+PER     670.00  40.00   33.00   14.00   67.00  
+ORG     133.00  96.00   41.00   19.00   102.00 
+LOC     41.00   25.00   402.00  16.00   93.00  
+MISC    59.00   24.00   46.00   52.00   77.00  
+O       95.00   44.00   43.00   23.00   6911.00
+
+DEBUG:Token-level scores:
+label   acc     prec    rec     f1   
+PER     0.95    0.67    0.81    0.74 
+ORG     0.95    0.42    0.25    0.31 
+LOC     0.96    0.71    0.70    0.70 
+MISC    0.97    0.42    0.20    0.27 
+O       0.94    0.95    0.97    0.96 
+micro   0.95    0.89    0.89    0.89 
+macro   0.95    0.63    0.59    0.60 
+not-O   0.96    0.64    0.60    0.62 
+
+INFO:Entity level P/R/F1: 0.49/0.53/0.51</code></pre>
+<p>The results are written and saved in “results/window/window_predictions.conll”. The saved predicted results for the first 2 sentences are:</p>
+<pre class="python"><code>EU  ORG O #(False)
+rejects O   O
+German  MISC    ORG #(False)
+call    O   O
+to  O   O
+boycott O   O
+British MISC    MISC
+lamb    O   O
+.   O   O
+
+Peter   PER PER
+Blackburn   PER PER</code></pre>
 </div>
 
     </div>

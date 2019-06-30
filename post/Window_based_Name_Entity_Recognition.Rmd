@@ -1,6 +1,6 @@
 ---
 autoCollapseToc: true
-title: "Window-based Name Entity Recognition"
+title: "CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model)"
 author: "Luyao Peng"
 date: '2019-05-06'
 categories:
@@ -13,6 +13,8 @@ draft: false
 toc: false
 header-includes: \usepackage{amsmath} \usepackage{bm} 
 ---
+
+# Introduction
 
 This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
 
@@ -492,3 +494,117 @@ correct_preds, total_correct, total_preds = 0., 0., 0.
       f1 = 2 * p * r / (p + r) if correct_preds > 0 else 0
 ```
 
+# Results and Predictions
+
+Train with "data/tiny.conll" as *dev_raw* and *train_raw*, which contains 721 sentences (the first 2 sentences are illustrated above).
+
+```python
+def do_test2():
+    logger.info("Testing implementation of WindowModel")
+    config = Config()
+    #helper, train, dev, train_raw, dev_raw = load_and_preprocess_data(args)
+    #embeddings = load_embeddings(args, helper)
+    #config.embed_size = embeddings.shape[1]
+
+    with tf.Graph().as_default():
+        logger.info("Building model...",)
+        start = time.time()
+        model = WindowModel(helper, embeddings)
+        logger.info("took %.2f seconds", time.time() - start)
+
+        init = tf.global_variables_initializer()
+        saver = None
+
+        with tf.Session() as session:
+            session.run(init)
+            #[[IMPORTANT MAP]]: train_raw, dev_raw ---load_preprocess()--> train, dev--precess_sequence_data()-->train_examples, dev_set
+            model.fit(session, saver, train_examples, dev_set, train, dev) 
+            output = model.output(session, dev_raw, dev_set) #list of list: [[sentence, labels, labels_]]
+            sentences, labels, predictions = zip(*output)
+            predictions = [[LBLS[l] for l in preds] for preds in predictions]
+            output = zip(sentences, labels, predictions)
+            print(sentences[0], labels[0], predictions[0])
+            with open("results/window/window_predictions.conll", 'w') as f:
+                write_conll(f, output)
+    
+    logger.info("Model did not crash!")
+    logger.info("Passed!")
+```
+
+```python
+#FIRST EPOCH
+INFO:Epoch 1 out of 10
+5/5 [==============================] - 0s - train loss: 1.4808     
+INFO:Evaluating on development data
+
+
+5/5 [==============================] - 0s     
+DEBUG:Token-level confusion matrix:
+go\gu  	PER    	ORG    	LOC    	MISC   	O      
+PER    	134.00 	57.00  	84.00  	6.00   	543.00 
+ORG    	52.00  	29.00  	25.00  	5.00   	280.00 
+LOC    	47.00  	36.00  	70.00  	4.00   	420.00 
+MISC   	28.00  	10.00  	27.00  	5.00   	188.00 
+O      	167.00 	93.00  	81.00  	14.00  	6761.00
+
+DEBUG:Token-level scores:
+label	acc  	prec 	rec  	f1   
+PER  	0.89 	0.31 	0.16 	0.21 
+ORG  	0.94 	0.13 	0.07 	0.09 
+LOC  	0.92 	0.24 	0.12 	0.16 
+MISC 	0.97 	0.15 	0.02 	0.03 
+O    	0.81 	0.83 	0.95 	0.88 
+micro	0.91 	0.76 	0.76 	0.76 
+macro	0.91 	0.33 	0.27 	0.28 
+not-O	0.93 	0.24 	0.12 	0.16 
+
+INFO:Entity level P/R/F1: 0.09/0.06/0.07
+
+...
+
+#LAST EPOCH
+INFO:Epoch 10 out of 10
+
+
+5/5 [==============================] - 0s - train loss: 0.3210     
+INFO:Evaluating on development data
+
+
+5/5 [==============================] - 0s     
+DEBUG:Token-level confusion matrix:
+go\gu  	PER    	ORG    	LOC    	MISC   	O      
+PER    	670.00 	40.00  	33.00  	14.00  	67.00  
+ORG    	133.00 	96.00  	41.00  	19.00  	102.00 
+LOC    	41.00  	25.00  	402.00 	16.00  	93.00  
+MISC   	59.00  	24.00  	46.00  	52.00  	77.00  
+O      	95.00  	44.00  	43.00  	23.00  	6911.00
+
+DEBUG:Token-level scores:
+label	acc  	prec 	rec  	f1   
+PER  	0.95 	0.67 	0.81 	0.74 
+ORG  	0.95 	0.42 	0.25 	0.31 
+LOC  	0.96 	0.71 	0.70 	0.70 
+MISC 	0.97 	0.42 	0.20 	0.27 
+O    	0.94 	0.95 	0.97 	0.96 
+micro	0.95 	0.89 	0.89 	0.89 
+macro	0.95 	0.63 	0.59 	0.60 
+not-O	0.96 	0.64 	0.60 	0.62 
+
+INFO:Entity level P/R/F1: 0.49/0.53/0.51
+```
+
+The results are written and saved in "results/window/window_predictions.conll". The saved predicted results for the first 2 sentences are:
+```python
+EU	ORG	O #(False)
+rejects	O	O
+German	MISC	ORG #(False)
+call	O	O
+to	O	O
+boycott	O	O
+British	MISC	MISC
+lamb	O	O
+.	O	O
+
+Peter	PER	PER
+Blackburn	PER	PER
+```
