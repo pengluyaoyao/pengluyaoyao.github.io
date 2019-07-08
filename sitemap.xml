@@ -17,6 +17,13 @@
   </url>
   
   <url>
+    <loc>/post/rnn_ner/</loc>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/post/window_based_name_entity_recognition/</loc>
     <lastmod>2019-05-06T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -171,7 +178,7 @@
   
   <url>
     <loc>/tags/deep-learning/</loc>
-    <lastmod>2019-05-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -248,7 +255,7 @@
   
   <url>
     <loc>/tags/nlp/</loc>
-    <lastmod>2019-05-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -262,7 +269,7 @@
   
   <url>
     <loc>/tags/name-entity-recognition/</loc>
-    <lastmod>2019-05-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -310,6 +317,13 @@
   </url>
   
   <url>
+    <loc>/tags/rnn/</loc>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/shiny/</loc>
     <lastmod>2019-03-07T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -318,7 +332,7 @@
   
   <url>
     <loc>/categories/stanford-nlp-and-deep-learning/</loc>
-    <lastmod>2019-05-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

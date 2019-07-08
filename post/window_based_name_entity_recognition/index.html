@@ -187,8 +187,8 @@ Using the windowed input <span class="math inline">\(\mathbf{x}^t\)</span>, want
 <p><span class="math display">\[\begin{array}{rcl} \mathbf{e}^t &amp;=&amp; [\mathbf{x}^{t-w}\mathbf{E}, \dots, \mathbf{x}^t\mathbf{E}, \dots, \mathbf{x}^{t+w}\mathbf{E}]\\
 \mathbf{h}^t &amp;=&amp; ReLU(\mathbf{e}^t\mathbf{W} + \mathbf{b}_1)\\
 \hat{\mathbf{y}}^t &amp;=&amp; softmax(\mathbf{h}^t\mathbf{U}+\mathbf{b}_2)\\
-J &amp;=&amp;  CE(\mathbf{y}^t, \hat{\mathbf{y}^t}) \\
-&amp;=&amp; -\sum_iy_i^t log(\hat{y_i^t})
+J &amp;=&amp;  \sum_tCE(\mathbf{y}^t, \hat{\mathbf{y}^t}) \\
+&amp;=&amp; -\sum_t\sum_iy_i^t log(\hat{y_i^t})
 \end{array}\]</span></p>
 <ul>
 <li>Code:</li>
@@ -658,9 +658,9 @@ Blackburn   PER PER</code></pre>
           <a href="/tags/name-entity-recognition/">Name Entity Recognition</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/even-preview/">
+        <a class="prev" href="/post/rnn_ner/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-default">CS224n/assignment3/: Detailed Explanation of RNN Name Entity Recognition</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/post/basics-of-rnn-and-lstm/">
