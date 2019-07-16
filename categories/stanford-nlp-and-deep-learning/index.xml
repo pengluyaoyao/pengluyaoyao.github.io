@@ -12,18 +12,16 @@
     
     
     <item>
-      <title>CS224n/assignment3/: Detailed Explanation of RNN Name Entity Recognition</title>
+      <title>CS224n/assignment3/: RNN/GRU Name Entity Recognition</title>
       <link>/post/rnn_ner/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/rnn_ner/</guid>
-      <description>This post deals with the name entity recognition task using RNN model.
-The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as
-\[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1) \\ \hat{\mathbf{y}}^t = softmax(\mathbf{h}^t\mathbf{U} + \mathbf{b}_2)\\ J = \sum_tCE(\mathbf{y}^t-\hat{\mathbf{y}}^t) =-\sum_t\sum_iy_i^tlog(\hat{y}_i^t).</description>
+      <description>This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1) \\</description>
     </item>
     
     <item>
-      <title>CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model)</title>
+      <title>CS224n/assignment3/: Window-based Name Entity Recognition (Baseline Model)</title>
       <link>/post/window_based_name_entity_recognition/</link>
       <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
       

@@ -1,6 +1,6 @@
 ---
 autoCollapseToc: true
-title: "CS224n/assignment3/: Detailed Explanation of Window-based Name Entity Recognition (Baseline Model)"
+title: "CS224n/assignment3/: Window-based Name Entity Recognition (Baseline Model)"
 author: "Luyao Peng"
 date: '2019-05-06'
 categories:

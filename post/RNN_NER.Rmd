@@ -1,6 +1,6 @@
 ---
 autoCollapseToc: true
-title: "CS224n/assignment3/: Detailed Explanation of RNN Name Entity Recognition"
+title: "CS224n/assignment3/: RNN/GRU Name Entity Recognition"
 author: "Luyao Peng"
 date: '2019-06-29'
 categories:
@@ -20,7 +20,6 @@ This post deals with the name entity recognition task using RNN model.
 # The RNN model for NER
 
 Let $\mathbf{x}_t$ be a one-hot vector for word at time $t$, define $\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}$, the RNN model to make prediction at time step $t$ can be expressed as
-
 $$\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1) \\ \hat{\mathbf{y}}^t = softmax(\mathbf{h}^t\mathbf{U} + \mathbf{b}_2)\\ J = \sum_tCE(\mathbf{y}^t-\hat{\mathbf{y}}^t)  =-\sum_t\sum_iy_i^tlog(\hat{y}_i^t).$$
 
 
@@ -154,6 +153,266 @@ The returned *ret* is a list of tuples containing three lists: padded sentences 
 
 ## RNN model
 
+In RNN model, each sentence is first windowed using *window_size = 1*, then padded to have equal length (*max_length*) using **featuruzed_windows()**, **pad_sequences()** and **window_iterator()**. These three functions are wrapped in a function **preprocess_sequence_data()**：
+
+```python
+#before
+
+[([[89, 2647],
+   [1070, 2646],
+   [115, 2648],
+   [288, 2646],
+   [7, 2646],
+   [1071, 2646],
+   [78, 2648],
+   [392, 2646],
+   [1, 2649]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4]),
+ ([[1072, 2648], [175, 2648]], [0, 0])]
+```
+```python
+#after
+def preprocess_sequence_data(examples):
+    def featurize_windows(data, start, end, window_size = 1):
+        """Uses the input sequences in @data to construct new windowed data points.
+        """
+        ret = []
+        for sentence, labels in data:
+            from util import window_iterator
+            sentence_ = []
+            for window in window_iterator(sentence, window_size, beg=start, end=end):
+                sentence_.append(sum(window, [])) # ex: window = [[1072, 2648], [175, 2648], [2651, 2646]], sum two list makes it a long list from list of lists
+            ret.append((sentence_, labels))
+        return ret
+
+    examples = featurize_windows(examples, [2650, 2646], [2651, 2646])
+    return pad_sequences(examples, 10) #suppose the max length in this example is 10
+
+preprocess_sequence_data(train[0:2])
+
+Out[31]: 
+[([[2650, 2646, 89, 2647, 1070, 2646],
+   [89, 2647, 1070, 2646, 115, 2648],
+   [1070, 2646, 115, 2648, 288, 2646],
+   [115, 2648, 288, 2646, 7, 2646],
+   [288, 2646, 7, 2646, 1071, 2646],
+   [7, 2646, 1071, 2646, 78, 2648],
+   [1071, 2646, 78, 2648, 392, 2646],
+   [78, 2648, 392, 2646, 1, 2649],
+   [392, 2646, 1, 2649, 2651, 2646],
+   [0, 0, 0, 0, 0, 0]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4, 4],
+  [True, True, True, True, True, True, True, True, True, False]),
+ ([[2650, 2646, 1072, 2648, 175, 2648],
+   [1072, 2648, 175, 2648, 2651, 2646],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0]],
+  [0, 0, 4, 4, 4, 4, 4, 4, 4, 4],
+  [True, True, False, False, False, False, False, False, False, False])]
+```
+
+NOTICE THE DIFFERENT FORMAT AFTER **preprocess_sequence_data** FOR WINDOW-BASED MODEL AND RNN MODEL. WINDOW-BASED MODEL IS 9000+ WINDOWED INPUTS WITH CORRESPONDING LABEL FOR THE CENTERED WORD; RNN MODEL IS STILL 700+ SENTENCES (IN EACH SENTENCE, IT CONTAINS WINDOWED INPUTS), AND THE LABLES ARE IN A LIST OUTSIDE THE SENTENCE, THE LABLES ARE FOR THE SENTENCE.
+
+The output[31] is assigned to *train_examples*. Do the same preprocessing for development data and the resulted data is assigned to *dev_set*
+
+```python
+#train and dev is in the form of the 'before' preprocessing
+train_examples = self.preprocess_sequence_data(train) 
+dev_set = self.preprocess_sequence_data(dev)
+```
+
+If `model.cell = rnn`, then after preparing the data into wanted form, initialize the RNN model
+
+```python
+model = RNNModel(helper, config, embeddings, args.cell)
+
+model.helper = helper
+model.report = report
+model.pretrained_embeddings = pretrained_embeddings
+model.max_length = 120
+model.cell = arg_cell
+```
+
+Then fit the RNN model to the *train* and *dev* datasets, which are the output after **load_and_preprocess_data**. Inside the `model.fit`, *train* and *dev* are first **preprocess_sequence_data()**, the resulted outputs are *train_examples* and *dev_set*, respectively.
+
+We will train and evaluate the RNN model for 10 epochs. In each epoch, first initialize a file summary writer for the TensorBoard:
+
+```python
+writer = tf.summary.FileWriter('./tb/epoch {}'.format(epoch), sess.graph)
+```
+
+Then dividing the *train_examples* into minibatches as in window-based model. Train the RNN model on each batch by providing the *feed* dictionary to placeholders and using the loss function defined in **add_loss_op()** and **add_training_op()**. In **add_loss_op()**, the RNN operation is implemented in making the predictions at each time step. 
+```python
+   def add_embedding(self):
+
+        embedded = tf.Variable(self.pretrained_embeddings)
+        embeddings = tf.nn.embedding_lookup(embedded, self.input_placeholder)
+        embeddings = tf.reshape(embeddings, [-1, self.max_length, 6 * 50])                                                     
+
+        return embeddings
+
+    def add_prediction_op(self):
+
+        x = self.add_embedding() #(None, max_length, n_window_features*embed_size)
+        dropout_rate = self.dropout_placeholder
+
+        preds = [] # Predicted output at each timestep should go here!
+        
+        #Initialize cell
+        if self.cell == "rnn":
+            cell = RNNCell(6 * 50, 300)
+        elif self.cell == "gru":
+            cell = GRUCell(6 * 50, 300)
+        else:
+            raise ValueError("Unsuppported cell type: " + self.cell)
+
+        # Initialize state as vector of zeros.
+        with tf.variable_scope("Layer1"):       
+            b2 = tf.get_variable(name='b2', shape = [5],        
+                                 initializer=tf.constant_initializer(0))
+            U = tf.get_variable(name='U', shape = [300, 5],
+                                initializer=tf.contrib.layers.xavier_initializer(seed=4)) 
+
+        input_shape = tf.shape(x) #[batch size, max_length, n_features*embed_size]
+        h = tf.zeros([input_shape[0], 300]) #t_0 state
+
+        with tf.variable_scope("RNN"):
+            for time_step in range(self.max_length):
+                if time_step > 0:
+                    tf.get_variable_scope().reuse_variables()
+
+                o, h =  cell(x[:,time_step, :], h, scope="RNN") #__call__ in RNNcell
+                h_drop = tf.nn.dropout(h, dropout_rate)
+                pred = tf.matmul(h_drop, U) + b2 #pred: batch_size*n_class, 
+                preds.append(pred) #preds: [[nclass, nclass, ...,nclass],[],...,[]]maxlength个【batch_size个 nclass】
+                
+        # Make sure to reshape @preds here.
+        #print(tf.shape(preds), tf.shape(preds[0]))
+        preds = tf.stack(preds, axis = 1) #batchsize个（maxlength个 nclass）
+        #print(tf.shape(preds))
+
+        assert preds.get_shape().as_list() == [None, 120, 5], "predictions are not of the right shape. Expected {}, got {}".format([None, 120, 5], preds.get_shape().as_list())
+        return preds
+```
+
+Here, `cell = RNNCell(6 * 50, 300)` initializes the RNN cell (introduced above in `class RNNCell(tf.nn.rnn_cell.RNNCell):`) with $nwindowfeatures \times embed size = (2\times3) \times 50, hidden size = 300$, initialize the initial hidden state for time step 0, which is of size $batch size \times hidden size = batch size \times 300$. For each time step `for time_step in range(self.max_length):`, update the output *o* and *h* by `cell(x[:,time_step, :], h, scope="RNN")` (here, for each word, the input is the window features, with size $6 \times 50$), making prediction for that time step `pred = tf.matmul(h_drop, U) + b2`; move the next time step using the previously updated *h* and update the *h* again, making predictions, etc. 
+
+
+With the *preds* in **add_prediction_op()**, we can define **add_loss_op()** and **add_training_op**. Recall when building the model, we have 
+
+```python
+self.add_placeholders()
+self.pred = self.add_prediction_op()
+self.loss = self.add_loss_op(self.pred)
+self.train_op = self.add_training_op(self.loss)
+tf.summary.scalar('loss1', self.loss) # add a scalar tensorboard to keep track of the loss scalar
+self.merged = tf.summary.merge_all() # merge the loss scalar across 10 epochs into one plot
+```
+
+Then 
+
+```python
+def add_loss_op(self, preds):
+      pred_mask = tf.boolean_mask(preds, self.mask_placeholder)
+      label_mask = tf.boolean_mask(self.labels_placeholder, self.mask_placeholder)
+      loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=pred_mask, labels=label_mask)
+      loss = tf.reduce_mean(loss)
+      return loss
+
+def add_training_op(self, loss): 
+      adam_optim = tf.train.AdamOptimizer(0.001)
+      train_op = adam_optim.minimize(loss)
+
+      return train_op
+```
+
+and implement those functions in **train_on_batch()**, in addition to the loss value returned, the merged summary of the loss value for each batch in each epoch is also returned:
+
+```python
+def train_on_batch(self, sess, inputs_batch, labels_batch, mask_batch):
+
+        feed = self.create_feed_dict(inputs_batch, labels_batch=labels_batch, mask_batch=mask_batch,
+                                     dropout=0.5)
+        summary, _, loss = sess.run([self.merged, self.train_op, self.loss], feed_dict=feed)
+        return summary, loss
+
+for i, batch in enumerate(minibatches(train_examples, 140)):
+            summary, loss = self.train_on_batch(sess, *batch)
+            writer.add_summary(summary, i)
+            writer.flush()
+```
+
+
+After training on all batches in the epoch, evaluate the trained model on *dev_set* (in the code, **inputs** is same as **dev_set**). Then divide the **dev_set** into minibatches, for each minibatch, **predict_on_batch()**  
+
+
+```python
+def output(self, sess, dev, inputs=dev_set):
+  for i, batch in enumerate(minibatches(inputs, 140, shuffle=False)):
+            # Ignore predict
+      batch = batch[:1] + batch[2:]
+      preds_ = self.predict_on_batch(sess, *batch)
+      preds += list(preds_)
+      prog.update(i + 1, [])
+  return self.consolidate_predictions(inputs_raw, inputs, preds)
+```
+
+where `self.predict_on_batch` is
+
+```python
+def predict_on_batch(self, sess, inputs_batch, mask_batch):
+        feed = self.create_feed_dict(inputs_batch=inputs_batch, mask_batch=mask_batch)
+        predictions = sess.run(tf.argmax(self.pred, axis=2), feed_dict=feed)
+        return predictions
+
+```
+by using the trained $\mathbf{W}_h, \mathbf{W}_e, \mathbf{U}, \mathbf{b}_1, \mathbf{b}_2$.
+
+DIFFERENT BATCH SIZE HAS DIFFERENT VALIDATION SCORES. IN THIS EXAMPLE, THE BATCH SIZE IS 140. At epoch 10, the results are
+
+```python
+I0713 10:28:00.729423 139762688649024 <ipython-input-39-b9d6a5ec9b7a>:213] Epoch 10 out of 10
 
 
 
+6/6 [==============================] - 15s - train loss: 0.3258    
+
+I0713 10:28:19.765505 139762688649024 <ipython-input-39-b9d6a5ec9b7a>:180] Evaluating on development data
+
+
+
+6/6 [==============================] - 48s    
+
+I0713 10:29:08.066092 139762688649024 <ipython-input-39-b9d6a5ec9b7a>:182] Token-level confusion matrix:
+go\gu  	PER    	ORG    	LOC    	MISC   	O      
+PER    	689.00 	33.00  	14.00  	7.00   	81.00  
+ORG    	151.00 	69.00  	26.00  	18.00  	127.00 
+LOC    	40.00  	26.00  	413.00 	16.00  	82.00  
+MISC   	44.00  	27.00  	44.00  	71.00  	72.00  
+O      	71.00  	27.00  	39.00  	8.00   	6971.00
+
+I0713 10:29:08.068744 139762688649024 <ipython-input-39-b9d6a5ec9b7a>:183] Token-level scores:
+label	acc  	prec 	rec  	f1   
+PER  	0.95 	0.69 	0.84 	0.76 
+ORG  	0.95 	0.38 	0.18 	0.24 
+LOC  	0.97 	0.77 	0.72 	0.74 
+MISC 	0.97 	0.59 	0.28 	0.38 
+O    	0.94 	0.95 	0.98 	0.96 
+micro	0.96 	0.90 	0.90 	0.90 
+macro	0.96 	0.68 	0.60 	0.62 
+not-O	0.96 	0.68 	0.61 	0.64 
+
+I0713 10:29:08.070044 139762688649024 <ipython-input-39-b9d6a5ec9b7a>:184] Entity level P/R/F1: 0.54/0.54/0.54
+```
+
+The loss plot in the TensorBoard is
+
+<img src="/post/RNN_NER_files/figure-html/loss1.svg" alt="Luyao Peng" width=90% height=80%/>
+
+At early epochs, the loss decreases apparantly; at later epochs, the loss values remain unchanged. 
