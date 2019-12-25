@@ -1,0 +1,45 @@
+---
+autoCollapseToc: true
+title: "Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data"
+author: "Luyao Peng"
+date: '2019-10-02'
+categories:
+  - NLP and Deep Learning
+tags:
+  - Deep Learning
+  - NLP
+  - RNN
+draft: false
+toc: false
+header-includes: \usepackage{amsmath} \usepackage{bm} 
+---
+
+
+# Introduction
+This post introduces the application of deep learning model in automated ASAP essay scoring. 
+
+## Traditional machine learning in automated essay scoring
+
+### Advantage
+1.  Interpretibility
+
+Traditional machine learning method (e.g. regression-based method) requires features as input. People need to have domain knowledge, experiences and even imagination to provide predictive feature variables. Those features endow the interpretibility of the scoring model, which can provide guidance to students in their essay writing.
+
+2.  Memerization
+Traditional machine learning method can model the direct relationship between input and output, As long as the value for a given feature is the same, the weigt assigned by the model to the feature in predicting the outcome will be the same. As long as a given value of $x$ is given, the $\hat{y}$ will be given by assigning the same weigt the the feature. 
+
+### Disadvantage
+
+1. Manual features
+It is a non-trivial work to develop features manually. Sometimes, it may be possible that even though the engineered feature is predictive but is not interpretible. 
+
+2. Limited relationship modeling
+Traditional machine learning method can only model linear or non-linear relationship between the input and output, which is the 
+
+
+# Model
+
+# Training
+
+# Results
+

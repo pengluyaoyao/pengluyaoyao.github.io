@@ -33,6 +33,29 @@ My Research Projects:
     </item>
     
     <item>
+      <title>Gaussian Process in Deep and Wide Model in Automated Essay Scoring</title>
+      <link>/post/gp-in-dw/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/gp-in-dw/</guid>
+      <description>Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
+Goal: Let GP to decide latent functions in NN
+ Provide uncertainty of predictions
+ Ensemble of infinite number of 2-layer NNs (see page5)
+   Innovations: Consider sigmoid output function rather than linear output function in Lee et al.</description>
+    </item>
+    
+    <item>
+      <title>Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data</title>
+      <link>/post/train-lstm-in-automated-essay-scoring/</link>
+      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/train-lstm-in-automated-essay-scoring/</guid>
+      <description>Introduction This post introduces the application of deep learning model in automated ASAP essay scoring.
+Traditional machine learning in automated essay scoring Advantage Interpretibility  Traditional machine learning method (e.g. regression-based method) requires features as input. People need to have domain knowledge, experiences and even imagination to provide predictive feature variables. Those features endow the interpretibility of the scoring model, which can provide guidance to students in their essay writing.</description>
+    </item>
+    
+    <item>
       <title>CS224n/assignment3/: RNN/GRU Name Entity Recognition</title>
       <link>/post/rnn_ner/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
@@ -82,9 +105,8 @@ equivalently,
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/project/</guid>
-      <description> In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.
-Link to the Stock Prince app
-  </description>
+      <description>In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.
+Link to the Stock Prince app</description>
     </item>
     
     <item>

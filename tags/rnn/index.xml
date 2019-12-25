@@ -6,10 +6,20 @@
     <description>Recent content in RNN on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 29 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/rnn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data</title>
+      <link>/post/train-lstm-in-automated-essay-scoring/</link>
+      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/train-lstm-in-automated-essay-scoring/</guid>
+      <description>Introduction This post introduces the application of deep learning model in automated ASAP essay scoring.
+Traditional machine learning in automated essay scoring Advantage Interpretibility  Traditional machine learning method (e.g. regression-based method) requires features as input. People need to have domain knowledge, experiences and even imagination to provide predictive feature variables. Those features endow the interpretibility of the scoring model, which can provide guidance to students in their essay writing.</description>
+    </item>
     
     <item>
       <title>CS224n/assignment3/: RNN/GRU Name Entity Recognition</title>

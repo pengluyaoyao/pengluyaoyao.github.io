@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Gaussian Process in Deep and Wide Model in Automated Essay Scoring - Luyao Peng&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Luyao Peng" /><meta name="description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
+Goal: Let GP to decide latent functions in NN
+ Provide uncertainty of predictions
+ Ensemble of infinite number of 2-layer NNs (see page5)
+   Innovations: Consider sigmoid output function rather than linear output function in Lee et al." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="/post/gp-in-dw/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Gaussian Process in Deep and Wide Model in Automated Essay Scoring" />
+<meta property="og:description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
+Goal: Let GP to decide latent functions in NN
+ Provide uncertainty of predictions
+ Ensemble of infinite number of 2-layer NNs (see page5)
+   Innovations: Consider sigmoid output function rather than linear output function in Lee et al." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/gp-in-dw/" />
+<meta property="article:published_time" content="2019-12-25T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-12-25T00:00:00&#43;00:00"/>
+
+<meta itemprop="name" content="Gaussian Process in Deep and Wide Model in Automated Essay Scoring">
+<meta itemprop="description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
+Goal: Let GP to decide latent functions in NN
+ Provide uncertainty of predictions
+ Ensemble of infinite number of 2-layer NNs (see page5)
+   Innovations: Consider sigmoid output function rather than linear output function in Lee et al.">
+
+
+<meta itemprop="datePublished" content="2019-12-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="985">
+
+
+
+<meta itemprop="keywords" content="Deep and Wide Model,Gaussian Process," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gaussian Process in Deep and Wide Model in Automated Essay Scoring"/>
+<meta name="twitter:description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
+Goal: Let GP to decide latent functions in NN
+ Provide uncertainty of predictions
+ Ensemble of infinite number of 2-layer NNs (see page5)
+   Innovations: Consider sigmoid output function rather than linear output function in Lee et al."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">LP&#39;s NLP Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">LP&#39;s NLP Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Gaussian Process in Deep and Wide Model in Automated Essay Scoring</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-25 </span>
+        <div class="post-category">
+            <a href="/categories/nlp/"> NLP </a>
+            <a href="/categories/deep-learning/"> Deep Learning </a>
+            <a href="/categories/automated-essay-scoring/"> Automated Essay Scoring </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      
+
+
+<p>Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):</p>
+<div id="goal" class="section level2">
+<h2>Goal:</h2>
+<ol style="list-style-type: decimal">
+<li><p>Let GP to decide latent functions in NN</p></li>
+<li><p>Provide uncertainty of predictions</p></li>
+<li><p>Ensemble of infinite number of 2-layer NNs (see page5)</p></li>
+</ol>
+</div>
+<div id="innovations" class="section level2">
+<h2>Innovations:</h2>
+<ol style="list-style-type: decimal">
+<li><p>Consider sigmoid output function rather than linear output function in Lee et al.(2018)</p></li>
+<li><p>Extend to deep and wide NN</p></li>
+<li><p>In essay scoring context</p></li>
+<li><p>Closed-form solution to the predictions and uncertainty measures</p></li>
+</ol>
+</div>
+<div id="main-idea" class="section level2">
+<h2>Main idea:</h2>
+<p>Obtaining/updating the explicit posterior distribution for the output of a test essay in each layer using the training data and prior assumptions, the output in the last layer (before non-linear transformation) is still normal, then derive the probability density function (pdf) after the non-linear transformation of a normal random variable, we can obtain the pdf for the final prediction, its expectation and the variance will be the point prediction and measure of uncertainty, respectively.</p>
+<div id="define" class="section level3">
+<h3>Define:</h3>
+
+</div>
+<div id="model" class="section level3">
+<h3>Model:</h3>
+<p>Consider a two-layer feed-forward NN for one essay <span class="math inline">\(\mathbf{e}\)</span>:</p>
+<p><span class="math display">\[\begin{equation}\begin{array}{rcl}
+h_i^{(1)} &amp;=&amp; \phi(\mathbf{w}_i^{(1)T}\mathbf{e}+b_i^{(1)}), \mbox{ the ith component after transformation by } \phi\\
+h_i^{(2)} &amp;=&amp; \phi(\mathbf{w}_i^{(2)T}\mathbf{h}^{(1)}+b_i^{(2)}), \mathbf{h}^{(1)} =[h_1^{(1)}, \dots, h_{dim^{(1)}}^{(1)}]^T\\
+y^{out}&amp;=&amp;\sigma(\mathbf{w}^{(out)T}\mathbf{h}^{(2)}+b^{(out)}), \begin{cases}\mathbf{h}^{(2)} =[h_1^{(2)}, \dots, h_{dim^{(2)}}^{(2)}]^T\\ \textcolor{blue}{\mbox{or in D+W: } \mathbf{h}^{(2)} =[h_1^{(2)}, \dots, h_{dim^{(2)}}^{(2)}, x_1, \dots, x_p]^T} \end{cases}\\
+\end{array}\end{equation}\]</span></p>
+<p>We can formulate the two-layer NN as:</p>
+<p><span class="math display">\[\begin{equation}\begin{array}{rcl}
+f_i(\mathbf{e})^{(1)} \leftarrow z_i^{(1)} &amp;=&amp;  \mathbf{w}_i^{(1)T}\mathbf{e}+b_i^{(1)}; \\
+f_i(\mathbf{z}^{(1)}) \leftarrow z_i^{(2)} &amp;=&amp;  \mathbf{w}_i^{(2)T}\phi(\mathbf{z}^{(1)})+b_i^{(2)}, \mbox{where } \mathbf{z}^{(1)} =[z_1^{(1)}, \dots, z_{dim^{(1)}}^{(1)}]^T; \\
+f(\mathbf{z}^{(2)}) \leftarrow z^{(3)} &amp;=&amp; \begin{cases}\mathbf{w}^{(out)T}\phi(\mathbf{z}^{(2)})+b^{(out)}, \mbox{where }\mathbf{z}^{(2)} =[z_1^{(2)}, \dots, z_{dim^{(2)}}^{(2)}]^T, f(\mathbf{z}^{(2)})\mbox{ is a scalar};\\ \textcolor{blue}{\mbox{or in D+W: } \mathbf{w}^{(out)T}\begin{bmatrix}\phi(\mathbf{z}^{(2)})\\ 
+\mathbf{x}\end{bmatrix}+b^{(out)}, \mathbf{w}^{(out)}\in \mathbb{R}^{dim^{(2)}+p}}\end{cases}\\
+f(z^{(3)}) \leftarrow y^{out}&amp;=&amp; \sigma(z^{(3)})
+\end{array}\end{equation}\]</span></p>
+</div>
+<div id="draft-of-derivation" class="section level3">
+<h3>Draft of derivation:</h3>
+<p>Now, from function-space view, let <strong>Gaussian Process (GP)</strong> to decide the function <span class="math inline">\(f(\cdot)\)</span> by assuming the <span class="math inline">\(i\)</span>th weight vector in <span class="math inline">\(\mathbf{W}^{(s)}\)</span> as <span class="math inline">\(\mathbf{w}_i^{(s)} \stackrel{iid}{\sim} MVN(\mathbf{0}, \sigma_w^{2(s)}\mathbf{I})\)</span>, bias <span class="math inline">\(b_i^{(s)}\)</span> in <span class="math inline">\(\mathbf{b}^{(s)}\)</span> as <span class="math inline">\(b_i^{(s)}\stackrel{iid}{\sim} N(0, \sigma_b^{2(s)})\)</span> for <span class="math inline">\(s =1,2, out\)</span> layer, then for  in <span class="math inline">\(D_{train}\)</span>:</p>
+<p><span class="math display">\[\begin{equation}\begin{array}{rcl}
+z_i^{(1)} &amp;=&amp; \mathbf{w}_i^{(1)T}\mathbf{e}+b_i^{(1)}\\
+&amp;\sim&amp; N(0, \sigma_w^{2(1)}\mathbf{e}^T\mathbf{e}+\sigma_b^2), \mbox{ the prior of i.i.d }z_i^{(1)}, i = 1,\dots, dim^{(1)}\\
+&amp;\rightarrow&amp; \mathbf{z}^{(1)} = \begin{bmatrix}z_1^{(1)}\\\vdots\\z_{dim^{(1)}}^{(1)}\end{bmatrix} \\ 
+&amp; &amp;\sim MVN(\mathbf{0}, [\sigma_w^{2(1)}\mathbf{e}^T\mathbf{e}+\sigma_b^2]\mathbf{I}) \rightarrow MVN(\mathbf{0}, [k(\mathbf{e}, \mathbf{e})+\sigma_b^2]\mathbf{I})\\
+\end{array}
+\end{equation}\]</span></p>
+<p>which is the prior assumed for function <span class="math inline">\(f_i(\mathbf{e})^{(1)}\)</span> or <span class="math inline">\(z_i^{(1)}\)</span>, with <span class="math inline">\(k(\mathbf{e}, \mathbf{e})\)</span> being the kernel for <span class="math inline">\(\mathbf{e}\)</span> itself, the kernel between two different essay vectors is denoted by <span class="math inline">\(k(\mathbf{e}, \mathbf{e}&#39;)\)</span> (measuring how close two essay vectors are).</p>
+<p>In predicting <span class="math inline">\(\mathbf{z}^{*(1)}\)</span> of a test essay <span class="math inline">\(\mathbf{e}^*\)</span> using GP, we assume</p>
+<p><span class="math display">\[
+\begin{cases}
+\mbox{prior of }\mathbf{z}^{*(1)}  \sim MVN(\mathbf{0}, k(\mathbf{e}^*, \mathbf{e}^*)\mathbf{I}), \mathbf{I}\mbox{ is identity matrix }\in \mathbb{R}^{dim^{(1)}}\\
+\mbox{joint prior of }\mathbf{z}^{*(1)} , \mathbf{z}^{(1)}  \sim MVN\left(\mathbf{0}, \begin{bmatrix}k(\mathbf{e}, \mathbf{e})+\sigma_b^2 &amp; k(\mathbf{e}, \mathbf{e}^*) \\symmetric &amp;k(\mathbf{e}^*, \mathbf{e}^*)\end{bmatrix}\otimes\mathbf{I}\right), \\
+\boxed{\mbox{posterior of }\mathbf{z}^{*(1)}|\mathbf{z}^{(1)} \sim MVN(\bar{f}^{*(1)}, cov(f^{*(1)}))}
+\end{cases}
+\]</span>
+<!-- where $E(\mathbf{z}^{*(1)}) = \bar{f}^{*(1)}, Var(\mathbf{z}^{*(1)}) =cov(f^{*(1)})$. --></p>
+<p>where <span class="math inline">\(\bar{f}^{*(1)}, cov(f^{*(1)})\)</span> have closed form and are equal to <span class="math inline">\(\bar{f}^{*(1)} = k(\mathbf{e}^*, \mathbf{e})[k(\mathbf{e}, \mathbf{e})+\sigma_b^{2(1)}]^{-1}\mathbf{z}^{(1)}, cov(f^{*(1)})=k(\mathbf{e}^*, \mathbf{e}^*)-k(\mathbf{e}^*, \mathbf{e})^T[k(\mathbf{e}, \mathbf{e})+\sigma_b^{2(1)}]^{-1}k(\mathbf{e}^*, \mathbf{e})\)</span>.</p>
+<p>Similarly,</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{rcl}
+z_i^{(2)} &amp;=&amp; \mathbf{w}_i^{(2)T}\phi(\mathbf{z}^{(1)})+b_i^{(2)}\\
+&amp;\sim&amp; N(0, \sigma_w^{2(2)}\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)}))+\sigma_b^{2(2)})\\
+&amp;\rightarrow&amp; \mathbf{z}^{(2)} = \begin{bmatrix}z_1^{(2)}\\\vdots\\z_{dim^{(2)}}^{(2)}\end{bmatrix} \\
+&amp;&amp; \sim MVN(\mathbf{0}, [\sigma_w^{2(2)}\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)}))+\sigma_b^2]\mathbf{I}) \\
+\end{array}\end{equation}\]</span></p>
+<p>Since <span class="math inline">\(\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)})) = \int\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)})p(\mathbf{z}^{(1)})d\mathbf{z}^{(1)}\)</span>, where <span class="math inline">\(p(\mathbf{z}^{(1)})\)</span> is MVN derived above, <span class="math inline">\(\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)})) = F(k(\mathbf{e}, \mathbf{e}))\)</span>, a function of <span class="math inline">\(k(\mathbf{e}, \mathbf{e})\)</span>;</p>
+<p>for two essay vectors in <span class="math inline">\(D_{train}\)</span>, <span class="math inline">\(\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)&#39;})) = \int\int\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)&#39;})p(\mathbf{z}^{(1)}, \mathbf{z}^{(1)&#39;})d\mathbf{z}^{(1)}d\mathbf{z}^{(1)&#39;}\)</span>, where <span class="math inline">\(p(\mathbf{z}^{(1)}, \mathbf{z}^{(1)&#39;})\)</span> is an assumed joint MVN of <span class="math inline">\(\mathbf{z}^{(1)}\)</span> and <span class="math inline">\(\mathbf{z}^{(1)&#39;}\)</span>, then <span class="math inline">\(\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)&#39;})) = F(k(\mathbf{e}, \mathbf{e}), k(\mathbf{e}, \mathbf{e}&#39;), k(\mathbf{e}&#39;, \mathbf{e}&#39;))\)</span>;</p>
+<p>in predicting <span class="math inline">\(\mathbf{z}^{*(2)}\)</span> of a test essay <span class="math inline">\(\mathbf{e}^*\)</span> using random variable <span class="math inline">\(\mathbf{z}^{*(1)}\)</span>, we assume</p>
+<p><span class="math display">\[
+\begin{cases}
+\mbox{prior of }\mathbf{z}^{*(2)} \sim MVN(\mathbf{0}, [\sigma_w^{2(2)}\mathbb{E}(\phi(\mathbf{z}^{*(1)})^T\phi(\mathbf{z}^{*(1)}))]\mathbf{I}) =  MVN(\mathbf{0}, F(k(\mathbf{e}^*, \mathbf{e}^*)))\mathbf{I})\\
+\mbox{joint prior of } \mathbf{z}^{*(2)}, \mathbf{z}^{(2)} \sim  MVN\left(\mathbf{0}, \begin{bmatrix}F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^2 &amp; F(k(\mathbf{e}, \mathbf{e}^*)) \\symmetric &amp; F(k(\mathbf{e}^*, \mathbf{e}^*))\end{bmatrix}\otimes\mathbf{I}\right), \mathbf{I} \in \mathbb{R}^{dim^{(2)}}\\
+\boxed{\mbox{posterior of } \mathbf{z}^{*(2)}|\mathbf{z}^{(2)} \sim MVN(\bar{f}^{*(2)}, cov(f^{*(2)}))}
+\end{cases}
+\]</span>
+where <span class="math inline">\(\bar{f}^{*(2)}, cov(f^{*(2)})\)</span> have closed form and are equal to <span class="math inline">\(\bar{f}^{*(2)} = F(k(\mathbf{e}^*, \mathbf{e}))[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(2)}]^{-1}\mathbf{z}^{(2)}, cov(f^{*(2)})=F(k(\mathbf{e}^*, \mathbf{e}^*))-F(k(\mathbf{e}^*, \mathbf{e}))^T[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(2)}]^{-1}F(k(\mathbf{e}^*, \mathbf{e}))\)</span>.</p>
+<p>For the output layer, the <span class="math inline">\(z^{(3)}\)</span> is a scalar for an essay in <span class="math inline">\(D_{train}\)</span>, we assume:</p>
+<p><span class="math display">\[\begin{equation}
+\begin{array}{rcl}
+z^{(3)} &amp;=&amp; \mathbf{w}^{(out)T}\phi(\mathbf{z}^{(2)})+b^{(out)}\\
+&amp;\sim&amp; N(0, \sigma_w^{2(out)}\mathbb{E}(\phi(\mathbf{z}^{(2)}), \phi(\mathbf{z}^{(2)}))+\sigma_b^{2(out)})\\
+&amp; \rightarrow&amp; N(0, F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(out)})\\
+&amp;\mbox{or}&amp; MVN(0, F(k(\mathbf{e}, \mathbf{e}), k(\mathbf{e}, \mathbf{e}&#39;), k(\mathbf{e}&#39;, \mathbf{e}&#39;))) \mbox{ for two different essays}
+\end{array}\end{equation}\]</span></p>
+<p></p>
+<p>Similarly, in predicting <span class="math inline">\(z^{*(3)}\)</span> by assuming the prior of <span class="math inline">\(z^{*(3)}\)</span> and the joint prior of <span class="math inline">\(z^{*(3)}, z^{(3)}\)</span>, the posterior of <span class="math inline">\(z^{*(3)}|z^{(3)}\)</span> is</p>
+<p><span class="math display">\[
+\boxed{z^{*(3)}|z^{(3)} \sim N(\bar{f}^{*(3)}, cov(f^{*(3)}))}
+\]</span></p>
+<p>where <span class="math inline">\(\bar{f}^{*(3)}, cov(f^{*(3)})\)</span> have closed form and are equal to <span class="math inline">\(\bar{f}^{*(3)} = F(k(\mathbf{e}^*, \mathbf{e}))[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(3)}]^{-1}z^{(3)}, cov(f^{*(3)})=F(k(\mathbf{e}^*, \mathbf{e}^*))-F(k(\mathbf{e}^*, \mathbf{e}))^T[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(3)}]^{-1}F(k(\mathbf{e}^*, \mathbf{e}))\)</span>.</p>
+<p>Actually, <span class="math inline">\(z^{*(3)}|z^{(3)} \sim N(\bar{f}^{*(3)}, cov(f^{*(3)}))\)</span> is equivalent to <span class="math inline">\(\int p(z^{*(3)}|\mathbf{e}^*, \mathbf{W})p(\mathbf{W}|D_{train})d\mathbf{W}\)</span>. The form of the integral is essentially weighting the output density function <span class="math inline">\(p(z^{*(3)}|\mathbf{e}^*, \mathbf{W})\)</span> by the posterior probability density function of the weights <span class="math inline">\(p(\mathbf{W}|D_{train})\)</span>, then summing/integrate the weighted <span class="math inline">\(p(z^{*(3)}, \mathbf{W}|\mathbf{e}^*, D_{train})\)</span> over all possible values of <span class="math inline">\(\mathbf{W}\)</span>, thus, the pdf of <span class="math inline">\(z^{*(3)}|z^{(3)}\)</span> is a pdf by ensembling NNs with all possible <span class="math inline">\(\mathbf{W}\)</span> values (can prove the equivalency mathematically).</p>
+<p>Lee et al. (2018) only considers linear transformation in the output layer <span class="math inline">\(z^{(l)} = \mathbf{w}^{(l)T}\phi(\mathbf{z}^{(l-1)})+b^{(l)}\)</span>. We extended their work to sigmoid transformation for prediction, i.e. <span class="math inline">\(y^{out} = z^{(l)} = \sigma(\mathbf{w}^{(l)T}\phi(\mathbf{z}^{(l-1)})+b^{(l)})\)</span>. To yield prediction between <span class="math inline">\([0,1]\)</span>, sigmoid transformation is needed, so in predicting <span class="math inline">\(y^{*out}\)</span> for a test essay <span class="math inline">\(\mathbf{e}^*\)</span> after observing <span class="math inline">\(D_{train}\)</span>, the pdf of the transformed variable <span class="math inline">\(y^{*out}\)</span> is derived as following using the absolute value of Jacobian:</p>
+<!-- \begin{equation} -->
+<!-- \begin{array}{rcl} -->
+<!-- y^{out}&=& \sigma(z^{(3)})\\ -->
+<!-- &=&\frac{1}{1+e^{-z^{(3)}}}\\ -->
+<!-- \sigma^{-1}(y^{out})&=&log\left(\frac{y^{out}}{1-y^{out}}\right) = logit(y^{out})\\ -->
+<!-- &\mbox{since }&  \begin{cases}\mbox{prior }z^{(3)} \sim N(0, F), \\\mbox{implying } p(z^{(3)} ) = (F\sqrt{2\pi})^{-1}exp\left\{-\frac{(z^{(3)})^2}{2F}\right\}\\ -->
+<!-- \mbox{first derivative in Jacobian }\frac{d\sigma^{-1}(y^{out})}{dy^{out}}= \frac{1}{y^{out}(1-y^{out})}\end{cases}\\ -->
+<!-- p(y^{out})&=& p(\sigma^{-1}(y^{out})) \frac{1}{y^{out}(1-y^{out})} \mbox{ (density times Jacobian)}\\ -->
+<!-- &=&\frac{1}{F\sqrt{2\pi}}exp\left\{-\frac{[logit(y^{out})]^2}{2F}\right\}\frac{1}{y^{out}(1-y^{out})} \\ -->
+<!-- y^{out} &\sim&\mbox{logit-normal}\\ -->
+<!-- E(y^{out}) &\approx&\frac{1}{K-1}\mathlarger{\sum}_{i=1}^{K-1}\left[logit\left(\Phi_{\mu, \sigma^2}^{-1}(\frac{i}{K})\right)\right] \mbox{ (quasi monte carlo approximation)} -->
+<!-- \end{array} -->
+<!-- \end{equation} -->
+<!-- $$ -->
+<!-- \begin{cases} -->
+<!-- \mbox{prior of } z^{(3)}\sim N(0, F+\sigma_b^{(3)})\\ -->
+<!-- \mbox{prior of } z^{*(3)}\sim N(0, F)\\ -->
+<!-- \mbox{joint prior of } z^{*(3)},  z^{(3)} \sim MVN(\mathbf{0}, ) -->
+<!-- \end{cases} -->
+<!-- $$ -->
+<p><span class="math display">\[\begin{equation*}
+\begin{array}{rcl}
+y^{*out}&amp;=&amp; \sigma(z^{*(3)})\\
+&amp;=&amp;\frac{1}{1+e^{-z^{*(3)}}}\\
+\sigma^{-1}(y^{*out})&amp;=&amp;log\left(\frac{y^{*out}}{1-y^{*out}}\right) = logit(y^{*out})\\
+&amp;\mbox{since }&amp;  \begin{cases}\mbox{conditional posterior }z^{*(3)}|z^{(3)} \sim N(\bar{f}^{*(3)}, cov(f^{*(3)})),  \\
+\mbox{implying } p(z^{*(3)}|z^{(3)} ) = (cov(f^{*(3)})2\pi)^{-\frac{1}{2}}exp\left\{-(z^{*(3)}-\bar{f}^{*(3)})^T[2cov(f^{*(3)})]^{-1}(z^{*(3)}-\bar{f}^{*(3)})\right\}\\
+\mbox{first derivative in Jacobian }\frac{d\sigma^{-1}(y^{*out})}{dy^{*out}}= \frac{1}{y^{*out}(1-y^{*out})}\end{cases}\\
+p(y^{*out})&amp;=&amp; p(\sigma^{-1}(y^{*out})) \frac{1}{y^{*out}(1-y^{*out})}\\
+&amp;=&amp;(cov(f^{*(3)})2\pi)^{-\frac{1}{2}}exp\left\{-(logit(y^{*out})-\bar{f}^{*(3)})^T[2cov(f^{*(3)})]^{-1}(logit(y^{*out})-\bar{f}^{*(3)})\right\}\frac{1}{y^{*out}(1-y^{*out})} \\
+y^{*out} &amp;\sim&amp;\mbox{logit-normal whose E and Var don&#39;t have analytic solution, but can be approximated}\\
+\end{array}
+\end{equation*}\]</span></p>
+
+<p>where <span class="math inline">\(\Phi_{\mu, \sigma^2}^{-1}(\frac{i}{K})\)</span> is the <span class="math inline">\(\frac{i}{K}\)</span>th quantile of normal distribution with mean <span class="math inline">\(\mu\)</span>, variance <span class="math inline">\(\sigma^2\)</span>, the average of the logit of <span class="math inline">\(K\)</span> such quantiles approximates the first moment of <span class="math inline">\(y^{*out}\)</span>, similar way to obtain the <span class="math inline">\(Var(y^{*out})\)</span>. In prediction, <span class="math inline">\(E(y^{*out})\)</span> and <span class="math inline">\(Var(y^{*out})\)</span> are the prediction and uncertainty measure in this Gaussian Process NN, respectively. Since we use MSE as loss function, it can be shown that <span class="math inline">\(E(y^{*out})\)</span> (mean) minimized the MSE loss function.</p>
+<!-- ## Extention: -->
+<!-- 1. Can extend to sequential GP to process essay as sequential data rather than a single vector but a sequence of vectors. -->
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References:</h2>
+<ol style="list-style-type: decimal">
+<li><p>Rasmussen and Williams, 2006: Gaussian Processes for Machine Learning</p></li>
+<li><p>Lee et al., 2018: DEEP NEURAL NETWORKS AS GAUSSIAN PROCESSES</p></li>
+<li><p>Zhang et al., 2019: Sequential Gaussian Processes for Online Learning of Nonstationary Functions</p></li>
+<li><p>Williams, 1997: Computing with infinite networks</p></li>
+</ol>
+</div>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Luyao Peng</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-12-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/deep-and-wide-model/">Deep and Wide Model</a>
+          <a href="/tags/gaussian-process/">Gaussian Process</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/train-lstm-in-automated-essay-scoring/">
+            <span class="next-text nav-default">Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <div id="disqus_thread"></div>
+  <script>
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://luyao-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+  
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Luyao Peng</span>
+  </span>
+</div>
+
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

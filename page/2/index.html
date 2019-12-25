@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
 
-<meta property="og:updated_time" content="2019-03-10T00:00:00&#43;00:00"/>
+<meta property="og:updated_time" content="2019-03-11T00:00:00&#43;00:00"/>
 
 <meta itemprop="name" content="Luyao Peng&#39;s Blog">
 <meta itemprop="description" content="Hugo theme even example site.">
@@ -130,6 +130,54 @@ MathJax.Hub.Config({
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/stat209/">Machine Learning STAT209 Review</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-11 </span>
+      <div class="post-category">
+          <a href="/categories/course/"> Course </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) + \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\\ 0, ow\end{cases}\)
+    </div>
+    <div class="read-more">
+      <a href="/post/stat209/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/project/">Project: Web Application for Interactive Visualization of Stock Price </a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-10 </span>
+      <div class="post-category">
+          <a href="/categories/visualization/"> Visualization </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.
+Link to the Stock Prince app
+    </div>
+    <div class="read-more">
+      <a href="/post/project/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/">R Package “regrrr”: Compiling and Visualizing Regression Results</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-03-10 </span>
@@ -192,56 +240,6 @@ Wollack and Eckerly (2017) extended the ‘erasure detection index’ (EDI) to d
     </div>
     <div class="read-more">
       <a href="/post/kpca-for-one-class-classification/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/nlp-in-automated-essay-scoring/">Project: NLP in Automated Essay Scoring</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-03-07 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> Python </a>
-          <a href="/categories/my-projects/"> My Projects </a>
-          <a href="/categories/nlp/"> NLP </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.
-Link to the MMeM github
-(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results.
-    </div>
-    <div class="read-more">
-      <a href="/post/nlp-in-automated-essay-scoring/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/multivariate-mixed-effects-model-r-package/">R Package “MMeM”: Multivariate Mixed-effects Model</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-03-07 </span>
-      <div class="post-category">
-          <a href="/categories/my-projects/"> My Projects </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) doi:10.2307/2530651 and Wesolowska Janczarek (1984) doi:10.1002/bimj.4710260613.
-It is available on CRAN and my github page:
-Link to the MMeM github
-Link to the MMeM CRAN
-The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:
-    </div>
-    <div class="read-more">
-      <a href="/post/multivariate-mixed-effects-model-r-package/" class="read-more-link">Read more..</a>
     </div>
   </div>
 </article>

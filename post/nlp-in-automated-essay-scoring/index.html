@@ -178,16 +178,23 @@ MathJax.Hub.Config({
 <ol start="2" style="list-style-type: decimal">
 <li>Features</li>
 </ol>
-<p>This is traditional NLP method, so input features were extraced manually, they are: + Bag of Words (BOW) + Number of words + Number of sentences + Variation of sentences + Average word length + Number of lemms + Number of spelling errors + Number of nouns, adjectives, verbs and adverbs</p>
+<p>This is traditional NLP method, so input features were extraced manually, they are:
++ Bag of Words (BOW)
++ Number of words
++ Number of sentences
++ Variation of sentences
++ Average word length
++ Number of lemms
++ Number of spelling errors
++ Number of nouns, adjectives, verbs and adverbs</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Model and results</li>
 </ol>
-<p>Four regression models are compared: + random forest + ridge regression + lasson regression + gradient boosting regressor Gradient boosting regressor performed better in terms of Variance Explained metric, so gradi- ent boosting was used to make prediction on the validate essay set for set1 and set 5, respectively.</p>
-<p>After applying the early stopping, the results of gradient boosting regressor of the 3-fold cross validation results for essay set1 and essay set5 are (the <span class="math inline">\(R^2\)</span> for other categories are 0.5-0.6, which is relatively low):</p>
-<div class="figure">
-<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/results_AES_TDI.jpg" />
-
-</div>
+<p>Four regression models are compared: + random forest + ridge regression + lasson regression + gradient boosting regressor
+Gradient boosting regressor performed better in terms of Variance Explained metric, so gradi- ent boosting was used to make prediction on the validate essay set for set1 and set 5, respectively.</p>
+<p>After applying the early stopping, the results of gradient boosting regressor of the 3-fold cross
+validation results for essay set1 and essay set5 are (the <span class="math inline">\(R^2\)</span> for other categories are 0.5-0.6, which is relatively low):</p>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/results_AES_TDI.jpg" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Problems</li>
 </ol>

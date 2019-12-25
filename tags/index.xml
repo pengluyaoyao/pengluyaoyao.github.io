@@ -23,9 +23,18 @@
     <item>
       <title>Deep Learning</title>
       <link>/tags/deep-learning/</link>
-      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep and Wide Model</title>
+      <link>/tags/deep-and-wide-model/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/deep-and-wide-model/</guid>
       <description></description>
     </item>
     
@@ -44,6 +53,15 @@
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/flask/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gaussian Process</title>
+      <link>/tags/gaussian-process/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gaussian-process/</guid>
       <description></description>
     </item>
     
@@ -77,7 +95,7 @@
     <item>
       <title>NLP</title>
       <link>/tags/nlp/</link>
-      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/nlp/</guid>
       <description></description>
@@ -122,7 +140,7 @@
     <item>
       <title>RNN</title>
       <link>/tags/rnn/</link>
-      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/rnn/</guid>
       <description></description>

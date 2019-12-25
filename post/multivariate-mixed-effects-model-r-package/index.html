@@ -181,15 +181,26 @@ MathJax.Hub.Config({
 <p><span class="math inline">\(\mathbf{y} = (\mathbf{I} \otimes \mathbf{X})\mathbf{b} + (\mathbf{I} \otimes \mathbf{Z} )\mathbf{u} + \mathbf{e}\)</span></p>
 <p>with</p>
 <p><span class="math inline">\(\mathbf{y} = \left\{\mathbf{y}_i\right\}_c, \mathbf{b} = \left\{\mathbf{b}_i\right\}_c, \mathbf{u} = \left\{\mathbf{u}_i\right\}_c, \mathbf{e} = \left\{\mathbf{e}_i\right\}_c, i =1, \dots, q\)</span></p>
-<p>where <span class="math inline">\(\mathbf{y}\)</span> is n<em>q by 1 response vector; <span class="math inline">\(\mathbf{X}\)</span> is n by p design matrix for the fixed effects; <span class="math inline">\(\mathbf{b}\)</span> is p</em>q by 1 coefficients vector for the fixed effects; <span class="math inline">\(\mathbf{Z}\)</span> is n by s design matrix for the random effects; <span class="math inline">\(\mathbf{u}\)</span> is s<em>q by 1 vector of the random effects; <span class="math inline">\(\mathbf{e}\)</span> is n</em>q by 1 vector of random errors.</p>
+<p>where <span class="math inline">\(\mathbf{y}\)</span> is n<em>q by 1 response vector;
+<span class="math inline">\(\mathbf{X}\)</span> is n by p design matrix for the fixed effects;
+<span class="math inline">\(\mathbf{b}\)</span> is p</em>q by 1 coefficients vector for the fixed effects;
+<span class="math inline">\(\mathbf{Z}\)</span> is n by s design matrix for the random effects;
+<span class="math inline">\(\mathbf{u}\)</span> is s<em>q by 1 vector of the random effects;
+<span class="math inline">\(\mathbf{e}\)</span> is n</em>q by 1 vector of random errors.</p>
 <p>It is assumed that</p>
 <p><span class="math inline">\(cov(\mathbf{u}_i, \mathbf{u}_j&#39;) = \mathbf{G}_{ij}, cov(\mathbf{e}_i, \mathbf{e}_j&#39;) = \mathbf{R}_{ij}, cov(\mathbf{u}_i, \mathbf{e}_j&#39;) = \mathbf{0}\)</span></p>
 <p>or</p>
 <p><span class="math inline">\(var(\mathbf{u}) = \mathbf{G} = \mathbf{T}\otimes \mathbf{I}_s, var(\mathbf{e}) = \mathbf{R} = \mathbf{E} \otimes \mathbf{I}_n, var(\mathbf{y}) = \mathbf{V} = \mathbf{T}\otimes \mathbf{ZZ}&#39; + \mathbf{E} \otimes \mathbf{I}_n\)</span>.</p>
-<p>The goal is to estimate the variance-covariance matrix of random effects <span class="math inline">\(\mathbf{u}\)</span> and <span class="math inline">\(\mathbf{e}\)</span> on <span class="math inline">\(q\)</span> response variates, i.e. <span class="math inline">\(\mathbf{T}\)</span> and <span class="math inline">\(\mathbf{E}\)</span>.</p>
+<p>The goal is to estimate the variance-covariance matrix of random effects <span class="math inline">\(\mathbf{u}\)</span> and <span class="math inline">\(\mathbf{e}\)</span> on <span class="math inline">\(q\)</span> response variates, i.e. <span class="math inline">\(\mathbf{T}\)</span> and <span class="math inline">\(\mathbf{E}\)</span>.</p>
 <p>The model also supports the variance component estimations using univariate mixed-effects model regression, which is equivalent to R package lme4:</p>
 <p><span class="math inline">\(\mathbf{y} = \mathbf{Xb} + \mathbf{Zu} + \mathbf{e}\)</span></p>
-<p>where <span class="math inline">\(\mathbf{y}\)</span> is n by 1 response vector; <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Z}\)</span> are n by p and n by s known design matrix; <span class="math inline">\(\mathbf{b}\)</span> is p by 1 coefficients vector for the fixed effects; <span class="math inline">\(\mathbf{u}\)</span> is s by 1 matrix for the random effects, <span class="math inline">\(\mathbf{e}\)</span> is n by 1 vector of random errors. }</p>
+<p>where
+<span class="math inline">\(\mathbf{y}\)</span> is n by 1 response vector;
+<span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Z}\)</span> are n by p and n by s known design matrix;
+<span class="math inline">\(\mathbf{b}\)</span> is p by 1 coefficients vector for the fixed effects;
+<span class="math inline">\(\mathbf{u}\)</span> is s by 1 matrix for the random effects,
+<span class="math inline">\(\mathbf{e}\)</span> is n by 1 vector of random errors.
+}</p>
 <p>The goal is to estimate <span class="math inline">\(\sigma_u^2\)</span> and <span class="math inline">\(\sigma_e^2\)</span> for <span class="math inline">\(\mathbf{u} \sim N(\mathbf{0}, \sigma_u^2\mathbf{I}), \mathbf{e} \sim N(\mathbf{0}, \sigma_e^2\mathbf{I})\)</span>.</p>
 <p>Currently this package supports multivariate mixed effects model with two response variables, one fixed effects and one random effects, the package only estimates the variance covariance components under multivariate mixed effects model, it doesn’t provide the estimation and hypothesis testing for the fixed effects parameters, which will be incorporated in the future. Users can compute the estimated fixed effects parameters by using the generalized least square formula for the fixed effect parameters after estimating the variance covariance components using this package.</p>
 
