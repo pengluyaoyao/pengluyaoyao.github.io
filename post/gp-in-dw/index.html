@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Gaussian Process in Deep and Wide Model in Automated Essay Scoring - Luyao Peng&#39;s Blog</title>
+  <title>Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring - Luyao Peng&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,18 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Luyao Peng" /><meta name="description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
-Goal: Let GP to decide latent functions in NN
- Provide uncertainty of predictions
- Ensemble of infinite number of 2-layer NNs (see page5)
-   Innovations: Consider sigmoid output function rather than linear output function in Lee et al." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Luyao Peng" /><meta name="description" content="High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network for comparable tasks." /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.73.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="/post/gp-in-dw/" />
@@ -42,39 +38,23 @@ Goal: Let GP to decide latent functions in NN
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Gaussian Process in Deep and Wide Model in Automated Essay Scoring" />
-<meta property="og:description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
-Goal: Let GP to decide latent functions in NN
- Provide uncertainty of predictions
- Ensemble of infinite number of 2-layer NNs (see page5)
-   Innovations: Consider sigmoid output function rather than linear output function in Lee et al." />
+<meta property="og:title" content="Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring" />
+<meta property="og:description" content="High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network for comparable tasks." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/gp-in-dw/" />
-<meta property="article:published_time" content="2019-12-25T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-12-25T00:00:00&#43;00:00"/>
-
-<meta itemprop="name" content="Gaussian Process in Deep and Wide Model in Automated Essay Scoring">
-<meta itemprop="description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
-Goal: Let GP to decide latent functions in NN
- Provide uncertainty of predictions
- Ensemble of infinite number of 2-layer NNs (see page5)
-   Innovations: Consider sigmoid output function rather than linear output function in Lee et al.">
-
-
+<meta property="article:published_time" content="2019-12-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-12-25T00:00:00+00:00" />
+<meta itemprop="name" content="Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring">
+<meta itemprop="description" content="High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network for comparable tasks.">
 <meta itemprop="datePublished" content="2019-12-25T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-25T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="985">
+<meta itemprop="wordCount" content="1080">
 
 
 
-<meta itemprop="keywords" content="Deep and Wide Model,Gaussian Process," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Gaussian Process in Deep and Wide Model in Automated Essay Scoring"/>
-<meta name="twitter:description" content="Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
-Goal: Let GP to decide latent functions in NN
- Provide uncertainty of predictions
- Ensemble of infinite number of 2-layer NNs (see page5)
-   Innovations: Consider sigmoid output function rather than linear output function in Lee et al."/>
+<meta itemprop="keywords" content="Deep and Wide Model,Gaussian Process," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring"/>
+<meta name="twitter:description" content="High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network for comparable tasks."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -152,7 +132,7 @@ MathJax.Hub.Config({
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Gaussian Process in Deep and Wide Model in Automated Essay Scoring</h1>
+      <h1 class="post-title">Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-12-25 </span>
@@ -175,6 +155,8 @@ MathJax.Hub.Config({
       
 
 
+<p>High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network
+for comparable tasks.</p>
 <p>Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):</p>
 <div id="goal" class="section level2">
 <h2>Goal:</h2>
@@ -411,7 +393,7 @@ y^{*out} &amp;\sim&amp;\mbox{logit-normal whose E and Var don&#39;t have analyti
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

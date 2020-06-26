@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.73.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="/" />
@@ -44,13 +44,9 @@
 <meta property="og:description" content="Hugo theme even example site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-
-<meta property="og:updated_time" content="2018-07-10T00:00:00&#43;08:00"/>
-
+<meta property="og:updated_time" content="2019-12-25T00:00:00+00:00" />
 <meta itemprop="name" content="Luyao Peng&#39;s Blog">
-<meta itemprop="description" content="Hugo theme even example site.">
-
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="Hugo theme even example site."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Luyao Peng&#39;s Blog"/>
 <meta name="twitter:description" content="Hugo theme even example site."/>
 
@@ -130,115 +126,19 @@ MathJax.Hub.Config({
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/gp-in-dw/">Gaussian Process in Deep and Wide Model in Automated Essay Scoring</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/">Posts</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-12-25 </span>
-      <div class="post-category">
-          <a href="/categories/nlp/"> NLP </a>
-          <a href="/categories/deep-learning/"> Deep Learning </a>
-          <a href="/categories/automated-essay-scoring/"> Automated Essay Scoring </a>
-          </div>
+      
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
-Goal: Let GP to decide latent functions in NN
- Provide uncertainty of predictions
- Ensemble of infinite number of 2-layer NNs (see page5)
-   Innovations: Consider sigmoid output function rather than linear output function in Lee et al.
+      
     </div>
     <div class="read-more">
-      <a href="/post/gp-in-dw/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/train-lstm-in-automated-essay-scoring/">Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-10-02 </span>
-      <div class="post-category">
-          <a href="/categories/nlp-and-deep-learning/"> NLP and Deep Learning </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Introduction This post introduces the application of deep learning model in automated ASAP essay scoring.
-Traditional machine learning in automated essay scoring Advantage Interpretibility  Traditional machine learning method (e.g. regression-based method) requires features as input. People need to have domain knowledge, experiences and even imagination to provide predictive feature variables. Those features endow the interpretibility of the scoring model, which can provide guidance to students in their essay writing.
-    </div>
-    <div class="read-more">
-      <a href="/post/train-lstm-in-automated-essay-scoring/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/rnn_ner/">CS224n/assignment3/: RNN/GRU Name Entity Recognition</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-06-29 </span>
-      <div class="post-category">
-          <a href="/categories/stanford-nlp-and-deep-learning/"> Stanford NLP and Deep Learning </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1) \\
-    </div>
-    <div class="read-more">
-      <a href="/post/rnn_ner/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/window_based_name_entity_recognition/">CS224n/assignment3/: Window-based Name Entity Recognition (Baseline Model)</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-05-06 </span>
-      <div class="post-category">
-          <a href="/categories/stanford-nlp-and-deep-learning/"> Stanford NLP and Deep Learning </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Introduction This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
- Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O].
-    </div>
-    <div class="read-more">
-      <a href="/post/window_based_name_entity_recognition/" class="read-more-link">Read more..</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/basics-of-rnn-and-lstm/">Basics of RNN and LSTM</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-04-24 </span>
-      <div class="post-category">
-          <a href="/categories/deep-learning/"> Deep Learning </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      RNN The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_t)\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
-\[ P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \]
-The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.
-    </div>
-    <div class="read-more">
-      <a href="/post/basics-of-rnn-and-lstm/" class="read-more-link">Read more..</a>
+      <a href="/post/" class="read-more-link">Read more..</a>
     </div>
   </div>
 </article>
@@ -247,10 +147,7 @@ The cons of traditional language models assumes independence among words (this i
   
   <nav class="pagination">
     
-    <a class="next" href="/page/2/">
-        <span class="next-text">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
+    
   </nav>
         </div>
         
@@ -293,7 +190,7 @@ The cons of traditional language models assumes independence among words (this i
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

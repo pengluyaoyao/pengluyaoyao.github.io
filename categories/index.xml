@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Luyao Peng&#39;s Blog</title>
@@ -21,47 +21,11 @@
     </item>
     
     <item>
-      <title>Course</title>
-      <link>/categories/course/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/course/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Deep Learning</title>
       <link>/categories/deep-learning/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/categories/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>English</title>
-      <link>/categories/english/</link>
-      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
-      
-      <guid>/categories/english/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>My Projects</title>
-      <link>/categories/my-projects/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/my-projects/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>My Research</title>
-      <link>/categories/my-research/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/my-research/</guid>
       <description></description>
     </item>
     
@@ -84,24 +48,6 @@
     </item>
     
     <item>
-      <title>Python</title>
-      <link>/categories/python/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/categories/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Stanford NLP and Deep Learning</title>
       <link>/categories/stanford-nlp-and-deep-learning/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
@@ -111,20 +57,20 @@
     </item>
     
     <item>
-      <title>Syntax Highlighting</title>
-      <link>/categories/syntax-highlighting/</link>
-      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      <title>Course</title>
+      <link>/categories/course/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/syntax-highlighting/</guid>
+      <guid>/categories/course/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Theme preview</title>
-      <link>/categories/theme-preview/</link>
-      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      <title>My Research</title>
+      <link>/categories/my-research/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/theme-preview/</guid>
+      <guid>/categories/my-research/</guid>
       <description></description>
     </item>
     
@@ -134,6 +80,24 @@
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/categories/visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My Projects</title>
+      <link>/categories/my-projects/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/my-projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/categories/python/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/python/</guid>
       <description></description>
     </item>
     
@@ -156,11 +120,20 @@
     </item>
     
     <item>
-      <title>shortcodes</title>
-      <link>/categories/shortcodes/</link>
-      <pubDate>Tue, 30 Aug 2016 16:01:23 +0800</pubDate>
+      <title>Theme preview</title>
+      <link>/categories/theme-preview/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
       
-      <guid>/categories/shortcodes/</guid>
+      <guid>/categories/theme-preview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>English</title>
+      <link>/categories/english/</link>
+      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
+      
+      <guid>/categories/english/</guid>
       <description></description>
     </item>
     
@@ -170,6 +143,33 @@
       <pubDate>Wed, 30 Aug 2017 01:53:34 +0800</pubDate>
       
       <guid>/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shortcodes</title>
+      <link>/categories/shortcodes/</link>
+      <pubDate>Tue, 30 Aug 2016 16:01:23 +0800</pubDate>
+      
+      <guid>/categories/shortcodes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/categories/r/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Syntax Highlighting</title>
+      <link>/categories/syntax-highlighting/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      
+      <guid>/categories/syntax-highlighting/</guid>
       <description></description>
     </item>
     

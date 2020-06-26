@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+<meta name="generator" content="Hugo 0.73.0 with even 4.0.0" />
 
 
 <link rel="canonical" href="/post/rnn_ner/" />
@@ -42,21 +42,17 @@
 <meta property="og:description" content="This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h &#43; \mathbf{e}^t\mathbf{W}_e&#43;\mathbf{b}_1) \\" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/rnn_ner/" />
-<meta property="article:published_time" content="2019-06-29T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-06-29T00:00:00&#43;00:00"/>
-
+<meta property="article:published_time" content="2019-06-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-06-29T00:00:00+00:00" />
 <meta itemprop="name" content="CS224n/assignment3/: RNN/GRU Name Entity Recognition">
 <meta itemprop="description" content="This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h &#43; \mathbf{e}^t\mathbf{W}_e&#43;\mathbf{b}_1) \\">
-
-
 <meta itemprop="datePublished" content="2019-06-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-06-29T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="2044">
 
 
 
-<meta itemprop="keywords" content="Deep Learning,NLP,Name Entity Recognition,RNN," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Deep Learning,NLP,Name Entity Recognition,RNN," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CS224n/assignment3/: RNN/GRU Name Entity Recognition"/>
 <meta name="twitter:description" content="This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h &#43; \mathbf{e}^t\mathbf{W}_e&#43;\mathbf{b}_1) \\"/>
 
@@ -571,7 +567,7 @@ I0713 10:29:08.070044 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:184]
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2019
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

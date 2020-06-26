@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deep and Wide Model on Luyao Peng&#39;s Blog</title>
@@ -12,16 +12,12 @@
     
     
     <item>
-      <title>Gaussian Process in Deep and Wide Model in Automated Essay Scoring</title>
+      <title>Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring</title>
       <link>/post/gp-in-dw/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/gp-in-dw/</guid>
-      <description>Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
-Goal: Let GP to decide latent functions in NN
- Provide uncertainty of predictions
- Ensemble of infinite number of 2-layer NNs (see page5)
-   Innovations: Consider sigmoid output function rather than linear output function in Lee et al.</description>
+      <description>High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network for comparable tasks.</description>
     </item>
     
   </channel>
