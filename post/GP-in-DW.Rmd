@@ -62,14 +62,14 @@ K^l(X^l, X^{l}) = \frac{\sigma_w^2}{n^l}\mathbb{E}\left[\phi(X^{l-1})\phi(X^{l-1
 ## Advantages of GPDNN:
 1. GPDNNs are essentially a DNN based on bayesian method to weight the final predictions by the posterior probabilities of the parameters, weights and bias in each layer, which implies the ensemble learning nature of GPDNN, because it takes into account of the probabilities of all possible values of weights and bias parameters. This is important in reducing the prediction variance, achieving a stable predictions and avoid overfitting problems that exist in deep learning techniques.
 2. The gaussian process regression or classification model [1] can be implemented after driving the GP forms of a DNN, which yields closed-form predictions/ This saves the training time dramatically compared to deep learning methods.
-3. GPDNNs is scalable to large-scale data by using gpytorch library to solve Cholesky decomposition in parallel.
+3. GPDNNs is scalable to large-scale data by using gpytorch library to solve Cholesky Decomposition in parallel.
 
 ## References:
 
 
 1. Rasmussen and Williams, 2006: Gaussian Processes for Machine Learning
 
-2. Lee et al., 2018: DEEP NEURAL NETWORKS AS GAUSSIAN PROCESSES
+2. Lee et al., 2018: Deep Neural Networks as Gaussian Processes
 
 3. Zhang et al., 2019: Sequential Gaussian Processes for Online Learning of Nonstationary Functions
 

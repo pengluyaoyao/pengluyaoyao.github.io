@@ -51,7 +51,7 @@ The following figure shows the consistency between the theoretical GP (contour r
 The following figure shows the consistency between the theoretical GP (contour rings) and the sampled \(z_i\) at the initial layer (left) and the third layer (right) in a DNN.">
 <meta itemprop="datePublished" content="2019-12-25T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-25T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="470">
+<meta itemprop="wordCount" content="940">
 
 
 
@@ -194,19 +194,71 @@ K^l(X^l, X^{l}) = \frac{\sigma_w^2}{n^l}\mathbb{E}\left[\phi(X^{l-1})\phi(X^{l-1
 <ol style="list-style-type: decimal">
 <li>GPDNNs are essentially a DNN based on bayesian method to weight the final predictions by the posterior probabilities of the parameters, weights and bias in each layer, which implies the ensemble learning nature of GPDNN, because it takes into account of the probabilities of all possible values of weights and bias parameters. This is important in reducing the prediction variance, achieving a stable predictions and avoid overfitting problems that exist in deep learning techniques.</li>
 <li>The gaussian process regression or classification model [1] can be implemented after driving the GP forms of a DNN, which yields closed-form predictions/ This saves the training time dramatically compared to deep learning methods.</li>
-<li>GPDNNs is scalable to large-scale data by using gpytorch library to solve Cholesky decomposition in parallel.</li>
+<li>GPDNNs is scalable to large-scale data by using gpytorch library to solve Cholesky Decomposition in parallel.</li>
 </ol>
 </div>
 <div id="references" class="section level2">
 <h2>References:</h2>
 <ol style="list-style-type: decimal">
 <li><p>Rasmussen and Williams, 2006: Gaussian Processes for Machine Learning</p></li>
-<li><p>Lee et al., 2018: DEEP NEURAL NETWORKS AS GAUSSIAN PROCESSES</p></li>
+<li><p>Lee et al., 2018: Deep Neural Networks as Gaussian Processes</p></li>
 <li><p>Zhang et al., 2019: Sequential Gaussian Processes for Online Learning of Nonstationary Functions</p></li>
 <li><p>Williams, 1997: Computing with infinite networks</p></li>
 </ol>
 </div>
-
+<div id="equivalency-between-gaussian-process-and-dnns-1" class="section level2">
+<h2>Equivalency between Gaussian Process and DNNs</h2>
+<p>Previous studies have shown the equivalency between Gaussian Process (GP) [1] and infinitely wide fully-connected Neural Networks (NNs) [2][4], which implies that if we choose a fully-connected NN with infinite width, the function computed by the NN is equivalent to a function drawn from a GP under appropriate statistical assumptions. The analytic forms of GP kernel for DNNs were also subsequentially developed.</p>
+<p>The following figure shows the consistency between the theoretical GP (contour rings) and the sampled <span class="math inline">\(z_i\)</span> at the initial layer (left) and the third layer (right) in a DNN. Note the kernel <span class="math inline">\(K\)</span> in MVN is computed based on the method in [2].</p>
+<p><img src="/post/Window_based_Name_Entity_Recognition_files/figure-html/mvn_check.png" alt="Luyao Peng" width=90% height=80%/></p>
+<p>We can also show the correspondence theoretically.</p>
+<p>Consider a fully-connected feed-forward NN with <span class="math inline">\(L\)</span> layers. Let <span class="math inline">\(\phi\)</span> be pointwise nonlinear function, <span class="math inline">\(X^l\)</span> and <span class="math inline">\(y\)</span> denote the input features at the <span class="math inline">\(l\)</span>th layer and the target, respectively, <span class="math inline">\(z_i^l\)</span> is the ith post-linear transformation component at the <span class="math inline">\(l\)</span>th layer, <span class="math inline">\(i=1, \dots, n^l\)</span>, <span class="math inline">\(Z^l=[z_1^l, \dots, z_{n^l}^l]\)</span>, <span class="math inline">\(n^l\)</span> is the width at the <span class="math inline">\(l\)</span>th layer, <span class="math inline">\(w_i^l\)</span> and <span class="math inline">\(b_i^l\)</span> are the weight and bias vectors for <span class="math inline">\(z_i^l\)</span>, then</p>
+<p><span class="math display">\[\begin{equation}\label{eq:1}
+\begin{aligned}[l]
+z_i^0&amp;=X^0 w_i^0+b_i^0\\
+z_i^1 &amp;= X^1w_i^1+b_i^1\\
+&amp;\qquad \vdots\\
+\quad z_i^{L-1} &amp;= X^{L-1}w_i^{L-1}+b_i^{L-1} \quad\\
+\quad z^{L} &amp;=X^{L}w^{L}+b^{L}\\
+\mbox{prediction:}\quad y &amp;= z^L+\epsilon\\
+\end{aligned}
+\begin{aligned}[c]
+X^1 &amp;= \phi(Z^0) \\
+X^2 &amp;= \phi(Z^1)\\
+&amp;\quad\vdots\\
+X^L &amp;= \phi(Z^{L-1})\\
+&amp;\quad\\
+&amp;\quad\\
+\end{aligned}
+\end{equation}\]</span></p>
+<p>If we assume <span class="math inline">\(w_i^{l} \stackrel{iid}{\sim} MVN(0, \frac{\sigma_w^{2}}{n^l}I),b_i^{l}\stackrel{iid}{\sim} MVN(0, \sigma_b^{2}I)\)</span>, then</p>
+<ul>
+<li><p>Layer 0:
+Each element in layer 0 is <span class="math inline">\(z_{ki}^0 = \mathlarger{\sum}_{j=1}^{n^0} x_{kj}w_{ji}^0+b_{ki}\)</span>, which is a sum of iid random variables for <span class="math inline">\(k=1, \dots, N\)</span>. If <span class="math inline">\(n^0 \rightarrow \infty\)</span>, we have <span class="math inline">\(z_i^0 \stackrel{iid}{\dot{\sim}} MVN(0, \frac{\sigma_w^2}{n^0}XX&#39;+\sigma_b^2I)\)</span> by Central Limit Theorem (CLT), where the <span class="math inline">\(\cdot\)</span> indicates ‘approximately’.</p></li>
+<li><p>Layer 1-L:
+Each element in <span class="math inline">\(z_{i}^l\)</span> is also a sum of iid random variables, where <span class="math inline">\(z_i^l \stackrel{iid}{\dot{\sim}} MVN\left(0, K^l(X^l, X^{l})\right)\)</span>, where</p></li>
+</ul>
+<p><span class="math display">\[\begin{equation}\label{eq:2}
+K^l(X^l, X^{l}) = \frac{\sigma_w^2}{n^l}\mathbb{E}\left[\phi(X^{l-1})\phi(X^{l-1})&#39;\right]+\sigma_b^2I, [2]
+\end{equation}\]</span></p>
+</div>
+<div id="advantages-of-gpdnn-1" class="section level2">
+<h2>Advantages of GPDNN:</h2>
+<ol style="list-style-type: decimal">
+<li>GPDNNs are essentially a DNN based on bayesian method to weight the final predictions by the posterior probabilities of the parameters, weights and bias in each layer, which implies the ensemble learning nature of GPDNN, because it takes into account of the probabilities of all possible values of weights and bias parameters. This is important in reducing the prediction variance, achieving a stable predictions and avoid overfitting problems that exist in deep learning techniques.</li>
+<li>The gaussian process regression or classification model [1] can be implemented after driving the GP forms of a DNN, which yields closed-form predictions/ This saves the training time dramatically compared to deep learning methods.</li>
+<li>GPDNNs is scalable to large-scale data by using gpytorch library to solve Cholesky Decomposition in parallel.</li>
+</ol>
+</div>
+<div id="references-1" class="section level2">
+<h2>References:</h2>
+<ol style="list-style-type: decimal">
+<li><p>Rasmussen and Williams, 2006: Gaussian Processes for Machine Learning</p></li>
+<li><p>Lee et al., 2018: Deep Neural Networks as Gaussian Processes</p></li>
+<li><p>Zhang et al., 2019: Sequential Gaussian Processes for Online Learning of Nonstationary Functions</p></li>
+<li><p>Williams, 1997: Computing with infinite networks</p></li>
+</ol>
+</div>
 
     </div>
 
@@ -231,11 +283,7 @@ K^l(X^l, X^{l}) = \frac{\sigma_w^2}{n^l}\mathbb{E}\left[\phi(X^{l-1})\phi(X^{l-1
           <a href="/tags/gaussian-process/">Gaussian Process</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/even-preview/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Theme preview</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
+        
         <a class="next" href="/post/rnn_ner/">
             <span class="next-text nav-default">CS224n/assignment3/: RNN/GRU Name Entity Recognition</span>
             <span class="next-text nav-mobile">Next</span>
