@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Deep and Wide Model</title>
-      <link>/tags/deep-and-wide-model/</link>
+      <title>Deep Neural Networks</title>
+      <link>/tags/deep-neural-networks/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/deep-and-wide-model/</guid>
+      <guid>/tags/deep-neural-networks/</guid>
       <description></description>
     </item>
     
@@ -30,33 +30,6 @@
     </item>
     
     <item>
-      <title>Deep Learning</title>
-      <link>/tags/deep-learning/</link>
-      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NLP</title>
-      <link>/tags/nlp/</link>
-      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/nlp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>RNN</title>
-      <link>/tags/rnn/</link>
-      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rnn/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Name Entity Recognition</title>
       <link>/tags/name-entity-recognition/</link>
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
@@ -66,47 +39,29 @@
     </item>
     
     <item>
-      <title>Machine Learning</title>
-      <link>/tags/machine-learning/</link>
+      <title>RNN</title>
+      <link>/tags/rnn/</link>
+      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rnn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LSTM</title>
+      <link>/tags/lstm/</link>
       <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       
+      <guid>/tags/lstm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>/tags/machine-learning/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
       <guid>/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bokeh</title>
-      <link>/tags/bokeh/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bokeh/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Flask</title>
-      <link>/tags/flask/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/flask/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mixed-effects Model</title>
-      <link>/tags/mixed-effects-model/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/mixed-effects-model/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/tags/python/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/python/</guid>
       <description></description>
     </item>
     
@@ -120,7 +75,7 @@
     </item>
     
     <item>
-      <title>regression</title>
+      <title>Regression</title>
       <link>/tags/regression/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
@@ -129,11 +84,11 @@
     </item>
     
     <item>
-      <title>html</title>
-      <link>/tags/html/</link>
+      <title>KPCA</title>
+      <link>/tags/kpca/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/html/</guid>
+      <guid>/tags/kpca/</guid>
       <description></description>
     </item>
     
@@ -228,38 +183,20 @@
     </item>
     
     <item>
-      <title>plot</title>
-      <link>/tags/plot/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/tags/plot/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R Markdown</title>
-      <link>/tags/r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/tags/r-markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Syntax Highlighting</title>
-      <link>/tags/syntax-highlighting/</link>
+      <title>Deep Learning and NLP</title>
+      <link>/tags/deep-learning-and-nlp/</link>
       <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
       
-      <guid>/tags/syntax-highlighting/</guid>
+      <guid>/tags/deep-learning-and-nlp/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>tag-5</title>
-      <link>/tags/tag-5/</link>
+      <title>Dependency Parsing</title>
+      <link>/tags/dependency-parsing/</link>
       <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
       
-      <guid>/tags/tag-5/</guid>
+      <guid>/tags/dependency-parsing/</guid>
       <description></description>
     </item>
     

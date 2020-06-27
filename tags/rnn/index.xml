@@ -6,20 +6,10 @@
     <description>Recent content in RNN on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 02 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/rnn/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data</title>
-      <link>/post/train-lstm-in-automated-essay-scoring/</link>
-      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/train-lstm-in-automated-essay-scoring/</guid>
-      <description>Introduction This post introduces the application of deep learning model in automated ASAP essay scoring.
-Traditional machine learning in automated essay scoring Advantage Interpretibility  Traditional machine learning method (e.g. regression-based method) requires features as input. People need to have domain knowledge, experiences and even imagination to provide predictive feature variables. Those features endow the interpretibility of the scoring model, which can provide guidance to students in their essay writing.</description>
-    </item>
     
     <item>
       <title>CS224n/assignment3/: RNN/GRU Name Entity Recognition</title>
@@ -28,6 +18,17 @@ Traditional machine learning in automated essay scoring Advantage Interpretibili
       
       <guid>/post/rnn_ner/</guid>
       <description>This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1) \\</description>
+    </item>
+    
+    <item>
+      <title>Basics of RNN and LSTM</title>
+      <link>/post/basics-of-rnn-and-lstm/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/basics-of-rnn-and-lstm/</guid>
+      <description>RNN The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_t)\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+\[ P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \]
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.</description>
     </item>
     
   </channel>

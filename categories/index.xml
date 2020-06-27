@@ -12,92 +12,38 @@
     
     
     <item>
-      <title>Automated Essay Scoring</title>
-      <link>/categories/automated-essay-scoring/</link>
+      <title>Deep Learning and NLP</title>
+      <link>/categories/deep-learning-and-nlp/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/automated-essay-scoring/</guid>
+      <guid>/categories/deep-learning-and-nlp/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Deep Learning</title>
-      <link>/categories/deep-learning/</link>
-      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NLP</title>
-      <link>/categories/nlp/</link>
-      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/nlp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NLP and Deep Learning</title>
-      <link>/categories/nlp-and-deep-learning/</link>
-      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/nlp-and-deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Stanford NLP and Deep Learning</title>
-      <link>/categories/stanford-nlp-and-deep-learning/</link>
-      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/stanford-nlp-and-deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Course</title>
-      <link>/categories/course/</link>
+      <title>Statistics</title>
+      <link>/categories/statistics/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/course/</guid>
+      <guid>/categories/statistics/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>My Research</title>
-      <link>/categories/my-research/</link>
+      <title>Packages</title>
+      <link>/categories/packages/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/my-research/</guid>
+      <guid>/categories/packages/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Visualization</title>
-      <link>/categories/visualization/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/visualization/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>My Projects</title>
-      <link>/categories/my-projects/</link>
+      <title>Machine Learning</title>
+      <link>/categories/machine-learning/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>/categories/my-projects/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/categories/python/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/python/</guid>
+      <guid>/categories/machine-learning/</guid>
       <description></description>
     </item>
     
@@ -156,20 +102,11 @@
     </item>
     
     <item>
-      <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/categories/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Syntax Highlighting</title>
-      <link>/categories/syntax-highlighting/</link>
+      <title>Dependency Parsing</title>
+      <link>/categories/dependency-parsing/</link>
       <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
       
-      <guid>/categories/syntax-highlighting/</guid>
+      <guid>/categories/dependency-parsing/</guid>
       <description></description>
     </item>
     

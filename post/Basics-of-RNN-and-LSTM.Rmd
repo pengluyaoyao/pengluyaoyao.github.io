@@ -4,9 +4,10 @@ title: Basics of RNN and LSTM
 author: 'Luyao Peng'
 date: '2019-04-24'
 categories:
-  - Deep Learning
+  - Deep Learning and NLP
 tags:
-  - Machine Learning
+  - RNN
+  - LSTM
 draft: false
 flowchartDiagrams:
   enable: true

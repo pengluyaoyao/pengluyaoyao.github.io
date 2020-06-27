@@ -4,7 +4,8 @@ author: Luyao Peng
 date: '2019-03-07'
 slug: multivariate-mixed-effects-model-r-package
 categories:
-  - My Projects
+  - Packages
+  - Statistics
 tags:
   - R 
   - Multivariate Mixed-effects Model

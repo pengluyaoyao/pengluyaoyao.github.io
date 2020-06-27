@@ -1,14 +1,13 @@
 ---
-title: 'Project: KPCA for one-class classification in automated essay scoring and forensic analysis'
+title: 'KPCA for One-class Classification in Automated Essay Scoring and Forensic Analysis'
 author: Luyao Peng
 date: '2019-03-07'
 slug: kpca-for-one-class-classification
 categories:
-  - My Projects
-tags:
-  - R
-  - Shiny
   - Machine Learning
+tags:
+  - Shiny
+  - KPCA
 ---
 
 One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening. 

@@ -4,7 +4,7 @@ title: "Building Generic Model in Automated Essay Scoring Using Deep Learning Me
 author: "Luyao Peng"
 date: '2019-10-02'
 categories:
-  - NLP and Deep Learning
+  - Deep Learning and NLP
 tags:
   - Deep Learning
   - NLP

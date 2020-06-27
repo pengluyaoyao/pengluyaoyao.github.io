@@ -4,10 +4,8 @@ title: "CS224n/assignment3/: Window-based Name Entity Recognition (Baseline Mode
 author: "Luyao Peng"
 date: '2019-05-06'
 categories:
-  - Stanford NLP and Deep Learning
+  - Deep Learning and NLP
 tags:
-  - Deep Learning
-  - NLP
   - Name Entity Recognition
 draft: false
 toc: false

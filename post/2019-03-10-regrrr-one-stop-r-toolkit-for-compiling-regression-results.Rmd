@@ -3,9 +3,11 @@ title: 'R Package “regrrr”: Compiling and Visualizing Regression Results'
 author: ''
 date: '2019-03-10'
 slug: regrrr-one-stop-r-toolkit-for-compiling-regression-results
-categories: []
+categories: 
+  - Packages
+  - Statistics
 tags:
-  - regression
+  - Regression
   - R
 ---
 

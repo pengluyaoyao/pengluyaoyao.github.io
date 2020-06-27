@@ -21,16 +21,5 @@
 Link to the Stock Prince app</description>
     </item>
     
-    <item>
-      <title>Project: NLP in Automated Essay Scoring</title>
-      <link>/post/nlp-in-automated-essay-scoring/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/nlp-in-automated-essay-scoring/</guid>
-      <description>In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.
-Link to the MMeM github
-(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results.</description>
-    </item>
-    
   </channel>
 </rss>

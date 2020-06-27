@@ -1,13 +1,11 @@
 ---
-title: "Correspondence between Infinitely Wide Deep Neural Networks and a Gaussian Process"
+title: "Correspondence Between Infinitely Wide Deep Neural Networks and Gaussian Process"
 author: "Luyao Peng"
 date: '2019-12-25'
 categories:
-  - NLP
-  - Deep Learning
-  - Automated Essay Scoring
+  - Deep Learning and NLP
 tags:
-  - Deep and Wide Model
+  - Deep Neural Networks
   - Gaussian Process
 draft: false
 header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usepackage{pifont} \usepackage{breqn} \usepackage{setspace} \doublespacing  \usepackage{parskip}  \usepackage{epsfig}  \usepackage{xcolor} \usepackage{tcolorbox}

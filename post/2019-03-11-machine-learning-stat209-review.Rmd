@@ -1,10 +1,10 @@
 ---
-title: Machine Learning STAT209 Review
+title: 'Machine Learning STAT209 Review'
 author: ''
 date: '2019-03-11'
 slug: STAT209
 categories:
-  - Course
+  - Statistics
 tags:
   - Machine Learning
 header-includes: \usepackage{amsmath} \usepackage{bm} 

@@ -4,10 +4,8 @@ title: "CS224n/assignment3/: RNN/GRU Name Entity Recognition"
 author: "Luyao Peng"
 date: '2019-06-29'
 categories:
-  - Stanford NLP and Deep Learning
+  - Deep Learning and NLP
 tags:
-  - Deep Learning
-  - NLP
   - Name Entity Recognition
   - RNN
 draft: false

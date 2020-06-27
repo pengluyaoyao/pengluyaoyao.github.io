@@ -6,21 +6,10 @@
     <description>Recent content in Machine Learning on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Basics of RNN and LSTM</title>
-      <link>/post/basics-of-rnn-and-lstm/</link>
-      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/basics-of-rnn-and-lstm/</guid>
-      <description>RNN The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_t)\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
-\[ P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \]
-The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.</description>
-    </item>
     
     <item>
       <title>Machine Learning STAT209 Review</title>
@@ -34,15 +23,6 @@ To minimize \(R(\delta)\), the decision rule is
 \(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} &amp;lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} \\ 0, ow\end{cases}\)
 equivalently,
 \(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &amp;gt; \frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\\ 0, ow\end{cases}\)</description>
-    </item>
-    
-    <item>
-      <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
-      <link>/post/kpca-for-one-class-classification/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/kpca-for-one-class-classification/</guid>
-      <description>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</description>
     </item>
     
   </channel>

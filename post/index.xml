@@ -21,23 +21,13 @@
     </item>
     
     <item>
-      <title>Correspondence between Infinitely Wide Deep Neural Networks and a Gaussian Process</title>
+      <title>Correspondence Between Infinitely Wide Deep Neural Networks and Gaussian Process</title>
       <link>/post/gp-in-dw/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/gp-in-dw/</guid>
       <description>Equivalency between Gaussian Process and DNNs Previous studies have shown the equivalency between Gaussian Process (GP) [1] and infinitely wide fully-connected Neural Networks (NNs) [2][4], which implies that if we choose a fully-connected NN with infinite width, the function computed by the NN is equivalent to a function drawn from a GP under appropriate statistical assumptions. The analytic forms of GP kernel for DNNs were also subsequentially developed.
 The following figure shows the consistency between the theoretical GP (contour rings) and the sampled \(z_i\) at the initial layer (left) and the third layer (right) in a DNN.</description>
-    </item>
-    
-    <item>
-      <title>Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data</title>
-      <link>/post/train-lstm-in-automated-essay-scoring/</link>
-      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/train-lstm-in-automated-essay-scoring/</guid>
-      <description>Introduction This post introduces the application of deep learning model in automated ASAP essay scoring.
-Traditional machine learning in automated essay scoring Advantage Interpretibility  Traditional machine learning method (e.g. regression-based method) requires features as input. People need to have domain knowledge, experiences and even imagination to provide predictive feature variables. Those features endow the interpretibility of the scoring model, which can provide guidance to students in their essay writing.</description>
     </item>
     
     <item>
@@ -85,16 +75,6 @@ equivalently,
     </item>
     
     <item>
-      <title>Project: Web Application for Interactive Visualization of Stock Price </title>
-      <link>/post/project/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/project/</guid>
-      <description>In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.
-Link to the Stock Prince app</description>
-    </item>
-    
-    <item>
       <title>R Package “regrrr”: Compiling and Visualizing Regression Results</title>
       <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
       <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
@@ -110,33 +90,12 @@ devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  E
     </item>
     
     <item>
-      <title>Research: Using linear mixed-effects model to detect fraudulent erasures at an aggregate level</title>
-      <link>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</guid>
-      <description>Abstract
-Wollack and Eckerly (2017) extended the ‘erasure detection index’ (EDI) to detect fraudulent erasures at the group level. Sinharay (2018) suggested two modifications of the EDI at the group level. Those EDIs were not developed specifically for the fraudulent schools with small number of examinees with erasures. This paper suggested a new modification of the group-level EDI in Wollack and Eckerly (2017) by incorporating the ‘empirical best linear unbiased predictor’ (EBLUP) from the linear mixed-effects model.</description>
-    </item>
-    
-    <item>
-      <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
+      <title>KPCA for One-class Classification in Automated Essay Scoring and Forensic Analysis</title>
       <link>/post/kpca-for-one-class-classification/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/kpca-for-one-class-classification/</guid>
       <description>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</description>
-    </item>
-    
-    <item>
-      <title>Project: NLP in Automated Essay Scoring</title>
-      <link>/post/nlp-in-automated-essay-scoring/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/nlp-in-automated-essay-scoring/</guid>
-      <description>In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.
-Link to the MMeM github
-(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results.</description>
     </item>
     
     <item>
@@ -234,17 +193,6 @@ Without title.
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
     <item>
