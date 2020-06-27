@@ -10,7 +10,7 @@ weight: 50
  
 My name is Luyao Peng. I am a Ph.D. candidate in applied statistics with specialization in the mixed-effects model and computational linguistics. I apply natural language processing and build machine learning algorithms to automatize essay scoring and detect cheating behavior. 
 
-My current [CV](Resume_Luyao_Peng_DS.pdf)
+My current [CV](https://github.com/pengluyaoyao/CV/blob/master/Resume_Luyao_Peng_DS.pdf)
 
 My Research Projects:
 
