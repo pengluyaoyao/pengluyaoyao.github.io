@@ -17,7 +17,7 @@
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
       <guid>/about/</guid>
-      <description>--- date: &#34;2017-08-20T21:38:52+08:00&#34; lastmod: &#34;2017-08-28T21:41:52+08:00&#34; menu: main title: About weight: 50 --- My name is Luyao Peng. I am a data scientist in NLP (natural language processing) with industry and research experience in text generation, general language understanding evaluation and chatbot, and educational background in statistics (Ph.D.) and linguistics (M.A.).
+      <description>My name is Luyao Peng. I am a data scientist in NLP (natural language processing) with industry and research experience in text generation, general language understanding evaluation and chatbot, and educational background in statistics (Ph.D.) and linguistics (M.A.).
 My current C.V.
 My Personal Research Projects:
  Bert Summarization and Generation of Chinese Language Automated Content Generation by Keyword Using Transformer Networks Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (National Council on Measurement in Education 2020, conference abstract, pg113) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (Joint Statistical Meetings 2019, conference abstract)  My Visualization of Data Science Projects:</description>
@@ -112,53 +112,6 @@ It is available on CRAN and my github page:
 Link to the MMeM github
 Link to the MMeM CRAN
 The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
-    </item>
-    
-    <item>
-      <title>Shortcodes</title>
-      <link>/post/shortcodes/</link>
-      <pubDate>Tue, 30 Aug 2016 16:01:23 +0800</pubDate>
-      
-      <guid>/post/shortcodes/</guid>
-      <description>&lt;h1 id=&#34;admonition&#34;&gt;Admonition&lt;/h1&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;biu biu biu.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;{{% admonition note &amp;#34;I&amp;#39;m title!&amp;#34; false %}}
-biu biu biu.
-
-{{% admonition type=&amp;#34;note&amp;#34; title=&amp;#34;note&amp;#34; details=&amp;#34;true&amp;#34; %}}
-biu biu biu.
-{{% /admonition %}}
-
-{{% admonition example %}}
-Without title.
-{{% /admonition %}}
-
-{{% /admonition %}}
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
     </item>
     
     <item>
