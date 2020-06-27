@@ -51,14 +51,5 @@ The following figure shows the consistency between the theoretical GP (contour r
 The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.</description>
     </item>
     
-    <item>
-      <title>CS224n/assignment2/: RNN in Dependency Parsing</title>
-      <link>/post/2019-03-04-assignment2/</link>
-      <pubDate>Thu, 30 Aug 2018 16:01:23 +0800</pubDate>
-      
-      <guid>/post/2019-03-04-assignment2/</guid>
-      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has ‘word</description>
-    </item>
-    
   </channel>
 </rss>
