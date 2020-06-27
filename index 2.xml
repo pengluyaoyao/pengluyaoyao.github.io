@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Luyao Peng&#39;s Blog</title>
+    <link>/</link>
+    <description>Recent content on Luyao Peng&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Theme preview</title>
+      <link>/post/even-preview/</link>
+      <pubDate>Tue, 10 Jul 2018 00:00:00 +0800</pubDate>
+      
+      <guid>/post/even-preview/</guid>
+      <description>Based on MarkdownPreview test.md. Markdown 1 2 3 4 5 6 7 8 # H1 ## H2 ### H3 #### H4 ##### H5 ###### H6 ### Duplicate Header ### Duplicate Header H1 H2 H3 H4 H5 H6 Duplicate Header Duplicate Header Paragraphs 1 2 3 4 This is a paragraph. I am still part of the paragraph. New paragraph. This is a paragraph. I am still part of the paragraph.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>/about/</guid>
+      <description>My name is Luyao Peng. I am a Ph.D. candidate in applied statistics with specialization in the mixed-effects model and computational linguistics. I apply natural language processing and build machine learning algorithms to automatize essay scoring and detect cheating behavior.
+My current CV
+My Research Projects:
+ Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (abstract) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (abstract)  My Data Science Projects:</description>
+    </item>
+    
+    <item>
+      <title>Deep and Wide Model in Automated Essay Scoring</title>
+      <link>/post/deep-and-wide-model-in-automated-essay-scoring/</link>
+      <pubDate>Fri, 17 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/deep-and-wide-model-in-automated-essay-scoring/</guid>
+      <description>Introduction Generic approach in automated essay scoring produces scores that have the same standards/meanings across all prompts, existing or new, of a writing assessment. This is accomplished by using a single set of indicators or features, a consistent way of weighting and transforming these features into essay scores, and a focus on features that are not based on prompt-specific information or vocabulary.
+Tranditional generic approach focuses on creating linguistic features that are designed to measure elements of writing quality and combining and weighting those features to produce an essay score by using machine learning methods (current CRASE+ engine applies gradient-boosting regression method).</description>
+    </item>
+    
+    <item>
+      <title>Gaussian Process in Deep and Wide Model in Automated Essay Scoring</title>
+      <link>/post/gp-in-dw/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/gp-in-dw/</guid>
+      <description>Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
+Goal: Let GP to decide latent functions in NN
+ Provide uncertainty of predictions
+ Ensemble of infinite number of 2-layer NNs (see page5)
+   Innovations: Consider sigmoid output function rather than linear output function in Lee et al.</description>
+    </item>
+    
+    <item>
+      <title>Building Generic Model in Automated Essay Scoring Using Deep Learning Method-- ASAP data</title>
+      <link>/post/train-lstm-in-automated-essay-scoring/</link>
+      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/train-lstm-in-automated-essay-scoring/</guid>
+      <description>Introduction This post introduces the application of deep learning model in automated ASAP essay scoring.
+Traditional machine learning in automated essay scoring Advantage Interpretibility  Traditional machine learning method (e.g. regression-based method) requires features as input. People need to have domain knowledge, experiences and even imagination to provide predictive feature variables. Those features endow the interpretibility of the scoring model, which can provide guidance to students in their essay writing.</description>
+    </item>
+    
+    <item>
+      <title>CS224n/assignment3/: RNN/GRU Name Entity Recognition</title>
+      <link>/post/rnn_ner/</link>
+      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rnn_ner/</guid>
+      <description>This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1) \\</description>
+    </item>
+    
+    <item>
+      <title>CS224n/assignment3/: Window-based Name Entity Recognition (Baseline Model)</title>
+      <link>/post/window_based_name_entity_recognition/</link>
+      <pubDate>Mon, 06 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/window_based_name_entity_recognition/</guid>
+      <description>Introduction This assignment built 3 different models for named entity recognition (NER) task. For a given word in a context, we want to predict the name entity of the word in one of the following 5 categories:
+ Person (PER): Organization (ORG): Location (LOC): Miscellaneous (MISC): Null (O): the word do not represent a named entity and most of the words fall into this categroy.  This is a 5-class classification problem, which implies a label vector of [PER, ORG, LOC, MISC, O].</description>
+    </item>
+    
+    <item>
+      <title>Basics of RNN and LSTM</title>
+      <link>/post/basics-of-rnn-and-lstm/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/basics-of-rnn-and-lstm/</guid>
+      <description>RNN The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_t)\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
+\[ P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \]
+The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning STAT209 Review</title>
+      <link>/post/stat209/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/stat209/</guid>
+      <description>1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) + \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} &amp;lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &amp;gt; \frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\\ 0, ow\end{cases}\)</description>
+    </item>
+    
+    <item>
+      <title>Project: Web Application for Interactive Visualization of Stock Price </title>
+      <link>/post/project/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/project/</guid>
+      <description>In this project, I developed a simple web application for interactive visualization of stock price using Bokeh and Flask modules in Python. Users can select any company to compare the trends of Close Price, Adjusted Close Price, Open Price and Adjusted Open Price for that selected company.
+Link to the Stock Prince app</description>
+    </item>
+    
+    <item>
+      <title>R Package “regrrr”: Compiling and Visualizing Regression Results</title>
+      <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</guid>
+      <description>This is an R package “regrrr” on Cran I coauthored with Rui Yang.
+In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.
+Here is the quickstart guide.
+ 
+Installation To install from CRAN:
+install.packages(&amp;quot;regrrr&amp;quot;) library(regrrr) You can also use devtools to install the latest development version:
+devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  Examples compile the correlation table library(regrrr) ## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.</description>
+    </item>
+    
+    <item>
+      <title>Research: Using linear mixed-effects model to detect fraudulent erasures at an aggregate level</title>
+      <link>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/using-linear-mixed-effects-model-to-detect-fraudulent-erasures-at-an-aggregate-level/</guid>
+      <description>Abstract
+Wollack and Eckerly (2017) extended the ‘erasure detection index’ (EDI) to detect fraudulent erasures at the group level. Sinharay (2018) suggested two modifications of the EDI at the group level. Those EDIs were not developed specifically for the fraudulent schools with small number of examinees with erasures. This paper suggested a new modification of the group-level EDI in Wollack and Eckerly (2017) by incorporating the ‘empirical best linear unbiased predictor’ (EBLUP) from the linear mixed-effects model.</description>
+    </item>
+    
+    <item>
+      <title>Project: KPCA for one-class classification in automated essay scoring and forensic analysis</title>
+      <link>/post/kpca-for-one-class-classification/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/kpca-for-one-class-classification/</guid>
+      <description>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</description>
+    </item>
+    
+    <item>
+      <title>Project: NLP in Automated Essay Scoring</title>
+      <link>/post/nlp-in-automated-essay-scoring/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/nlp-in-automated-essay-scoring/</guid>
+      <description>In The Data Incubator, my capstone project was NLP in automated essay scoring, which was completed in Nov,2018, at that time, I haven’t learned the techniques of NLP with deep learning, so this project only involves basic NLP methods such as BOW, n-gram and tree-based boosting model.
+Link to the MMeM github
+(The heroku platform only allows 30s response time for any request, sometimes the app takes takes more than 30s to respond due to an external API, please try multiple times to get the results.</description>
+    </item>
+    
+    <item>
+      <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
+      <link>/post/multivariate-mixed-effects-model-r-package/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
+      <description>This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) doi:10.2307/2530651 and Wesolowska Janczarek (1984) doi:10.1002/bimj.4710260613.
+It is available on CRAN and my github page:
+Link to the MMeM github
+Link to the MMeM CRAN
+The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
+    </item>
+    
+    <item>
+      <title>This is a hidden post.</title>
+      <link>/post/hidden-post/</link>
+      <pubDate>Thu, 08 Mar 2018 17:40:19 +0800</pubDate>
+      
+      <guid>/post/hidden-post/</guid>
+      <description>&lt;p&gt;This post is hidden from the home page.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>[English] Creating a New Theme</title>
+      <link>/post/english-preview/</link>
+      <pubDate>Thu, 31 Aug 2017 15:43:48 +0800</pubDate>
+      
+      <guid>/post/english-preview/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>[日本語] 敬語体系</title>
+      <link>/post/japanese-preview/</link>
+      <pubDate>Wed, 30 Aug 2017 01:53:34 +0800</pubDate>
+      
+      <guid>/post/japanese-preview/</guid>
+      <description>日本語の敬語体系は、一般に、大きく尊敬語・謙譲語・丁寧語に分類される。文化審議会国語分科会は、2007年2月に「敬語の指針」を答申し、これに</description>
+    </item>
+    
+    <item>
+      <title>[中文] 《长恨歌》</title>
+      <link>/post/chinese-preview/</link>
+      <pubDate>Wed, 30 Aug 2017 01:37:56 +0800</pubDate>
+      
+      <guid>/post/chinese-preview/</guid>
+      <description>《长恨歌》是中国唐朝诗人白居易的一首长篇叙事诗。 第一段：贵妃受宠爱 汉皇重色思倾国，御宇多年求不得。杨家有女初长成，养在深闺人未识。 天生丽质难</description>
+    </item>
+    
+    <item>
+      <title>Shortcodes</title>
+      <link>/post/shortcodes/</link>
+      <pubDate>Tue, 30 Aug 2016 16:01:23 +0800</pubDate>
+      
+      <guid>/post/shortcodes/</guid>
+      <description>&lt;h1 id=&#34;admonition&#34;&gt;Admonition&lt;/h1&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;&lt;p class=&#34;admonition-title&#34;&gt;I&amp;#39;m title!&lt;/p&gt;
+  &lt;p&gt;biu biu biu.&lt;/p&gt;
+
+&lt;p&gt;&lt;details class=&#34;admonition note&#34;&gt;&lt;summary class=&#34;admonition-title&#34;&gt;note&lt;/summary&gt;
+  &lt;p&gt;biu biu biu.&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/details&gt;&lt;/p&gt;
+
+&lt;div class=&#34;admonition example&#34;&gt;
+  &lt;p&gt;Without title.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;{{% admonition note &amp;#34;I&amp;#39;m title!&amp;#34; false %}}&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;biu biu biu.&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;{{% admonition type=&amp;#34;note&amp;#34; title=&amp;#34;note&amp;#34; details=&amp;#34;true&amp;#34; %}}&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;biu biu biu.&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;{{% /admonition %}}&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;{{% admonition example %}}&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;Without title.&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;{{% /admonition %}}&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;{{% /admonition %}}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+    <item>
+      <title>JS Flowchart Diagrams</title>
+      <link>/post/js-flowchart-diagrams/</link>
+      <pubDate>Wed, 04 Mar 2015 21:57:50 +0800</pubDate>
+      
+      <guid>/post/js-flowchart-diagrams/</guid>
+      <description>&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-flow&#34; data-lang=&#34;flow&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-flow&#34; data-lang=&#34;flow&#34;&gt;st=&amp;gt;start: Start|past:&amp;gt;http://www.google.com[blank]
+e=&amp;gt;end: End:&amp;gt;http://www.google.com
+op1=&amp;gt;operation: My Operation|past
+op2=&amp;gt;operation: Stuff|current
+sub1=&amp;gt;subroutine: My Subroutine|invalid
+cond=&amp;gt;condition: Yes
+or No?|approved:&amp;gt;http://www.google.com
+c2=&amp;gt;condition: Good idea|rejected
+io=&amp;gt;inputoutput: catch something...|request
+
+st-&amp;gt;op1(right)-&amp;gt;cond
+cond(yes, right)-&amp;gt;c2
+cond(no)-&amp;gt;sub1(left)-&amp;gt;op1
+c2(yes)-&amp;gt;io-&amp;gt;e
+c2(no)-&amp;gt;op2-&amp;gt;e&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>JS Sequence Diagrams</title>
+      <link>/post/js-sequence-diagrams/</link>
+      <pubDate>Wed, 04 Mar 2015 21:57:45 +0800</pubDate>
+      
+      <guid>/post/js-sequence-diagrams/</guid>
+      <description>&lt;h2 id=&#34;usage&#34;&gt;Usage&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sequence&#34; data-lang=&#34;sequence&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sequence&#34; data-lang=&#34;sequence&#34;&gt;Andrew-&amp;gt;China: Says Hello
+Note right of China: China thinks\nabout it
+China--&amp;gt;Andrew: How are you?
+Andrew-&amp;gt;&amp;gt;China: I am good thanks!&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Project: Dependency Parsing Using Deep Learning NN Model</title>
+      <link>/post/dependency-parsing/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      
+      <guid>/post/dependency-parsing/</guid>
+      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parsing model is Penn Treebank, and each sentence has &amp;lsquo;word&amp;rsquo;, &amp;lsquo;POS&amp;rsquo;, &amp;lsquo;head&amp;rsquo; and &amp;lsquo;label&amp;rsquo;,</description>
+    </item>
+    
+    <item>
+      <title>Syntax Highlighting</title>
+      <link>/post/2019-03-04-assignment2/</link>
+      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      
+      <guid>/post/2019-03-04-assignment2/</guid>
+      <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has ‘word</description>
+    </item>
+    
+  </channel>
+</rss>
