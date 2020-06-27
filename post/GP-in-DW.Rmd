@@ -1,5 +1,5 @@
 ---
-title: "Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring"
+title: "Correspondence between Infinitely Wide Deep Neural Networks and a Gaussian Process"
 author: "Luyao Peng"
 date: '2019-12-25'
 categories:
@@ -16,207 +16,55 @@ header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usep
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network
-for comparable tasks. 
+## Equivalency between Gaussian Process and DNNs
 
-Consider a two-layer feed-forward NN (but it is easy to extend to deep NN more than 2 layers without loss of generality and to deep and wide (in blue color)):
+Previous studies have shown the equivalency between Gaussian Process (GP) [1] and infinitely wide fully-connected Neural Networks (NNs) [2][4], which implies that if we choose a fully-connected NN with infinite width, the function computed by the NN is equivalent to a function drawn from a GP under appropriate statistical assumptions. The analytic forms of GP kernel for DNNs were also subsequentially developed.
 
-## Goal:
+The following figure shows the consistency between the theoretical GP (contour rings) and the sampled $z_i$ at the initial layer (left) and the third layer (right) in a DNN. Note the kernel $K$ in MVN is computed based on the method in [2].
 
-1. Let GP to decide latent functions in NN
+<img src="/post/Window_based_Name_Entity_Recognition_files/figure-html/mvn_check.png" alt="Luyao Peng" width=90% height=80%/>
 
-2. Provide uncertainty of predictions
+We can also show the correspondence theoretically.
 
-3. Ensemble of infinite number of 2-layer NNs (see page5)
-
-## Innovations:
-
-1. Consider sigmoid output function rather than linear output function in Lee et al.(2018)
-
-2. Extend to deep and wide NN
-
-3. In essay scoring context
-
-4. Closed-form solution to the predictions and uncertainty measures
-
-## Main idea:
-
-Obtaining/updating the explicit posterior distribution for the output of a test essay in each layer using the training data and prior assumptions, the output in the last layer (before non-linear transformation) is still normal,  then derive the probability density function (pdf) after the non-linear transformation of a normal random variable, we can obtain the pdf for the final prediction, its expectation and the variance will be the point prediction and measure of uncertainty, respectively.
+Consider a fully-connected feed-forward NN with $L$ layers. Let $\phi$ be pointwise nonlinear function, $X^l$ and $y$ denote the input features at the $l$th layer and the target, respectively, $z_i^l$ is the ith post-linear transformation component at the $l$th layer, $i=1, \dots, n^l$, $Z^l=[z_1^l, \dots, z_{n^l}^l]$, $n^l$ is the width at the $l$th layer, $w_i^l$ and $b_i^l$ are the weight and bias vectors for $z_i^l$, then
 
 
-### Define:
-\begin{enumerate}
-\item $D_{train}$ is training data;
-\item $\mathbf{e} \in \mathbb{R}^{dim_e}$, the vector for one essay; \textcolor{blue}{$\mathbf{x}\in \mathbb{R}^{p}$, the vector for $p$ wide features (hand-crafted).}
-\item letters with $*$ is for a new test data, e.g. $\mathbf{e}^*$, vector for a test essay, $z_i^{*(1)}$ the $i$th component after linear transformation of $\mathbf{e}^*$ for the first layer;
-\item letters in bold: e.g. $\mathbf{e}$ or $\mathbf{w}$ is a vector, capitalized bolded letters: e.g. $\mathbf{E}$ or $\mathbf{W}$ is a matrix, unbolded letter is a scalar;
-\item $f(\cdot)$ is a latent function to be decided;
-\item $p(\cdot)$ is probability density function (pdf) of a variable;
-\item $^T$ in supperscript is transform of a vector/matrix
-\item $E = \mbox{Expectation}, Var=\mbox{Variance}$ 
-\end{enumerate}
-
-### Model:
-
-Consider a two-layer feed-forward NN for one essay $\mathbf{e}$:
-
-\begin{equation}\begin{array}{rcl}
-h_i^{(1)} &=& \phi(\mathbf{w}_i^{(1)T}\mathbf{e}+b_i^{(1)}), \mbox{ the ith component after transformation by } \phi\\
-h_i^{(2)} &=& \phi(\mathbf{w}_i^{(2)T}\mathbf{h}^{(1)}+b_i^{(2)}), \mathbf{h}^{(1)} =[h_1^{(1)}, \dots, h_{dim^{(1)}}^{(1)}]^T\\
-y^{out}&=&\sigma(\mathbf{w}^{(out)T}\mathbf{h}^{(2)}+b^{(out)}), \begin{cases}\mathbf{h}^{(2)} =[h_1^{(2)}, \dots, h_{dim^{(2)}}^{(2)}]^T\\ \textcolor{blue}{\mbox{or in D+W: } \mathbf{h}^{(2)} =[h_1^{(2)}, \dots, h_{dim^{(2)}}^{(2)}, x_1, \dots, x_p]^T} \end{cases}\\
-\end{array}\end{equation}
-
-We can formulate the two-layer NN as:
-
-\begin{equation}\begin{array}{rcl}
-f_i(\mathbf{e})^{(1)} \leftarrow z_i^{(1)} &=&  \mathbf{w}_i^{(1)T}\mathbf{e}+b_i^{(1)}; \\
-f_i(\mathbf{z}^{(1)}) \leftarrow z_i^{(2)} &=&  \mathbf{w}_i^{(2)T}\phi(\mathbf{z}^{(1)})+b_i^{(2)}, \mbox{where } \mathbf{z}^{(1)} =[z_1^{(1)}, \dots, z_{dim^{(1)}}^{(1)}]^T; \\
-f(\mathbf{z}^{(2)}) \leftarrow z^{(3)} &=& \begin{cases}\mathbf{w}^{(out)T}\phi(\mathbf{z}^{(2)})+b^{(out)}, \mbox{where }\mathbf{z}^{(2)} =[z_1^{(2)}, \dots, z_{dim^{(2)}}^{(2)}]^T, f(\mathbf{z}^{(2)})\mbox{ is a scalar};\\ \textcolor{blue}{\mbox{or in D+W: } \mathbf{w}^{(out)T}\begin{bmatrix}\phi(\mathbf{z}^{(2)})\\ 
-\mathbf{x}\end{bmatrix}+b^{(out)}, \mathbf{w}^{(out)}\in \mathbb{R}^{dim^{(2)}+p}}\end{cases}\\
-f(z^{(3)}) \leftarrow y^{out}&=& \sigma(z^{(3)})
-\end{array}\end{equation}
-
-### Draft of derivation:
-
-Now, from function-space view, let **Gaussian Process (GP)** to decide the function $f(\cdot)$ by assuming the $i$th weight vector in $\mathbf{W}^{(s)}$ as $\mathbf{w}_i^{(s)} \stackrel{iid}{\sim} MVN(\mathbf{0}, \sigma_w^{2(s)}\mathbf{I})$, bias $b_i^{(s)}$ in $\mathbf{b}^{(s)}$ as $b_i^{(s)}\stackrel{iid}{\sim} N(0, \sigma_b^{2(s)})$ for $s =1,2, out$ layer, then for \underline{one essay} in $D_{train}$:
-
-
-\begin{equation}\begin{array}{rcl}
-z_i^{(1)} &=& \mathbf{w}_i^{(1)T}\mathbf{e}+b_i^{(1)}\\
-&\sim& N(0, \sigma_w^{2(1)}\mathbf{e}^T\mathbf{e}+\sigma_b^2), \mbox{ the prior of i.i.d }z_i^{(1)}, i = 1,\dots, dim^{(1)}\\
-&\rightarrow& \mathbf{z}^{(1)} = \begin{bmatrix}z_1^{(1)}\\\vdots\\z_{dim^{(1)}}^{(1)}\end{bmatrix} \\ 
-& &\sim MVN(\mathbf{0}, [\sigma_w^{2(1)}\mathbf{e}^T\mathbf{e}+\sigma_b^2]\mathbf{I}) \rightarrow MVN(\mathbf{0}, [k(\mathbf{e}, \mathbf{e})+\sigma_b^2]\mathbf{I})\\
-\end{array}
+\begin{equation}\label{eq:1}
+\begin{aligned}[l]
+z_i^0&=X^0 w_i^0+b_i^0\\
+z_i^1 &= X^1w_i^1+b_i^1\\
+&\qquad \vdots\\
+\quad z_i^{L-1} &= X^{L-1}w_i^{L-1}+b_i^{L-1} \quad\\
+\quad z^{L} &=X^{L}w^{L}+b^{L}\\
+\mbox{prediction:}\quad y &= z^L+\epsilon\\
+\end{aligned}
+\begin{aligned}[c]
+X^1 &= \phi(Z^0) \\
+X^2 &= \phi(Z^1)\\
+&\quad\vdots\\
+X^L &= \phi(Z^{L-1})\\
+&\quad\\
+&\quad\\
+\end{aligned}
 \end{equation}
 
-which is the prior assumed for function $f_i(\mathbf{e})^{(1)}$ or $z_i^{(1)}$, with $k(\mathbf{e}, \mathbf{e})$ being the kernel for $\mathbf{e}$ itself, the kernel between two different essay vectors is denoted by $k(\mathbf{e}, \mathbf{e}')$ (measuring how close two essay vectors are). 
+If we assume $w_i^{l} \stackrel{iid}{\sim} MVN(0, \frac{\sigma_w^{2}}{n^l}I),b_i^{l}\stackrel{iid}{\sim} MVN(0, \sigma_b^{2}I)$, then
 
-In predicting $\mathbf{z}^{*(1)}$ of a test essay $\mathbf{e}^*$ using GP, we assume 
+* Layer 0:
+Each element in layer 0 is $z_{ki}^0 = \mathlarger{\sum}_{j=1}^{n^0} x_{kj}w_{ji}^0+b_{ki}$, which is a sum of iid random variables for $k=1, \dots, N$. If $n^0 \rightarrow \infty$, we have $z_i^0  \stackrel{iid}{\dot{\sim}} MVN(0, \frac{\sigma_w^2}{n^0}XX'+\sigma_b^2I)$ by Central Limit Theorem (CLT), where the $\cdot$ indicates 'approximately'. 
 
-$$
-\begin{cases}
-\mbox{prior of }\mathbf{z}^{*(1)}  \sim MVN(\mathbf{0}, k(\mathbf{e}^*, \mathbf{e}^*)\mathbf{I}), \mathbf{I}\mbox{ is identity matrix }\in \mathbb{R}^{dim^{(1)}}\\
-\mbox{joint prior of }\mathbf{z}^{*(1)} , \mathbf{z}^{(1)}  \sim MVN\left(\mathbf{0}, \begin{bmatrix}k(\mathbf{e}, \mathbf{e})+\sigma_b^2 & k(\mathbf{e}, \mathbf{e}^*) \\symmetric &k(\mathbf{e}^*, \mathbf{e}^*)\end{bmatrix}\otimes\mathbf{I}\right), \\
-\boxed{\mbox{posterior of }\mathbf{z}^{*(1)}|\mathbf{z}^{(1)} \sim MVN(\bar{f}^{*(1)}, cov(f^{*(1)}))}
-\end{cases}
-$$
-<!-- where $E(\mathbf{z}^{*(1)}) = \bar{f}^{*(1)}, Var(\mathbf{z}^{*(1)}) =cov(f^{*(1)})$. -->
+* Layer 1-L:
+Each element in $z_{i}^l$ is also a sum of iid random variables, where $z_i^l \stackrel{iid}{\dot{\sim}} MVN\left(0, K^l(X^l, X^{l})\right)$, where   
 
-where $\bar{f}^{*(1)}, cov(f^{*(1)})$ have closed form and are equal to $\bar{f}^{*(1)} = k(\mathbf{e}^*, \mathbf{e})[k(\mathbf{e}, \mathbf{e})+\sigma_b^{2(1)}]^{-1}\mathbf{z}^{(1)}, cov(f^{*(1)})=k(\mathbf{e}^*, \mathbf{e}^*)-k(\mathbf{e}^*, \mathbf{e})^T[k(\mathbf{e}, \mathbf{e})+\sigma_b^{2(1)}]^{-1}k(\mathbf{e}^*, \mathbf{e})$.
-
-Similarly,
-
-\begin{equation}
-\begin{array}{rcl}
-z_i^{(2)} &=& \mathbf{w}_i^{(2)T}\phi(\mathbf{z}^{(1)})+b_i^{(2)}\\
-&\sim& N(0, \sigma_w^{2(2)}\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)}))+\sigma_b^{2(2)})\\
-&\rightarrow& \mathbf{z}^{(2)} = \begin{bmatrix}z_1^{(2)}\\\vdots\\z_{dim^{(2)}}^{(2)}\end{bmatrix} \\
-&& \sim MVN(\mathbf{0}, [\sigma_w^{2(2)}\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)}))+\sigma_b^2]\mathbf{I}) \\
-\end{array}\end{equation}
-
-Since $\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)})) = \int\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)})p(\mathbf{z}^{(1)})d\mathbf{z}^{(1)}$, where $p(\mathbf{z}^{(1)})$ is MVN derived above, $\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)})) = F(k(\mathbf{e}, \mathbf{e}))$, a function of $k(\mathbf{e}, \mathbf{e})$; 
-
-for two essay vectors in $D_{train}$, $\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)'})) = \int\int\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)'})p(\mathbf{z}^{(1)}, \mathbf{z}^{(1)'})d\mathbf{z}^{(1)}d\mathbf{z}^{(1)'}$, where $p(\mathbf{z}^{(1)}, \mathbf{z}^{(1)'})$ is an assumed joint MVN of $\mathbf{z}^{(1)}$ and $\mathbf{z}^{(1)'}$, then $\mathbb{E}(\phi(\mathbf{z}^{(1)})^T\phi(\mathbf{z}^{(1)'})) = F(k(\mathbf{e}, \mathbf{e}), k(\mathbf{e}, \mathbf{e}'), k(\mathbf{e}', \mathbf{e}'))$;
-
-in predicting $\mathbf{z}^{*(2)}$ of a test essay $\mathbf{e}^*$ using random variable $\mathbf{z}^{*(1)}$, we assume 
-
-$$
-\begin{cases}
-\mbox{prior of }\mathbf{z}^{*(2)} \sim MVN(\mathbf{0}, [\sigma_w^{2(2)}\mathbb{E}(\phi(\mathbf{z}^{*(1)})^T\phi(\mathbf{z}^{*(1)}))]\mathbf{I}) =  MVN(\mathbf{0}, F(k(\mathbf{e}^*, \mathbf{e}^*)))\mathbf{I})\\
-\mbox{joint prior of } \mathbf{z}^{*(2)}, \mathbf{z}^{(2)} \sim  MVN\left(\mathbf{0}, \begin{bmatrix}F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^2 & F(k(\mathbf{e}, \mathbf{e}^*)) \\symmetric & F(k(\mathbf{e}^*, \mathbf{e}^*))\end{bmatrix}\otimes\mathbf{I}\right), \mathbf{I} \in \mathbb{R}^{dim^{(2)}}\\
-\boxed{\mbox{posterior of } \mathbf{z}^{*(2)}|\mathbf{z}^{(2)} \sim MVN(\bar{f}^{*(2)}, cov(f^{*(2)}))}
-\end{cases}
-$$
-where $\bar{f}^{*(2)}, cov(f^{*(2)})$ have closed form and are equal to $\bar{f}^{*(2)} = F(k(\mathbf{e}^*, \mathbf{e}))[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(2)}]^{-1}\mathbf{z}^{(2)}, cov(f^{*(2)})=F(k(\mathbf{e}^*, \mathbf{e}^*))-F(k(\mathbf{e}^*, \mathbf{e}))^T[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(2)}]^{-1}F(k(\mathbf{e}^*, \mathbf{e}))$.
-
-For the output layer, the $z^{(3)}$ is a scalar for an essay in $D_{train}$, we assume:
-
-\begin{equation}
-\begin{array}{rcl}
-z^{(3)} &=& \mathbf{w}^{(out)T}\phi(\mathbf{z}^{(2)})+b^{(out)}\\
-&\sim& N(0, \sigma_w^{2(out)}\mathbb{E}(\phi(\mathbf{z}^{(2)}), \phi(\mathbf{z}^{(2)}))+\sigma_b^{2(out)})\\
-& \rightarrow& N(0, F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(out)})\\
-&\mbox{or}& MVN(0, F(k(\mathbf{e}, \mathbf{e}), k(\mathbf{e}, \mathbf{e}'), k(\mathbf{e}', \mathbf{e}'))) \mbox{ for two different essays}
-\end{array}\end{equation}
-
-\textcolor{blue}
-{\begin{equation*}
-\begin{array}{rcl}
-z^{(3)} &=& \mathbf{w}^{(out)T}\begin{bmatrix}\phi(\mathbf{z}^{(2)})\\ \mathbf{x}\end{bmatrix}+b^{(out)}\\
-&\sim& N\left(0, \sigma_w^{2(out)}[\mathbb{E}(\phi(\mathbf{z}^{(2)}), \phi(\mathbf{z}^{(2)}))+\mathbf{x}]+\sigma_b^{2(out)}\right)\\
-& \rightarrow& N(0, F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(out)}), \mbox{ still function of }k(\mathbf{e}, \mathbf{e}), \mbox{ because }\mathbf{x}\mbox{ are constants}\\
-&\mbox{or}& MVN(0, F(k(\mathbf{e}, \mathbf{e}), k(\mathbf{e}, \mathbf{e}'), k(\mathbf{e}', \mathbf{e}'))) \mbox{ for two different essays}
-\end{array}\end{equation*}
-}
-
-Similarly, in predicting $z^{*(3)}$ by assuming the prior of $z^{*(3)}$  and the joint prior of $z^{*(3)}, z^{(3)}$, the posterior of $z^{*(3)}|z^{(3)}$ is
-
-
-$$
-\boxed{z^{*(3)}|z^{(3)} \sim N(\bar{f}^{*(3)}, cov(f^{*(3)}))}
-$$
-
-
-where $\bar{f}^{*(3)}, cov(f^{*(3)})$ have closed form and are equal to $\bar{f}^{*(3)} = F(k(\mathbf{e}^*, \mathbf{e}))[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(3)}]^{-1}z^{(3)}, cov(f^{*(3)})=F(k(\mathbf{e}^*, \mathbf{e}^*))-F(k(\mathbf{e}^*, \mathbf{e}))^T[F(k(\mathbf{e}, \mathbf{e}))+\sigma_b^{2(3)}]^{-1}F(k(\mathbf{e}^*, \mathbf{e}))$.
-
-
-Actually, $z^{*(3)}|z^{(3)} \sim N(\bar{f}^{*(3)}, cov(f^{*(3)}))$ is equivalent to $\int p(z^{*(3)}|\mathbf{e}^*, \mathbf{W})p(\mathbf{W}|D_{train})d\mathbf{W}$. The form of the integral is essentially weighting the output density function $p(z^{*(3)}|\mathbf{e}^*, \mathbf{W})$ by the posterior probability density function of the weights $p(\mathbf{W}|D_{train})$, then summing/integrate the weighted $p(z^{*(3)}, \mathbf{W}|\mathbf{e}^*, D_{train})$ over all possible values of $\mathbf{W}$, thus, the pdf of $z^{*(3)}|z^{(3)}$ is a pdf by ensembling NNs with all possible $\mathbf{W}$ values (can prove the equivalency mathematically).
-
-Lee et al. (2018) only considers linear transformation in the output layer $z^{(l)} = \mathbf{w}^{(l)T}\phi(\mathbf{z}^{(l-1)})+b^{(l)}$. We extended their work to sigmoid transformation for prediction, i.e.  $y^{out} = z^{(l)} = \sigma(\mathbf{w}^{(l)T}\phi(\mathbf{z}^{(l-1)})+b^{(l)})$. To yield prediction between $[0,1]$, sigmoid transformation is needed, so in predicting $y^{*out}$ for a test essay $\mathbf{e}^*$ after observing $D_{train}$, the pdf of the transformed variable $y^{*out}$ is derived as following using the absolute value of Jacobian: 
-
-<!-- \begin{equation} -->
-<!-- \begin{array}{rcl} -->
-<!-- y^{out}&=& \sigma(z^{(3)})\\ -->
-<!-- &=&\frac{1}{1+e^{-z^{(3)}}}\\ -->
-<!-- \sigma^{-1}(y^{out})&=&log\left(\frac{y^{out}}{1-y^{out}}\right) = logit(y^{out})\\ -->
-<!-- &\mbox{since }&  \begin{cases}\mbox{prior }z^{(3)} \sim N(0, F), \\\mbox{implying } p(z^{(3)} ) = (F\sqrt{2\pi})^{-1}exp\left\{-\frac{(z^{(3)})^2}{2F}\right\}\\ -->
-<!-- \mbox{first derivative in Jacobian }\frac{d\sigma^{-1}(y^{out})}{dy^{out}}= \frac{1}{y^{out}(1-y^{out})}\end{cases}\\ -->
-<!-- p(y^{out})&=& p(\sigma^{-1}(y^{out})) \frac{1}{y^{out}(1-y^{out})} \mbox{ (density times Jacobian)}\\ -->
-<!-- &=&\frac{1}{F\sqrt{2\pi}}exp\left\{-\frac{[logit(y^{out})]^2}{2F}\right\}\frac{1}{y^{out}(1-y^{out})} \\ -->
-<!-- y^{out} &\sim&\mbox{logit-normal}\\ -->
-<!-- E(y^{out}) &\approx&\frac{1}{K-1}\mathlarger{\sum}_{i=1}^{K-1}\left[logit\left(\Phi_{\mu, \sigma^2}^{-1}(\frac{i}{K})\right)\right] \mbox{ (quasi monte carlo approximation)} -->
-<!-- \end{array} -->
-<!-- \end{equation} -->
-
-<!-- $$ -->
-<!-- \begin{cases} -->
-<!-- \mbox{prior of } z^{(3)}\sim N(0, F+\sigma_b^{(3)})\\ -->
-<!-- \mbox{prior of } z^{*(3)}\sim N(0, F)\\ -->
-<!-- \mbox{joint prior of } z^{*(3)},  z^{(3)} \sim MVN(\mathbf{0}, ) -->
-
-<!-- \end{cases} -->
-<!-- $$ -->
-
-\begin{equation*}
-\begin{array}{rcl}
-y^{*out}&=& \sigma(z^{*(3)})\\
-&=&\frac{1}{1+e^{-z^{*(3)}}}\\
-\sigma^{-1}(y^{*out})&=&log\left(\frac{y^{*out}}{1-y^{*out}}\right) = logit(y^{*out})\\
-&\mbox{since }&  \begin{cases}\mbox{conditional posterior }z^{*(3)}|z^{(3)} \sim N(\bar{f}^{*(3)}, cov(f^{*(3)})),  \\
-\mbox{implying } p(z^{*(3)}|z^{(3)} ) = (cov(f^{*(3)})2\pi)^{-\frac{1}{2}}exp\left\{-(z^{*(3)}-\bar{f}^{*(3)})^T[2cov(f^{*(3)})]^{-1}(z^{*(3)}-\bar{f}^{*(3)})\right\}\\
-\mbox{first derivative in Jacobian }\frac{d\sigma^{-1}(y^{*out})}{dy^{*out}}= \frac{1}{y^{*out}(1-y^{*out})}\end{cases}\\
-p(y^{*out})&=& p(\sigma^{-1}(y^{*out})) \frac{1}{y^{*out}(1-y^{*out})}\\
-&=&(cov(f^{*(3)})2\pi)^{-\frac{1}{2}}exp\left\{-(logit(y^{*out})-\bar{f}^{*(3)})^T[2cov(f^{*(3)})]^{-1}(logit(y^{*out})-\bar{f}^{*(3)})\right\}\frac{1}{y^{*out}(1-y^{*out})} \\
-y^{*out} &\sim&\mbox{logit-normal whose E and Var don't have analytic solution, but can be approximated}\\
-\end{array}
-\end{equation*}
-
-\begin{tcolorbox}
-\begin{equation}
-\begin{array}{rcl}
-
-E(y^{*out}) &\approx&\frac{1}{K-1}\mathlarger{\sum}_{i=1}^{K-1}\left[logit\left(\Phi_{\mu, \sigma^2}^{-1}(\frac{i}{K})\right)\right]\mbox{ quasi monte carlo approximation}\\
-Var(y^{*out})&\approx& E((y^{*out})^2) - E(y^{*out})^2
-\end{array}
+\begin{equation}\label{eq:2}
+K^l(X^l, X^{l}) = \frac{\sigma_w^2}{n^l}\mathbb{E}\left[\phi(X^{l-1})\phi(X^{l-1})'\right]+\sigma_b^2I, [2]
 \end{equation}
-\end{tcolorbox}
-
-where $\Phi_{\mu, \sigma^2}^{-1}(\frac{i}{K})$ is the $\frac{i}{K}$th quantile of normal distribution with mean $\mu$, variance $\sigma^2$, the average of the logit of $K$ such quantiles approximates the first moment of $y^{*out}$, similar way to obtain the $Var(y^{*out})$. In prediction, $E(y^{*out})$ and $Var(y^{*out})$ are the prediction and uncertainty measure in this Gaussian Process NN, respectively. Since we use MSE as loss function, it can be shown that $E(y^{*out})$ (mean) minimized the MSE loss function.
 
 
-<!-- ## Extention: -->
-
-<!-- 1. Can extend to sequential GP to process essay as sequential data rather than a single vector but a sequence of vectors. -->
+## Advantages of GPDNN:
+1. GPDNNs are essentially a DNN based on bayesian method to weight the final predictions by the posterior probabilities of the parameters, weights and bias in each layer, which implies the ensemble learning nature of GPDNN, because it takes into account of the probabilities of all possible values of weights and bias parameters. This is important in reducing the prediction variance, achieving a stable predictions and avoid overfitting problems that exist in deep learning techniques.
+2. The gaussian process regression or classification model [1] can be implemented after driving the GP forms of a DNN, which yields closed-form predictions/ This saves the training time dramatically compared to deep learning methods.
+3. GPDNNs is scalable to large-scale data by using gpytorch library to solve Cholesky decomposition in parallel.
 
 ## References:
 

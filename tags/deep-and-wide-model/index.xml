@@ -12,12 +12,13 @@
     
     
     <item>
-      <title>Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring</title>
+      <title>Correspondence between Infinitely Wide Deep Neural Networks and a Gaussian Process</title>
       <link>/post/gp-in-dw/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/gp-in-dw/</guid>
-      <description>High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network for comparable tasks.</description>
+      <description>Equivalency between Gaussian Process and DNNs Previous studies have shown the equivalency between Gaussian Process (GP) [1] and infinitely wide fully-connected Neural Networks (NNs) [2][4], which implies that if we choose a fully-connected NN with infinite width, the function computed by the NN is equivalent to a function drawn from a GP under appropriate statistical assumptions. The analytic forms of GP kernel for DNNs were also subsequentially developed.
+The following figure shows the consistency between the theoretical GP (contour rings) and the sampled \(z_i\) at the initial layer (left) and the third layer (right) in a DNN.</description>
     </item>
     
   </channel>

@@ -26,19 +26,20 @@
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
       <guid>/about/</guid>
-      <description>My name is Luyao Peng. I am a Ph.D. candidate in applied statistics with specialization in the mixed-effects model and computational linguistics. I apply natural language processing and build machine learning algorithms to automatize essay scoring and detect cheating behavior.
+      <description>--- date: &#34;2017-08-20T21:38:52+08:00&#34; lastmod: &#34;2017-08-28T21:41:52+08:00&#34; menu: main title: About weight: 50 --- My name is Luyao Peng. I am a data scientist in NLP (natural language processing) with industry and research experience in text generation, general language understanding evaluation and chatbot, and educational background in statistics (Ph.D.) and linguistics (M.A.).
 My current C.V.
-My Research Projects:
- Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (abstract) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (abstract)  My Data Science Projects:</description>
+My Personal Research Projects:
+ Bert Summarization and Generation of Chinese Language Automated Content Generation by Keyword Using Transformer Networks Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (National Council on Measurement in Education 2020, conference abstract, pg113) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (Joint Statistical Meetings 2019, conference abstract)  My Visualization of Data Science Projects:</description>
     </item>
     
     <item>
-      <title>Gaussian Process in Deep and Wide Prediction Model in Automated Essay Scoring</title>
+      <title>Correspondence between Infinitely Wide Deep Neural Networks and a Gaussian Process</title>
       <link>/post/gp-in-dw/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/gp-in-dw/</guid>
-      <description>High stakes applications of NLP models such as educational assessments require a trade-off between the complex pattern recognition functionalities of deep learning models and the interpretability of knowledge-driven handcrafted features. In this paper, we propose a hybrid two-stage closed-form model called the Gaussian Process Deep and Wide Neu ral Networks (GPDWNNs) that combines strengths of knowledge-driven (wide) features with deep features from encoders such as BERT. Moreover, due to the closed-form solutions of GPDWNNs, we are able to significantly reduce computation time required for model parameter estimation versus training a deep network for comparable tasks.</description>
+      <description>Equivalency between Gaussian Process and DNNs Previous studies have shown the equivalency between Gaussian Process (GP) [1] and infinitely wide fully-connected Neural Networks (NNs) [2][4], which implies that if we choose a fully-connected NN with infinite width, the function computed by the NN is equivalent to a function drawn from a GP under appropriate statistical assumptions. The analytic forms of GP kernel for DNNs were also subsequentially developed.
+The following figure shows the consistency between the theoretical GP (contour rings) and the sampled \(z_i\) at the initial layer (left) and the third layer (right) in a DNN.</description>
     </item>
     
     <item>
