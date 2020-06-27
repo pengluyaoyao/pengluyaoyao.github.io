@@ -6,15 +6,15 @@
     <description>Recent content in Dependency Parsing on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 30 Aug 2011 16:01:23 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Aug 2018 16:01:23 +0800</lastBuildDate>
     
 	<atom:link href="/tags/dependency-parsing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Syntax Highlighting</title>
+      <title>CS224n/assignment2/: RNN in Dependency Parsing</title>
       <link>/post/2019-03-04-assignment2/</link>
-      <pubDate>Tue, 30 Aug 2011 16:01:23 +0800</pubDate>
+      <pubDate>Thu, 30 Aug 2018 16:01:23 +0800</pubDate>
       
       <guid>/post/2019-03-04-assignment2/</guid>
       <description>This project extends Neural Transition-based dependeny Parsing (Stanford U cs224n A#2 Q2). The goal is to build a three layer neural network using TensorFlow to parse the dependency structure of sentences. The orignal code contributed by hankcs is built in Python2. I revised it so it runs in Python3. The training data for the neural dependency parser model is Penn Treebank, and each sentence has ‘word</description>
