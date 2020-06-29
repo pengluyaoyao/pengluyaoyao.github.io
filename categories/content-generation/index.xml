@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Content Generation on Luyao Peng&#39;s Blog</title>
+    <link>/categories/content-generation/</link>
+    <description>Recent content in Content Generation on Luyao Peng&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 07 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/content-generation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Neural Text Generation</title>
+      <link>/post/2020-03-07-content-generation/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-07-content-generation/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

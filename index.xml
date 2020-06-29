@@ -6,7 +6,7 @@
     <description>Recent content on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 25 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 07 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,7 +20,16 @@
       <description>My name is Luyao Peng. I am a data scientist in NLP (natural language processing) with industry and research experience in text generation, general language understanding evaluation and chatbot, and educational background in statistics (Ph.D.) and linguistics (M.A.).
 My current C.V.
 My Personal Research Projects:
- Bert Summarization and Generation of Chinese Language Automated Content Generation by Keyword Using Transformer Networks Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (National Council on Measurement in Education 2020, conference abstract, pg113) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (Joint Statistical Meetings 2019, conference abstract)  My Visualization of Data Science Projects:</description>
+ Bert Summarization and Generation of Chinese Text Neural Text Generation Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (National Council on Measurement in Education 2020, conference abstract, pg113) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (Joint Statistical Meetings 2019, conference abstract)  My Visualization of Data Science Projects:</description>
+    </item>
+    
+    <item>
+      <title>Neural Text Generation</title>
+      <link>/post/2020-03-07-content-generation/</link>
+      <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020-03-07-content-generation/</guid>
+      <description></description>
     </item>
     
     <item>
