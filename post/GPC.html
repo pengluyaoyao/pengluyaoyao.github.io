@@ -1,0 +1,41 @@
+---
+title: "Gaussian Process Classification by Tensorflow-probability"
+author: Luyao Peng
+date: '2020-05-25'
+categories:
+  - statistics
+  - machine learning
+tags:
+  - tensorflow-probability
+  - tensorflow
+  - Gaussian Process
+draft: false
+header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usepackage{pifont} \usepackage{breqn} \usepackage{setspace} \doublespacing  \usepackage{parskip}  \usepackage{epsfig}  \usepackage{xcolor} \usepackage{tcolorbox}
+---
+
+
+
+<p>In classification, people can model the class-conditional densities with a Gaussian, where <span class="math inline">\(x\)</span> is the input features:</p>
+<p><span class="math display">\[
+p(x|c) = N(\mu, \Sigma_c)
+\]</span></p>
+<p>In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point <span class="math inline">\((x_i, c_i)\)</span>,</p>
+<p><span class="math display">\[\begin{equation}
+\label{eq:2}
+p(c_i|x_i, w) = \frac{1}{1+exp(-x_i&#39;w)} = \sigma(x_i&#39;w)
+\end{equation}\]</span></p>
+<p>Encode class <span class="math inline">\(c_i\)</span> as <span class="math inline">\(+1\)</span> or <span class="math inline">\(-1\)</span>, Equation  can be written as</p>
+<p><span class="math display">\[\begin{equation}
+\label{eq:3}
+p(c_i|x_i, w) = \sigma(c_if_i), f_i = x_i&#39;w.
+\end{equation}\]</span></p>
+<p>Here, <span class="math inline">\(f\)</span> is the latent function <span class="math inline">\(f(x)\)</span> that we do not observe it, it is also stochastic, so we assume the priors for <span class="math inline">\(f\)</span> and weights <span class="math inline">\(w\)</span> as <span class="math inline">\(f~MVN(0, \Sigma_f)\)</span> and <span class="math inline">\(w\sim MVN(0, \Sigma_w)\)</span>,</p>
+<p>Given a dataset <span class="math inline">\(D=\left\{(x_i, c_i), i=1, \dots, n\right\}\)</span> and assuming <span class="math inline">\(w\sim MVN(0, \Sigma)\)</span>, then the posterior log conditional probability of weights <span class="math inline">\(w\)</span> is</p>
+<p><span class="math display">\[
+logp(w|x, c) \propto log p (c|x, w)+log p(w)\\
+\hspace{3.5cm}= const-\frac{1}{2}w&#39;\Sigma^{-1}w+\Sigma_{i=1}^{n} log\sigma\left(c_if_i\right)
+\]</span>
+then the posterior distribution of <span class="math inline">\(c\)</span> is</p>
+<p><span class="math display">\[
+p(c^*=+1)
+\]</span></p>

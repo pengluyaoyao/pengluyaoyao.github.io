@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 07 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gaussian Process</title>
+      <link>/tags/gaussian-process/</link>
+      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gaussian-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tensorflow</title>
+      <link>/tags/tensorflow/</link>
+      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tensorflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tensorflow-probability</title>
+      <link>/tags/tensorflow-probability/</link>
+      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tensorflow-probability/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Transformers</title>
@@ -26,15 +53,6 @@
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/deep-neural-networks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gaussian Process</title>
-      <link>/tags/gaussian-process/</link>
-      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/gaussian-process/</guid>
       <description></description>
     </item>
     

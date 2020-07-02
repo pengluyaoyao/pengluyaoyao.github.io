@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Neural Text Generation - Luyao Peng&#39;s Blog</title>
+  <title>Gaussian Process Classification by Tensorflow-probability - Luyao Peng&#39;s Blog</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Luyao Peng" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Luyao Peng" /><meta name="description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
+\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&amp;rsquo;w)} = \sigma(x_i&amp;rsquo;w) \end{equation}" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,7 +27,7 @@
 <meta name="generator" content="Hugo 0.73.0 with even 4.0.0" />
 
 
-<link rel="canonical" href="/post/2020-03-07-content-generation/" />
+<link rel="canonical" href="/post/gpc.utf8/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -38,23 +39,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Neural Text Generation" />
-<meta property="og:description" content="" />
+<meta property="og:title" content="Gaussian Process Classification by Tensorflow-probability" />
+<meta property="og:description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
+\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) \end{equation}" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/post/2020-03-07-content-generation/" />
-<meta property="article:published_time" content="2020-03-07T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-03-07T00:00:00+00:00" />
-<meta itemprop="name" content="Neural Text Generation">
-<meta itemprop="description" content="">
-<meta itemprop="datePublished" content="2020-03-07T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-03-07T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="0">
+<meta property="og:url" content="/post/gpc.utf8/" />
+<meta property="article:published_time" content="2020-05-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-25T00:00:00+00:00" />
+<meta itemprop="name" content="Gaussian Process Classification by Tensorflow-probability">
+<meta itemprop="description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
+\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) \end{equation}">
+<meta itemprop="datePublished" content="2020-05-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-05-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="245">
 
 
 
-<meta itemprop="keywords" content="Transformers," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Neural Text Generation"/>
-<meta name="twitter:description" content=""/>
+<meta itemprop="keywords" content="tensorflow-probability,tensorflow,Gaussian Process," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gaussian Process Classification by Tensorflow-probability"/>
+<meta name="twitter:description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
+\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) \end{equation}"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -128,12 +132,13 @@ MathJax.Hub.Config({
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Neural Text Generation</h1>
+      <h1 class="post-title">Gaussian Process Classification by Tensorflow-probability</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2020-03-07 </span>
+        <span class="post-time"> 2020-05-25 </span>
         <div class="post-category">
-            <a href="/categories/content-generation/"> Content Generation </a>
+            <a href="/categories/statistics/"> statistics </a>
+            <a href="/categories/machine-learning/"> machine learning </a>
             </div>
         
       </div>
@@ -142,13 +147,36 @@ MathJax.Hub.Config({
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
-    
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-
+      <p>In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,</p>
+<p>\begin{equation}
+\label{eq:2}
+p(c_i|x_i, w) = \frac{1}{1+exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w)
+\end{equation}</p>
+<p>Encode class $c_i$ as $+1$ or $-1$, Equation \ref{eq:2} can be written as</p>
+<p>\begin{equation}
+\label{eq:3}
+p(c_i|x_i, w) = p(c_i|f_i)=\sigma(c_if_i), f_i = x_i&rsquo;w.
+\end{equation}</p>
+<p>Here, $f$ is the latent function $f(x)$ that we do not observe it, it is also stochastic, so we assume the priors for $f$ and weights $w$ as $f~MVN(0, \Sigma_f)$ and $w\sim MVN(0, \Sigma_w)$, then given a dataset $D=\left{(x_i, c_i), i=1, \dots, n\right}$ and new data points $(x^*, c^*)$,  the posterior conditional distribution for predicting $f^*$ for $(x^*, c^*)$ is</p>
+<p>$$
+p(f^<em>|D, x^</em>) = \int p(f^<em>|x, x^</em>, f)p(f|D)df, \mbox{ where } p(f|D)\propto p(c|f)p(f|x).
+$$</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Since $p(f|D)$ is not Gaussian, then we approximate it by $$q(f|D) = MVN(\hat{f}, (K^{-1}+W)^{-1}), \mbox{ where }(K^{-1}+W) \mbox{ is the hessian matrix of }-log p(f|D),$$</p>
+<p>$\hat{f}$ is the posterior mode computed iteratively using Newton&rsquo;s method.</p>
+<p>With $q(f|D)$, $p(f^<em>|D, x^</em>)$ above replaced by $q(f^<em>|D, x^</em>)$ with mean and variance in [1], pg44.</p>
+<p>Given dataset $D$ and new data points $(c^*, x^*)$, the posterior predictive probability after marginalizing $w$ is</p>
+<p>$$
+p(c^<em>=+1|D, x^</em>) = \int \sigma(f^*)q(f^*|D, x^*) df^*
+$$</p>
 
     </div>
 
@@ -160,7 +188,7 @@ MathJax.Hub.Config({
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-03-07
+        2020-05-25
         
     </span>
   </p>
@@ -169,16 +197,18 @@ MathJax.Hub.Config({
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags/transformers/">Transformers</a>
+          <a href="/tags/tensorflow-probability/">tensorflow-probability</a>
+          <a href="/tags/tensorflow/">tensorflow</a>
+          <a href="/tags/gaussian-process/">Gaussian Process</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/gpc/">
+        <a class="prev" href="/post/gpc.knit/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">Gaussian Process Classification by Tensorflow-probability</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/gp-in-dw/">
-            <span class="next-text nav-default">Correspondence Between Infinitely Wide Deep Neural Networks and Gaussian Process</span>
+        <a class="next" href="/post/2020-03-07-content-generation/">
+            <span class="next-text nav-default">Neural Text Generation</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

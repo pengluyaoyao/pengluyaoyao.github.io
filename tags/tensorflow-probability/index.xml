@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tensorflow-probability on Luyao Peng&#39;s Blog</title>
+    <link>/tags/tensorflow-probability/</link>
+    <description>Recent content in tensorflow-probability on Luyao Peng&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tensorflow-probability/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gaussian Process Classification by Tensorflow-probability</title>
+      <link>/post/gpc/</link>
+      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/gpc/</guid>
+      <description>In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point \((x_i, c_i)\),
+\[\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1+exp(-x_i&amp;#39;w)} = \sigma(x_i&amp;#39;w) \end{equation}\]</description>
+    </item>
+    
+  </channel>
+</rss>

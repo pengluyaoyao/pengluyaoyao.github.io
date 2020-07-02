@@ -1,0 +1,71 @@
+---
+title: "Gaussian Process Classification by Tensorflow-probability"
+author: Luyao Peng
+date: '2020-05-25'
+categories:
+  - statistics
+  - machine learning
+tags:
+  - tensorflow-probability
+  - tensorflow
+  - Gaussian Process
+draft: false
+header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usepackage{pifont} \usepackage{breqn} \usepackage{setspace} \doublespacing  \usepackage{parskip}  \usepackage{epsfig}  \usepackage{xcolor} \usepackage{tcolorbox}
+---
+
+
+In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$, 
+
+\begin{equation}
+\label{eq:2}
+p(c_i|x_i, w) = \frac{1}{1+exp(-x_i'w)} = \sigma(x_i'w)
+\end{equation}
+
+Encode class $c_i$ as $+1$ or $-1$, Equation \ref{eq:2} can be written as
+
+\begin{equation}
+\label{eq:3}
+p(c_i|x_i, w) = p(c_i|f_i)=\sigma(c_if_i), f_i = x_i'w.
+\end{equation}
+
+Here, $f$ is the latent function $f(x)$ that we do not observe it, it is also stochastic, so we assume the priors for $f$ and weights $w$ as $f\sim MVN(0, \Sigma_f)$ and $w \sim MVN(0, \Sigma_w)$, then given a dataset $D=\left\{(x_i, c_i), i=1, \dots, n\right\}$ and new data points $(x^*, c^*)$,  the posterior conditional distribution for predicting $f^*$ for $(x^*, c^*)$ is
+
+$$
+p(f^*|D, x^*) = \int p(f^*|x, x^*, f)p(f|D)df, \mbox{ where } p(f|D)\propto p(c|f)p(f|x).
+$$
+
+<!-- $$ -->
+<!-- logp(w|x, c) \propto log p (c|x, w)+log p(w)\\ -->
+<!-- \hspace{3.5cm}= const-\frac{1}{2}w'\Sigma^{-1}w+\Sigma_{i=1}^{n} log\sigma\left(c_if_i\right) -->
+<!-- $$ -->
+<!-- then the posterior distribution of $c$ is  -->
+
+Since $p(f|D)$ is not Gaussian, then we approximate it by $$q(f|D) = MVN(\hat{f}, (K^{-1}+W)^{-1}), \mbox{ where }(K^{-1}+W) \mbox{ is the hessian matrix of }-log p(f|D),$$
+
+$\hat{f}$ is the posterior mode that maximizes $p(f|D)$ and is computed iteratively using Newton's method.
+
+
+With $q(f|D)$, $p(f^*|D, x^*)$ above replaced by $q(f^*|D, x^*)$ with mean and variance in [1], pg44.
+
+Given dataset $D$ and new data points $(c^*, x^*)$, the posterior predictive probability is
+
+
+$$
+p(c^*=+1|D, x^*) = \int \sigma(f^*)q(f^*|D, x^*) df^*
+$$
+Approximate this integral using Gaussian integral of an error function [link](http:\\blitiri.blogspot.de/2012/11/gaussian-integral-of-error-function.html).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
