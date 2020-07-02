@@ -1,8 +1,8 @@
 ---
-date: "2017-08-20T21:38:52+08:00"
-lastmod: "2017-08-28T21:41:52+08:00"
-menu: main
-title: 'About'
+title: "About"
+lastmod: '2017-08-28T21:41:52+08:00'
+date: '2017-08-20T21:38:52+08:00'
+menu: 'main'
 weight: 50
 ---
 
@@ -15,6 +15,7 @@ My current <a href="/Resume_Luyao_Peng.pdf" target="_blank">C.V.</a>
 
 My Personal Research Projects:
 
+* Gaussian Process Classification by Tensorflow-probability (<a href="https://github.com/pengluyaoyao/Gaussian-Process-Classification-Using-Tensorflow-probability">GPC jupyter notebook example</a>)
 * Bert Summarization and Generation of Chinese Text
 * Neural Text Generation
 * Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (<a href="https://higherlogicdownload.s3.amazonaws.com/NCME/c53581e4-9882-4137-987b-4475f6cb502a/UploadedImages/2020_Annual_Meeting/Preliminary_Program_1_28_2020.pdf">National Council on Measurement in Education 2020, conference abstract, pg113</a>)
