@@ -16,17 +16,15 @@ header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usep
 
 In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$, 
 
-\begin{equation}
-\label{eq:2}
+$$
 p(c_i|x_i, w) = \frac{1}{1+exp(-x_i'w)} = \sigma(x_i'w)
-\end{equation}
+$$
 
 Encode class $c_i$ as $+1$ or $-1$, Equation \ref{eq:2} can be written as
 
-\begin{equation}
-\label{eq:3}
+$$
 p(c_i|x_i, w) = p(c_i|f_i)=\sigma(c_if_i), f_i = x_i'w.
-\end{equation}
+$$
 
 Here, $f$ is the latent function $f(x)$ that we do not observe it, it is also stochastic, so we assume the priors for $f$ and weights $w$ as $f\sim MVN(0, \Sigma_f)$ and $w \sim MVN(0, \Sigma_w)$, then given a dataset $D=\left\{(x_i, c_i), i=1, \dots, n\right\}$ and new data points $(x^*, c^*)$,  the posterior conditional distribution for predicting $f^*$ for $(x^*, c^*)$ is
 
@@ -55,9 +53,9 @@ p(c^*=+1|D, x^*) = \int \sigma(f^*)q(f^*|D, x^*) df^*
 $$
 Approximate this integral using Gaussian integral of an error function [link](http:\\blitiri.blogspot.de/2012/11/gaussian-integral-of-error-function.html).
 
+For tensorflow implementation, check out my repo [GPC-tensorflow](https://github.com/pengluyaoyao/Gaussian-Process-Classification-Using-Tensorflow-probability)
 
-
-
+[1] Williams, Christopher KI, and Carl Edward Rasmussen. Gaussian processes for machine learning. Vol. 2. No. 3. Cambridge, MA: MIT press, 2006.
 
 
 

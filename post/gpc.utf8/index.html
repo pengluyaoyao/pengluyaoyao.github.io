@@ -17,7 +17,7 @@
 
 
 <meta name="author" content="Luyao Peng" /><meta name="description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
-\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&amp;rsquo;w)} = \sigma(x_i&amp;rsquo;w) \end{equation}" /><meta name="keywords" content="Hugo, theme, even" />
+$$ p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&amp;rsquo;w)} = \sigma(x_i&amp;rsquo;w) $$" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -41,24 +41,24 @@
 
 <meta property="og:title" content="Gaussian Process Classification by Tensorflow-probability" />
 <meta property="og:description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
-\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) \end{equation}" />
+$$ p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) $$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/gpc.utf8/" />
 <meta property="article:published_time" content="2020-05-25T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-05-25T00:00:00+00:00" />
 <meta itemprop="name" content="Gaussian Process Classification by Tensorflow-probability">
 <meta itemprop="description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
-\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) \end{equation}">
+$$ p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) $$">
 <meta itemprop="datePublished" content="2020-05-25T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-05-25T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="245">
+<meta itemprop="wordCount" content="288">
 
 
 
 <meta itemprop="keywords" content="tensorflow-probability,tensorflow,Gaussian Process," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Gaussian Process Classification by Tensorflow-probability"/>
 <meta name="twitter:description" content="In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,
-\begin{equation} \label{eq:2} p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) \end{equation}"/>
+$$ p(c_i|x_i, w) = \frac{1}{1&#43;exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w) $$"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -152,16 +152,14 @@ MathJax.Hub.Config({
 </div>
     <div class="post-content">
       <p>In binary classification, a response function (or a link function) is used to turn the output of a regression model into class probability, so the domain of the output from a regression model is squashed into [0, 1] range. Common link function is logistic function (another one is probit function, which will not be discussed here). For a data point $(x_i, c_i)$,</p>
-<p>\begin{equation}
-\label{eq:2}
+<p>$$
 p(c_i|x_i, w) = \frac{1}{1+exp(-x_i&rsquo;w)} = \sigma(x_i&rsquo;w)
-\end{equation}</p>
+$$</p>
 <p>Encode class $c_i$ as $+1$ or $-1$, Equation \ref{eq:2} can be written as</p>
-<p>\begin{equation}
-\label{eq:3}
+<p>$$
 p(c_i|x_i, w) = p(c_i|f_i)=\sigma(c_if_i), f_i = x_i&rsquo;w.
-\end{equation}</p>
-<p>Here, $f$ is the latent function $f(x)$ that we do not observe it, it is also stochastic, so we assume the priors for $f$ and weights $w$ as $f~MVN(0, \Sigma_f)$ and $w\sim MVN(0, \Sigma_w)$, then given a dataset $D=\left{(x_i, c_i), i=1, \dots, n\right}$ and new data points $(x^*, c^*)$,  the posterior conditional distribution for predicting $f^*$ for $(x^*, c^*)$ is</p>
+$$</p>
+<p>Here, $f$ is the latent function $f(x)$ that we do not observe it, it is also stochastic, so we assume the priors for $f$ and weights $w$ as $f\sim MVN(0, \Sigma_f)$ and $w \sim MVN(0, \Sigma_w)$, then given a dataset $D=\left{(x_i, c_i), i=1, \dots, n\right}$ and new data points $(x^*, c^*)$,  the posterior conditional distribution for predicting $f^*$ for $(x^*, c^*)$ is</p>
 <p>$$
 p(f^<em>|D, x^</em>) = \int p(f^<em>|x, x^</em>, f)p(f|D)df, \mbox{ where } p(f|D)\propto p(c|f)p(f|x).
 $$</p>
@@ -171,12 +169,15 @@ $$</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <p>Since $p(f|D)$ is not Gaussian, then we approximate it by $$q(f|D) = MVN(\hat{f}, (K^{-1}+W)^{-1}), \mbox{ where }(K^{-1}+W) \mbox{ is the hessian matrix of }-log p(f|D),$$</p>
-<p>$\hat{f}$ is the posterior mode computed iteratively using Newton&rsquo;s method.</p>
+<p>$\hat{f}$ is the posterior mode that maximizes $p(f|D)$ and is computed iteratively using Newton&rsquo;s method.</p>
 <p>With $q(f|D)$, $p(f^<em>|D, x^</em>)$ above replaced by $q(f^<em>|D, x^</em>)$ with mean and variance in [1], pg44.</p>
-<p>Given dataset $D$ and new data points $(c^*, x^*)$, the posterior predictive probability after marginalizing $w$ is</p>
+<p>Given dataset $D$ and new data points $(c^*, x^*)$, the posterior predictive probability is</p>
 <p>$$
 p(c^<em>=+1|D, x^</em>) = \int \sigma(f^*)q(f^*|D, x^*) df^*
-$$</p>
+$$
+Approximate this integral using Gaussian integral of an error function <a href="http:%5Cblitiri.blogspot.de/2012/11/gaussian-integral-of-error-function.html">link</a>.</p>
+<p>For tensorflow implementation, check out my repo <a href="https://github.com/pengluyaoyao/Gaussian-Process-Classification-Using-Tensorflow-probability">GPC-tensorflow</a></p>
+<p>[1] Williams, Christopher KI, and Carl Edward Rasmussen. Gaussian processes for machine learning. Vol. 2. No. 3. Cambridge, MA: MIT press, 2006.</p>
 
     </div>
 
