@@ -16,12 +16,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Luyao Peng" /><meta name="description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+<meta name="author" content="Luyao Peng" /><meta name="description" content="--- title: &#39;Machine Learning STAT209 Review&#39; author: &#39;&#39; date: &#39;2019-03-11&#39; slug: STAT209 categories: - Statistics tags: - Machine Learning header-includes: \usepackage{amsmath} \usepackage{bm} --- 1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
 \(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
-To minimize \(R(\delta)\), the decision rule is
-\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &amp;lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
-equivalently,
-\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &amp;gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)" /><meta name="keywords" content="Hugo, theme, even" />
+To minimize \(R(\delta)\), the decision rule is" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -44,37 +41,28 @@ equivalently,
 
 
 <meta property="og:title" content="Machine Learning STAT209 Review" />
-<meta property="og:description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+<meta property="og:description" content="--- title: &#39;Machine Learning STAT209 Review&#39; author: &#39;&#39; date: &#39;2019-03-11&#39; slug: STAT209 categories: - Statistics tags: - Machine Learning header-includes: \usepackage{amsmath} \usepackage{bm} --- 1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
 \(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
-To minimize \(R(\delta)\), the decision rule is
-\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
-equivalently,
-\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)" />
+To minimize \(R(\delta)\), the decision rule is" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/stat209/" />
 <meta property="article:published_time" content="2019-03-11T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-03-11T00:00:00+00:00" />
 <meta itemprop="name" content="Machine Learning STAT209 Review">
-<meta itemprop="description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+<meta itemprop="description" content="--- title: &#39;Machine Learning STAT209 Review&#39; author: &#39;&#39; date: &#39;2019-03-11&#39; slug: STAT209 categories: - Statistics tags: - Machine Learning header-includes: \usepackage{amsmath} \usepackage{bm} --- 1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
 \(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
-To minimize \(R(\delta)\), the decision rule is
-\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
-equivalently,
-\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)">
+To minimize \(R(\delta)\), the decision rule is">
 <meta itemprop="datePublished" content="2019-03-11T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-03-11T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="310">
+<meta itemprop="wordCount" content="333">
 
 
 
 <meta itemprop="keywords" content="Machine Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Machine Learning STAT209 Review"/>
-<meta name="twitter:description" content="1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+<meta name="twitter:description" content="--- title: &#39;Machine Learning STAT209 Review&#39; author: &#39;&#39; date: &#39;2019-03-11&#39; slug: STAT209 categories: - Statistics tags: - Machine Learning header-includes: \usepackage{amsmath} \usepackage{bm} --- 1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
 \(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) &#43; \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
-To minimize \(R(\delta)\), the decision rule is
-\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} &lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0&#43; \pi_1 f_1} \\ 0, ow\end{cases}\)
-equivalently,
-\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &gt; \frac{Cost(1|0)}{C(1|0)&#43;Cost(0|1)}\\ 0, ow\end{cases}\)"/>
+To minimize \(R(\delta)\), the decision rule is"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -167,6 +155,18 @@ MathJax.Hub.Config({
 </div>
     <div class="post-content">
       
+---
+title: 'Machine Learning STAT209 Review'
+author: ''
+date: '2019-03-11'
+slug: STAT209
+categories:
+  - Statistics
+tags:
+  - Machine Learning
+header-includes: \usepackage{amsmath} \usepackage{bm} 
+---
+
 
 
 <div id="bayes-classification-rule" class="section level1">

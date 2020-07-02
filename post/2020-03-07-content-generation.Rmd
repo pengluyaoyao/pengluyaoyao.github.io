@@ -1,12 +1,14 @@
 ---
 title: 'Neural Text Generation'
-author: Luyao Peng
+author: 'Luyao Peng'
 date: '2020-03-07'
 categories:
   - Content Generation
 tags:
   - Transformers
 ---
+
+
 
 
 
