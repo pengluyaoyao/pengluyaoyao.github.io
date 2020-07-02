@@ -11,9 +11,6 @@ draft: false
 header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usepackage{pifont} \usepackage{breqn} \usepackage{setspace} \doublespacing  \usepackage{parskip}  \usepackage{epsfig}  \usepackage{xcolor} \usepackage{tcolorbox}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 ## Equivalency between Gaussian Process and DNNs
 
 Previous studies have shown the equivalency between Gaussian Process (GP) [1] and infinitely wide fully-connected Neural Networks (NNs) [2][4], which implies that if we choose a fully-connected NN with infinite width, the function computed by the NN is equivalent to a function drawn from a GP under appropriate statistical assumptions. The analytic forms of GP kernel for DNNs were also subsequentially developed.
