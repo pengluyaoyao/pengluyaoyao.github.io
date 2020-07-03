@@ -27,6 +27,20 @@
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/stat209/</guid>
+      <description>1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
+\(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) + \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
+To minimize \(R(\delta)\), the decision rule is
+\(\delta(\mathbf{x}) = \begin{cases} 1, \frac{\pi_0Cost(1|0)f_0(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} &amp;lt; \frac{\pi_1Cost(0|1)f_1(\mathbf{x})}{\pi_0 f_0+ \pi_1 f_1} \\ 0, ow\end{cases}\)
+equivalently,
+\(\delta(\mathbf{x}) = \begin{cases} 1, p(c=1|\mathbf{x} = x) &amp;gt; \frac{Cost(1|0)}{C(1|0)+Cost(0|1)}\\ 0, ow\end{cases}\)</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning STAT209 Review</title>
+      <link>/post/stat209/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/stat209/</guid>
       <description>--- title: &#39;Machine Learning STAT209 Review&#39; author: &#39;&#39; date: &#39;2019-03-11&#39; slug: STAT209 categories: - Statistics tags: - Machine Learning header-includes: \usepackage{amsmath} \usepackage{bm} --- 1. Bayes Classification Rule 1.1 Decision Rule Let \(\delta(\mathbf{x}) \rightarrow \left\{0, 1 \right\}\) be the classification rule for class 0 or 1. The expected cost is
 \(R(\delta) = \int_{R_1(\mathbf{x})}\pi_0 Cost(1|0) f(\mathbf{x}|c = 0) + \int_{R_0(\mathbf{x})}\pi_1 Cost(0|1) f(\mathbf{x}|c = 1)\)
 To minimize \(R(\delta)\), the decision rule is</description>
@@ -45,6 +59,34 @@ Here is the quickstart guide.
 Installation To install from CRAN:
 install.packages(&amp;quot;regrrr&amp;quot;) library(regrrr) You can also use devtools to install the latest development version:
 devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  Examples compile the correlation table library(regrrr) ## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.</description>
+    </item>
+    
+    <item>
+      <title>R Package “regrrr”: Compiling and Visualizing Regression Results</title>
+      <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</guid>
+      <description>This is an R package “regrrr” on Cran I coauthored with Rui Yang.
+In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.
+Here is the quickstart guide.
+ 
+Installation To install from CRAN:
+install.packages(&amp;quot;regrrr&amp;quot;) library(regrrr) You can also use devtools to install the latest development version:
+devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  Examples compile the correlation table library(regrrr) ## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.</description>
+    </item>
+    
+    <item>
+      <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
+      <link>/post/multivariate-mixed-effects-model-r-package/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
+      <description>This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) doi:10.2307/2530651 and Wesolowska Janczarek (1984) doi:10.1002/bimj.4710260613.
+It is available on CRAN and my github page:
+Link to the MMeM github
+Link to the MMeM CRAN
+The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
     </item>
     
     <item>

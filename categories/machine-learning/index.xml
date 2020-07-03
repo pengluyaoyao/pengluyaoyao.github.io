@@ -30,5 +30,14 @@
       <description>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</description>
     </item>
     
+    <item>
+      <title>KPCA for One-class Classification in Automated Essay Scoring and Forensic Analysis</title>
+      <link>/post/kpca-for-one-class-classification/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/kpca-for-one-class-classification/</guid>
+      <description>One-class classification problem is useful in many applications. For example, if people want to diagnoze the healthy condition of machines, measurements on the normal operation of the machine are easy to obtain, and most faults will not haveoccurred so one will have little or no training data for the negative class. Another example is web security detection, people only have data for normal web behavior , since once abnormal behavior occurs, the web security will be attacked, which is a situation people try to prevent from happening.</description>
+    </item>
+    
   </channel>
 </rss>

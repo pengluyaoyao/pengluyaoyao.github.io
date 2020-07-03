@@ -24,5 +24,18 @@ Link to the MMeM CRAN
 The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
     </item>
     
+    <item>
+      <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
+      <link>/post/multivariate-mixed-effects-model-r-package/</link>
+      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
+      <description>This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) doi:10.2307/2530651 and Wesolowska Janczarek (1984) doi:10.1002/bimj.4710260613.
+It is available on CRAN and my github page:
+Link to the MMeM github
+Link to the MMeM CRAN
+The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
+    </item>
+    
   </channel>
 </rss>

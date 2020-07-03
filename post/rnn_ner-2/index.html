@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.73.0 with even 4.0.0" />
 
 
-<link rel="canonical" href="/post/rnn_ner/" />
+<link rel="canonical" href="/post/rnn_ner-2/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,14 +41,14 @@
 <meta property="og:title" content="CS224n/assignment3/: RNN/GRU Name Entity Recognition" />
 <meta property="og:description" content="This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h &#43; \mathbf{e}^t\mathbf{W}_e&#43;\mathbf{b}_1) \\" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/post/rnn_ner/" />
+<meta property="og:url" content="/post/rnn_ner-2/" />
 <meta property="article:published_time" content="2019-06-29T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-06-29T00:00:00+00:00" />
 <meta itemprop="name" content="CS224n/assignment3/: RNN/GRU Name Entity Recognition">
 <meta itemprop="description" content="This post deals with the name entity recognition task using RNN model. The RNN model for NER Let \(\mathbf{x}_t\) be a one-hot vector for word at time \(t\), define \(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\), the RNN model to make prediction at time step \(t\) can be expressed as \[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h &#43; \mathbf{e}^t\mathbf{W}_e&#43;\mathbf{b}_1) \\">
 <meta itemprop="datePublished" content="2019-06-29T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-06-29T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2044">
+<meta itemprop="wordCount" content="4170">
 
 
 
@@ -468,6 +468,349 @@ not-O   0.96    0.68    0.61    0.64
 I0713 10:29:08.070044 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:184] Entity level P/R/F1: 0.54/0.54/0.54</code></pre>
 <p>The loss plot in the TensorBoard is</p>
 <p><img src="/post/RNN_NER_files/figure-html/loss1.svg" alt="Luyao Peng" width=90% height=80%/></p>
+</div>
+<div id="at-early-epochs-the-loss-decreases-apparantly-at-later-epochs-the-loss-values-remain-unchanged." class="section level2">
+<h2>At early epochs, the loss decreases apparantly; at later epochs, the loss values remain unchanged.</h2>
+autoCollapseToc: true
+title: “CS224n/assignment3/: RNN/GRU Name Entity Recognition”
+author: “Luyao Peng”
+date: ‘2019-06-29’
+categories:
+- Deep Learning and NLP
+tags:
+- Name Entity Recognition
+- RNN
+draft: false
+toc: false
+header-includes:
+
+<hr />
+<p>This post deals with the name entity recognition task using RNN model.</p>
+</div>
+</div>
+<div id="the-rnn-model-for-ner-1" class="section level1">
+<h1>The RNN model for NER</h1>
+<p>Let <span class="math inline">\(\mathbf{x}_t\)</span> be a one-hot vector for word at time <span class="math inline">\(t\)</span>, define <span class="math inline">\(\mathbf{E}\in \mathbb{R}^{V\times D}, \mathbf{W}_h \in \mathbb{R}^{H\times H}, \mathbf{W}_e\in \mathbb{R}^{D\times H}, \mathbf{U} \in \mathbb{R}^{H\times (C=5)},\mathbf{b}_1\in \mathbb{R}^{H}, \mathbf{b}_2 \in \mathbb{R}^{C}\)</span>, the RNN model to make prediction at time step <span class="math inline">\(t\)</span> can be expressed as
+<span class="math display">\[\mathbf{e}^t = \mathbf{x}^t\mathbf{E}\\ \mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1) \\ \hat{\mathbf{y}}^t = softmax(\mathbf{h}^t\mathbf{U} + \mathbf{b}_2)\\ J = \sum_tCE(\mathbf{y}^t-\hat{\mathbf{y}}^t)  =-\sum_t\sum_iy_i^tlog(\hat{y}_i^t).\]</span></p>
+</div>
+<div id="the-gru-model-for-ner-1" class="section level1">
+<h1>The GRU model for NER</h1>
+</div>
+<div id="code-1" class="section level1">
+<h1>Code:</h1>
+<p>Using <strong>load_and_preprocess_data()</strong>, the raw train data and raw test data</p>
+<pre class="python"><code>[([&#39;EU&#39;, &#39;rejects&#39;, &#39;German&#39;, &#39;call&#39;, &#39;to&#39;, &#39;boycott&#39;, &#39;British&#39;, &#39;lamb&#39;, &#39;.&#39;],
+  [&#39;ORG&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;, &#39;O&#39;, &#39;MISC&#39;, &#39;O&#39;, &#39;O&#39;]),
+ ([&#39;Peter&#39;, &#39;Blackburn&#39;], [&#39;PER&#39;, &#39;PER&#39;])]</code></pre>
+<p>become list of tuples ([[ids, case types]], [labels]) as</p>
+<pre class="python"><code>[([[1, 12],
+   [2, 11],
+   [3, 13],
+   [4, 11],
+   [5, 11],
+   [6, 11],
+   [7, 13],
+   [8, 11],
+   [9, 14]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4]),
+ ([[10, 13], [11, 13]], [0, 0])]</code></pre>
+<p><strong>load_embeddings()</strong> matches the word vectors with the corresponding word in each sentence by searching in <em>helper.tok2id</em> dictionary. The embedding’s shape is <span class="math inline">\(19\times 50\)</span> for the 2-sentence example and embed size is 50.</p>
+<p>The two steps above are the same as in the window-based model. The followings are the different steps in creating RNN model from creating window-based model.</p>
+<div id="defining-rnn-cell-1" class="section level2">
+<h2>Defining RNN cell</h2>
+<p>Essentially, this step is to create the hidden cell by</p>
+<p><span class="math display">\[\mathbf{h}^t = \sigma(\mathbf{h}^{t-1}\mathbf{W}_h + \mathbf{e}^t\mathbf{W}_e+\mathbf{b}_1).\]</span></p>
+<ul>
+<li><p>define the variables <span class="math inline">\(\mathbf{W}_h, \mathbf{W}_e, \mathbf{b}_1\)</span> with shape <span class="math inline">\(\mathbf{W}_h\in \mathbb{R}^{H\times H}, \mathbf{W}_e \in \mathbb{R}^{(n window features\times D)\times H}, \mathbf{b}_1 \in \mathbb{R}^{1\times H}\)</span>.</p></li>
+<li><p>create <span class="math inline">\(\mathbf{h}^t\)</span> following the formula</p></li>
+<li><p>return <em>output</em> and <em>new_state</em>. In RNN, <em>output</em> is the same as the new state <span class="math inline">\(\mathbf{h}^t\)</span>.</p></li>
+</ul>
+<pre class="python"><code>class RNNCell(tf.nn.rnn_cell.RNNCell):
+    &quot;&quot;&quot;Wrapper around our RNN cell implementation that allows us to play
+    nicely with TensorFlow.
+    &quot;&quot;&quot;
+    def __init__(self, input_size, state_size):
+        self.input_size = input_size
+        self._state_size = state_size
+
+    @property
+    def state_size(self):
+        return self._state_size
+
+    @property
+    def output_size(self):
+        return self._state_size
+
+    def __call__(self, inputs, state, scope=None):
+        scope = scope or type(self).__name__
+
+        with tf.variable_scope(scope):
+            b = tf.get_variable(name=&#39;b&#39;, shape = [self.state_size], initializer=tf.contrib.layers.xavier_initializer(seed=1))
+            W_x = tf.get_variable(name=&#39;W_x&#39;, shape = [self.input_size, self.state_size], initializer=tf.contrib.layers.xavier_initializer(seed=2))
+            W_h = tf.get_variable(name=&#39;W_h&#39;, shape = [self.state_size, self.state_size], initializer=tf.contrib.layers.xavier_initializer(seed=3))
+            z1 = tf.matmul(inputs,W_x) + tf.matmul(state, W_h) + b
+            new_state = tf.nn.sigmoid(z1)
+            
+        output = new_state
+        return output, new_state</code></pre>
+</div>
+<div id="padding-and-masking-1" class="section level2">
+<h2>Padding and masking</h2>
+<p>Implementing an RNN requires us to unroll the computation over the
+whole sentence. Unfortunately, each sentence can be of arbitrary length and this would cause the
+RNN to be unrolled a different number of times for different sentences, making it impossible to
+BATCH PROCESS the data (assignment#3).</p>
+<p>The most common way to address the unequal length of the sentences is <em>pad</em>. For example, suppose the longest sentence in the inputs is <span class="math inline">\(M\)</span> tokens, then for our example with 2 sentences, the lengths are 9 and 2, respectively, which are <span class="math inline">\(&lt;M\)</span>, so we pad the two sentences with zeros until they reaches length <span class="math inline">\(M\)</span>. Meanwhile, a mask vector is also created for each sentence. The mask vector has <code>True</code> wherever there was a token in the original sequence and <code>False</code> for padded positions:</p>
+<pre class="python"><code># before
+[([[89, 2647],
+   [1070, 2646],
+   [115, 2648],
+   [288, 2646],
+   [7, 2646],
+   [1071, 2646],
+   [78, 2648],
+   [392, 2646],
+   [1, 2649]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4]),
+ ([[1072, 2648], [175, 2648]], [0, 0])]</code></pre>
+<pre class="python"><code># after
+[([[89, 2647],
+   [1070, 2646],
+   [115, 2648],
+   [288, 2646],
+   [7, 2646],
+   [1071, 2646],
+   [78, 2648],
+   [392, 2646],
+   [1, 2649],
+   [0, 0]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4, 4],
+  [True, True, True, True, True, True, True, True, True, False]),
+ ([[1072, 2648],
+   [175, 2648],
+   [0, 0],
+   [0, 0],
+   [0, 0],
+   [0, 0],
+   [0, 0],
+   [0, 0],
+   [0, 0],
+   [0, 0]],
+  [0, 0, 4, 4, 4, 4, 4, 4, 4, 4],
+  [True, True, False, False, False, False, False, False, False, False])]</code></pre>
+<p>The returned <em>ret</em> is a list of tuples containing three lists: padded sentences (each token is represented by 2 features), labels and mask vector.</p>
+</div>
+<div id="rnn-model-1" class="section level2">
+<h2>RNN model</h2>
+<p>In RNN model, each sentence is first windowed using <em>window_size = 1</em>, then padded to have equal length (<em>max_length</em>) using <strong>featuruzed_windows()</strong>, <strong>pad_sequences()</strong> and <strong>window_iterator()</strong>. These three functions are wrapped in a function <strong>preprocess_sequence_data()</strong>：</p>
+<pre class="python"><code>#before
+
+[([[89, 2647],
+   [1070, 2646],
+   [115, 2648],
+   [288, 2646],
+   [7, 2646],
+   [1071, 2646],
+   [78, 2648],
+   [392, 2646],
+   [1, 2649]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4]),
+ ([[1072, 2648], [175, 2648]], [0, 0])]</code></pre>
+<pre class="python"><code>#after
+def preprocess_sequence_data(examples):
+    def featurize_windows(data, start, end, window_size = 1):
+        &quot;&quot;&quot;Uses the input sequences in @data to construct new windowed data points.
+        &quot;&quot;&quot;
+        ret = []
+        for sentence, labels in data:
+            from util import window_iterator
+            sentence_ = []
+            for window in window_iterator(sentence, window_size, beg=start, end=end):
+                sentence_.append(sum(window, [])) # ex: window = [[1072, 2648], [175, 2648], [2651, 2646]], sum two list makes it a long list from list of lists
+            ret.append((sentence_, labels))
+        return ret
+
+    examples = featurize_windows(examples, [2650, 2646], [2651, 2646])
+    return pad_sequences(examples, 10) #suppose the max length in this example is 10
+
+preprocess_sequence_data(train[0:2])
+
+Out[31]: 
+[([[2650, 2646, 89, 2647, 1070, 2646],
+   [89, 2647, 1070, 2646, 115, 2648],
+   [1070, 2646, 115, 2648, 288, 2646],
+   [115, 2648, 288, 2646, 7, 2646],
+   [288, 2646, 7, 2646, 1071, 2646],
+   [7, 2646, 1071, 2646, 78, 2648],
+   [1071, 2646, 78, 2648, 392, 2646],
+   [78, 2648, 392, 2646, 1, 2649],
+   [392, 2646, 1, 2649, 2651, 2646],
+   [0, 0, 0, 0, 0, 0]],
+  [1, 4, 3, 4, 4, 4, 3, 4, 4, 4],
+  [True, True, True, True, True, True, True, True, True, False]),
+ ([[2650, 2646, 1072, 2648, 175, 2648],
+   [1072, 2648, 175, 2648, 2651, 2646],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0]],
+  [0, 0, 4, 4, 4, 4, 4, 4, 4, 4],
+  [True, True, False, False, False, False, False, False, False, False])]</code></pre>
+<p>NOTICE THE DIFFERENT FORMAT AFTER <strong>preprocess_sequence_data</strong> FOR WINDOW-BASED MODEL AND RNN MODEL. WINDOW-BASED MODEL IS 9000+ WINDOWED INPUTS WITH CORRESPONDING LABEL FOR THE CENTERED WORD; RNN MODEL IS STILL 700+ SENTENCES (IN EACH SENTENCE, IT CONTAINS WINDOWED INPUTS), AND THE LABLES ARE IN A LIST OUTSIDE THE SENTENCE, THE LABLES ARE FOR THE SENTENCE.</p>
+<p>The output[31] is assigned to <em>train_examples</em>. Do the same preprocessing for development data and the resulted data is assigned to <em>dev_set</em></p>
+<pre class="python"><code>#train and dev is in the form of the &#39;before&#39; preprocessing
+train_examples = self.preprocess_sequence_data(train) 
+dev_set = self.preprocess_sequence_data(dev)</code></pre>
+<p>If <code>model.cell = rnn</code>, then after preparing the data into wanted form, initialize the RNN model</p>
+<pre class="python"><code>model = RNNModel(helper, config, embeddings, args.cell)
+
+model.helper = helper
+model.report = report
+model.pretrained_embeddings = pretrained_embeddings
+model.max_length = 120
+model.cell = arg_cell</code></pre>
+<p>Then fit the RNN model to the <em>train</em> and <em>dev</em> datasets, which are the output after <strong>load_and_preprocess_data</strong>. Inside the <code>model.fit</code>, <em>train</em> and <em>dev</em> are first <strong>preprocess_sequence_data()</strong>, the resulted outputs are <em>train_examples</em> and <em>dev_set</em>, respectively.</p>
+<p>We will train and evaluate the RNN model for 10 epochs. In each epoch, first initialize a file summary writer for the TensorBoard:</p>
+<pre class="python"><code>writer = tf.summary.FileWriter(&#39;./tb/epoch {}&#39;.format(epoch), sess.graph)</code></pre>
+<p>Then dividing the <em>train_examples</em> into minibatches as in window-based model. Train the RNN model on each batch by providing the <em>feed</em> dictionary to placeholders and using the loss function defined in <strong>add_loss_op()</strong> and <strong>add_training_op()</strong>. In <strong>add_loss_op()</strong>, the RNN operation is implemented in making the predictions at each time step.</p>
+<pre class="python"><code>   def add_embedding(self):
+
+        embedded = tf.Variable(self.pretrained_embeddings)
+        embeddings = tf.nn.embedding_lookup(embedded, self.input_placeholder)
+        embeddings = tf.reshape(embeddings, [-1, self.max_length, 6 * 50])                                                     
+
+        return embeddings
+
+    def add_prediction_op(self):
+
+        x = self.add_embedding() #(None, max_length, n_window_features*embed_size)
+        dropout_rate = self.dropout_placeholder
+
+        preds = [] # Predicted output at each timestep should go here!
+        
+        #Initialize cell
+        if self.cell == &quot;rnn&quot;:
+            cell = RNNCell(6 * 50, 300)
+        elif self.cell == &quot;gru&quot;:
+            cell = GRUCell(6 * 50, 300)
+        else:
+            raise ValueError(&quot;Unsuppported cell type: &quot; + self.cell)
+
+        # Initialize state as vector of zeros.
+        with tf.variable_scope(&quot;Layer1&quot;):       
+            b2 = tf.get_variable(name=&#39;b2&#39;, shape = [5],        
+                                 initializer=tf.constant_initializer(0))
+            U = tf.get_variable(name=&#39;U&#39;, shape = [300, 5],
+                                initializer=tf.contrib.layers.xavier_initializer(seed=4)) 
+
+        input_shape = tf.shape(x) #[batch size, max_length, n_features*embed_size]
+        h = tf.zeros([input_shape[0], 300]) #t_0 state
+
+        with tf.variable_scope(&quot;RNN&quot;):
+            for time_step in range(self.max_length):
+                if time_step &gt; 0:
+                    tf.get_variable_scope().reuse_variables()
+
+                o, h =  cell(x[:,time_step, :], h, scope=&quot;RNN&quot;) #__call__ in RNNcell
+                h_drop = tf.nn.dropout(h, dropout_rate)
+                pred = tf.matmul(h_drop, U) + b2 #pred: batch_size*n_class, 
+                preds.append(pred) #preds: [[nclass, nclass, ...,nclass],[],...,[]]maxlength个【batch_size个 nclass】
+                
+        # Make sure to reshape @preds here.
+        #print(tf.shape(preds), tf.shape(preds[0]))
+        preds = tf.stack(preds, axis = 1) #batchsize个（maxlength个 nclass）
+        #print(tf.shape(preds))
+
+        assert preds.get_shape().as_list() == [None, 120, 5], &quot;predictions are not of the right shape. Expected {}, got {}&quot;.format([None, 120, 5], preds.get_shape().as_list())
+        return preds</code></pre>
+<p>Here, <code>cell = RNNCell(6 * 50, 300)</code> initializes the RNN cell (introduced above in <code>class RNNCell(tf.nn.rnn_cell.RNNCell):</code>) with <span class="math inline">\(nwindowfeatures \times embed size = (2\times3) \times 50, hidden size = 300\)</span>, initialize the initial hidden state for time step 0, which is of size <span class="math inline">\(batch size \times hidden size = batch size \times 300\)</span>. For each time step <code>for time_step in range(self.max_length):</code>, update the output <em>o</em> and <em>h</em> by <code>cell(x[:,time_step, :], h, scope="RNN")</code> (here, for each word, the input is the window features, with size <span class="math inline">\(6 \times 50\)</span>), making prediction for that time step <code>pred = tf.matmul(h_drop, U) + b2</code>; move the next time step using the previously updated <em>h</em> and update the <em>h</em> again, making predictions, etc.</p>
+<p>With the <em>preds</em> in <strong>add_prediction_op()</strong>, we can define <strong>add_loss_op()</strong> and <strong>add_training_op</strong>. Recall when building the model, we have</p>
+<pre class="python"><code>self.add_placeholders()
+self.pred = self.add_prediction_op()
+self.loss = self.add_loss_op(self.pred)
+self.train_op = self.add_training_op(self.loss)
+tf.summary.scalar(&#39;loss1&#39;, self.loss) # add a scalar tensorboard to keep track of the loss scalar
+self.merged = tf.summary.merge_all() # merge the loss scalar across 10 epochs into one plot</code></pre>
+<p>Then</p>
+<pre class="python"><code>def add_loss_op(self, preds):
+      pred_mask = tf.boolean_mask(preds, self.mask_placeholder)
+      label_mask = tf.boolean_mask(self.labels_placeholder, self.mask_placeholder)
+      loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=pred_mask, labels=label_mask)
+      loss = tf.reduce_mean(loss)
+      return loss
+
+def add_training_op(self, loss): 
+      adam_optim = tf.train.AdamOptimizer(0.001)
+      train_op = adam_optim.minimize(loss)
+
+      return train_op</code></pre>
+<p>and implement those functions in <strong>train_on_batch()</strong>, in addition to the loss value returned, the merged summary of the loss value for each batch in each epoch is also returned:</p>
+<pre class="python"><code>def train_on_batch(self, sess, inputs_batch, labels_batch, mask_batch):
+
+        feed = self.create_feed_dict(inputs_batch, labels_batch=labels_batch, mask_batch=mask_batch,
+                                     dropout=0.5)
+        summary, _, loss = sess.run([self.merged, self.train_op, self.loss], feed_dict=feed)
+        return summary, loss
+
+for i, batch in enumerate(minibatches(train_examples, 140)):
+            summary, loss = self.train_on_batch(sess, *batch)
+            writer.add_summary(summary, i)
+            writer.flush()</code></pre>
+<p>After training on all batches in the epoch, evaluate the trained model on <em>dev_set</em> (in the code, <strong>inputs</strong> is same as <strong>dev_set</strong>). Then divide the <strong>dev_set</strong> into minibatches, for each minibatch, <strong>predict_on_batch()</strong></p>
+<pre class="python"><code>def output(self, sess, dev, inputs=dev_set):
+  for i, batch in enumerate(minibatches(inputs, 140, shuffle=False)):
+            # Ignore predict
+      batch = batch[:1] + batch[2:]
+      preds_ = self.predict_on_batch(sess, *batch)
+      preds += list(preds_)
+      prog.update(i + 1, [])
+  return self.consolidate_predictions(inputs_raw, inputs, preds)</code></pre>
+<p>where <code>self.predict_on_batch</code> is</p>
+<pre class="python"><code>def predict_on_batch(self, sess, inputs_batch, mask_batch):
+        feed = self.create_feed_dict(inputs_batch=inputs_batch, mask_batch=mask_batch)
+        predictions = sess.run(tf.argmax(self.pred, axis=2), feed_dict=feed)
+        return predictions
+</code></pre>
+<p>by using the trained <span class="math inline">\(\mathbf{W}_h, \mathbf{W}_e, \mathbf{U}, \mathbf{b}_1, \mathbf{b}_2\)</span>.</p>
+<p>DIFFERENT BATCH SIZE HAS DIFFERENT VALIDATION SCORES. IN THIS EXAMPLE, THE BATCH SIZE IS 140. At epoch 10, the results are</p>
+<pre class="python"><code>I0713 10:28:00.729423 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:213] Epoch 10 out of 10
+
+
+
+6/6 [==============================] - 15s - train loss: 0.3258    
+
+I0713 10:28:19.765505 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:180] Evaluating on development data
+
+
+
+6/6 [==============================] - 48s    
+
+I0713 10:29:08.066092 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:182] Token-level confusion matrix:
+go\gu   PER     ORG     LOC     MISC    O      
+PER     689.00  33.00   14.00   7.00    81.00  
+ORG     151.00  69.00   26.00   18.00   127.00 
+LOC     40.00   26.00   413.00  16.00   82.00  
+MISC    44.00   27.00   44.00   71.00   72.00  
+O       71.00   27.00   39.00   8.00    6971.00
+
+I0713 10:29:08.068744 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:183] Token-level scores:
+label   acc     prec    rec     f1   
+PER     0.95    0.69    0.84    0.76 
+ORG     0.95    0.38    0.18    0.24 
+LOC     0.97    0.77    0.72    0.74 
+MISC    0.97    0.59    0.28    0.38 
+O       0.94    0.95    0.98    0.96 
+micro   0.96    0.90    0.90    0.90 
+macro   0.96    0.68    0.60    0.62 
+not-O   0.96    0.68    0.61    0.64 
+
+I0713 10:29:08.070044 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:184] Entity level P/R/F1: 0.54/0.54/0.54</code></pre>
+<p>The loss plot in the TensorBoard is</p>
+<p><img src="/post/RNN_NER_files/figure-html/loss1.svg" alt="Luyao Peng" width=90% height=80%/></p>
 <p>At early epochs, the loss decreases apparantly; at later epochs, the loss values remain unchanged.</p>
 </div>
 </div>
@@ -495,13 +838,13 @@ I0713 10:29:08.070044 139762688649024 &lt;ipython-input-39-b9d6a5ec9b7a&gt;:184]
           <a href="/tags/rnn/">RNN</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/rnn_ner-2/">
+        <a class="prev" href="/post/gp-in-dw/">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">CS224n/assignment3/: RNN/GRU Name Entity Recognition</span>
+            <span class="prev-text nav-default">Correspondence Between Infinitely Wide Deep Neural Networks and Gaussian Process</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/window_based_name_entity_recognition/">
-            <span class="next-text nav-default">CS224n/assignment3/: Window-based Name Entity Recognition (Baseline Model)</span>
+        <a class="next" href="/post/rnn_ner/">
+            <span class="next-text nav-default">CS224n/assignment3/: RNN/GRU Name Entity Recognition</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

@@ -11,7 +11,7 @@ weight: 50
 My name is Luyao Peng. I am a data scientist in NLP (natural language processing) with industry and research experience in text generation, general language understanding evaluation and chatbot, and educational background in statistics (Ph.D.) and linguistics (M.A.).
 
 
-My current <a href="/Resume_Luyao_Peng.pdf" target="_blank">C.V.</a>
+My current <a href="/Resume_Luyao_Peng_DS_7_3.pdf" target="_blank">C.V.</a>
 
 My Personal Research Projects:
 

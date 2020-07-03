@@ -23,6 +23,16 @@
     
     <item>
       <title>Correspondence Between Infinitely Wide Deep Neural Networks and Gaussian Process</title>
+      <link>/post/gp-in-dw-2/</link>
+      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/gp-in-dw-2/</guid>
+      <description>Equivalency between Gaussian Process and DNNs Previous studies have shown the equivalency between Gaussian Process (GP) [1] and infinitely wide fully-connected Neural Networks (NNs) [2][4], which implies that if we choose a fully-connected NN with infinite width, the function computed by the NN is equivalent to a function drawn from a GP under appropriate statistical assumptions. The analytic forms of GP kernel for DNNs were also subsequentially developed.
+The following figure shows the consistency between the theoretical GP (contour rings) and the sampled \(z_i\) at the initial layer (left) and the third layer (right) in a DNN.</description>
+    </item>
+    
+    <item>
+      <title>Correspondence Between Infinitely Wide Deep Neural Networks and Gaussian Process</title>
       <link>/post/gp-in-dw/</link>
       <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
       
