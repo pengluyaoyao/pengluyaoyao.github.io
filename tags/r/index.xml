@@ -27,34 +27,6 @@ devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  E
     </item>
     
     <item>
-      <title>R Package “regrrr”: Compiling and Visualizing Regression Results</title>
-      <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</guid>
-      <description>This is an R package “regrrr” on Cran I coauthored with Rui Yang.
-In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.
-Here is the quickstart guide.
- 
-Installation To install from CRAN:
-install.packages(&amp;quot;regrrr&amp;quot;) library(regrrr) You can also use devtools to install the latest development version:
-devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  Examples compile the correlation table library(regrrr) ## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.</description>
-    </item>
-    
-    <item>
-      <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
-      <link>/post/multivariate-mixed-effects-model-r-package/</link>
-      <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/multivariate-mixed-effects-model-r-package/</guid>
-      <description>This package estimates the variance covariance components for data under multivariate mixed effects model using multivariate REML and multivariate Henderson3 methods. See Meyer (1985) doi:10.2307/2530651 and Wesolowska Janczarek (1984) doi:10.1002/bimj.4710260613.
-It is available on CRAN and my github page:
-Link to the MMeM github
-Link to the MMeM CRAN
-The package supports the variance covariance component estimations for the multivariate mixed effects model for one-way randomized block design with equal design matrices:</description>
-    </item>
-    
-    <item>
       <title>R Package “MMeM”: Multivariate Mixed-effects Model</title>
       <link>/post/multivariate-mixed-effects-model-r-package/</link>
       <pubDate>Thu, 07 Mar 2019 00:00:00 +0000</pubDate>

@@ -13,17 +13,6 @@
     
     <item>
       <title>Basics of RNN and LSTM</title>
-      <link>/post/basics-of-rnn-and-lstm-2/</link>
-      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/basics-of-rnn-and-lstm-2/</guid>
-      <description>RNN The language model computes the probability of a sequence of previous words, \(P(word_1, word_2, \dots, word_t)\). The traditional language model is based on naive bayes model, the probability of a sequence of words is:
-\[ P(word_1, word_2, \dots, word_{t}) = \prod_{i = 1}^{t} P(word_i|word_1, \dots, word_{i-1}). \]
-The cons of traditional language models assumes independence among words (this is the naive part), which is not true in reality, it also requires a lot of RAM to compute the conditional probabilities for each word.</description>
-    </item>
-    
-    <item>
-      <title>Basics of RNN and LSTM</title>
       <link>/post/basics-of-rnn-and-lstm/</link>
       <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       

@@ -26,20 +26,5 @@ install.packages(&amp;quot;regrrr&amp;quot;) library(regrrr) You can also use de
 devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  Examples compile the correlation table library(regrrr) ## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.</description>
     </item>
     
-    <item>
-      <title>R Package “regrrr”: Compiling and Visualizing Regression Results</title>
-      <link>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</guid>
-      <description>This is an R package “regrrr” on Cran I coauthored with Rui Yang.
-In strategy/management research, we always need to compile the regression results into the publishable format and sometimes plot the moderating effects. This package does the job.
-Here is the quickstart guide.
- 
-Installation To install from CRAN:
-install.packages(&amp;quot;regrrr&amp;quot;) library(regrrr) You can also use devtools to install the latest development version:
-devtools::install_github(&amp;quot;raykyang/regrrr&amp;quot;) library(regrrr)  Examples compile the correlation table library(regrrr) ## Warning: package &amp;#39;regrrr&amp;#39; was built under R version 3.</description>
-    </item>
-    
   </channel>
 </rss>

@@ -86,13 +86,6 @@
   </url>
   
   <url>
-    <loc>/post/2020-03-07-content-generation-2/</loc>
-    <lastmod>2020-03-07T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>/post/2020-03-07-content-generation/</loc>
     <lastmod>2020-03-07T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -102,13 +95,6 @@
   <url>
     <loc>/tags/transformers/</loc>
     <lastmod>2020-03-07T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/post/gp-in-dw-2/</loc>
-    <lastmod>2019-12-25T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -130,13 +116,6 @@
   <url>
     <loc>/tags/deep-neural-networks/</loc>
     <lastmod>2019-12-25T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/post/rnn_ner-2/</loc>
-    <lastmod>2019-06-29T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -170,13 +149,6 @@
   </url>
   
   <url>
-    <loc>/post/basics-of-rnn-and-lstm-2/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>/post/basics-of-rnn-and-lstm/</loc>
     <lastmod>2019-04-24T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -192,13 +164,6 @@
   
   <url>
     <loc>/tags/machine-learning/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/post/stat209/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -233,13 +198,6 @@
   </url>
   
   <url>
-    <loc>/post/regrrr-one-stop-r-toolkit-for-compiling-regression-results/</loc>
-    <lastmod>2019-03-10T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>/tags/regression/</loc>
     <lastmod>2019-03-10T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -261,21 +219,7 @@
   </url>
   
   <url>
-    <loc>/post/kpca-for-one-class-classification/</loc>
-    <lastmod>2019-03-07T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>/tags/multivariate-mixed-effects-model/</loc>
-    <lastmod>2019-03-07T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/post/multivariate-mixed-effects-model-r-package/</loc>
     <lastmod>2019-03-07T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
