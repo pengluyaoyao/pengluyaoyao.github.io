@@ -6,10 +6,19 @@
     <description>Recent content in Deep Learning and NLP on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 25 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/deep-learning-and-nlp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Doubly Stochastic Deep Gaussian Process</title>
+      <link>/post/doubly-deep-gp/</link>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/doubly-deep-gp/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Correspondence Between Infinitely Wide Deep Neural Networks and Gaussian Process</title>

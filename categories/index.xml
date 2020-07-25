@@ -6,15 +6,24 @@
     <description>Recent content in Categories on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Deep Learning and NLP</title>
+      <link>/categories/deep-learning-and-nlp/</link>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/deep-learning-and-nlp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Machine Learning</title>
       <link>/categories/machine-learning/</link>
-      <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>/categories/machine-learning/</guid>
       <description></description>
@@ -35,15 +44,6 @@
       <pubDate>Sat, 07 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/categories/content-generation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deep Learning and NLP</title>
-      <link>/categories/deep-learning-and-nlp/</link>
-      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/deep-learning-and-nlp/</guid>
       <description></description>
     </item>
     

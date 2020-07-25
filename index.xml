@@ -6,7 +6,7 @@
     <description>Recent content on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -21,6 +21,15 @@
 My current C.V.
 My Personal Research Projects:
  Gaussian Process Classification by Tensorflow-probability (GPC jupyter notebook example) Bert Summarization and Generation of Chinese Text Neural Text Generation Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (National Council on Measurement in Education 2020, conference abstract, pg113) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (Joint Statistical Meetings 2019, conference abstract)  My Visualization of Data Science Projects:</description>
+    </item>
+    
+    <item>
+      <title>Doubly Stochastic Deep Gaussian Process</title>
+      <link>/post/doubly-deep-gp/</link>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/doubly-deep-gp/</guid>
+      <description></description>
     </item>
     
     <item>

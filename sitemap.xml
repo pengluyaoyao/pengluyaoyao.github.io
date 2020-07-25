@@ -10,14 +10,56 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/deep-learning-and-nlp/</loc>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/post/doubly-deep-gp/</loc>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>/tags/gaussian-process/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/machine-learning/</loc>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-07-23T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -30,35 +72,7 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/machine-learning/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>/categories/statistics/</loc>
-    <lastmod>2020-05-25T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-05-25T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -101,13 +115,6 @@
   
   <url>
     <loc>/post/gp-in-dw/</loc>
-    <lastmod>2019-12-25T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/deep-learning-and-nlp/</loc>
     <lastmod>2019-12-25T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

@@ -1,0 +1,13 @@
+---
+title: "Doubly Stochastic Deep Gaussian Process"
+author: Luyao Peng
+date: '2020-07-23'
+categories:
+  - deep learning and nlp
+  - machine learning
+tags:
+  - Gaussian Process
+draft: false
+header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usepackage{pifont} \usepackage{breqn} \usepackage{setspace} \doublespacing  \usepackage{parskip}  \usepackage{epsfig}  \usepackage{xcolor} \usepackage{tcolorbox}
+---
+
