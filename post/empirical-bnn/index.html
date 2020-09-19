@@ -48,11 +48,11 @@
 <meta itemprop="description" content="Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice.">
 <meta itemprop="datePublished" content="2020-09-04T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-09-04T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2417">
+<meta itemprop="wordCount" content="2418">
 
 
 
-<meta itemprop="keywords" content="Bayesian," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Bayesian,Name Entity Recognition," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Empirical Bayesian Neural Network"/>
 <meta name="twitter:description" content="Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice."/>
 
@@ -273,7 +273,7 @@ Var_{p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D})}(\hat{\mathbf{y}}_t^*) &amp;\a
 \end{aligned}
 \]</span></p>
 <p>which is essentially sampling <span class="math inline">\(\hat{f}(\mathbf{x}_t^*)\)</span> S times, hence obtain <span class="math inline">\(\hat{p}\)</span> S times to estimate the variance of <span class="math inline">\(\hat{\mathbf{y}}_t^*\)</span>.</p>
-<p>The code the variance is</p>
+<p>The code of the variance is</p>
 <pre class="python"><code>   def output(self, sess, inputs_raw, inputs):
 
         preds = []
@@ -391,6 +391,7 @@ The tunable hyperparameters include ‘batch size’, ‘learning rate’, ‘de
 <footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/bayesian/">Bayesian</a>
+          <a href="/tags/name-entity-recognition/">Name Entity Recognition</a>
           </div>
       <nav class="post-nav">
         
