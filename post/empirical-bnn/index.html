@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Empirical Bayesian Neural Network - Luyao Peng&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Luyao Peng" /><meta name="description" content="Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="/post/empirical-bnn/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Empirical Bayesian Neural Network" />
+<meta property="og:description" content="Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/empirical-bnn/" />
+<meta property="article:published_time" content="2020-09-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-09-04T00:00:00+00:00" />
+<meta itemprop="name" content="Empirical Bayesian Neural Network">
+<meta itemprop="description" content="Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice.">
+<meta itemprop="datePublished" content="2020-09-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-09-04T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2417">
+
+
+
+<meta itemprop="keywords" content="Bayesian," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Empirical Bayesian Neural Network"/>
+<meta name="twitter:description" content="Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">LP&#39;s NLP Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">LP&#39;s NLP Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Empirical Bayesian Neural Network</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-09-04 </span>
+        <div class="post-category">
+            <a href="/categories/deep-learning-and-nlp/"> deep learning and nlp </a>
+            <a href="/categories/machine-learning/"> machine learning </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      
+
+
+<p>Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice.</p>
+<p>We apply the empirical bayesian neural network (EBNNs) proposed by [3] and the method of quantifying the classification uncertainty [12] to the named entity recognition, a classification task in NLP community and compare five common NLP models in terms of multi-class classification accuracy and training time.</p>
+<div id="bayesian-neural-networks" class="section level2">
+<h2>Bayesian Neural Networks</h2>
+<p>For BNNs, they follow windowed input and a feed-forward two-layer neural network (FNNs) architecture. The difference is that all the weights in BNNs are represented by probability distributions over their possible values, while all the weights have fixed values to be learned in FNNs [1]. Define <span class="math inline">\(w_{ij}\)</span> as a single weight in the model parameters <span class="math inline">\(\mathbf{W}, \mathbf{U}, \mathbf{b}_1, \mathbf{b}_2\)</span>, and <span class="math inline">\(\mu_{ij}, \sigma_{ij}\)</span> as the mean and scale for <span class="math inline">\(w_{ij}\)</span>, then the window-based BNNs can be expressed as</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{e}_t &amp;=  [\mathbf{x}_{t-w}\mathbf{E}, \dots, \mathbf{x}_{t}\mathbf{E}, \dots, \mathbf{x}_{t+w}\mathbf{E}]\\
+\mathbf{h_t} &amp;=  \phi(\mathbf{e}_t\mathbf{W}+\mathbf{b}_2)\\
+\hat{\mathbf{y}_t} &amp;=softmax(\mathbf{h}_t\mathbf{U}+\mathbf{b}_2)\\
+&amp;\mbox{where } w_{ij} \sim N(\mu_{ij}, \sigma_{ij})  \quad (1)\\
+\end{aligned}
+\]</span>
+The weights in BNNs are assumed to be independent, meaning that each weight has its own mean and scale.</p>
+</div>
+<div id="variational-bayesian-neural-networks" class="section level2">
+<h2>Variational Bayesian Neural Networks</h2>
+<p>Let <span class="math inline">\(\mathbf{D} = \left\{X, y\right\}, X\in \mathbb{R}^{N\times D}, y\in \mathbb{R}^{N\times 1}\)</span> be the dataset containing windowed input matrix and the associate target vector in the named entity recognition, let denote the weights and biases in a BNN, it is assumed that <span class="math inline">\(p(Y|\mathbf{w}, X)\)</span> is a categorical distribution conditioned on , the goal of model training is to find out <span class="math inline">\(p(y|X) = \int_\mathbf{w}p(y|\mathbf{w}, X)p(\mathbf{w|\mathbf{D}})d\mathbf{w}\)</span> , which is the probability of given by integrating our all possible <span class="math inline">\(\mathbf{w}\)</span>.</p>
+<p>To achieve this goal, one needs to find out the posterior distribution of <span class="math inline">\(\mathbf{w}\)</span>, i.e., <span class="math inline">\(p(\mathbf{w}| \mathbf{D})\)</span>. Since the likelihood distribution <span class="math inline">\(p(y|\mathbf{w}, X)\)</span> is not Gaussian in classification problem, the analytic form of the posterior <span class="math inline">\(p(\mathbf{w}| \mathbf{D})\)</span> is not tractable. To address this problem, a variational approach [8][9][10] is developed by introducing a variational distribution <span class="math inline">\(q(\mathbf{w}| \mathbf{\theta})\)</span> within a known distribution family with parameters <span class="math inline">\(\mathbf{\theta} = (\mathbf{\mu}_q, \Sigma_{q})\)</span> to approximate the true posterior <span class="math inline">\(p(\mathbf{w}| \mathbf{D})\)</span>. The approximation is learned by minimizing the Kullback-Laibler divergence (KL) between <span class="math inline">\(q(\mathbf{w}| \mathbf{\theta})\)</span> and <span class="math inline">\(p(\mathbf{w}| \mathbf{D})\)</span> with respect to . Therefore, in BNNs, the objective function to minimize is</p>
+<p><span class="math display">\[
+\begin{aligned}
+KL(q(\mathbf{w}|  \mathbf{\theta}) || p(\mathbf{w}|\mathbf{D})) &amp;= \int_{w} q(\mathbf{w}| \mathbf{\theta})log\frac{q(\mathbf{w}|  \mathbf{\theta})}{p(\mathbf{w}|\mathbf{D}))}dw\\
+&amp; = \int_{w} q(\mathbf{w}| \mathbf{\theta})log\left(\frac{q(\mathbf{w}|  \mathbf{\theta})}{p(y|\mathbf{w}, X))p(\mathbf{w})}p(y|X)\right)dw\\
+&amp; = KL[q(\mathbf{w}|  \mathbf{\theta}) || p(\mathbf{w})]-\mathbb{E}_{q(\mathbf{w}|\theta)}[logp(y|\mathbf{w}, X)] \quad (2)\\ &amp; \qquad\qquad\qquad\qquad\qquad\qquad+log[p(y|X)]\\
+\end{aligned}
+\]</span>
+Since <span class="math inline">\(log[p(y|X)]\)</span> doesn’t depend on <span class="math inline">\(\mathbf{w}\)</span>, minimizing <span class="math inline">\(KL(q(\mathbf{w}|\mathbf{\theta}) || p(\mathbf{w}|\mathbf{D}))\)</span> s equivalent to minimize the first two terms on the right hand side, which is called the variational free energy <span class="math inline">\(\mathcal{F}(\mathbf{D}, \mathbf{\theta})\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{F}(\mathbf{D}, \mathbf{\theta}) = KL[q(\mathbf{w}| \mathbf{\theta}) || p(\mathbf{w})]-\mathbb{E}_{q(\mathbf{w}|\theta)}[logp(y|\mathbf{w}, X)] \qquad (3)
+\end{aligned}
+\]</span></p>
+<p>People often maximize the negative of <span class="math inline">\(\mathcal{F}(\mathbf{D}, \mathbf{\theta})\)</span>, which is called the evidence lower bound <span class="math inline">\(\mathcal{L}(\mathbf{D}, \mathbf{\theta} )\)</span>,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{L}(\mathbf{D}, \mathbf{\theta})&amp; = \mathbb{E}_{q(\mathbf{w}| \mathbf{\theta})}[logp(y|\mathbf{w}, X)]-KL[q(\mathbf{w}| \mathbf{\theta}) || p(\mathbf{w})]\\
+&amp;=\mathbb{E}_{q(\mathbf{w}| \mathbf{\theta})}[logp(y|\mathbf{w}, X)] - \mathbb{E}_{q(\mathbf{w}| \mathbf{\theta})}logq(\mathbf{w}|\theta ) + \mathbb{E}_{q(\mathbf{w}| \mathbf{\theta})}log p(\mathbf{w}) \quad (4)
+\end{aligned}
+\]</span></p>
+<p>Since BNNs involves nonlinear transformation <span class="math inline">\(\phi\)</span>n each layer, each <span class="math inline">\(\mathbb{E}\)</span> term in Equation (4) is intractable, monte carlo (MC) can be used to estimate <span class="math inline">\(\mathbb{E}\)</span> by sampling <span class="math inline">\(\mathbf{w}\)</span> from <span class="math inline">\(q(\mathbf{w}|\theta)\)</span> each epoch to maximize <span class="math inline">\(\mathcal{L}(\mathbf{D}, \mathbf{\theta} )\)</span>,</p>
+<p><span class="math display">\[
+\mathcal{L}(\mathbf{D}, \theta)  \approx \frac{1}{S}\sum_{s=1}^{S}log p\left(y|\mathbf{w}^{(s)},\mathbf{x}\right) - \frac{1}{S}\sum_{s=1}^{S}log q(\mathbf{w}^{(s)}|\theta)+\frac{1}{S}\sum_{s=1}^{S} p(\mathbf{w}^{(s)}) \quad (5)
+\]</span>
+Maximizing <span class="math inline">\(\mathcal{L}(\mathbf{D}, \mathbf{\theta} )\)</span> encourages the model to find <span class="math inline">\(\theta\)</span> such that <span class="math inline">\(q(\mathbf{w}|\mathbf{\theta})\)</span> is closest to <span class="math inline">\(p(\mathbf{w}| \mathbf{D})\)</span> within a distribution family, then it can be assumed that <span class="math inline">\(w_{ij} \sim q(\mathbf{w}|\mathbf{\theta})\)</span> independently.</p>
+</div>
+<div id="empirical-variational-bayesian-neural-networks" class="section level2">
+<h2>Empirical Variational Bayesian Neural Networks</h2>
+<div id="the-model" class="section level3">
+<h3>The Model</h3>
+<p>Equation (2) requires us to define the prior distribution <span class="math inline">\(p(\mathbf{w})\)</span>, for which there is usually little intuition to select the prior parameters in practice, [3] proposes to parameterize the prior <span class="math inline">\(p(\mathbf{w})\)</span> hierarchically as <span class="math inline">\(p(w_{ij}|s)\sim N(0, s)\)</span> where <span class="math inline">\(s\sim \mbox{Inv-Gamma}(\alpha, \beta)\)</span>, then the <span class="math inline">\(KL(q(\mathbf{w}| \mathbf{\theta}) || p(\mathbf{w}|\mathbf{D}))\)</span> in Equation (2) becomes</p>
+<p><span class="math display">\[
+\begin{aligned}
+KL(q(\mathbf{w}| \mathbf{\theta}) || p(\mathbf{w}|\mathbf{D})) = KL[q(\mathbf{w}|  \mathbf{\theta}) || p(\mathbf{w}|s)]&amp;-log p(s) 
+-\mathbb{E}_{q(\mathbf{w}|\mathbf{D}), \mathbf{\theta}}[logp(y|\mathbf{w}, X)] \\ &amp; +log[p(y|X)] \qquad\qquad  (6)
+\end{aligned} 
+\]</span>
+Under independence assumption of each weight, and both <span class="math inline">\(q(\mathbf{w}|\theta) \mbox{ and } p(\mathbf{w}|s)\)</span> in Equation (6) are Gaussians with means and covariances $<em>q, </em>{q}=_{ij}, <em>p=, </em>{p}=s, $ from [3][10], it can be written as</p>
+<p><span class="math display">\[
+\begin{aligned}
+KL[q(\mathbf{w}| \mathbf{\theta}) || p(\mathbf{w}|s)] &amp;= \frac{1}{2} \left(log\frac{|\Sigma_p|}{|\Sigma_q|}-D+Tr(\Sigma_p^{-1}\Sigma_q)+(\mu_p-\mu_q)^{T}\Sigma_p^{-1}(\mu_p-\mu_q)\right)\\
+&amp; = \frac{1}{2} \left(log\frac{N_ws}{|\Sigma_q|}-D+Tr(s^{-1}\Sigma_q)+s^{-1}\mu_q^{T}\mu_q)\right) \qquad (7)
+\end{aligned}
+\]</span></p>
+<p>Taking derivative of <span class="math inline">\(KL[q(\mathbf{w}| \mathbf{\theta})\)</span> with respect to <span class="math inline">\(s\)</span>, we have</p>
+<p><span class="math display">\[
+\frac{dKL(q||p)}{ds} = \frac{N_w}{2s}-\frac{1}{2s^2}Tr(\Sigma_q+\mu_q\mu_q^{T})  \qquad (8)
+\]</span></p>
+<p>Taking derivative of <span class="math inline">\(log p(s)\)</span> with respect to <span class="math inline">\(s\)</span>, we have</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dlog p(s)}{ds} &amp;= \frac{d}{ds}log\frac{\beta^\alpha}{\Gamma^\alpha}-(\alpha+1)logs-\beta\frac{1}{s}\\
+&amp; = -(\alpha+1)\frac{1}{s}+\frac{\beta}{s^2} \qquad\qquad\quad (9)
+\end{aligned}
+\]</span>
+Having Equation (9) minus Equation (10), and let the result equal to 0, we can solve for <span class="math inline">\(s\)</span>
+<span class="math display">\[
+\hat{s} = \frac{Tr(\sigma_{ij}\mathbf{I}+\mu_q\mu_q^{T})+2\beta}{N_w+2\alpha+2} \qquad\qquad (10)
+\]</span>
+Plugging <span class="math inline">\(\hat{s}\)</span> into Equation (6), it becomes a function of <span class="math inline">\(\theta\)</span>, we can take gradients with respect to <span class="math inline">\(\theta\)</span> in Equation (6) to learn <span class="math inline">\(\theta\)</span> empirically. Equation (10) corresponds to the code</p>
+<pre class="python"><code>      m = tf.cast(mu.shape[0], dtype=&#39;float32&#39;)
+      S = tf.reduce_sum(sigma + mu * mu, axis=0)
+      m_plus_2alpha_plus_2 = m + 2.0 * self.prior_alpha + 2.0
+      S_plus_2beta = S + 2.0 * self.prior_beta
+      s_hat = S_plus_2beta / m_plus_2alpha_plus_2  </code></pre>
+</div>
+<div id="the-optimization-procedures" class="section level3">
+<h3>The Optimization Procedures</h3>
+<p>The optimization procedure of EBNN is the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>Initialize <span class="math inline">\(\theta = \mu_{ij}, \sigma_{ij} \mbox{ in } q(w_{ij}|\theta)\)</span> randomly and independently for each weight in BNN model;</p></li>
+<li><p>Build BNN model based on Equation (1), using re-parameterization trick to compute and is independent [1];</p></li>
+<li><p>With the initialized <span class="math inline">\(\theta\)</span> in step (1) and define a broad inv-gamma with <span class="math inline">\(\alpha = 1 \mbox{ and }\beta=10\)</span> [3], compute <span class="math inline">\(\hat{s}\)</span> based on Equation (10);</p></li>
+<li><p>With <span class="math inline">\(\hat{s}\)</span>, obtain the prior <span class="math inline">\(p(\mathbf{w}|s)\)</span> and compute the loss function based on Equation (6), using Adam with linear decay scheduler to back-propagate with respect to <span class="math inline">\(\theta\)</span>;</p></li>
+<li><p>Update <span class="math inline">\(\theta\)</span> and repeat from step (2).</p></li>
+</ol>
+</div>
+<div id="the-properties" class="section level3">
+<h3>The Properties</h3>
+<div id="prediction-uncertainty" class="section level4">
+<h4>Prediction Uncertainty</h4>
+<p>Denote the empirical estimates of <span class="math inline">\(\theta \mbox{ as } \hat{\theta}\)</span> and <span class="math inline">\(\hat{\mathbf{w}}\sim q\left(\hat{\theta}=\left\{\hat{\mathbf{\mu}}, \hat{\sigma}\mathbf{I}\right\}\right)\)</span> in an EBNN. The conditional variational predictive distribution for a new input <span class="math inline">\(\mathbf{x}_t^*\)</span> and a new output <span class="math inline">\(\mathbf{y}_t^*\)</span> is</p>
+<p><span class="math display">\[
+\hat{p} = p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D}, \hat{\mathbf{w}})= softmax\left[\hat{f}(\mathbf{x}_t^*)| \hat{\mathbf{w}}\right] \qquad(11)
+\]</span></p>
+<p>where <span class="math inline">\(\hat{f}(\mathbf{x}_t^*)\)</span> represents the predicted linear output before Softmax transformation in the last layer of the EBNN. The final prediction after marginalizing out model weights is</p>
+<p><span class="math display">\[
+p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D}) = \int_{\hat{\mathbf{w}}}softmax \left[ \hat{f}(\mathbf{x}_t^*)|\hat{\mathbf{w}}\right]q(\hat{\mathbf{w}}|\hat{\theta})d\hat{\mathbf{w}} \qquad (12)
+\]</span></p>
+<p>Since the integration is not tractable, we can use MC to approximate <span class="math inline">\(p(\mathbf{y}^*|\mathbf{x}_t^*, \mathbf{D})\)</span>,</p>
+<p><span class="math display">\[
+p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D}) \approx \frac{1}{S}\sum_{s=1}^Ssoftmax\left[\hat{f}(\mathbf{x}_t^*)|\hat{\mathbf{w}}^{(s)}\right] \quad(13)
+\]</span>
+The final prediction is <span class="math inline">\(\hat{y}^* = argmax[p(\mathbf{y}^*|\mathbf{x}^*,\mathbf{D})]\)</span>. According to [12][13][14] and the formula of variance of a random variable, the variance of <span class="math inline">\(\hat{\mathbf{y}}^*\)</span> is</p>
+<p><span class="math display">\[
+Var_{p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D})}(\hat{\mathbf{y}}_t^*)= \mathbb{E}_{p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D}) }\left(\hat{\mathbf{y}}_t^{*2}\right)-\left[\mathbb{E}_{p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D}) } (\hat{\mathbf{y}}_t^*)\right]^2  \qquad(14)
+\]</span></p>
+<p>in which each <span class="math inline">\(\mathbb{E}\)</span> can be estimated by MC by sampling S <span class="math inline">\(\hat{p}\)</span>’s according to [12],</p>
+<p><span class="math display">\[
+\begin{aligned}
+Var_{p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D})}(\hat{\mathbf{y}}_t^*) &amp;\approx  \frac{1}{S}\sum_{s=1}^{S}\left[diag(\hat{p}^{(s)})-\hat{p}^{(s)}\hat{p}^{(s)T}\right]+ \\ &amp; \quad\quad \frac{1}{S}\sum_{s=1}^{S}\left(\hat{p}^{(s)}-\bar{p}\right)\left(\hat{p}^{(s)}-\bar{p}\right)^T \qquad (15)
+\end{aligned}
+\]</span></p>
+<p>which is essentially sampling <span class="math inline">\(\hat{f}(\mathbf{x}_t^*)\)</span> S times, hence obtain <span class="math inline">\(\hat{p}\)</span> S times to estimate the variance of <span class="math inline">\(\hat{\mathbf{y}}_t^*\)</span>.</p>
+<p>The code the variance is</p>
+<pre class="python"><code>   def output(self, sess, inputs_raw, inputs):
+
+        preds = []
+        std_array_all = None
+        prog = Progbar(target=1 + int(len(inputs) /self.batch_size))
+        def counts(x):
+            return np.argmax(np.bincount(x))
+            
+        for i, batch in enumerate(minibatches(inputs, self.batch_size, shuffle=False)):
+            # Ignore predict
+            batch = batch[:1] + batch[2:]
+            y_pred_list = []
+            ps_list= []
+            for j in range(50):
+                preds_, ps_ = self.predict_on_batch(sess, *batch)
+                y_pred_list.append(preds_)
+                ps_list.append(ps_)
+            
+            stds = np.transpose(np.std(np.transpose(np.array(ps_list)), -1)) + np.mean(np.transpose(np.array(ps_list), (1,0,2))-np.transpose(np.array(ps_list), (1,0,2))**2, 1)
+            #std[(5, bs, 50), -1]-&gt;t(5, bs)-&gt;(bs, 5) + mean(bs, 50,5)-&gt;(bs,5)
+            if std_array_all is None:
+                std_array_all = stds
+            else:
+                std_array_all= np.concatenate((std_array_all, stds), axis=0)
+                
+            preds_ = np.apply_along_axis(counts, 0, np.array(y_pred_list))
+            preds += list(preds_)
+            prog.update(i + 1, [])
+            
+        #np.save(&#39;./results/stds.npy&#39;, std_array_all)
+        return self.consolidate_predictions(inputs_raw, inputs, preds)</code></pre>
+</div>
+<div id="ensemble-predictions-over-all-model-parameters" class="section level4">
+<h4>Ensemble Predictions over All Model Parameters</h4>
+<p>Assuming the variational predictive distribution for new data <span class="math inline">\(p(\mathbf{y}_t^*|\mathbf{x}_t^*, \mathbf{D})\)</span> to be an arbitrary distribution under EBNNs, from Equation (12), it can be seen that if we impose distribution to model weights <span class="math inline">\(\mathbf{w}\)</span>, the prediction will be the expectation weighted by all possible values of model weights given <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="experimental-results" class="section level2">
+<h2>Experimental Results</h2>
+<div id="datasets" class="section level3">
+<h3>Datasets</h3>
+<p>Four types of named entities are concentrated: person (PER), location (LOC), organization (ORG) and names of miscellaneous entities (MISC) that do not belong to the previous three groups. All the other tokens not belonging to the four named entities are labeled as O.</p>
+<p>Data are split to train dataset with 14041 sentences, development dataset with 3250 sentences and test dataset with 3453 sentences. Since the labels of the test sentences are not given, we use the development dataset as the test dataset, and divide the train dataset into train and development dataset according to 0.8 vs 0.2 ratio.</p>
+<p>Examples of sentences and labels are:</p>
+<p><img src="/post/Empirical-BNN_files/figure-html/ner.png" alt="Luyao Peng" width=70% height=60%/></p>
+</div>
+<div id="training-procedures" class="section level3">
+<h3>Training Procedures</h3>
+<p>We concentrate on five models: FNN, BNN, EBNN, RNN [16] and GRU[17]. for FNN, BNN and EBNN models, each sentence is windowed using window size <span class="math inline">\(w=1\)</span>, there are altogether 203621 and 51362 windowed inputs for training and test data, respectively; for RNN and GRU model, the windowed inputs belonging to one sentence are grouped together, resulting in 14041 lists of windowed inputs for training data, 3250 for test data.
+We define the vocabulary size <span class="math inline">\(V=20000\)</span> words. In additional to word embeddings as input features.
+The tunable hyperparameters include ‘batch size’, ‘learning rate’, ‘decay rate’, ‘number of training epoch’, ‘hidden size’. There are two additional hyper parameters to be tuned in BNNs: ‘prior variance for weight’, ‘prior variance for bias’. We use grid search to find out the relatively optimal set of hyperparameters for each of the five models.</p>
+<p>During training, we partition the training data into minibatches based on ‘batch size’ and re-weight <span class="math inline">\(KL(q||p)\)</span> in Equation (8) by <span class="math inline">\(1/M\)</span> [1][3].</p>
+</div>
+<div id="accuracy-metrics" class="section level3">
+<h3>Accuracy Metrics</h3>
+<p>Because of the unbalanced labels in the dataset (majority of the tokens are O category), we evaluate the results based on the precision and the recall at the entity level fro <code>seqval</code> package.</p>
+</div>
+<div id="results" class="section level3">
+<h3>Results</h3>
+<div id="accuracy-vs-training-time" class="section level4">
+<h4>Accuracy vs Training Time</h4>
+<p>Models are compared in terms of F1 accuracy and training time. Figure 1 shows the F1 accuracy of each model along training epochs. Even though the final F1 accuracies for these five models are close, the accuracy of EBNN, because the prior variance is determined analytically and guaranteed to be the optimal in each epoch, climbs and converges fast; on the opposite, BNN model requires the manual tuning of the prior variance for both weights and biases, it takes BNN some time to reach to the final accuracy. The weights and biases of FNN doesn’t involve distributional assumptions, which means there are only half of the number of model parameters to learn compare to that of EBNN and BNN, FNN is comparable to EBNN in efficiency but slightly lower in F1 accuracy.</p>
+<p><img src="/post/Empirical-BNN_files/figure-html/f1.png" alt="Luyao Peng" width=70% height=60%/></p>
+</div>
+<div id="uncertainty-of-classification" class="section level4">
+<h4>Uncertainty of Classification</h4>
+<p>We computed the prediction uncertainty according to Equation (14) by sampling the model weights for <span class="math inline">\(S=50\)</span> times, the resulting 50 <span class="math inline">\(\hat{p}\)</span>’s (each element in <span class="math inline">\(\hat{p}\)</span> is a vector of estimated probability for 5 classes), are used to compute the measure in Equation (14) for classification uncertainty for each of the five entity classes for each token. Using two sentences from the test dataset, Figure 2 demonstrates the sample standard deviations for the predicted and true label of each token.</p>
+<p><img src="/post/Empirical-BNN_files/figure-html/f2.png" alt="Luyao Peng" width=70% height=60%/></p>
+<p>For sentence #1, the first token “West” is classified incorrectly. We can see the estimated uncertainty for both the predicted (pink) and the true (green) labels are relatively large, indicating that the predicted probabilities for these two labels vary a lot across 50 samples, and the model seems to be uncertain in determining the label. For the second token “Indian”, even though the model has uncertainty, its prediction is correct. For the other tokens in this sentence, the uncertainty is almost 0, meaning that the predictions are made confidently.</p>
+<p><img src="/post/Empirical-BNN_files/figure-html/f3.png" alt="Luyao Peng" width=70% height=60%/></p>
+<p>For sentence #2, “Test” and “and” are predicted wrongly. Again, the uncertainty for predicting “Test” as O seems big, but the model is relatively certain that the label should not be “ORG” because the uncertainty level for “ORG” for token “Test” is almost 0. Further, the model is pretty certain to predict “and” to be “O” rather than “ORG”, which conforms to people’s intuition and perception.</p>
+</div>
+</div>
+</div>
+<div id="conclusions" class="section level2">
+<h2>Conclusions</h2>
+<p>In this study, we apply EBNN to classification problem in NLP area, which is an under-explored area. Results show that, for the named entity recognition task, EBNN converges faster and is comparable with other four deep learning models, in addition, EBNN provides the measure for inference uncertainty, which is informative especially for the wrong predictions.</p>
+<p>[1] Blundell, Charles, et al. “Weight uncertainty in neural networks.” arXiv preprint arXiv:1505.05424 (2015).</p>
+<p>[2] Neal, Radford M. “Bayesian learning via stochastic dynamics.” Advances in neural information processing systems. 1993.</p>
+<p>[3] Wu, Anqi, et al. “Deterministic variational inference for robust bayesian neural networks.” arXiv preprint arXiv:1810.03958 (2018).</p>
+<p>[4] Nickisch, Hannes, and Carl Edward Rasmussen. “Approximations for binary Gaussian process classification.” Journal of Machine Learning Research 9.Oct (2008): 2035-2078.</p>
+<p>[5] Rasmussen, Carl Edward. “Gaussian processes in machine learning.” Summer School on Machine Learning. Springer, Berlin, Heidelberg, 2003.</p>
+<p>[6] Lee, Jaehoon, et al. “Deep neural networks as gaussian processes.” arXiv preprint arXiv:1711.00165 (2017).</p>
+<p>[7] Cho, Kyunghyun, et al. “Learning phrase representations using RNN encoder-decoder for statistical machine translation.” arXiv preprint arXiv:1406.1078 (2014).</p>
+<p>[8] Jaakkola, Tommi S., and Michael I. Jordan. "Bayesian parameter estimation via variational methods.</p>
+<p>[9] Graves, Alex. “Practical variational inference for neural networks.” Advances in neural information processing systems. 2011.</p>
+<p>[10] Krishnan, Rahul G., Uri Shalit, and David Sontag. “Deep kalman filters.” arXiv preprint arXiv:1511.05121 (2015)." Statistics and Computing 10.1 (2000): 25-37.</p>
+<p>[11] Hinton, Geoffrey E., and Drew Van Camp. “Keeping the neural networks simple by minimizing the description length of the weights.” Proceedings of the sixth annual conference on Computational learning theory. 1993.</p>
+<p>[12] Kwon, Yongchan, et al. “Uncertainty quantification using bayesian neural networks in classification: Application to ischemic stroke lesion segmentation.” (2018).</p>
+<p>[13] Kwon, Yongchan, et al. “Uncertainty quantification using Bayesian neural networks in classification: Application to biomedical image segmentation.” Computational Statistics &amp; Data Analysis 142 (2020): 106816.</p>
+<p>[14] Shridhar, Kumar, Felix Laumann, and Marcus Liwicki. “Uncertainty estimations by softplus normalization in bayesian convolutional neural networks with variational inference.” arXiv preprint arXiv:1806.05978 (2018).
+[15] Sang, Erik F., and Fien De Meulder. “Introduction to the CoNLL-2003 shared task: Language-independent named entity recognition.” arXiv preprint cs/0306050 (2003).</p>
+<p>[16] Cho, Kyunghyun, et al. “Learning phrase representations using RNN encoder-decoder for statistical machine translation.” arXiv preprint arXiv:1406.1078 (2014).</p>
+<p>[17] Goller, Christoph, and Andreas Kuchler. “Learning task-dependent distributed representations by backpropagation through structure.” Proceedings of International Conference on Neural Networks (ICNN’96). Vol. 1. IEEE, 1996.</p>
+</div>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Luyao Peng</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-09-04
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/bayesian/">Bayesian</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/doubly-deep-gp/">
+            <span class="next-text nav-default">Doubly Stochastic Deep Gaussian Process</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <div id="disqus_thread"></div>
+  <script>
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://luyao-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+  
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Luyao Peng</span>
+  </span>
+</div>
+
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,7 +6,7 @@
     <description>Recent content on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -21,6 +21,15 @@
 My current C.V.
 My Personal Research Projects:
  Gaussian Process Classification by Tensorflow-probability (GPC jupyter notebook example) Bert Summarization and Generation of Chinese Text Neural Text Generation Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (National Council on Measurement in Education 2020, conference abstract, pg113) An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (Joint Statistical Meetings 2019, conference abstract)  My Visualization of Data Science Projects:</description>
+    </item>
+    
+    <item>
+      <title>Empirical Bayesian Neural Network</title>
+      <link>/post/empirical-bnn/</link>
+      <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/empirical-bnn/</guid>
+      <description>Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice.</description>
     </item>
     
     <item>

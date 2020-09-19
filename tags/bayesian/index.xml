@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bayesian on Luyao Peng&#39;s Blog</title>
+    <link>/tags/bayesian/</link>
+    <description>Recent content in Bayesian on Luyao Peng&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 04 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/bayesian/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Empirical Bayesian Neural Network</title>
+      <link>/post/empirical-bnn/</link>
+      <pubDate>Fri, 04 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/empirical-bnn/</guid>
+      <description>Bayesian approaches to neural networks (BNNs) training [1] have gained increased popularity in NLP community due to its merits of scalability, providing inference uncertainty, and its ensemble learning nature. Despite those features, BNNs are sensitive to the choice of prior and require to tune the parameters in the prior distribution assumed for model weights and biases [2][3]. Sensitivity to the prior and its initialization makes BNNs difficult to train in practice.</description>
+    </item>
+    
+  </channel>
+</rss>
