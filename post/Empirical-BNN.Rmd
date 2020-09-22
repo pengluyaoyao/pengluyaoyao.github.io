@@ -36,7 +36,7 @@ The weights in BNNs are assumed to be independent, meaning that each weight has 
 
 Let $\mathbf{D} = \left\{X, y\right\}, X\in \mathbb{R}^{N\times D}, y\in \mathbb{R}^{N\times 1}$ be the dataset containing windowed input matrix and the associate target vector in the named entity recognition, let  denote the weights and biases in a BNN, it is assumed that $p(Y|\mathbf{w},  X)$ is a categorical distribution conditioned on , the goal of model training is to find out $p(y|X) = \int_\mathbf{w}p(y|\mathbf{w}, X)p(\mathbf{w|\mathbf{D}})d\mathbf{w}$ , which is the probability of  given  by integrating our all possible $\mathbf{w}$.
 
-To achieve this goal, one needs to find out the posterior distribution of $\mathbf{w}$, i.e., $p(\mathbf{w}| \mathbf{D})$. Since the likelihood distribution $p(y|\mathbf{w},  X)$ is not Gaussian in classification problem, the analytic form of the posterior $p(\mathbf{w}| \mathbf{D})$ is not tractable. To address this problem, a variational approach [8][9][10] is developed by introducing a variational distribution $q(\mathbf{w}| \mathbf{\theta})$ within a known distribution family with parameters $\mathbf{\theta} = (\mathbf{\mu}_q, \Sigma_{q})$ to approximate the true posterior $p(\mathbf{w}| \mathbf{D})$.  The approximation is learned by minimizing the Kullback-Laibler divergence (KL) between $q(\mathbf{w}|  \mathbf{\theta})$ and $p(\mathbf{w}| \mathbf{D})$ with respect to . Therefore, in BNNs, the objective function to minimize is
+To achieve this goal, one needs to find out the posterior distribution of $\mathbf{w}$, i.e., $p(\mathbf{w}| \mathbf{D})$. Since the likelihood distribution $p(y|\mathbf{w},  X)$ is not Gaussian in classification problem, the analytic form of the posterior $p(\mathbf{w}| \mathbf{D})$ is not tractable. To address this problem, a variational approach [8][9][10] is developed by introducing a variational distribution $q(\mathbf{w}| \mathbf{\theta})$ within a known distribution family with parameters $\mathbf{\theta} = (\mathbf{\mu}_q, \Sigma_{q})$ to approximate the true posterior $p(\mathbf{w}| \mathbf{D})$.  The approximation is learned by minimizing the Kullback-Leibler divergence (KL) between $q(\mathbf{w}|  \mathbf{\theta})$ and $p(\mathbf{w}| \mathbf{D})$ with respect to . Therefore, in BNNs, the objective function to minimize is
 
 $$
 \begin{aligned}
@@ -82,7 +82,7 @@ KL(q(\mathbf{w}| \mathbf{\theta}) || p(\mathbf{w}|\mathbf{D})) = KL[q(\mathbf{w}
 -\mathbb{E}_{q(\mathbf{w}|\mathbf{D}), \mathbf{\theta}}[logp(y|\mathbf{w}, X)] \\ & +log[p(y|X)] \qquad\qquad  (6)
 \end{aligned} 
 $$
-Under independence assumption of each weight, and both $q(\mathbf{w}|\theta) \mbox{ and } p(\mathbf{w}|s)$ in Equation (6)  are Gaussians with means and covariances $\mathbf{\mu}_q, \Sigma_{q}=\sigma_{ij}\mathbf{I}, \mathbf{\mu}_p=\mathbf{0}, \Sigma_{p}=s\mathbf{I}, $ from [3][10], it can be written as 
+Under independence assumption of each weight, and both $q(\mathbf{w}|\theta) \mbox{ and } p(\mathbf{w}|s)$ in Equation (6)  are Gaussians with means and covariances $\mathbf{\mu}_q, \Sigma_{q}=\sigma_{ij}\mathbf{I}, \mathbf{\mu}_p=\mathbf{0}, \Sigma_{p}=s\mathbf{I}$ from [3][10], it can be written as 
 
 $$
 \begin{aligned}
