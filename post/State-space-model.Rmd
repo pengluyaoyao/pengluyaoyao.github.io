@@ -1,0 +1,37 @@
+---
+title: "State Space Model for Sequential Data"
+author: Luyao Peng
+date: '2020-10-10'
+categories:
+  - deep learning and nlp
+  - machine learning
+tags:
+  - State Space Model
+draft: false
+header-includes: \usepackage{amsmath} \usepackage{relsize} \usepackage{bm} \usepackage{pifont} \usepackage{breqn} \usepackage{setspace} \doublespacing  \usepackage{parskip}  \usepackage{epsfig}  \usepackage{xcolor} \usepackage{tcolorbox} \usepackage{bm}
+---
+
+A state space model defines the hidden state at time $t$, $z_t$,  to be a linear function of the input at time $t$, $u_t$,  and the hidden state at time $t-1$, $z_{t-1}$, and defines the output at time $t$ to be a linear function of the hidden state $z_t$. The model can be written as
+
+
+\begin{equation}
+\begin{array}{rcl}
+\mbox{Transition model} \mathbf{z}_t &=& \mathbf{A}_t \mathbf{z}_{t-1} + \mathbf{B}_t\mathbf{u}_t + \mathbf{\epsilon}_t \\
+\mbox{Observation model} \mathbf{y}_t &=& \mathbf{C}_t\mathbf{z}_t + \mathbf{D} \mathbf{u}_t + \mathbf{\delta}_t \\
+&& \mathbf{\epsilon}_t \sim N(\mathbf{0}, \mathbf{Q}_t), \mathbf{\delta}_t \sim N(\mathbf{0}, \mathbf{R}_t)
+\end{array}
+\end{equation}
+
+Let $\mathbf{\theta} = (\mathbf{A}_t, \mathbf{B}_t, \mathbf{C}_t, \mathbf{D}_t, \mathbf{Q}_t, \mathbf{R}_t)$, and are independent of time. This model is also called Linear Gaussian State Space Model (LGSSM).
+
+In the forward algorithm of LGSSM, we are interested in finding the posterior distribution of the hidden state at time $t$, i.e.
+
+$$p(\mathbf{z}_t| \mathbf{y}_{1:t}, \mathbf{u}_{1:t}) = N(\mathbf{\mu}_t, \mathbf{\Sigma}_t)$$
+The computation of $\mathbf{\mu}_t, \mathbf{\Sigma}_t$ includes two steps:
+
+1. Prediction step
+
+
+
+
+

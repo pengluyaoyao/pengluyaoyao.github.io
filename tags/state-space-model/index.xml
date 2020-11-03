@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>State Space Model on Luyao Peng&#39;s Blog</title>
+    <link>/tags/state-space-model/</link>
+    <description>Recent content in State Space Model on Luyao Peng&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 10 Oct 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/state-space-model/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>State Space Model for Sequential Data</title>
+      <link>/post/state-space-model/</link>
+      <pubDate>Sat, 10 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/state-space-model/</guid>
+      <description>A state space model defines the hidden state at time \(t\), \(z_t\), to be a linear function of the input at time \(t\), \(u_t\), and the hidden state at time \(t-1\), \(z_{t-1}\), and defines the output at time \(t\) to be a linear function of the hidden state \(z_t\). The model can be written as
+\[\begin{equation} \begin{array}{rcl} \mbox{Transition model} \mathbf{z}_t &amp;amp;=&amp;amp; \mathbf{A}_t \mathbf{z}_{t-1} + \mathbf{B}_t\mathbf{u}_t + \mathbf{\epsilon}_t \\ \mbox{Observation model} \mathbf{y}_t &amp;amp;=&amp;amp; \mathbf{C}_t\mathbf{z}_t + \mathbf{D} \mathbf{u}_t + \mathbf{\delta}_t \\ &amp;amp;&amp;amp; \mathbf{\epsilon}_t \sim N(\mathbf{0}, \mathbf{Q}_t), \mathbf{\delta}_t \sim N(\mathbf{0}, \mathbf{R}_t) \end{array} \end{equation}\]</description>
+    </item>
+    
+  </channel>
+</rss>
