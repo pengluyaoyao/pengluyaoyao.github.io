@@ -6,10 +6,20 @@
     <description>Recent content in Statistics on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 25 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2020 16:01:23 +0800</lastBuildDate>
     
 	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sparse Variational Gaussian Process in Multiclass Classification</title>
+      <link>/post/vgpc/</link>
+      <pubDate>Thu, 05 Nov 2020 16:01:23 +0800</pubDate>
+      
+      <guid>/post/vgpc/</guid>
+      <description>In this notebook, sparse variational gaussian process model (VGP) is applied to a multiclass classification problem. VGP is easily scalable to large scale dataset.
+Background Consider making inference about a stochastic function \(f\) given a likelihood \(p(y|f)\) and \(N\) observations \(y=\{y_1, y_2, \dots, y_N\}^T\) at observation index points \(X=\{x_1, x_2, \dots, x_N\}^T\). Place a GP prior on \(f\): \(p(f) \sim N(f|m(X), K(X, X))\). The joint distribution of data and latent stochastic function is</description>
+    </item>
     
     <item>
       <title>Gaussian Process Classification by Tensorflow-probability</title>

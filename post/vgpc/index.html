@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Sparse Variational Gaussian Process in Multiclass Classification - Luyao Peng&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Luyao Peng" /><meta name="description" content="In this notebook, sparse variational gaussian process model (VGP) is applied to a multiclass classification problem. VGP is easily scalable to large scale dataset.
+Background Consider making inference about a stochastic function \(f\) given a likelihood \(p(y|f)\) and \(N\) observations \(y=\{y_1, y_2, \dots, y_N\}^T\) at observation index points \(X=\{x_1, x_2, \dots, x_N\}^T\). Place a GP prior on \(f\): \(p(f) \sim N(f|m(X), K(X, X))\). The joint distribution of data and latent stochastic function is" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.73.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="/post/vgpc/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Sparse Variational Gaussian Process in Multiclass Classification" />
+<meta property="og:description" content="In this notebook, sparse variational gaussian process model (VGP) is applied to a multiclass classification problem. VGP is easily scalable to large scale dataset.
+Background Consider making inference about a stochastic function \(f\) given a likelihood \(p(y|f)\) and \(N\) observations \(y=\{y_1, y_2, \dots, y_N\}^T\) at observation index points \(X=\{x_1, x_2, \dots, x_N\}^T\). Place a GP prior on \(f\): \(p(f) \sim N(f|m(X), K(X, X))\). The joint distribution of data and latent stochastic function is" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/vgpc/" />
+<meta property="article:published_time" content="2020-11-05T16:01:23+08:00" />
+<meta property="article:modified_time" content="2020-11-05T16:01:23+08:00" />
+<meta itemprop="name" content="Sparse Variational Gaussian Process in Multiclass Classification">
+<meta itemprop="description" content="In this notebook, sparse variational gaussian process model (VGP) is applied to a multiclass classification problem. VGP is easily scalable to large scale dataset.
+Background Consider making inference about a stochastic function \(f\) given a likelihood \(p(y|f)\) and \(N\) observations \(y=\{y_1, y_2, \dots, y_N\}^T\) at observation index points \(X=\{x_1, x_2, \dots, x_N\}^T\). Place a GP prior on \(f\): \(p(f) \sim N(f|m(X), K(X, X))\). The joint distribution of data and latent stochastic function is">
+<meta itemprop="datePublished" content="2020-11-05T16:01:23&#43;08:00" />
+<meta itemprop="dateModified" content="2020-11-05T16:01:23&#43;08:00" />
+<meta itemprop="wordCount" content="1308">
+
+
+
+<meta itemprop="keywords" content="gaussian-process,bayesian,machine-learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sparse Variational Gaussian Process in Multiclass Classification"/>
+<meta name="twitter:description" content="In this notebook, sparse variational gaussian process model (VGP) is applied to a multiclass classification problem. VGP is easily scalable to large scale dataset.
+Background Consider making inference about a stochastic function \(f\) given a likelihood \(p(y|f)\) and \(N\) observations \(y=\{y_1, y_2, \dots, y_N\}^T\) at observation index points \(X=\{x_1, x_2, \dots, x_N\}^T\). Place a GP prior on \(f\): \(p(f) \sim N(f|m(X), K(X, X))\). The joint distribution of data and latent stochastic function is"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">LP&#39;s NLP Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">LP&#39;s NLP Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<script async type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Sparse Variational Gaussian Process in Multiclass Classification</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-05 </span>
+        <div class="post-category">
+            <a href="/categories/statistics/"> statistics </a>
+            </div>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      
+
+
+<p>In this notebook, sparse variational gaussian process model (VGP) is applied to a multiclass classification problem. VGP is easily scalable to large scale dataset.</p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>Consider making inference about a stochastic function <span class="math inline">\(f\)</span> given a likelihood <span class="math inline">\(p(y|f)\)</span> and <span class="math inline">\(N\)</span> observations <span class="math inline">\(y=\{y_1, y_2, \dots, y_N\}^T\)</span> at observation index points <span class="math inline">\(X=\{x_1, x_2, \dots, x_N\}^T\)</span>. Place a GP prior on <span class="math inline">\(f\)</span>: <span class="math inline">\(p(f) \sim N(f|m(X), K(X, X))\)</span>. The joint distribution of data and latent stochastic function is</p>
+<p><span class="math display">\[p(y, f) = \prod_{i=1}^{N}p(y_i|f_i)N(f|m(X), K(X, X)) \tag{1}\]</span></p>
+<p><span class="math inline">\(\qquad\)</span> The main interest is the posterior over the function values given the observations <span class="math inline">\(p(f|y)\)</span>. The posterior is intractable when the likelihood <span class="math inline">\(p(y|f)\)</span> is non-Gaussian, which is often the case in classification problems; and the computational complexity is <span class="math inline">\(O(N^3)\)</span> due to the inversion of <span class="math inline">\(K_{X, X}\)</span>, which is also intractable for large dataset.</p>
+<p><span class="math inline">\(\qquad\)</span> To reduce the computational complexity, <span class="math inline">\(M &lt;&lt; N\)</span> inducing index points <span class="math inline">\(Z=\{z_1, z_2, \dots, z_M\}^T\)</span> and inducing variables <span class="math inline">\(u=f(Z)\)</span> are introduced. Assuming a GP prior on the joint density <span class="math inline">\(p(f, u)\)</span>, <span class="math display">\[p(f, u) = N\begin{pmatrix} \begin{bmatrix} f \\ u\end{bmatrix}| \begin{bmatrix} m(X) \\ m(Z)\end{bmatrix}, \begin{bmatrix} K(X, X) &amp; K(X, Z) \\ K(Z, X) &amp; K(Z, Z)\end{bmatrix}\end{pmatrix},\]</span> and a GP prior on <span class="math inline">\(u\)</span> <span class="math display">\[p(u) = N(u|m(Z), K(Z, Z)),\]</span> the conditional of <span class="math inline">\(f\)</span> is <span class="math inline">\(p(f|u) = N(f|\mu, \Sigma)\)</span>, where for <span class="math inline">\(i, j = 1, \dots, N\)</span></p>
+<p><span class="math display">\[[\mu]_i = m(x_i) + \alpha(x_i)^T(u-m(Z)),   \tag{2}\]</span></p>
+<p><span class="math display">\[[\Sigma]_{ij} = K(x_i, x_j) - \alpha(x_i)^T K(Z, Z)\alpha(x_j), \tag{3}\]</span>
+where <span class="math inline">\(\alpha(x_i) = K(Z, Z)^{-1}K(Z, x_i)\)</span>, and the joint density of <span class="math inline">\(y, f, u\)</span> becomes</p>
+<p><span class="math display">\[p(y, f, u) = p(f|u; X, Z)p(u; Z)\prod_{i=1}^{N}p(y_i|f_i)\]</span></p>
+<p><span class="math inline">\(\qquad\)</span> The goal is still finding the posterior of the function values <span class="math inline">\(f\)</span>, however, the likelihood <span class="math inline">\(p(y_i|f_i)\)</span> is not Gaussian, so no closed-form solution for the posterior of <span class="math inline">\(f\)</span>. Therefore, a variational posterior is used to solve the difficulty.</p>
+<p><span class="math inline">\(\qquad\)</span> Replacing the posterior <span class="math inline">\(p(u|y)\)</span> by an arbitrary full-rank Gaussian distribution <span class="math inline">\(q(u)\)</span> [Hensman et al. (2013)], then the variational posterior for <span class="math inline">\(y\)</span> and <span class="math inline">\(u\)</span> jointly becomes</p>
+<p><span class="math display">\[q(f, u; X, Z) = p(f|u; X, Z)q(u), \tag{4}\]</span></p>
+<p><span class="math display">\[\mbox{where } q(u) \sim N(\mathbf{m}, \mathbf{S})\]</span></p>
+<p><span class="math inline">\(\mathbf{m}, \mathbf{S}\)</span> are parameters to be chosen by optimizing an evidence lower bound (ELBO).</p>
+<p><span class="math inline">\(\qquad\)</span> Since both <span class="math inline">\(p(f|u; X, Z)q(u)\)</span> are Gaussian, the marginal variational posterior of <span class="math inline">\(f\)</span> can be computed analytically</p>
+<p><span class="math display">\[q(f|\mathbf{m}, \mathbf{S}; X, Z) = \int p(f|u; X, Z)q(u) du \sim N(\tilde{\mu}, \tilde{\Sigma}) \tag{5}\]</span></p>
+<p>with <span class="math inline">\([\tilde{\mu}]_i = \mu_{\mathbf{m}, Z}(x_i), [\tilde{\Sigma}]_{ij} = \Sigma_{\mathbf{S}, Z}(x_i, x_j)\)</span>, and</p>
+<p><span class="math display">\[\mu_{m, Z}(x_i) = m(x_i)+\alpha(x_i)^T(\mathbf{m}-m(Z)) \tag{6}\]</span>
+<span class="math display">\[\Sigma_{S, Z}(x_i, x_j) = K(x_i, x_j) - \alpha(x_i)^T[K(Z, Z) - \mathbf{S}]\alpha(x_j) \tag{7}\]</span></p>
+<p><span class="math inline">\(\qquad\)</span> The variation parameters <span class="math inline">\(Z, \mathbf{m}, \mathbf{S}\)</span> in <span class="math inline">\(q(f|\mathbf{m}, \mathbf{S}; X, Z)\)</span> are determined by maximizing the lower bound</p>
+<p><span class="math display">\[L = \sum_{i=1}^N \mathbb{E}_{q(f_i|\mathbf{m}, \mathbf{S}; X, Z)}[logp(y_i|f_i)] - KL[q(u)|| p(u)], \tag{8}\]</span></p>
+<p>where the expected log-likelihood can be computed with Gauss–Hermite quadrature.</p>
+<p><span class="math inline">\(\qquad\)</span> The variational posterior is given as <span class="math inline">\(q(f)\)</span> in (5). To make predictions for a set of test index points <span class="math inline">\(X^*\)</span>, the new latent function values <span class="math inline">\(f^*\)</span> is approximated by</p>
+<p><span class="math display">\[\begin{equation}\begin{array}{rcl}p(f^*|y) &amp;=&amp; \int p(f^*|f, u)p(f, u|y) df du\\ &amp;\approx&amp; \int p(f^*|f, u)p(f|u)q(u)df du \\ &amp;=&amp; \int p(f^*|u)q(u) du \\ &amp;=&amp; q(f^*)\end{array}\end{equation}\]</span></p>
+<p>where the last line is following (5), (6) and (7) by replacing <span class="math inline">\(x_i\)</span> by <span class="math inline">\(x_i^*\)</span>.</p>
+<p><span class="math inline">\(\qquad\)</span> With the variational posterior in (5), the predictive mean and variance of <span class="math inline">\(y^*\)</span> are computed as</p>
+<p><span class="math display">\[\hat{y}^* = \mathbb{E}(y^*) = \int\int y^* p(y^*|f^*)q(f^*) df^* dy^* \tag{9}\]</span>
+<span class="math display">\[\hat{\mathbb{V}}(y^*) = \int\int y^{*2} p(y^*|f^*)q(f^*) df^* dy^* \tag{10}\]</span></p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>[1]: Titsias, M. “Variational Model Selection for Sparse Gaussian Process Regression”, 2009. <a href="http://proceedings.mlr.press/v5/titsias09a/titsias09a.pdf" class="uri">http://proceedings.mlr.press/v5/titsias09a/titsias09a.pdf</a></p>
+<p>[2]: Hensman, J., Lawrence, N. “Gaussian Processes for Big Data”, 2013. <a href="https://arxiv.org/abs/1309.6835" class="uri">https://arxiv.org/abs/1309.6835</a></p>
+<p>[3]: Salimbeni, H. and Deisenroth, M. “Doubly stochastic variational inference for deep Gaussian processes.” Advances in Neural Information Processing Systems. 2017. <a href="https://arxiv.org/pdf/1705.08933.pdf" class="uri">https://arxiv.org/pdf/1705.08933.pdf</a></p>
+</div>
+<div id="imports" class="section level2">
+<h2>Imports</h2>
+<pre class="python"><code>import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow.compat.v2 as tf
+import tensorflow_probability as tfp
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from scipy.cluster.vq import kmeans2
+
+tf.enable_v2_behavior()
+
+tfb = tfp.bijectors
+tfd = tfp.distributions
+tfk = tfp.math.psd_kernels
+
+dtype = np.float64</code></pre>
+</div>
+<div id="load-glass-data" class="section level2">
+<h2>Load Glass Data</h2>
+<p>A standard imbalanced machine learning dataset referred to as the “Glass Identification” dataset, or simply “glass”.</p>
+<p>The dataset describes the chemical properties of glass and involves classifying samples of glass using their chemical properties as one of six classes. The dataset was credited to Vina Spiehler in 1987.</p>
+<pre class="python"><code>#!wget https://raw.githubusercontent.com/jbrownlee/Datasets/master/glass.csv</code></pre>
+<pre class="python"><code>data = pd.read_csv(&#39;glass.csv&#39;, header=None)
+data = data.values
+X = data[:,0:9].astype(dtype)
+Y = data[:,9]
+
+encoder = LabelEncoder()
+encoder.fit(Y)
+encoded_Y = encoder.transform(Y)
+encoded_Y = encoded_Y.astype(dtype)
+num_outputs = 6
+
+X_train, X_test, y_train, y_test = train_test_split(X, encoded_Y, test_size=0.2, random_state=42)
+print(X_train.shape, X_test.shape, encoded_Y.shape)</code></pre>
+<pre><code>(171, 9) (43, 9) (214,)</code></pre>
+</div>
+<div id="defining-trainable-variables-in-vgp" class="section level2">
+<h2>Defining Trainable Variables in VGP</h2>
+<ul>
+<li>Using kmeans to initialize 30 representative <code>inducing_index_points</code> <span class="math inline">\(Z\)</span> and make them learnable variable</li>
+</ul>
+<pre class="python"><code>num_inducing_points_ = 30
+inducing_index_points_init = kmeans2(X_train, num_inducing_points_, minit=&quot;points&quot;)[0] #50, 60
+inducing_index_points = tf.Variable(inducing_index_points_init, dtype=dtype, name=&#39;inducing_index_points&#39;)</code></pre>
+<ul>
+<li>Initializing RBF kernel and kernel parameters, which are <code>amplitude</code> and <code>length_scale</code> (the same length scale is used for all <span class="math inline">\(X\)</span> columns)</li>
+<li>Initializing the variational mean and covariance <span class="math inline">\(\mathbf{m}, \mathbf{S}\)</span> in <span class="math inline">\(q(u)\)</span></li>
+</ul>
+<pre class="python"><code>amplitude = tfp.util.TransformedVariable(
+    1., tfb.Softplus(), dtype=dtype, name=&#39;amplitude&#39;)
+length_scale = tfp.util.TransformedVariable(
+    1., tfb.Softplus(), dtype=dtype, name=&#39;length_scale&#39;)
+kernel = tfk.ExponentiatedQuadratic(amplitude=amplitude, length_scale=length_scale)
+
+observation_noise_variance = tfp.util.TransformedVariable(1., tfb.Softplus(), dtype=dtype, name=&#39;observation_noise_variance&#39;)
+
+variational_inducing_observations_loc = tf.Variable(np.zeros([num_outputs, num_inducing_points_], dtype=dtype), name=&#39;variational_inducing_observations_loc&#39;)
+
+Ku = kernel.matrix(inducing_index_points, inducing_index_points)
+variational_inducing_observations_scale_init = np.linalg.cholesky(Ku + np.eye(num_inducing_points_)*1e-6)
+variational_inducing_observations_scale = tf.Variable(np.tile(variational_inducing_observations_scale_init[None, :, :], [num_outputs, 1, 1]), 
+                                                      name=&#39;variational_inducing_observations_scale&#39;)</code></pre>
+<ul>
+<li>Defining log probability. For multiclass classification, Categorical distribution is used. The <code>observations</code> is a flat array of batch size; since the expected log likelihood in VGP is approximated by Gauss–Hermite quadrature, the input logits is reshaped to (<code>quadrature_size, batch_size, num_outputs</code>) to adapt to the <code>sparse_softmax_cross_entropy_with_logits</code> in <code>log_prob</code></li>
+</ul>
+<pre class="python"><code>def log_prob(observations, f):
+    #f is (6, 20, 64)
+    berns = tfd.Independent(tfd.Categorical(logits=tf.transpose(f, perm=[1,2,0])), 1) #(20, 64, 6), n_quadrature, bs, n_outputs
+    return berns.log_prob(observations) #sparse_softmax_cross_entropy_with_logits: have logits of shape [batch_size, num_classes] and have labels of shape [batch_size]</code></pre>
+</div>
+<div id="constructing-model-and-training" class="section level2">
+<h2>Constructing Model and Training</h2>
+<pre class="python"><code>vgp = tfd.VariationalGaussianProcess(
+    kernel,
+    index_points=X_test,
+    inducing_index_points=inducing_index_points,
+    variational_inducing_observations_loc=variational_inducing_observations_loc, #TensorShape([6, 30])
+    variational_inducing_observations_scale=variational_inducing_observations_scale, #TensorShape([6, 30, 30])
+    observation_noise_variance=observation_noise_variance)</code></pre>
+<pre class="python"><code>batch_size = 64
+
+optimizer = tf.optimizers.Adam(learning_rate=.01)
+
+@tf.function
+def optimize(x_train_batch, y_train_batch):
+    with tf.GradientTape() as tape:
+        # Create the loss function we want to optimize.
+        recon = vgp.surrogate_posterior_expected_log_likelihood(
+          observations=y_train_batch,
+          observation_index_points=x_train_batch,
+          log_likelihood_fn=log_prob,
+          quadrature_size=20)
+
+        elbo = -tf.reduce_sum(recon) + tf.reduce_sum(vgp.surrogate_posterior_kl_divergence_prior())
+
+    grads = tape.gradient(elbo, vgp.trainable_variables)
+    optimizer.apply_gradients(zip(grads, vgp.trainable_variables))
+    return elbo</code></pre>
+</div>
+<div id="training-by-batch" class="section level2">
+<h2>Training by Batch</h2>
+<pre class="python"><code>num_iters = 1200
+num_logs = 10
+num_training_points_ = X_train.shape[0]
+
+for i in range(num_iters):
+    batch_idxs = np.random.randint(num_training_points_, size=[batch_size])
+    x_train_batch = X_train[batch_idxs, ...]
+    y_train_batch = y_train[batch_idxs]
+    loss = optimize(x_train_batch, y_train_batch)
+
+    if i % (num_iters / num_logs) == 0 or i + 1 == num_iters:
+        print(i, loss.numpy())
+</code></pre>
+<pre><code>WARNING:tensorflow:From /rhome/lp/.conda/envs/ipykernel_py2/lib/python3.8/site-packages/tensorflow/python/ops/linalg/linear_operator_full_matrix.py:142: calling LinearOperator.__init__ (from tensorflow.python.ops.linalg.linear_operator) with graph_parents is deprecated and will be removed in a future version.
+Instructions for updating:
+Do not pass `graph_parents`.  They will  no longer be used.
+0 114.67260603059553
+120 68.34762534248783
+240 64.21088822088196
+360 57.34725658089357
+480 55.54024567522668
+600 55.44484420146989
+720 47.751929090335935
+840 51.43769578785385
+960 46.757460639624206
+1080 45.57974099864305
+1199 34.62597956776342</code></pre>
+</div>
+<div id="computing-the-predictive-mean-and-variance" class="section level2">
+<h2>Computing the Predictive Mean and Variance</h2>
+<p>To compute the predictive mean and variance for a set of new <span class="math inline">\(X^*\)</span>, the <code>predict_mean_and_var</code> from gpflow is used to compute (9) and (10).</p>
+<pre class="python"><code>from gpflow.likelihoods.multiclass import Softmax
+
+Fmu = tf.cast(tf.transpose(vgp.mean()), tf.float32) #TensorShape([6, 43])
+Fvar = tf.cast(tf.transpose(vgp.variance()), tf.float32)##TensorShape([6, 43])
+
+S = Softmax(num_outputs)
+m, v = S.predict_mean_and_var(Fmu, Fvar) #shape=(43, 6)</code></pre>
+</div>
+<div id="results-and-plots" class="section level2">
+<h2>Results and Plots</h2>
+<pre class="python"><code>acc =np.mean(np.argmax(m, 1).astype(int) == y_test.astype(int))
+print(&quot;Multiclass classification accuracy for {} is {}&quot;.format(num_outputs, acc))</code></pre>
+<pre><code>Multiclass classification accuracy for 6 is 0.6744186046511628</code></pre>
+<pre class="python"><code>indices = np.argmax(m, 1)
+v_ = tf.reduce_sum(tf.one_hot(indices, 6)*v, 1)
+print(&quot;Multiclass classification variances for {} is {}&quot;.format(num_outputs, v_))</code></pre>
+<pre><code>Multiclass classification variances for 6 is [0.21738583 0.21815017 0.18933281 0.22934248 0.21277648 0.16272718
+ 0.22080968 0.20925453 0.24283622 0.23389922 0.18182059 0.17588708
+ 0.22748089 0.21455643 0.2155985  0.20811221 0.17323363 0.22754371
+ 0.2092959  0.1684241  0.20327246 0.19117251 0.23838614 0.23942412
+ 0.2244384  0.1978951  0.2334285  0.23561463 0.19514483 0.23224472
+ 0.20528135 0.22660583 0.20674482 0.21365893 0.22525424 0.20758402
+ 0.17756931 0.23329203 0.23498446 0.21907398 0.16997713 0.22914468
+ 0.22700277]</code></pre>
+<pre class="python"><code>from sklearn.decomposition import PCA
+
+pca = PCA(n_components=1)
+X_test_pca = pca.fit_transform(X_test)
+y_preds = np.argmax(m, 1).astype(int)
+y_sd = (v_)**0.5</code></pre>
+<p>Each dot is the predicted class for each <span class="math display">\[x_i^*\]</span>, and the error bar is one sd of <span class="math inline">\(y_i^*\)</span>. If the a dot and a cross overlap, this is a correct prediction.</p>
+<pre class="python"><code>plt.figure(figsize=(15, 5))
+plt.scatter(X_test_pca, y_test,
+            marker=&#39;x&#39;, s=50, c=y_test, zorder=10)
+
+plt.errorbar(X_test_pca, y_preds, yerr=y_sd, fmt=&#39;o&#39;, capthick=1, label=&#39;Predidtion&#39;, alpha=0.5)
+plt.legend(loc=&#39;upper right&#39;)
+plt.ylabel(&#39;6 Classes of Glasses&#39;)
+plt.xlabel(&#39;X_test_pca&#39;)</code></pre>
+<p><img src="/post/output_25_1.png" /></p>
+</div>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Luyao Peng</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-05
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/gaussian-process/">gaussian-process</a>
+          <a href="/tags/bayesian/">bayesian</a>
+          <a href="/tags/machine-learning/">machine-learning</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/state-space-model/">
+            <span class="next-text nav-default">State Space Model for Sequential Data</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  <div id="disqus_thread"></div>
+  <script>
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://luyao-1.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+  
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Luyao Peng</span>
+  </span>
+</div>
+
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
