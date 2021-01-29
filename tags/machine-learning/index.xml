@@ -6,10 +6,19 @@
     <description>Recent content in Machine Learning on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 05 Nov 2020 16:01:23 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 Dec 2020 16:01:23 +0800</lastBuildDate>
     
 	<atom:link href="/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Deep Probabilistic Programming</title>
+      <link>/post/deep-bandipt-showdown/</link>
+      <pubDate>Thu, 10 Dec 2020 16:01:23 +0800</pubDate>
+      
+      <guid>/post/deep-bandipt-showdown/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Sparse Variational Gaussian Process in Multiclass Classification</title>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>deep-learning on Luyao Peng&#39;s Blog</title>
-    <link>/tags/deep-learning/</link>
-    <description>Recent content in deep-learning on Luyao Peng&#39;s Blog</description>
+    <title>reinforcement learning on Luyao Peng&#39;s Blog</title>
+    <link>/categories/reinforcement-learning/</link>
+    <description>Recent content in reinforcement learning on Luyao Peng&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 10 Dec 2020 16:01:23 +0800</lastBuildDate>
     
-	<atom:link href="/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
