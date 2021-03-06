@@ -8,10 +8,16 @@ weight: 50
 
 <img src="/my_pic.jpg" alt="Luyao Peng" width="38%" height="40%">
  
-My name is Luyao Peng. I am an research engineer in NLP (natural language processing) and educational assessment with educational background in statistics (Ph.D.) and quantitative methodology in education (M.A.).
+My name is Luyao Peng. I am a senior research engineer in educational assessment and NLP (natural language processing) with educational background in statistics (Ph.D.) and quantitative methodology in education (M.A.).
 
 
 My current <a href="/Resume_Luyao_Peng_DS_industry_2021_3.pdf" target="_blank">C.V.</a>
+
+
+My Journal Publications:
+* Luyao Peng, Sandip Sinharay. 2020. The Use of Theory of Linear Mixed-Effects Models to Detect Fraudulent Erasures at an Aggregate Level. Educational and Psychological Measurement (Accepted)
+* Subir Ghosh, Li Guo, Luyao Peng. 2018. Variance Component Estimators OPE, NOPE and AOPE in Linear Mixed-effects Models.Australian & New Zealand Journal of Statistics60(4), 481-505. 
+* Gregory Palardy, Luyao Peng. 2015. The Effects of Including Summer on Value-added Assessments of Teachers and Schools.Education Policy Analysis Archives, 23(92), 1-26. 
 
 My Personal Research Projects:
 
@@ -20,16 +26,19 @@ My Personal Research Projects:
 * Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (<a href="https://higherlogicdownload.s3.amazonaws.com/NCME/c53581e4-9882-4137-987b-4475f6cb502a/UploadedImages/2020_Annual_Meeting/Preliminary_Program_1_28_2020.pdf">National Council on Measurement in Education 2020, conference abstract, pg113</a>)
 * An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (<a href="https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=305050">Joint Statistical Meetings 2019, conference abstract</a>)
 
-My Visualization of Data Science Projects:
-
-* [Stock price visualization (milesone project at The Data Incubator)](https://luyao-tdi-milestone.herokuapp.com/)
-* [NLP essay grader (Capstone project at The Data Incubator)](https://easygrader.herokuapp.com/)
-* [Cheating behavior detection in essay scoring and forensic analysis (Intern Research Project at CTB, McGraw-Hill Education)](https://kpca-outlier-detection.shinyapps.io/Shiny/)
-<!-- * [Dependency Parsing w/ Tensorflow] (https://pengluyaoyao.github.io/post/assignment2/) -->
-
 My R Packages:
 
 * [MMeM] (https://cran.r-project.org/web/packages/MMeM/index.html)
 * [regrrr] (https://cran.r-project.org/web/packages/regrrr/index.html)
+
+My Visualization of Data Science Projects:
+
+* [Cheating behavior detection in essay scoring and forensic analysis (Intern Research Project at CTB, McGraw-Hill Education)](https://kpca-outlier-detection.shinyapps.io/Shiny/)
+* [Stock price visualization (milesone project at The Data Incubator)](https://luyao-tdi-milestone.herokuapp.com/)
+* [NLP essay grader (Capstone project at The Data Incubator)](https://easygrader.herokuapp.com/)
+
+<!-- * [Dependency Parsing w/ Tensorflow] (https://pengluyaoyao.github.io/post/assignment2/) -->
+
+
 
 
