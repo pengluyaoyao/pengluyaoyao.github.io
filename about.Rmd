@@ -8,16 +8,15 @@ weight: 50
 
 <img src="/my_pic.jpg" alt="Luyao Peng" width="38%" height="40%">
  
-My name is Luyao Peng. I am a data scientist in NLP (natural language processing) with industry and research experience in text generation, general language understanding evaluation and chatbot, and educational background in statistics (Ph.D.) and linguistics (M.A.).
+My name is Luyao Peng. I am an research engineer in NLP (natural language processing) and educational assessment with educational background in statistics (Ph.D.) and quantitative methodology in education (M.A.).
 
 
-My current <a href="/Resume_Luyao_Peng_DS_7_5.pdf" target="_blank">C.V.</a>
+My current <a href="/Resume_Luyao_Peng_DS_industry_2021_3.pdf" target="_blank">C.V.</a>
 
 My Personal Research Projects:
 
 * Gaussian Process Classification by Tensorflow-probability (<a href="https://github.com/pengluyaoyao/Gaussian-Process-Classification-Using-Tensorflow-probability">GPC jupyter notebook example</a>)
 * Bert Summarization and Generation of Chinese Text
-* Neural Text Generation
 * Using linear mixed-effects model to detect fraudulent erasures at an aggregate level (<a href="https://higherlogicdownload.s3.amazonaws.com/NCME/c53581e4-9882-4137-987b-4475f6cb502a/UploadedImages/2020_Annual_Meeting/Preliminary_Program_1_28_2020.pdf">National Council on Measurement in Education 2020, conference abstract, pg113</a>)
 * An algorithmic construction of all unbiased estimators of variance components in linear mixed effects models (<a href="https://ww2.amstat.org/meetings/jsm/2019/onlineprogram/AbstractDetails.cfm?abstractid=305050">Joint Statistical Meetings 2019, conference abstract</a>)
 
