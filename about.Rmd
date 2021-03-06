@@ -15,6 +15,7 @@ My current <a href="/Resume_Luyao_Peng_DS_industry_2021_3.pdf" target="_blank">C
 
 
 My Journal Publications:
+
 * Luyao Peng, Sandip Sinharay. 2020. The Use of Theory of Linear Mixed-Effects Models to Detect Fraudulent Erasures at an Aggregate Level. Educational and Psychological Measurement (Accepted)
 * Subir Ghosh, Li Guo, Luyao Peng. 2018. Variance Component Estimators OPE, NOPE and AOPE in Linear Mixed-effects Models.Australian & New Zealand Journal of Statistics60(4), 481-505. 
 * Gregory Palardy, Luyao Peng. 2015. The Effects of Including Summer on Value-added Assessments of Teachers and Schools.Education Policy Analysis Archives, 23(92), 1-26. 
