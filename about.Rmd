@@ -8,7 +8,7 @@ weight: 50
 
 <img src="/my_pic.jpg" alt="Luyao Peng" width="38%" height="40%">
  
-My name is Luyao Peng. I am a senior research engineer in educational assessment and NLP (natural language processing) with educational background in statistics (Ph.D.) and quantitative methodology in education (M.A.).
+My name is Luyao Peng. I am a senior research engineer at ByteDance with educational background in statistics (Ph.D.) and quantitative methodology in education (M.A.). My research interests are cheating behavior detection and adaptive testing in educational assessment and probabilistic deep learning models in NLP (natural language processing).
 
 
 My current <a href="/Resume_Luyao_Peng_DS_industry_2021_3.pdf" target="_blank">C.V.</a>
