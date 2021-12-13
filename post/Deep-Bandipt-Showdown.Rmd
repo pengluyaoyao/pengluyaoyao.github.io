@@ -10,3 +10,5 @@ toc: false
 
 
 https://github.com/tensorflow/models/tree/archive/research/deep_contextual_bandits 
+
+https://gdmarmerola.github.io/ts-for-contextual-bandits/
